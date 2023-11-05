@@ -545,7 +545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &310141111
 Transform:
   m_ObjectHideFlags: 0
@@ -1925,20 +1925,40 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoursorIndicatorParent
       objectReference: {fileID: 0}
-    - target: {fileID: 6649991748552023838, guid: f0e3d7d8144604374ae31f559f9ce5b4,
+    - target: {fileID: 5085626198430463846, guid: f0e3d7d8144604374ae31f559f9ce5b4,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.5
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6649991748552023838, guid: f0e3d7d8144604374ae31f559f9ce5b4,
+    - target: {fileID: 5085626198430463846, guid: f0e3d7d8144604374ae31f559f9ce5b4,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.518
+      propertyPath: m_Color.g
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6649991748552023838, guid: f0e3d7d8144604374ae31f559f9ce5b4,
+    - target: {fileID: 5085626198430463846, guid: f0e3d7d8144604374ae31f559f9ce5b4,
         type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.5
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924947549173382743, guid: f0e3d7d8144604374ae31f559f9ce5b4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924947549173382743, guid: f0e3d7d8144604374ae31f559f9ce5b4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924947549173382743, guid: f0e3d7d8144604374ae31f559f9ce5b4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924947549173382743, guid: f0e3d7d8144604374ae31f559f9ce5b4,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
