@@ -60,7 +60,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.51, y: 0.51, z: 0.51}
   m_LocalScale: {x: 0.29, y: 0.29, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 505960584207365682}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
