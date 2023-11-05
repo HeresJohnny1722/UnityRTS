@@ -72,8 +72,9 @@ public class PreviewSystem : MonoBehaviour
     private void ApplyFeedback(bool validity)
     {
         Color c = validity ? Color.white : Color.red;
-        cellIndicatorRender.color = c;
+        
         c.a = 0.5f;
+        cellIndicatorRender.color = c;
         previewMaterialInstance.color = c;
     }
 
