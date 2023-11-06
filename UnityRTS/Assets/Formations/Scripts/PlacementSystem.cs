@@ -26,15 +26,15 @@ public class PlacementSystem : MonoBehaviour
 
     private GridData floorData,buildingData;
 
-    
 
-    //Important
-    private List<GameObject> placedGameObject = new();
 
     [SerializeField]
     private PreviewSystem preview;
 
     private Vector3Int lastDetectedPosition = Vector3Int.zero;
+
+    [SerializeField]
+    private ObjectPlacer objectPlacer;
 
     private void Start()
     {
@@ -72,16 +72,17 @@ public class PlacementSystem : MonoBehaviour
         if (placementValidity == false)
         {
             return;
+            //play wrong placement sound effect
         }
 
+        //play good sound effect
         source.Play();
 
-        GameObject newObject = Instantiate(database.objectsData[selectedObjectIndex].Prefab);
-        newObject.transform.position = grid.CellToWorld(gridPosition);
-        placedGameObject.Add(newObject);
+        int index= objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab, grid.CellToWorld(gridPosition));
 
+        
         GridData selectedData = buildingData;
-        selectedData.AddObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size, database.objectsData[selectedObjectIndex].ID, placedGameObject.Count - 1);
+        selectedData.AddObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size, database.objectsData[selectedObjectIndex].ID, index);
         preview.UpdatePosition(grid.CellToWorld(gridPosition), false);
     }
 
