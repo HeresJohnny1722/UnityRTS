@@ -23,7 +23,7 @@ public class Selections : MonoBehaviour
     private NavMeshAgent myAgent;
     //private Camera myCam;
 
-    //[SerializeField] private GameObject groundMarker;
+    [SerializeField] private GameObject groundMarker;
 
     private FormationBase _formation;
 
@@ -45,7 +45,7 @@ public class Selections : MonoBehaviour
 
         if (unitsSelected.Count > 0)
         {
-            //setGroundMarker(groundMarker, moveToPosition);
+            setGroundMarker(groundMarker, moveToPosition);
             NavMeshAgent leaderAgent = unitsSelected[0].GetComponent<NavMeshAgent>();
             leaderAgent.SetDestination(moveToPosition);
 
@@ -138,18 +138,15 @@ public class Selections : MonoBehaviour
 
     }
 
+    public void setGroundMarker(GameObject groundMarkerObject, Vector3 groundMarkerPosition)
+    {
+        groundMarkerObject.transform.position = groundMarkerPosition;
+        groundMarkerObject.SetActive(false);
+        groundMarkerObject.SetActive(true);
+    }
+
 
     /*
-    public void ClickSelectUnit(GameObject unitToAdd)
-    {
-        DeselectAll();
-        unitsSelected.Add(unitToAdd);
-        unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
-
-
-        barraksHandler.BarracksMenuClose();
-
-    }
 
     public void ClickSelectBuilding(Transform buildingToSelect)
     {
