@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitClick : MonoBehaviour
+public class Click : MonoBehaviour
 {
     Camera myCam;
 
     [SerializeField] private LayerMask ground;
     [SerializeField] private LayerMask friendlyUnits;
+    [SerializeField] private LayerMask building;
 
     
     void Awake()
@@ -40,6 +41,10 @@ public class UnitClick : MonoBehaviour
 
                 }
 
+            } else if(Physics.Raycast(ray, out hit, Mathf.Infinity, building))
+            {
+                Debug.Log("Selecting Building");
+                Selections.Instance.SelectBuilding(hit.transform);
             }
             else
             {
@@ -60,8 +65,15 @@ public class UnitClick : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
-
-                Selections.Instance.moveUnits(hit.point);
+                if (Selections.Instance.selectedBuilding != null)
+                {
+                    Selections.Instance.selectedBuilding.parent.GetChild(1).gameObject.transform.position = hit.point;
+                    Selections.Instance.selectedBuilding.parent.GetChild(1).gameObject.SetActive(true);
+                } else
+                {
+                    Selections.Instance.moveUnits(hit.point);
+                }
+                
 
             }
 
