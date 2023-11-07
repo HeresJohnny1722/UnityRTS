@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Click : MonoBehaviour
 {
@@ -16,9 +17,12 @@ public class Click : MonoBehaviour
         myCam = Camera.main;
     }
 
+    public bool IsPointerOverUI()
+        => EventSystem.current.IsPointerOverGameObject();
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !IsPointerOverUI())
         {
 
             RaycastHit hit;
@@ -57,7 +61,7 @@ public class Click : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && !IsPointerOverUI())
         {
 
             RaycastHit hit;
