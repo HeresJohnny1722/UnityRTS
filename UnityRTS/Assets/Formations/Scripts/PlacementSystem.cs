@@ -41,6 +41,7 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
         floorData = new GridData();
         buildingData = new GridData();
+        gridVisualization.SetActive(false);
         
     }
 
