@@ -18,5 +18,10 @@ public class UnitSO : ScriptableObject
     public UnitType unitType;
     public new string name;
     public float trainingTime;
-    //public new string description;
+    public float startingHealth;
+    public float speed;
+    public string description;
+    public float goldCost;
+    public float coalCost;
+    public float copperCost;
 }
