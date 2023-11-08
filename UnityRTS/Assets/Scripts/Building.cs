@@ -83,7 +83,8 @@ public class Building : MonoBehaviour
 
         //if (checkIfEnoughResources(resources that are being taken, would be in the buildingSO, cost
         troopQueue.Enqueue(buildingSO.unitsToTrain[index]);
-        
+        UpdateQueueSizeText();
+
         if (!isTraining)
         {
            
@@ -124,15 +125,16 @@ public class Building : MonoBehaviour
 
             
             GameObject troop = Instantiate(unit.prefab, unitSpawnPoint.position, Quaternion.identity);
-            NavMeshAgent unitAgent = troop.GetComponent<NavMeshAgent>();
-            unitAgent.SetDestination(movePosition);
-
-
             // Reset time left text and unit name
             timeLeftText.text = "Training Time: 0s";
             unitNameText.text = "No unit training";
 
             UpdateQueueSizeText(); // Update the queue size text when a troop is done training
+            NavMeshAgent unitAgent = troop.GetComponent<NavMeshAgent>();
+            unitAgent.SetDestination(movePosition);
+
+
+            
         }
 
 

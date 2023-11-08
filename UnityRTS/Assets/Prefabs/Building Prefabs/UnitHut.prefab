@@ -375,31 +375,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6154062769530413689}
     m_Modifications:
-    - target: {fileID: 867134125987201157, guid: 5e9160945b39240a1b3d02b0491f74a2,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1780284316057707808, guid: 5e9160945b39240a1b3d02b0491f74a2,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1780284316057707808, guid: 5e9160945b39240a1b3d02b0491f74a2,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2154539705400687124, guid: 5e9160945b39240a1b3d02b0491f74a2,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2154539705400687124, guid: 5e9160945b39240a1b3d02b0491f74a2,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 2386678556394689733, guid: 5e9160945b39240a1b3d02b0491f74a2,
         type: 3}
       propertyPath: m_Pivot.x
@@ -438,7 +413,7 @@ PrefabInstance:
     - target: {fileID: 2386678556394689733, guid: 5e9160945b39240a1b3d02b0491f74a2,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -368.1
+      value: -329.691
       objectReference: {fileID: 0}
     - target: {fileID: 2386678556394689733, guid: 5e9160945b39240a1b3d02b0491f74a2,
         type: 3}
@@ -483,7 +458,7 @@ PrefabInstance:
     - target: {fileID: 2386678556394689733, guid: 5e9160945b39240a1b3d02b0491f74a2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -184.05
+      value: -164.84554
       objectReference: {fileID: 0}
     - target: {fileID: 2386678556394689733, guid: 5e9160945b39240a1b3d02b0491f74a2,
         type: 3}

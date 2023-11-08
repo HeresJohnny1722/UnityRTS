@@ -1168,8 +1168,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -341.2789, y: -185.86096}
-  m_SizeDelta: {x: -682.5577, y: -365.5914}
+  m_AnchoredPosition: {x: -341.27893, y: -165.95012}
+  m_SizeDelta: {x: -682.5577, y: -325.7697}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &486870632
 MonoBehaviour:
@@ -1711,8 +1711,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -208.49997, y: -185.86096}
-  m_SizeDelta: {x: -651.88, y: -365.5914}
+  m_AnchoredPosition: {x: -208.5, y: -165.95012}
+  m_SizeDelta: {x: -651.88, y: -325.7697}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1028909905
 MonoBehaviour:
@@ -2033,6 +2033,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxVisual: {fileID: 479553363}
+  building:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &1277493182
 GameObject:
   m_ObjectHideFlags: 0

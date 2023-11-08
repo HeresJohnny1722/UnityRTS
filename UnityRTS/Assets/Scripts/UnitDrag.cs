@@ -23,34 +23,67 @@ public class UnitDrag : MonoBehaviour
         DrawVisual();
     }
 
+    [SerializeField] private LayerMask building;
+
     // Update is called once per frame
     void Update()
     {
-        if (Selections.Instance.selectedBuilding == null)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
 
+        
+
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            RaycastHit hit;
+            Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
+
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, building))
+            {
+                Debug.Log("Trying to drag select a building");
+            }
+            else
+            {
                 startPosition = Input.mousePosition;
                 selectionBox = new Rect();
             }
+            
+
+                
+        }
 
             if (Input.GetMouseButton(0))
+            {
+                if (startPosition == Vector2.zero)
+            {
+                Debug.Log("Trying to drag select a building");
+            } else
             {
                 endPosition = Input.mousePosition;
                 DrawVisual();
                 DrawSelection();
             }
+                    
+                
+            }
 
             if (Input.GetMouseButtonUp(0))
             {
-
+            if (startPosition == Vector2.zero)
+            {
+                Debug.Log("Trying to drag select a building");
+            }
+            else
+            {
                 SelectUnits();
                 startPosition = Vector2.zero;
                 endPosition = Vector2.zero;
                 DrawVisual();
             }
-        }
+            
+                
+            }
+        
        
         
 
