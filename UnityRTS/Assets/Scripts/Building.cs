@@ -148,7 +148,7 @@ public class Building : MonoBehaviour
     void Start()
     {
         HideShowBuildingStuff(false);
-        Selections.Instance.buildingsList.Add(this.gameObject);
+        //Selections.Instance.buildingsList.Add(this.gameObject);
         if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
         {
             unitFlagOffset = buildingSO.spawnOffset;
@@ -161,7 +161,7 @@ public class Building : MonoBehaviour
 
 void OnDestroy()
     {
-        Selections.Instance.buildingsList.Remove(this.gameObject);
+        //Selections.Instance.buildingsList.Remove(this.gameObject);
         HideShowBuildingStuff(false);
     }
 }

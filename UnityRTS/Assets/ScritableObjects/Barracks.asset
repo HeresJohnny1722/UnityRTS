@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitsToTrain:
   - {fileID: 11400000, guid: f8589073340ec4464a11392c28e3c57f, type: 2}
+  - {fileID: 11400000, guid: 7c537220440294dfb9387dc9a5a5ec4e, type: 2}
   buildingType: 1
   name: Unit Barracks
   description: This building spawns troops
+  spawnOffset: 1
