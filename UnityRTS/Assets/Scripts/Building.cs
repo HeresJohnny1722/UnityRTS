@@ -68,10 +68,11 @@ public class Building : MonoBehaviour
         {
             trainingPanelLayout.SetActive(visible);
             trainingPanel.SetActive(visible);
+            this.transform.GetChild(1).gameObject.SetActive(visible);
         }
         infoPanel.SetActive(visible);
         this.transform.GetChild(0).gameObject.SetActive(visible);
-        this.transform.GetChild(1).gameObject.SetActive(visible);
+        
     }
 
     public void spawnTroop(int index)

@@ -71,8 +71,13 @@ public class Click : MonoBehaviour
             {
                 if (Selections.Instance.selectedBuilding != null)
                 {
-                    Selections.Instance.selectedBuilding.parent.GetChild(1).gameObject.transform.position = hit.point;
-                    Selections.Instance.selectedBuilding.parent.GetChild(1).gameObject.SetActive(true);
+                    //Checks if it is a barracks to move the flag
+                    if (Selections.Instance.selectedBuilding.parent.GetComponent<Building>().buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
+                    {
+                        Selections.Instance.selectedBuilding.parent.GetChild(1).gameObject.transform.position = hit.point;
+                        Selections.Instance.selectedBuilding.parent.GetChild(1).gameObject.SetActive(true);
+                    }
+                    
                 } else
                 {
                     Selections.Instance.moveUnits(hit.point);
