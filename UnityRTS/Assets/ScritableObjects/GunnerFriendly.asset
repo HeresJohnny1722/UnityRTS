@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
-  m_Name: Barracks
+  m_Script: {fileID: 11500000, guid: d1d7d0a741b2b468782fb164ab03b0b2, type: 3}
+  m_Name: GunnerFriendly
   m_EditorClassIdentifier: 
-  unitsToTrain:
-  - {fileID: 11400000, guid: f8589073340ec4464a11392c28e3c57f, type: 2}
-  buildingType: 1
-  name: Unit Barracks
-  description: This building spawns troops
+  prefab: {fileID: 7462998351962582450, guid: dbb2d89fa05564e53a721066dfe8f072, type: 3}
+  unitType: 0
+  name: Gunner

@@ -12,7 +12,11 @@ public class BuildingSO : ScriptableObject
         Barracks
     }
 
+    [Header("If a barracks")]
+    public List<UnitSO> unitsToTrain = new List<UnitSO>();
+
     public BuildingType buildingType;
     public new string name;
-    public new string description;
+    public string description;
+    public float spawnOffset = 1f;
 }
