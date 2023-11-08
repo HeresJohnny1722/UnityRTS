@@ -17,8 +17,7 @@ public class Selections : MonoBehaviour
     private static Selections _instance;
     public static Selections Instance { get { return _instance; } }
 
-    [SerializeField]
-    private BarracksHandler barracksHandler;
+    
 
     private NavMeshAgent myAgent;
     
