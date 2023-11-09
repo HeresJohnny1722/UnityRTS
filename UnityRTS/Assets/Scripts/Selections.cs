@@ -9,21 +9,20 @@ public class Selections : MonoBehaviour
 
     public List<GameObject> unitList = new List<GameObject>();
     public List<GameObject> unitsSelected = new List<GameObject>();
+    public List<GameObject> buildingsList = new List<GameObject>();
+    public Transform selectedBuilding = null;
 
     [SerializeField] private int maxGroupSize = 8;
 
     private static Selections _instance;
     public static Selections Instance { get { return _instance; } }
 
-    //public List<GameObject> buildingsList = new List<GameObject>();
-    //public Transform selectedBuilding = null;
-
-    //[SerializeField] private BarracksHandler barraksHandler;
+    
 
     private NavMeshAgent myAgent;
-    //private Camera myCam;
+    
 
-    //[SerializeField] private GameObject groundMarker;
+    [SerializeField] private GameObject groundMarker;
 
     private FormationBase _formation;
 
@@ -41,11 +40,10 @@ public class Selections : MonoBehaviour
 
     public void moveUnits(Vector3 moveToPosition)
     {
-        Debug.Log("move units");
-
+        
         if (unitsSelected.Count > 0)
         {
-            //setGroundMarker(groundMarker, moveToPosition);
+            setGroundMarker(groundMarker, moveToPosition);
             NavMeshAgent leaderAgent = unitsSelected[0].GetComponent<NavMeshAgent>();
             leaderAgent.SetDestination(moveToPosition);
 
@@ -60,6 +58,8 @@ public class Selections : MonoBehaviour
 
         }
     }
+
+    
 
     void Awake()
     {
@@ -126,106 +126,16 @@ public class Selections : MonoBehaviour
         }
         unitsSelected.Clear();
 
-        /*
+        
         if (selectedBuilding)
         {
-            selectedBuilding.GetChild(3).gameObject.SetActive(true);
-            selectedBuilding.GetChild(4).gameObject.SetActive(false);
-            selectedBuilding.GetChild(2).gameObject.SetActive(false);
+            
+            selectedBuilding.parent.GetComponent<Building>().BuildingDeSelected();
             selectedBuilding = null;
         }
-        */
+        
 
     }
-
-
-    /*
-    public void ClickSelectUnit(GameObject unitToAdd)
-    {
-        DeselectAll();
-        unitsSelected.Add(unitToAdd);
-        unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
-
-
-        barraksHandler.BarracksMenuClose();
-
-    }
-
-    public void ClickSelectBuilding(Transform buildingToSelect)
-    {
-        barraksHandler.BarracksMenuClose();
-        DeselectAll();
-        Debug.Log(buildingToSelect.name);
-        selectedBuilding = buildingToSelect;
-        selectedBuilding.GetChild(3).gameObject.SetActive(false);
-        selectedBuilding.GetChild(4).gameObject.SetActive(true);
-        selectedBuilding.GetChild(2).gameObject.SetActive(true);
-
-        //selectedBuilding.GetChild(0).gameObject.SetActive(true);
-        //change material to white outline
-
-
-        //selectedBuilding.GetChild(2).gameObject.SetActive(true);
-        //Open up a training/reserch menu/ just some kind of UI
-        //ActionFrame.instance.SetActionButtons();
-        barraksHandler.BarracksMenuOpen();
-
-
-        //unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
-
-
-    }
-
-    public void ShiftClickSelect(GameObject unitToAdd)
-    {
-        if (!unitsSelected.Contains(unitToAdd) && (unitsSelected.Count < 9))
-        {
-            barraksHandler.BarracksMenuClose();
-            unitsSelected.Add(unitToAdd);
-            unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
-        }
-        else
-        {
-            unitToAdd.transform.GetChild(0).gameObject.SetActive(false);
-            unitsSelected.Remove(unitToAdd);
-
-        }
-    }
-
-    public void DragSelect(GameObject unitToAdd)
-    {
-        if (!unitsSelected.Contains(unitToAdd) && (unitsSelected.Count < 20))
-        {
-            barraksHandler.BarracksMenuClose();
-            unitsSelected.Add(unitToAdd);
-            unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
-        }
-    }
-
-    public void DeselectAll()
-    {
-        barraksHandler.BarracksMenuClose();
-
-
-        foreach (var unit in unitsSelected)
-        {
-            unit.transform.GetChild(0).gameObject.SetActive(false);
-        }
-        unitsSelected.Clear();
-
-        if (selectedBuilding)
-        {
-            selectedBuilding.GetChild(3).gameObject.SetActive(true);
-            selectedBuilding.GetChild(4).gameObject.SetActive(false);
-            selectedBuilding.GetChild(2).gameObject.SetActive(false);
-            selectedBuilding = null;
-        }
-
-    }
-
-
-
-
 
     public void setGroundMarker(GameObject groundMarkerObject, Vector3 groundMarkerPosition)
     {
@@ -233,5 +143,38 @@ public class Selections : MonoBehaviour
         groundMarkerObject.SetActive(false);
         groundMarkerObject.SetActive(true);
     }
-    */
+
+
+    
+
+    public void SelectBuilding(Transform buildingToSelect)
+    {
+        //barraksHandler.BarracksMenuClose();
+        DeselectAll();
+        selectedBuilding = buildingToSelect;
+        
+        selectedBuilding.parent.GetComponent<Building>().BuildingSelected();
+
+        /*
+        Debug.Log(buildingToSelect.name);
+        selectedBuilding = buildingToSelect;
+        selectedBuilding.GetChild(3).gameObject.SetActive(false);
+        selectedBuilding.GetChild(4).gameObject.SetActive(true);
+        selectedBuilding.GetChild(2).gameObject.SetActive(true);
+        */
+        //selectedBuilding.GetChild(0).gameObject.SetActive(true);
+        //change material to white outline
+
+
+        //selectedBuilding.GetChild(2).gameObject.SetActive(true);
+        //Open up a training/reserch menu/ just some kind of UI
+        //ActionFrame.instance.SetActionButtons();
+        //barraksHandler.BarracksMenuOpen();
+
+
+        //unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
+
+
+    }
+    
 }
