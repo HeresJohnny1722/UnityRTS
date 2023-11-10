@@ -16,4 +16,9 @@ MonoBehaviour:
   buildingType: 0
   name: House
   description: Increases the population of your town
-  spawnOffset: 1
+  spawnOffset: 0
+  startingHealth: 100
+  timeToBuild: 4
+  goldCost: 25
+  coalCost: 25
+  copperCost: 25

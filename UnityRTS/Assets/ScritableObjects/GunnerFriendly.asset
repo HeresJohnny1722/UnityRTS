@@ -16,3 +16,9 @@ MonoBehaviour:
   unitType: 0
   name: Gunner
   trainingTime: 2
+  startingHealth: 50
+  speed: 8
+  description: Gunner  description
+  goldCost: 5
+  coalCost: 5
+  copperCost: 5

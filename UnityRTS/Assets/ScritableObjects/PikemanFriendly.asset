@@ -16,3 +16,9 @@ MonoBehaviour:
   unitType: 1
   name: Pikeman
   trainingTime: 3
+  startingHealth: 25
+  speed: 6
+  description: Pikeman description
+  goldCost: 2
+  coalCost: 2
+  copperCost: 2

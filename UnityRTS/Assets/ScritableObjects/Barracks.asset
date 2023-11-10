@@ -19,3 +19,8 @@ MonoBehaviour:
   name: Unit Barracks
   description: This building spawns troops
   spawnOffset: 1
+  startingHealth: 300
+  timeToBuild: 6
+  goldCost: 50
+  coalCost: 50
+  copperCost: 50
