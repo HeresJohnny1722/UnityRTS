@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.AI;
+using TMPro;
 
 public class Selections : MonoBehaviour
 {
@@ -23,6 +24,11 @@ public class Selections : MonoBehaviour
     
 
     [SerializeField] private GameObject groundMarker;
+
+    [SerializeField] private GameObject infoPanel;
+    [SerializeField] private TextMeshProUGUI selectedObjectTitleText;
+    [SerializeField] private TextMeshProUGUI selectedObjectText;
+    [SerializeField] private TextMeshProUGUI resourceDataText;
 
     private FormationBase _formation;
 
@@ -82,6 +88,8 @@ public class Selections : MonoBehaviour
     {
         DeselectAll();
         unitsSelected.Add(unitToAdd);
+        updateInfoPanelForUnits();
+        infoPanel.SetActive(true);
         unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
 
 
@@ -95,12 +103,19 @@ public class Selections : MonoBehaviour
         {
             //barraksHandler.BarracksMenuClose();
             unitsSelected.Add(unitToAdd);
+            updateInfoPanelForUnits();
+            infoPanel.SetActive(true);
             unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
         }
         else
         {
             unitToAdd.transform.GetChild(0).gameObject.SetActive(false);
+            updateInfoPanelForUnits();
             unitsSelected.Remove(unitToAdd);
+            if (unitsSelected.Count <= 0)
+            {
+                infoPanel.SetActive(false);
+            }
 
         }
     }
@@ -112,6 +127,8 @@ public class Selections : MonoBehaviour
             //barraksHandler.BarracksMenuClose();
             unitsSelected.Add(unitToAdd);
             unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
+            updateInfoPanelForUnits();
+            infoPanel.SetActive(true);
         }
     }
 
@@ -125,8 +142,11 @@ public class Selections : MonoBehaviour
             unit.transform.GetChild(0).gameObject.SetActive(false);
         }
         unitsSelected.Clear();
+        updateInfoPanelForUnits();
+        infoPanel.SetActive(false);
 
-        
+
+
         if (selectedBuilding)
         {
             
@@ -149,32 +169,63 @@ public class Selections : MonoBehaviour
 
     public void SelectBuilding(Transform buildingToSelect)
     {
-        //barraksHandler.BarracksMenuClose();
+        
         DeselectAll();
         selectedBuilding = buildingToSelect;
         
         selectedBuilding.parent.GetComponent<Building>().BuildingSelected();
 
-        /*
-        Debug.Log(buildingToSelect.name);
-        selectedBuilding = buildingToSelect;
-        selectedBuilding.GetChild(3).gameObject.SetActive(false);
-        selectedBuilding.GetChild(4).gameObject.SetActive(true);
-        selectedBuilding.GetChild(2).gameObject.SetActive(true);
-        */
-        //selectedBuilding.GetChild(0).gameObject.SetActive(true);
-        //change material to white outline
-
-
-        //selectedBuilding.GetChild(2).gameObject.SetActive(true);
-        //Open up a training/reserch menu/ just some kind of UI
-        //ActionFrame.instance.SetActionButtons();
-        //barraksHandler.BarracksMenuOpen();
-
-
-        //unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
-
+        
 
     }
-    
+
+    public void updateInfoPanelForUnits()
+    {
+        selectedObjectTitleText.text = "Unit Group";
+        resourceDataText.text = "";
+
+        // Dictionary to store the counts of each unit type
+        Dictionary<UnitSO.UnitType, int> unitTypeCounts = new Dictionary<UnitSO.UnitType, int>();
+
+        // Iterate through selected units and count each type
+        foreach (var unit in unitsSelected)
+        {
+            UnitSO.UnitType unitType = unit.GetComponent<Unit>().unitSO.unitType;
+
+            // Update the count in the dictionary
+            if (unitTypeCounts.ContainsKey(unitType))
+            {
+                unitTypeCounts[unitType]++;
+            }
+            else
+            {
+                unitTypeCounts[unitType] = 1;
+            }
+        }
+
+        // Update the existing text in selectedObjectText
+        selectedObjectText.text = "";
+
+        // Check if there are two or more different types of troops selected
+        if (unitTypeCounts.Count > 1)
+        {
+            selectedObjectText.text += "Total #Units: " + unitsSelected.Count + "\n";
+        }
+
+        // Display the counts for each unit type
+        foreach (var kvp in unitTypeCounts)
+        {
+            selectedObjectText.text += $"{kvp.Key}s: {kvp.Value}\n";
+        }
+    }
+
+
+
+
+
+    public void updateInfoPanelResource()
+    {
+        infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Resource";
+    }
+
 }

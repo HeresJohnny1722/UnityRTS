@@ -9,19 +9,23 @@ public class Building : MonoBehaviour
 {
     [Header("Only for Barracks/Artillery Training")]
     [SerializeField]
-    private GameObject trainingPanelLayout;
+    private GameObject buttonLayout;
     [SerializeField]
-    private GameObject trainingPanel;
+    private GameObject barracksPanel;
     [SerializeField]
     public TextMeshProUGUI timeLeftText;
     public TextMeshProUGUI queueSizeText;
     public TextMeshProUGUI unitNameText;
+    
+    
 
 
     [Space(20)]
     [Header("General Building Stuff")]
     [SerializeField]
     private GameObject infoPanel;
+    public TextMeshProUGUI buildingHealthText;
+    private float buildingHealth;
 
     public BuildingSO buildingSO;
 
@@ -51,7 +55,7 @@ public class Building : MonoBehaviour
             for (int i = 0; i < buildingSO.unitsToTrain.Count; i++)
             {
                 //setting tool tips also
-                trainingPanelLayout.transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = buildingSO.unitsToTrain[i].name;
+                buttonLayout.transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = buildingSO.unitsToTrain[i].name;
             }
         }
     }
@@ -66,8 +70,8 @@ public class Building : MonoBehaviour
     {
         if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
         {
-            trainingPanelLayout.SetActive(visible);
-            trainingPanel.SetActive(visible);
+            buttonLayout.SetActive(visible);
+            barracksPanel.SetActive(visible);
             this.transform.GetChild(1).gameObject.SetActive(visible);
         }
         infoPanel.SetActive(visible);
@@ -150,6 +154,8 @@ public class Building : MonoBehaviour
     void Start()
     {
         HideShowBuildingStuff(false);
+        buildingHealth = buildingSO.startingHealth;
+        buildingHealthText.text = "Health: " + buildingHealth.ToString();
         //Selections.Instance.buildingsList.Add(this.gameObject);
         if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
         {

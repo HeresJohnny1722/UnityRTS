@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    public UnitSO unitSO;
+
     void Start()
     {
         
