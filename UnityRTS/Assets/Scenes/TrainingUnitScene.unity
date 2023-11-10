@@ -1355,6 +1355,16 @@ PrefabInstance:
       propertyPath: _hollow
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7115139983754509651, guid: e9897a06aeafd624e95d7db1580a9d4b,
+        type: 3}
+      propertyPath: _unitDepth
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115139983754509651, guid: e9897a06aeafd624e95d7db1580a9d4b,
+        type: 3}
+      propertyPath: _unitWidth
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1808,7 +1818,7 @@ MonoBehaviour:
   unitsSelected: []
   buildingsList: []
   selectedBuilding: {fileID: 0}
-  maxGroupSize: 25
+  maxGroupSize: 16
   groundMarker: {fileID: 1019874961}
   infoPanel: {fileID: 702007038}
   selectedObjectTitleText: {fileID: 2041082627}
@@ -1828,8 +1838,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _noise: 0
   Spread: 0.8
-  _unitWidth: 5
-  _unitDepth: 5
+  _unitWidth: 4
+  _unitDepth: 4
   _hollow: 0
   _nthOffset: 0
 --- !u!1 &1019874961 stripped

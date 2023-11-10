@@ -50,15 +50,17 @@ public class Selections : MonoBehaviour
         if (unitsSelected.Count > 0)
         {
             setGroundMarker(groundMarker, moveToPosition);
-            NavMeshAgent leaderAgent = unitsSelected[0].GetComponent<NavMeshAgent>();
-            leaderAgent.SetDestination(moveToPosition);
+            //NavMeshAgent leaderAgent = unitsSelected[0].GetComponent<NavMeshAgent>();
+            //leaderAgent.SetDestination(moveToPosition);
 
             _points = Formation.EvaluatePoints().ToList();
 
-            for (var i = 1; i < unitsSelected.Count; i++)
+            for (var i = 0; i < unitsSelected.Count; i++)
             {
                 myAgent = unitsSelected[i].GetComponent<NavMeshAgent>();
-                myAgent.SetDestination(_points[i] + moveToPosition + new Vector3(-0.5f, 0, -0.5f));
+                myAgent.SetDestination(_points[i] + moveToPosition);
+
+                // + new Vector3(-0.5f, 0, -0.5f));
 
             }
 
@@ -181,7 +183,7 @@ public class Selections : MonoBehaviour
 
     public void updateInfoPanelForUnits()
     {
-        selectedObjectTitleText.text = "Unit Group";
+        selectedObjectTitleText.text = "";
         resourceDataText.text = "";
 
         // Dictionary to store the counts of each unit type

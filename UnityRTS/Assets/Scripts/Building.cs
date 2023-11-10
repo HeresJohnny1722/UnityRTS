@@ -37,9 +37,26 @@ public class Building : MonoBehaviour
 
     private float unitFlagOffset;
 
+    public Healthbar healthbar;
 
 
 
+    void Start()
+    {
+        HideShowBuildingStuff(false);
+        buildingHealth = buildingSO.startingHealth;
+        healthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
+        buildingHealthText.text = "Health: " + buildingHealth.ToString();
+        //Selections.Instance.buildingsList.Add(this.gameObject);
+        if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
+        {
+            unitFlagOffset = buildingSO.spawnOffset;
+        }
+
+
+
+
+    }
 
     public void BuildingSelected()
     {
@@ -75,6 +92,7 @@ public class Building : MonoBehaviour
             this.transform.GetChild(1).gameObject.SetActive(visible);
         }
         infoPanel.SetActive(visible);
+        healthbar.gameObject.SetActive(visible);
         this.transform.GetChild(0).gameObject.SetActive(visible);
         
     }
@@ -151,21 +169,7 @@ public class Building : MonoBehaviour
         queueSizeText.text = "Queue Size: " + troopQueue.Count;
     }
 
-    void Start()
-    {
-        HideShowBuildingStuff(false);
-        buildingHealth = buildingSO.startingHealth;
-        buildingHealthText.text = "Health: " + buildingHealth.ToString();
-        //Selections.Instance.buildingsList.Add(this.gameObject);
-        if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
-        {
-            unitFlagOffset = buildingSO.spawnOffset;
-        }
-        
-
-
-
-}
+    
 
 void OnDestroy()
     {
