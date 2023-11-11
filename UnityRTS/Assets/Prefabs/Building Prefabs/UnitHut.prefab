@@ -302,7 +302,7 @@ PrefabInstance:
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.931
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
@@ -327,12 +327,12 @@ PrefabInstance:
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.9169922
+      value: 0.487
       objectReference: {fileID: 0}
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.7319946
+      value: 1.671
       objectReference: {fileID: 0}
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
@@ -364,6 +364,11 @@ PrefabInstance:
       propertyPath: _healthbarSprite
       value: 
       objectReference: {fileID: 6978972189828353358}
+    - target: {fileID: 3310764158376026943, guid: 40a912277b5d341eab3146133c11d5ac,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 747.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4948844156233565677, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_PresetInfoIsWorld

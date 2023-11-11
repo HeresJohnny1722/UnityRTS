@@ -695,7 +695,7 @@ PrefabInstance:
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.917
+      value: 0.985
       objectReference: {fileID: 0}
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
@@ -732,6 +732,11 @@ PrefabInstance:
       propertyPath: _healthbarSprite
       value: 
       objectReference: {fileID: 7083646371410911953}
+    - target: {fileID: 3310764158376026943, guid: 40a912277b5d341eab3146133c11d5ac,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1692.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4948844156233565677, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_PresetInfoIsWorld

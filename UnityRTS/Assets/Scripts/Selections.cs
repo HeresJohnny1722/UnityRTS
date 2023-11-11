@@ -93,6 +93,7 @@ public class Selections : MonoBehaviour
         updateInfoPanelForUnits();
         infoPanel.SetActive(true);
         unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
+        unitToAdd.transform.GetChild(1).gameObject.SetActive(true);
 
 
         //barraksHandler.BarracksMenuClose();
@@ -108,10 +109,12 @@ public class Selections : MonoBehaviour
             updateInfoPanelForUnits();
             infoPanel.SetActive(true);
             unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
+            unitToAdd.transform.GetChild(1).gameObject.SetActive(true);
         }
         else
         {
             unitToAdd.transform.GetChild(0).gameObject.SetActive(false);
+            unitToAdd.transform.GetChild(1).gameObject.SetActive(false);
             updateInfoPanelForUnits();
             unitsSelected.Remove(unitToAdd);
             if (unitsSelected.Count <= 0)
@@ -129,6 +132,7 @@ public class Selections : MonoBehaviour
             //barraksHandler.BarracksMenuClose();
             unitsSelected.Add(unitToAdd);
             unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
+            unitToAdd.transform.GetChild(1).gameObject.SetActive(true);
             updateInfoPanelForUnits();
             infoPanel.SetActive(true);
         }
@@ -142,6 +146,7 @@ public class Selections : MonoBehaviour
         foreach (var unit in unitsSelected)
         {
             unit.transform.GetChild(0).gameObject.SetActive(false);
+            unit.transform.GetChild(1).gameObject.SetActive(false);
         }
         unitsSelected.Clear();
         updateInfoPanelForUnits();

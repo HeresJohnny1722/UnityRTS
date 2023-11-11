@@ -140,8 +140,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1588904452610625877}
-  - {fileID: 137362014739603968}
   - {fileID: 113532461932598439}
+  - {fileID: 137362014739603968}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1653513212374591824
@@ -415,7 +415,7 @@ PrefabInstance:
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.05
+      value: 0.016
       objectReference: {fileID: 0}
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
@@ -442,11 +442,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBar Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1598209828171881189, guid: 40a912277b5d341eab3146133c11d5ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2051232162735146575, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: _healthbarSprite
       value: 
       objectReference: {fileID: 5091795748402203940}
+    - target: {fileID: 3310764158376026943, guid: 40a912277b5d341eab3146133c11d5ac,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1144.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948844156233565677, guid: 40a912277b5d341eab3146133c11d5ac,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
