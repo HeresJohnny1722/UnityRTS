@@ -11,7 +11,7 @@ public class Click : MonoBehaviour
     [SerializeField] private LayerMask friendlyUnits;
     [SerializeField] private LayerMask building;
 
-    
+
     void Awake()
     {
         myCam = Camera.main;
@@ -35,26 +35,28 @@ public class Click : MonoBehaviour
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
 
-                    Selections.Instance.ShiftClickSelect(hit.collider.gameObject);
+                    UnitSelection.Instance.ShiftClickSelect(hit.collider.gameObject);
 
                 }
                 else
                 {
 
-                    Selections.Instance.ClickSelectUnit(hit.collider.gameObject);
+                    UnitSelection.Instance.ClickSelectUnit(hit.collider.gameObject);
 
                 }
 
-            } else if(Physics.Raycast(ray, out hit, Mathf.Infinity, building))
+            }
+            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, building))
             {
-                Debug.Log("Selecting Building");
-                Selections.Instance.SelectBuilding(hit.transform);
+                    BuildingSelection.Instance.SelectBuilding(hit.transform);
+                
             }
             else
             {
                 if (!Input.GetKey(KeyCode.LeftShift))
                 {
-                    Selections.Instance.DeselectAll();
+                    BuildingSelection.Instance.DeselectBuilding();
+                    UnitSelection.Instance.DeselectAll();
                 }
 
             }
@@ -69,20 +71,16 @@ public class Click : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
-                if (Selections.Instance.selectedBuilding != null)
+                if (BuildingSelection.Instance.selectedBuilding != null)
                 {
-                    //Checks if it is a barracks to move the flag
-                    if (Selections.Instance.selectedBuilding.parent.GetComponent<Building>().buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
-                    {
-                        Selections.Instance.selectedBuilding.parent.GetChild(1).gameObject.transform.position = hit.point;
-                        Selections.Instance.selectedBuilding.parent.GetChild(1).gameObject.SetActive(true);
-                    }
-                    
-                } else
-                {
-                    Selections.Instance.moveUnits(hit.point);
+                    BuildingSelection.Instance.MoveFlag(hit.point);
+
                 }
-                
+                else
+                {
+                    UnitSelection.Instance.moveUnits(hit.point);
+                }
+
 
             }
 

@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8664488261239127566}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Building, Assembly-CSharp
+        m_MethodName: spawnTroop
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &788105615644726144
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +490,7 @@ GameObject:
   - component: {fileID: 802084044407891404}
   - component: {fileID: 3711590599041396969}
   m_Layer: 5
-  m_Name: TextPanel
+  m_Name: BarracksTextPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -557,7 +569,7 @@ GameObject:
   - component: {fileID: 7954353954265697630}
   - component: {fileID: 3643351683397722500}
   m_Layer: 5
-  m_Name: ButtonPanel
+  m_Name: BarracksButtonPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -973,7 +985,7 @@ GameObject:
   - component: {fileID: 725315188905292266}
   - component: {fileID: 3901326891012393232}
   m_Layer: 5
-  m_Name: UnitTrainingTime
+  m_Name: BarracksTrainingTimeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1351,7 +1363,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3403390688741880603}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Building, Assembly-CSharp
+        m_MethodName: spawnTroop
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6001629076383857429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,7 +1388,7 @@ GameObject:
   - component: {fileID: 2858248119642854710}
   - component: {fileID: 1199931243853130766}
   m_Layer: 5
-  m_Name: UnitName
+  m_Name: BarracksUnitTrainingName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1632,7 +1656,7 @@ GameObject:
   - component: {fileID: 4904302488212718948}
   - component: {fileID: 5801824248723568010}
   m_Layer: 5
-  m_Name: UnitQueue
+  m_Name: BarracksQueueSize
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

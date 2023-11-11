@@ -29,7 +29,7 @@ public class UnitDrag : MonoBehaviour
     void Update()
     {
 
-        
+
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -47,28 +47,29 @@ public class UnitDrag : MonoBehaviour
                 startPosition = Input.mousePosition;
                 selectionBox = new Rect();
             }
-            
 
-                
+
+
         }
 
-            if (Input.GetMouseButton(0))
-            {
-                if (startPosition == Vector2.zero)
+        if (Input.GetMouseButton(0))
+        {
+            if (startPosition == Vector2.zero)
             {
                 Debug.Log("Trying to drag select a building");
-            } else
+            }
+            else
             {
                 endPosition = Input.mousePosition;
                 DrawVisual();
                 DrawSelection();
             }
-                    
-                
-            }
 
-            if (Input.GetMouseButtonUp(0))
-            {
+
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
             if (startPosition == Vector2.zero)
             {
                 Debug.Log("Trying to drag select a building");
@@ -80,12 +81,12 @@ public class UnitDrag : MonoBehaviour
                 endPosition = Vector2.zero;
                 DrawVisual();
             }
-            
-                
-            }
-        
-       
-        
+
+
+        }
+
+
+
 
     }
 
@@ -133,14 +134,13 @@ public class UnitDrag : MonoBehaviour
 
     void SelectUnits()
     {
-        foreach (var unit in Selections.Instance.unitList)
+        
+        foreach (var unit in UnitSelection.Instance.unitList)
         {
             if (selectionBox.Contains(myCam.WorldToScreenPoint(unit.transform.position)))
             {
-                Selections.Instance.DragSelect(unit);
+                UnitSelection.Instance.DragSelect(unit);
             }
         }
     }
 }
-
-//Selection.Selections.

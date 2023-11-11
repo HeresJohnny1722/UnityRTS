@@ -8,60 +8,87 @@ using UnityEngine.AI;
 public class Building : MonoBehaviour
 {
     [Header("Only for Barracks/Artillery Training")]
-    [SerializeField]
-    private GameObject buttonLayout;
-    [SerializeField]
-    private GameObject barracksPanel;
-    [SerializeField]
-    public TextMeshProUGUI timeLeftText;
-    public TextMeshProUGUI queueSizeText;
-    public TextMeshProUGUI unitNameText;
-    
+
+    [SerializeField] private GameObject barracksSpawnFlag;
+    [SerializeField] private GameObject barracksPanel;
+    [SerializeField] private GameObject barracksButtonLayout;
     
 
+    [SerializeField] private TextMeshProUGUI barracksTrainingTimeLeftText;
+    [SerializeField] private TextMeshProUGUI barracacksQueueSizeText;
+    [SerializeField] private TextMeshProUGUI barracksUnitTrainingNameText;
 
     [Space(20)]
     [Header("General Building Stuff")]
-    [SerializeField]
-    private GameObject infoPanel;
-    public TextMeshProUGUI buildingHealthText;
-    private float buildingHealth;
 
-    public BuildingSO buildingSO;
+    [SerializeField] private GameObject infoPanel;
+    [SerializeField] private Healthbar buildingHealthbar;
+
+    [SerializeField] private TextMeshProUGUI buildingHealthText;
+    [SerializeField] private BuildingSO buildingSO;
+
+
+    private float buildingHealth;
+    private float unitFlagOffset;
 
     private Transform unitSpawnPoint;
     private Transform unitMovePoint;
-    
+
     private Queue<UnitSO> troopQueue = new Queue<UnitSO>();
     private bool isTraining = false;
-
-    private float unitFlagOffset;
-
-    public Healthbar healthbar;
-
 
 
     void Start()
     {
         HideShowBuildingStuff(false);
         buildingHealth = buildingSO.startingHealth;
-        healthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
+        buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
         buildingHealthText.text = "Health: " + buildingHealth.ToString();
-        //Selections.Instance.buildingsList.Add(this.gameObject);
+        BuildingSelection.Instance.buildingsList.Add(this.gameObject);
         if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
         {
             unitFlagOffset = buildingSO.spawnOffset;
         }
+    }
+
+    public void moveFlag(Vector3 point)
+    {
+        if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
+        {
+
+            barracksSpawnFlag.transform.position = point;
+            
+        }
+    }
+
+    public void takeDamage(float damageAmount)
+    {
 
 
+        buildingHealth -= damageAmount;
 
+        if (buildingHealth <= 0)
+        {
+            deselectBuilding();
+            
+            BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
+            Destroy(this.gameObject);
 
+        }
+        buildingHealthText.text = "Health: " + buildingHealth.ToString();
+        HideShowBuildingStuff(true);
+        buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
     }
 
     public void BuildingSelected()
     {
-        Debug.Log("Selecting " + this.gameObject.name);
+        
         HideShowBuildingStuff(true);
+        if (buildingSO.startingHealth == buildingHealth)
+        {
+            buildingHealthbar.gameObject.SetActive(false);
+
+        }
         infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = buildingSO.name;
         infoPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = buildingSO.description;
 
@@ -72,34 +99,35 @@ public class Building : MonoBehaviour
             for (int i = 0; i < buildingSO.unitsToTrain.Count; i++)
             {
                 //setting tool tips also
-                buttonLayout.transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = buildingSO.unitsToTrain[i].name;
+                barracksButtonLayout.transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = buildingSO.unitsToTrain[i].name;
             }
         }
     }
 
-    public void BuildingDeSelected()
+    public void deselectBuilding()
     {
-        Debug.Log("Deselecting " + this.gameObject.name);
+        
         HideShowBuildingStuff(false);
+        
     }
 
     void HideShowBuildingStuff(bool visible)
     {
         if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
         {
-            buttonLayout.SetActive(visible);
+            barracksButtonLayout.SetActive(visible);
             barracksPanel.SetActive(visible);
-            this.transform.GetChild(1).gameObject.SetActive(visible);
+            barracksSpawnFlag.SetActive(visible);
         }
         infoPanel.SetActive(visible);
-        healthbar.gameObject.SetActive(visible);
+        buildingHealthbar.gameObject.SetActive(visible);
         this.transform.GetChild(0).gameObject.SetActive(visible);
-        
+
     }
 
     public void spawnTroop(int index)
     {
-        Debug.Log(buildingSO.unitsToTrain[index]);
+        
         unitSpawnPoint = this.transform.GetChild(2).transform;
         unitMovePoint = this.transform.GetChild(1).transform;
 
@@ -109,7 +137,7 @@ public class Building : MonoBehaviour
 
         if (!isTraining)
         {
-           
+
             StartCoroutine(TrainTroops());
         }
 
@@ -118,45 +146,45 @@ public class Building : MonoBehaviour
 
     private IEnumerator TrainTroops()
     {
-        
+
         isTraining = true;
 
         while (troopQueue.Count > 0)
         {
-            
+
             UnitSO unit = troopQueue.Dequeue();
 
-            unitNameText.text = unit.name;
-            Debug.Log("Training " + unit.name);
+            barracksUnitTrainingNameText.text = unit.name;
+            
 
 
             float trainingTime = unit.trainingTime;
-            
+
             while (trainingTime > 0)
             {
-                
-                timeLeftText.text = "Training Time: " + trainingTime.ToString("0") + "s";
+
+                barracksTrainingTimeLeftText.text = "Training Time: " + trainingTime.ToString("0") + "s";
                 yield return new WaitForSeconds(1);
                 trainingTime -= 1;
                 UpdateQueueSizeText();
             }
 
 
-            
+
             Vector3 movePosition = new Vector3(unitMovePoint.position.x + Random.Range(-unitFlagOffset, unitFlagOffset), 0, unitMovePoint.position.z + Random.Range(-unitFlagOffset, unitFlagOffset));
 
-            
+
             GameObject troop = Instantiate(unit.prefab, unitSpawnPoint.position, Quaternion.identity);
             // Reset time left text and unit name
-            timeLeftText.text = "Training Time: 0s";
-            unitNameText.text = "No unit training";
+            barracksTrainingTimeLeftText.text = "Training Time: 0s";
+            barracksUnitTrainingNameText.text = "No unit training";
 
             UpdateQueueSizeText(); // Update the queue size text when a troop is done training
             NavMeshAgent unitAgent = troop.GetComponent<NavMeshAgent>();
             unitAgent.SetDestination(movePosition);
 
 
-            
+
         }
 
 
@@ -166,14 +194,8 @@ public class Building : MonoBehaviour
 
     private void UpdateQueueSizeText()
     {
-        queueSizeText.text = "Queue Size: " + troopQueue.Count;
+        barracacksQueueSizeText.text = "Queue Size: " + troopQueue.Count;
     }
 
-    
 
-void OnDestroy()
-    {
-        //Selections.Instance.buildingsList.Remove(this.gameObject);
-        HideShowBuildingStuff(false);
-    }
 }

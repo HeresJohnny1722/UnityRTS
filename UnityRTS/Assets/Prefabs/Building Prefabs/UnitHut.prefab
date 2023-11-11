@@ -153,15 +153,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf8c699281a0497db41e1ef11678c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonLayout: {fileID: 0}
-  barracksPanel: {fileID: 0}
-  timeLeftText: {fileID: 0}
-  queueSizeText: {fileID: 0}
-  unitNameText: {fileID: 0}
+  barracksSpawnFlag: {fileID: 0}
+  barracksButtonLayout: {fileID: 0}
+  barracksTextPanel: {fileID: 0}
+  barracksTrainingTimeLeftText: {fileID: 0}
+  barracacksQueueSizeText: {fileID: 0}
+  barracksUnitTrainingNameText: {fileID: 0}
   infoPanel: {fileID: 8316160886918510635}
+  buildingHealthbar: {fileID: 3021232541319925804}
   buildingHealthText: {fileID: 6411153642131242701}
   buildingSO: {fileID: 11400000, guid: 83b453ecbb6054e5387fc73b965d70de, type: 2}
-  healthbar: {fileID: 3021232541319925804}
 --- !u!1001 &1652922495148914923
 PrefabInstance:
   m_ObjectHideFlags: 0

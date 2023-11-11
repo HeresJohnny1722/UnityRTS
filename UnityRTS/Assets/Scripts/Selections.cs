@@ -7,7 +7,6 @@ using TMPro;
 
 public class Selections : MonoBehaviour
 {
-
     public List<GameObject> unitList = new List<GameObject>();
     public List<GameObject> unitsSelected = new List<GameObject>();
     public List<GameObject> buildingsList = new List<GameObject>();
@@ -18,10 +17,7 @@ public class Selections : MonoBehaviour
     private static Selections _instance;
     public static Selections Instance { get { return _instance; } }
 
-    
-
     private NavMeshAgent myAgent;
-    
 
     [SerializeField] private GameObject groundMarker;
 
@@ -30,49 +26,38 @@ public class Selections : MonoBehaviour
     [SerializeField] private TextMeshProUGUI selectedObjectText;
     [SerializeField] private TextMeshProUGUI resourceDataText;
 
-    private FormationBase _formation;
+    private FormationBase _formationBase;
 
     public FormationBase Formation
     {
         get
         {
-            if (_formation == null) _formation = GetComponent<FormationBase>();
-            return _formation;
+            if (_formationBase == null) _formationBase = GetComponent<FormationBase>();
+            return _formationBase;
         }
-        set => _formation = value;
+        set => _formationBase = value;
     }
 
     private List<Vector3> _points = new List<Vector3>();
 
     public void moveUnits(Vector3 moveToPosition)
     {
-        
-        if (unitsSelected.Count > 0)
+        if (unitsSelected.Count > 0 && Formation != null)
         {
             setGroundMarker(groundMarker, moveToPosition);
-            //NavMeshAgent leaderAgent = unitsSelected[0].GetComponent<NavMeshAgent>();
-            //leaderAgent.SetDestination(moveToPosition);
 
             _points = Formation.EvaluatePoints().ToList();
 
-            for (var i = 0; i < unitsSelected.Count; i++)
+            for (int i = 0; i < unitsSelected.Count; i++)
             {
                 myAgent = unitsSelected[i].GetComponent<NavMeshAgent>();
                 myAgent.SetDestination(_points[i] + moveToPosition);
-
-                // + new Vector3(-0.5f, 0, -0.5f));
-
             }
-
         }
     }
 
-    
-
     void Awake()
     {
-
-
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -81,10 +66,16 @@ public class Selections : MonoBehaviour
         {
             _instance = this;
         }
-
-       
-
     }
+
+    public void takeDamageBuildingTest(float damage)
+    {
+        if (selectedBuilding != null && selectedBuilding.parent != null)
+        {
+            selectedBuilding.parent.GetComponent<Building>().takeDamage(damage);
+        }
+    }
+
 
     public void ClickSelectUnit(GameObject unitToAdd)
     {
@@ -156,11 +147,11 @@ public class Selections : MonoBehaviour
 
         if (selectedBuilding)
         {
-            
-            selectedBuilding.parent.GetComponent<Building>().BuildingDeSelected();
-            selectedBuilding = null;
+
+            //electedBuilding.parent.GetComponent<Building>().BuildingDeSelected();
+            //selectedBuilding = null;
         }
-        
+
 
     }
 
@@ -172,17 +163,17 @@ public class Selections : MonoBehaviour
     }
 
 
-    
+
 
     public void SelectBuilding(Transform buildingToSelect)
     {
-        
+
         DeselectAll();
         selectedBuilding = buildingToSelect;
-        
+
         selectedBuilding.parent.GetComponent<Building>().BuildingSelected();
 
-        
+
 
     }
 
