@@ -18,7 +18,7 @@ public class BuildingSO : ScriptableObject
     public BuildingType buildingType;
     public new string name;
     public string description;
-    public float spawnOffset = 1f;
+    public float spawnFlagMoveToTroopOffset = 1f;
     public float startingHealth;
     public float timeToBuild;
     public float goldCost;

@@ -10,6 +10,7 @@ public class Building : MonoBehaviour
     [Header("Only for Barracks/Artillery Training")]
 
     [SerializeField] private GameObject barracksSpawnFlag;
+    [SerializeField] private float baracksStartFlagRadius = 5f;
     [SerializeField] private GameObject barracksPanel;
     [SerializeField] private GameObject barracksButtonLayout;
     
@@ -47,8 +48,31 @@ public class Building : MonoBehaviour
         BuildingSelection.Instance.buildingsList.Add(this.gameObject);
         if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
         {
-            unitFlagOffset = buildingSO.spawnOffset;
+            unitFlagOffset = buildingSO.spawnFlagMoveToTroopOffset;
+
+            // Adjust the distance value to set the minimum distance between the barracks and the spawn flag
+            float minDistance = 1.0f;
+            LayerMask buildingLayerMask = LayerMask.GetMask("Building"); // Assuming "Building" is the layer name
+
+            Vector3 randomOffset = new Vector3(Random.Range(-baracksStartFlagRadius, baracksStartFlagRadius), 0, Random.Range(-baracksStartFlagRadius, baracksStartFlagRadius));
+
+            // Calculate the new position with a minimum distance from the barracks
+            Vector3 newPosition = transform.position + Vector3.one + randomOffset;
+            float distance = Vector3.Distance(newPosition, transform.position);
+
+            while (distance < minDistance || Physics.Raycast(newPosition, Vector3.down, 1.0f, buildingLayerMask))
+            {
+                randomOffset = new Vector3(Random.Range(-baracksStartFlagRadius, baracksStartFlagRadius), 0, Random.Range(-baracksStartFlagRadius, baracksStartFlagRadius));
+                newPosition = transform.position + Vector3.one + randomOffset;
+                distance = Vector3.Distance(newPosition, transform.position);
+            }
+
+            barracksSpawnFlag.transform.position = new Vector3(newPosition.x, barracksSpawnFlag.transform.position.y, newPosition.z);
+
+
+            //barracksSpawnFlag.transform.position = new Vector3((transform.position.x + 1) + Random.Range(-baracksStartRadius, baracksStartRadius), barracksSpawnFlag.transform.position.y, (transform.position.z + 1) + Random.Range(-baracksStartRadius, baracksStartRadius));
         }
+
     }
 
     public void moveFlag(Vector3 point)
@@ -129,7 +153,7 @@ public class Building : MonoBehaviour
     {
         
         unitSpawnPoint = this.transform.GetChild(2).transform;
-        unitMovePoint = this.transform.GetChild(1).transform;
+        unitMovePoint = barracksSpawnFlag.transform;
 
         //if (checkIfEnoughResources(resources that are being taken, would be in the buildingSO, cost
         troopQueue.Enqueue(buildingSO.unitsToTrain[index]);
@@ -171,7 +195,24 @@ public class Building : MonoBehaviour
 
 
 
-            Vector3 movePosition = new Vector3(unitMovePoint.position.x + Random.Range(-unitFlagOffset, unitFlagOffset), 0, unitMovePoint.position.z + Random.Range(-unitFlagOffset, unitFlagOffset));
+            //Vector3 movePosition = new Vector3(unitMovePoint.position.x + Random.Range(-unitFlagOffset, unitFlagOffset), 0, unitMovePoint.position.z + Random.Range(-unitFlagOffset, unitFlagOffset));
+
+
+    
+
+            Vector3 movePosition;
+            bool isOccupied;
+
+            do
+            {
+                // Generate a new random position
+                movePosition = new Vector3(unitMovePoint.position.x + Random.Range(-unitFlagOffset, unitFlagOffset), 0, unitMovePoint.position.z + Random.Range(-unitFlagOffset, unitFlagOffset));
+
+                // Check if there's already a troop within the specified radius
+                isOccupied = IsPositionOccupied(movePosition, unit.prefab.gameObject.transform.localScale.x/2 + 1/16);
+            } while (isOccupied);
+
+            // Use the new movePosition for your logic
 
 
             GameObject troop = Instantiate(unit.prefab, unitSpawnPoint.position, Quaternion.identity);
@@ -191,6 +232,25 @@ public class Building : MonoBehaviour
         isTraining = false;
         UpdateQueueSizeText(); // Update the queue size text when all troops are done training
     }
+
+    bool IsPositionOccupied(Vector3 position, float radius)
+    {
+        foreach (GameObject unit in UnitSelection.Instance.unitList)
+        {
+            // Check the distance from the unit to the specified position
+            float distance = Vector3.Distance(unit.transform.position, position);
+
+            // If the distance is within the radius, the position is considered occupied
+            if (distance < radius)
+            {
+                return true;
+            }
+        }
+
+        // No units found within the radius
+        return false;
+    }
+
 
     private void UpdateQueueSizeText()
     {

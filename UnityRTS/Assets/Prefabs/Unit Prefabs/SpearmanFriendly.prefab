@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 8433340988126413272}
   - component: {fileID: 2958555681735352451}
   m_Layer: 8
-  m_Name: PikemanFriendly
+  m_Name: SpearmanFriendly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

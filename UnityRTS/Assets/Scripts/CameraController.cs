@@ -24,6 +24,9 @@ public class CameraController : MonoBehaviour
     public Quaternion newRotation;
     public Vector3 newZoom;
 
+    public Vector3 originalZoom;
+    public Quaternion originalRotation;
+
     public Vector3 dragStartPosition;
     public Vector3 dragCurrentPosition;
     public Vector3 rotateStartPosition;
@@ -32,9 +35,13 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        newPosition = transform.position;
-        newRotation = transform.rotation;
-        newZoom = cameraTransform.localPosition;
+        newZoom = originalZoom = cameraTransform.localPosition;
+        newZoom.y = maxZoom;
+        originalRotation = newRotation = transform.rotation;
+
+        newRotation = originalRotation;
+        newZoom = originalZoom;
+
     }
 
     // Update is called once per frame
@@ -42,13 +49,14 @@ public class CameraController : MonoBehaviour
     {
         HandleMouseInput();
         HandleMovementInput();
+        HandleResetInput();
+        
     }
 
     void HandleMouseInput()
     {
         if (Input.mouseScrollDelta.y > 0)
         {
-            // Zoom in only if the current zoom is not at the minimum limit
             if (newZoom.y > minZoom)
             {
                 newZoom += Input.mouseScrollDelta.y * zoomAmount;
@@ -56,20 +64,15 @@ public class CameraController : MonoBehaviour
         }
         else if (Input.mouseScrollDelta.y < 0)
         {
-            // Zoom out only if the current zoom is not at the maximum limit
             if (newZoom.y < maxZoom)
             {
                 newZoom += Input.mouseScrollDelta.y * zoomAmount;
             }
         }
 
-        // Get the mouse position
         Vector3 mousePosition = Input.mousePosition;
-
-        // Initialize a movement vector
         Vector3 moveDirection = Vector3.zero;
 
-        // Check if the mouse is near the screen edges
         if (mousePosition.x < screenEdgeWidth)
         {
             moveDirection += -transform.right;
@@ -88,14 +91,8 @@ public class CameraController : MonoBehaviour
             moveDirection += transform.forward;
         }
 
-        // Apply camera movement based on the mouse position
         newPosition += moveDirection.normalized * movementMouseSpeed * Time.deltaTime;
 
-        // Ensure the camera doesn't move too far away
-
-        // ... Your existing camera bounds logic ...
-
-        // Update the camera position and rotation
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
         cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * movementTime);
@@ -129,7 +126,6 @@ public class CameraController : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             newPosition += transform.right * -movementKeyboardSpeed;
-
         }
 
         if (Input.GetKey(KeyCode.Q))
@@ -141,17 +137,18 @@ public class CameraController : MonoBehaviour
             newRotation *= Quaternion.Euler(Vector3.up * -rotationAmount);
         }
 
-        /*if (Input.GetKey(KeyCode.R))
-        {
-            newZoom += zoomAmount;
-        }
-        if (Input.GetKey(KeyCode.F))
-        {
-            newZoom -= zoomAmount;
-        }*/
-
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
         cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * movementTime);
+    }
+
+    void HandleResetInput()
+    {
+        if (Input.GetKey(KeyCode.R))
+        {
+            // Lerping back to original rotation and zoom
+            newRotation = originalRotation;
+            newZoom = originalZoom;
+        }
     }
 }
