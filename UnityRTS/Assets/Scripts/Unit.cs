@@ -51,6 +51,9 @@ public class Unit : MonoBehaviour
         {
             unitHealthbar.gameObject.SetActive(false);
 
+        } else
+        {
+            unitHealthbar.gameObject.SetActive(true);
         }
         
     }

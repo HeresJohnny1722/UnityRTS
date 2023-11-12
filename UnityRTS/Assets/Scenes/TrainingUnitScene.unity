@@ -2026,8 +2026,8 @@ MonoBehaviour:
   maxGroupSize: 25
   groundMarker: {fileID: 1019874961}
   unitInfoPanel: {fileID: 702007038}
-  selectedUnitsTitle: {fileID: 0}
-  selectedUnitsListText: {fileID: 0}
+  selectedUnitsTitle: {fileID: 2041082627}
+  selectedUnitsListText: {fileID: 2075506202}
 --- !u!114 &1325466777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3483,7 +3483,7 @@ GameObject:
   - component: {fileID: 2041082628}
   - component: {fileID: 2041082627}
   m_Layer: 5
-  m_Name: SelectedObject
+  m_Name: SelectedUnitsTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3617,7 +3617,7 @@ GameObject:
   - component: {fileID: 2075506203}
   - component: {fileID: 2075506202}
   m_Layer: 5
-  m_Name: TroopsSelected/ResourceSelected
+  m_Name: SelectedUnitsList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

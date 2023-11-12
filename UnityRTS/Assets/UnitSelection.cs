@@ -80,12 +80,7 @@ public class UnitSelection : MonoBehaviour
     public void ClickSelectUnit(GameObject unitToAdd)
     {
         DeselectAll();
-        unitsSelected.Add(unitToAdd);
-        BuildingSelection.Instance.DeselectBuilding();
-        //updateInfoPanelForUnits();
-        //infoPanel.SetActive(true);
-        unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
-        unitToAdd.transform.GetChild(1).gameObject.SetActive(true);
+        SelectUnit(unitToAdd);
 
     }
 
@@ -93,22 +88,18 @@ public class UnitSelection : MonoBehaviour
     {
         if (!unitsSelected.Contains(unitToAdd) && (unitsSelected.Count < maxGroupSize))
         {
-            BuildingSelection.Instance.DeselectBuilding();
-            unitsSelected.Add(unitToAdd);
-            //updateInfoPanelForUnits();
-            //infoPanel.SetActive(true);
-            unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
-            unitToAdd.transform.GetChild(1).gameObject.SetActive(true);
+            SelectUnit(unitToAdd);
         }
         else
         {
-            unitToAdd.transform.GetChild(0).gameObject.SetActive(false);
-            unitToAdd.transform.GetChild(1).gameObject.SetActive(false);
-            //updateInfoPanelForUnits();
             unitsSelected.Remove(unitToAdd);
+            unitScript = unitToAdd.GetComponent<Unit>();
+            unitScript.deselectUnit();
+
+            updateInfoPanelForUnits();
             if (unitsSelected.Count <= 0)
             {
-                //infoPanel.SetActive(false);
+                unitInfoPanel.SetActive(false);
             }
         }
     }
@@ -117,12 +108,7 @@ public class UnitSelection : MonoBehaviour
     {
         if (!unitsSelected.Contains(unitToAdd) && (unitsSelected.Count < maxGroupSize))
         {
-            unitsSelected.Add(unitToAdd);
-            unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
-            unitToAdd.transform.GetChild(1).gameObject.SetActive(true);
-            BuildingSelection.Instance.DeselectBuilding();
-            //updateInfoPanelForUnits();
-            //infoPanel.SetActive(true);
+            SelectUnit(unitToAdd);
         }
     }
 
@@ -131,32 +117,29 @@ public class UnitSelection : MonoBehaviour
 
         foreach (var unit in unitsSelected)
         {
-            unit.transform.GetChild(0).gameObject.SetActive(false);
-            unit.transform.GetChild(1).gameObject.SetActive(false);
+            
+            unitScript = unit.GetComponent<Unit>();
+            unitScript.deselectUnit();
+            updateInfoPanelForUnits();
+            unitInfoPanel.SetActive(false);
         }
         unitsSelected.Clear();
-        //unitsSelected.Clear();
+        
 
     }
 
     public void SelectUnit(GameObject unitToSelect)
     {
-        //updateInfoPanelForUnits();
-        //unitInfoPanel.SetActive(true);
-        BuildingSelection.Instance.DeselectBuilding();
+        unitsSelected.Add(unitToSelect);
         unitScript = unitToSelect.GetComponent<Unit>();
         unitScript.selectUnit();
-        
-        
+        BuildingSelection.Instance.DeselectBuilding();
+        updateInfoPanelForUnits();
+        unitInfoPanel.SetActive(true);
+
+
     }
 
-    public void DeselectUnit(GameObject unitToDeselect)
-    {
-        //updateInfoPanelForUnits();
-        unitInfoPanel.SetActive(false);
-        unitScript.deselectUnit();
-        
-    }
 
     public void setGroundMarker(GameObject groundMarkerObject, Vector3 groundMarkerPosition)
     {
