@@ -81,6 +81,7 @@ public class UnitSelection : MonoBehaviour
     {
         DeselectAll();
         unitsSelected.Add(unitToAdd);
+        BuildingSelection.Instance.DeselectBuilding();
         //updateInfoPanelForUnits();
         //infoPanel.SetActive(true);
         unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
@@ -92,6 +93,7 @@ public class UnitSelection : MonoBehaviour
     {
         if (!unitsSelected.Contains(unitToAdd) && (unitsSelected.Count < maxGroupSize))
         {
+            BuildingSelection.Instance.DeselectBuilding();
             unitsSelected.Add(unitToAdd);
             //updateInfoPanelForUnits();
             //infoPanel.SetActive(true);
@@ -118,6 +120,7 @@ public class UnitSelection : MonoBehaviour
             unitsSelected.Add(unitToAdd);
             unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
             unitToAdd.transform.GetChild(1).gameObject.SetActive(true);
+            BuildingSelection.Instance.DeselectBuilding();
             //updateInfoPanelForUnits();
             //infoPanel.SetActive(true);
         }
@@ -140,6 +143,7 @@ public class UnitSelection : MonoBehaviour
     {
         //updateInfoPanelForUnits();
         //unitInfoPanel.SetActive(true);
+        BuildingSelection.Instance.DeselectBuilding();
         unitScript = unitToSelect.GetComponent<Unit>();
         unitScript.selectUnit();
         

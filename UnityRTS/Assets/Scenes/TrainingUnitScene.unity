@@ -2023,7 +2023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitList: []
   unitsSelected: []
-  maxGroupSize: 8
+  maxGroupSize: 25
   groundMarker: {fileID: 1019874961}
   unitInfoPanel: {fileID: 702007038}
   selectedUnitsTitle: {fileID: 0}

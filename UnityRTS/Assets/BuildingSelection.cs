@@ -37,6 +37,7 @@ public class BuildingSelection : MonoBehaviour
 
     public void SelectBuilding(Transform buildingToSelect)
     {
+        UnitSelection.Instance.DeselectAll();
         DeselectBuilding();
         selectedBuilding = buildingToSelect;
         building = selectedBuilding.parent.GetComponent<Building>();
