@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 7462998351962582450, guid: bab61cac434c240ddbd343af9fd25842, type: 3}
   unitType: 1
-  name: Pikeman
+  name: Spearman
   trainingTime: 3
   startingHealth: 25
   speed: 6
-  description: Pikeman description
+  description: Spearman description
   goldCost: 2
   coalCost: 2
   copperCost: 2
