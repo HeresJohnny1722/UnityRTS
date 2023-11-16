@@ -13,11 +13,21 @@ public class Building : MonoBehaviour
     [SerializeField] private float baracksStartFlagRadius = 5f;
     [SerializeField] private GameObject barracksPanel;
     [SerializeField] private GameObject barracksButtonLayout;
-    
+
 
     [SerializeField] private TextMeshProUGUI barracksTrainingTimeLeftText;
     [SerializeField] private TextMeshProUGUI barracacksQueueSizeText;
     [SerializeField] private TextMeshProUGUI barracksUnitTrainingNameText;
+
+    [Header("Production buildings")]
+    public List<GameObject> workersCurrentlyWorking = new List<GameObject>();
+    [SerializeField] private GameObject productionPanel;
+    [SerializeField] private TextMeshProUGUI workersCurrentlyWorkingText;
+    [SerializeField] private TextMeshProUGUI outputRateText;
+    [SerializeField] private TextMeshProUGUI resourceTypeText;
+
+    private float outputRate;
+
 
     [Space(20)]
     [Header("General Building Stuff")]
@@ -26,7 +36,7 @@ public class Building : MonoBehaviour
     [SerializeField] private Healthbar buildingHealthbar;
 
     [SerializeField] private TextMeshProUGUI buildingHealthText;
-    [SerializeField] private BuildingSO buildingSO;
+    public BuildingSO buildingSO;
 
 
     private float buildingHealth;
@@ -73,6 +83,11 @@ public class Building : MonoBehaviour
             //barracksSpawnFlag.transform.position = new Vector3((transform.position.x + 1) + Random.Range(-baracksStartRadius, baracksStartRadius), barracksSpawnFlag.transform.position.y, (transform.position.z + 1) + Random.Range(-baracksStartRadius, baracksStartRadius));
         }
 
+        if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
+        {
+            outputRate = buildingSO.resourceOutputRate;
+        }
+
     }
 
     public void moveFlag(Vector3 point)
@@ -81,9 +96,29 @@ public class Building : MonoBehaviour
         {
 
             barracksSpawnFlag.transform.position = point;
-            
+
         }
     }
+
+    public void removeOneWorker()
+    {
+        if (workersCurrentlyWorking.Count > 0)
+        {
+            float radius = 1.5f; // Set your desired radius here
+
+            Vector2 randomPoint = Random.insideUnitCircle * radius;
+            Vector3 newPosition = transform.position + new Vector3(randomPoint.x, 0, randomPoint.y);
+
+            workersCurrentlyWorking[0].transform.position = newPosition;
+            workersCurrentlyWorking[0].SetActive(true);
+            
+            UnitSelection.Instance.unitList.Add(workersCurrentlyWorking[0]);
+            workersCurrentlyWorking.Remove(workersCurrentlyWorking[0]);
+
+            //Update the production stuff, capacity and output
+        }
+    }
+
 
     public void takeDamage(float damageAmount)
     {
@@ -94,7 +129,7 @@ public class Building : MonoBehaviour
         if (buildingHealth <= 0)
         {
             deselectBuilding();
-            
+
             BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
             Destroy(this.gameObject);
 
@@ -104,9 +139,24 @@ public class Building : MonoBehaviour
         buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
     }
 
+    public void addWorker(GameObject worker)
+    {
+        workersCurrentlyWorking.Add(worker);
+       
+
+        //Production
+        if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
+        {
+            workersCurrentlyWorkingText.text = workersCurrentlyWorking.Count + "/" + buildingSO.workerCapacity.ToString() + " Workers";
+            outputRateText.text = "Output rate: " + outputRate + " " + buildingSO.resourceType.ToString() + "/second";
+            resourceTypeText.text = buildingSO.resourceType.ToString();
+        }
+
+    }
+
     public void BuildingSelected()
     {
-        
+
         HideShowBuildingStuff(true);
         if (buildingSO.startingHealth == buildingHealth)
         {
@@ -130,9 +180,9 @@ public class Building : MonoBehaviour
 
     public void deselectBuilding()
     {
-        
+
         HideShowBuildingStuff(false);
-        
+
     }
 
     void HideShowBuildingStuff(bool visible)
@@ -143,6 +193,10 @@ public class Building : MonoBehaviour
             barracksPanel.SetActive(visible);
             barracksSpawnFlag.SetActive(visible);
         }
+        else if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
+        {
+            productionPanel.SetActive(visible);
+        }
         infoPanel.SetActive(visible);
         buildingHealthbar.gameObject.SetActive(visible);
         this.transform.GetChild(0).gameObject.SetActive(visible);
@@ -151,7 +205,7 @@ public class Building : MonoBehaviour
 
     public void spawnTroop(int index)
     {
-        
+
         unitSpawnPoint = this.transform.GetChild(2).transform;
         unitMovePoint = barracksSpawnFlag.transform;
 
@@ -179,7 +233,7 @@ public class Building : MonoBehaviour
             UnitSO unit = troopQueue.Dequeue();
 
             barracksUnitTrainingNameText.text = unit.name;
-            
+
 
 
             float trainingTime = unit.trainingTime;
@@ -198,7 +252,7 @@ public class Building : MonoBehaviour
             //Vector3 movePosition = new Vector3(unitMovePoint.position.x + Random.Range(-unitFlagOffset, unitFlagOffset), 0, unitMovePoint.position.z + Random.Range(-unitFlagOffset, unitFlagOffset));
 
 
-    
+
 
             Vector3 movePosition;
             bool isOccupied;
@@ -209,7 +263,7 @@ public class Building : MonoBehaviour
                 movePosition = new Vector3(unitMovePoint.position.x + Random.Range(-unitFlagOffset, unitFlagOffset), 0, unitMovePoint.position.z + Random.Range(-unitFlagOffset, unitFlagOffset));
 
                 // Check if there's already a troop within the specified radius
-                isOccupied = IsPositionOccupied(movePosition, unit.prefab.gameObject.transform.localScale.x/2 + 1/16);
+                isOccupied = IsPositionOccupied(movePosition, unit.prefab.gameObject.transform.localScale.x / 2 + 1 / 16);
             } while (isOccupied);
 
             // Use the new movePosition for your logic

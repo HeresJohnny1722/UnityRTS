@@ -24,4 +24,6 @@ public class UnitSO : ScriptableObject
     public float goldCost;
     public float coalCost;
     public float copperCost;
+
+    public float gatheringSpeed;
 }

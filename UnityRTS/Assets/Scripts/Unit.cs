@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Unit : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Unit : MonoBehaviour
 
     private float unitHealth;
     private float unitWalkingSpeed;
+
+    private NavMeshAgent myAgent;
 
     void Start()
     {
@@ -63,4 +66,33 @@ public class Unit : MonoBehaviour
         unitFloorHighlight.SetActive(false);
         unitHealthbar.gameObject.SetActive(false);
     }
+
+    public bool isEnteringProduction = false;
+    private Transform buildingTransform = null;
+
+    public void productionBuildingStuff(Transform buildingToEnter)
+    {
+        myAgent = GetComponent<NavMeshAgent>();
+        float radius = 1f;
+
+        NavMesh.SamplePosition(buildingTransform.position, out NavMeshHit hit, radius, NavMesh.AllAreas);
+
+        // Set destination for the agent to the closest point on the nav mesh
+        myAgent.SetDestination(hit.position);
+
+        //myAgent.SetDestination(buildingToEnter.position);
+        buildingTransform = buildingToEnter;
+    }
+
+
+    /*private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform == buildingTransform)
+        {
+            Debug.Log("Entering Building");
+            buildingTransform = null;
+        }
+    }*/
+
+
 }

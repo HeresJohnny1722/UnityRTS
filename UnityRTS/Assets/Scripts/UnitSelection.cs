@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.AI;
 using TMPro;
+using System;
 
 public class UnitSelection : MonoBehaviour
 {
@@ -67,9 +68,107 @@ public class UnitSelection : MonoBehaviour
         }
     }
 
+    public void moveWorkersIntoProductionBuilding(Transform buildingToEnter)
+    {
+        if (unitsSelected.Count > 0)
+        {
+            // Highlight the resource node
+
+            // If the building is a production building
+            if (buildingToEnter.parent.GetComponent<Building>().buildingSO.buildingType == BuildingSO.BuildingType.Production)
+            {
+                
+                foreach (var unitSelected in unitsSelected)
+                {
+                    Unit unit = unitSelected.GetComponent<Unit>();
+
+                    if (unit.unitSO.unitType == UnitSO.UnitType.Worker)
+                    {
+                        
+                            // Start coroutine to check for collision with the building
+                            StartCoroutine(MoveWorkerToBuilding(unitSelected, buildingToEnter));
+                            
+                        
+                        
+                    }
+                }
+            }
+        }
+    }
+
+    private IEnumerator MoveWorkerToBuilding(GameObject worker, Transform buildingToEnter)
+    {
+        myAgent = worker.GetComponent<NavMeshAgent>();
+        float radius = 1f;
+
+        NavMesh.SamplePosition(buildingToEnter.position, out NavMeshHit hit, radius, NavMesh.AllAreas);
+
+        // Set destination for the agent to the closest point on the nav mesh
+        myAgent.SetDestination(hit.position);
+
+        // Wait for the worker to collide with the building
+        yield return StartCoroutine(WaitForCollisionWithBuilding(worker, buildingToEnter));
+
+        if (buildingToEnter.parent.GetComponent<Building>().workersCurrentlyWorking.Count < buildingToEnter.parent.GetComponent<Building>().buildingSO.workerCapacity)
+        {
+            // Additional logic after reaching the destination (if needed)
+            // ...
+
+            // Worker has collided with the building, do something
+            Debug.Log("Worker has collided with the production building!");
+            //Do all the add the unit to the building list stuff
+            //play a glowing unit animation
+            //update the progress bar on the building
+            if (worker.GetComponent<Unit>().unitSO.unitType == UnitSO.UnitType.Worker)
+            {
+                // Start coroutine to check for collision with the building
+
+                buildingToEnter.parent.GetComponent<Building>().addWorker(worker);
+                worker.SetActive(false);
+                unitScript = worker.GetComponent<Unit>();
+                unitScript.deselectUnit();
+                UnitSelection.Instance.unitsSelected.Remove(worker);
+                UnitSelection.Instance.unitList.Remove(worker);
+                //Destroy(worker);
+            }
+        } else
+        {
+            float spawnRadius = 5; // Set your desired radius here
+
+            Vector2 randomPoint = UnityEngine.Random.insideUnitCircle * spawnRadius;
+            Vector3 newPosition = transform.position + new Vector3(randomPoint.x, 0, randomPoint.y);
+
+            myAgent.SetDestination(newPosition);
+
+            // Additional logic or messages if needed
+            Debug.Log("Worker capacity reached. Moving to a random spot around the building.");
+        }
+        
+    }
+
+    private IEnumerator WaitForCollisionWithBuilding(GameObject worker, Transform buildingToEnter)
+    {
+        Collider buildingCollider = buildingToEnter.GetComponent<Collider>();
+        while (true)
+        {
+            if (buildingCollider.bounds.Contains(worker.transform.position))
+            {
+                // Worker has collided with the building
+                yield break;
+            }
+            yield return null;
+        }
+    }
+
+
+    public void UnitEnterBuilding(GameObject unitAddingIntoBuilding)
+    {
+        unitAddingIntoBuilding.SetActive(false);
+    }
+
     public void takeDamageUnitTest(float damage)
     {
-        
+
 
         for (int i = 0; i < unitsSelected.Count; i++)
         {
@@ -117,25 +216,28 @@ public class UnitSelection : MonoBehaviour
 
         foreach (var unit in unitsSelected)
         {
-            
+
             unitScript = unit.GetComponent<Unit>();
             unitScript.deselectUnit();
             updateInfoPanelForUnits();
             unitInfoPanel.SetActive(false);
         }
         unitsSelected.Clear();
-        
+
 
     }
 
     public void SelectUnit(GameObject unitToSelect)
     {
-        unitsSelected.Add(unitToSelect);
-        unitScript = unitToSelect.GetComponent<Unit>();
-        unitScript.selectUnit();
-        BuildingSelection.Instance.DeselectBuilding();
-        updateInfoPanelForUnits();
-        unitInfoPanel.SetActive(true);
+        if (unitToSelect.activeSelf == true)
+        {
+            unitsSelected.Add(unitToSelect);
+            unitScript = unitToSelect.GetComponent<Unit>();
+            unitScript.selectUnit();
+            BuildingSelection.Instance.DeselectBuilding();
+            updateInfoPanelForUnits();
+            unitInfoPanel.SetActive(true);
+        }
 
 
     }

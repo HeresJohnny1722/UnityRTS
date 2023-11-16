@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
+  m_Name: GoldMine
+  m_EditorClassIdentifier: 
+  buildingType: 2
+  unitsToTrain: []
+  spawnFlagMoveToTroopOffset: 1
+  resourceType: 0
+  resourceOutputRate: 2
+  outputWorkerMultiplyer: 2
+  workerCapacity: 10
+  name: Gold Mine
+  description: Place this on a gold node and put workers in it to start mining
+  startingHealth: 400
+  timeToBuild: 2
+  goldCost: 234
+  coalCost: 234
+  copperCost: 23

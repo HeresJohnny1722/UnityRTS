@@ -10,6 +10,7 @@ public class Click : MonoBehaviour
     [SerializeField] private LayerMask ground;
     [SerializeField] private LayerMask friendlyUnits;
     [SerializeField] private LayerMask building;
+    [SerializeField] private LayerMask resourceNode;
 
 
     void Awake()
@@ -48,8 +49,8 @@ public class Click : MonoBehaviour
             }
             else if (Physics.Raycast(ray, out hit, Mathf.Infinity, building))
             {
-                    BuildingSelection.Instance.SelectBuilding(hit.transform);
-                
+                BuildingSelection.Instance.SelectBuilding(hit.transform);
+
             }
             else
             {
@@ -69,7 +70,13 @@ public class Click : MonoBehaviour
             RaycastHit hit;
             Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, building))
+            {
+                Debug.Log("Trying to move to a building");
+                UnitSelection.Instance.moveWorkersIntoProductionBuilding(hit.transform);
+
+            }
+            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
                 if (BuildingSelection.Instance.selectedBuilding != null)
                 {
@@ -78,12 +85,20 @@ public class Click : MonoBehaviour
                 }
                 else
                 {
+
                     UnitSelection.Instance.moveUnits(hit.point);
                 }
 
 
-            }
 
+
+                /*if (hit.transform.GetComponent < buildingSO.buildingType == BuildingSO.BuildingType.Production)
+                {
+
+                }*/
+
+
+            }
         }
     }
 }

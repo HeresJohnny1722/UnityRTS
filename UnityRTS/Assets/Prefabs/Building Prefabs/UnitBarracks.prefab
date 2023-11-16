@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barracksSpawnFlag: {fileID: 3280989634548615702}
+  baracksStartFlagRadius: 5
   barracksPanel: {fileID: 1646429084274468258}
   barracksButtonLayout: {fileID: 3148074238489852892}
   barracksTrainingTimeLeftText: {fileID: 3031748581197004594}
@@ -204,41 +205,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5703970984420481760}
     m_Modifications:
-    - target: {fileID: 788105615644726144, guid: d8f43148855d24b7aa08f4876f186f35,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1887937802420657614, guid: d8f43148855d24b7aa08f4876f186f35,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1887937802420657614, guid: d8f43148855d24b7aa08f4876f186f35,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1887937802420657614, guid: d8f43148855d24b7aa08f4876f186f35,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 26
-      objectReference: {fileID: 0}
-    - target: {fileID: 1887937802420657614, guid: d8f43148855d24b7aa08f4876f186f35,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 26
-      objectReference: {fileID: 0}
-    - target: {fileID: 1887937802420657614, guid: d8f43148855d24b7aa08f4876f186f35,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 44
-      objectReference: {fileID: 0}
-    - target: {fileID: 1887937802420657614, guid: d8f43148855d24b7aa08f4876f186f35,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -18
-      objectReference: {fileID: 0}
     - target: {fileID: 1983884910063581451, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
       propertyPath: m_Pivot.x
@@ -344,45 +310,15 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6712343966138974176}
-    - target: {fileID: 4260999877378704496, guid: d8f43148855d24b7aa08f4876f186f35,
+    - target: {fileID: 4274729731681897862, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6712343966138974176}
     - target: {fileID: 4847257150891387452, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
       propertyPath: m_Name
       value: BuildingCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5981592995326394873, guid: d8f43148855d24b7aa08f4876f186f35,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5981592995326394873, guid: d8f43148855d24b7aa08f4876f186f35,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5981592995326394873, guid: d8f43148855d24b7aa08f4876f186f35,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 26
-      objectReference: {fileID: 0}
-    - target: {fileID: 5981592995326394873, guid: d8f43148855d24b7aa08f4876f186f35,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 26
-      objectReference: {fileID: 0}
-    - target: {fileID: 5981592995326394873, guid: d8f43148855d24b7aa08f4876f186f35,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 5981592995326394873, guid: d8f43148855d24b7aa08f4876f186f35,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 6202076081818643482, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
