@@ -312,6 +312,9 @@ public class Building : MonoBehaviour
             productionPanel.SetActive(true);
             nodePanel.SetActive(false);
             //Make it cost resources
+            infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = buildingSO.name;
+            infoPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = buildingSO.description;
+            
         }
     }
 
