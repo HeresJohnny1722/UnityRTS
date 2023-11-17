@@ -27,6 +27,8 @@ public class Building : MonoBehaviour
     [SerializeField] private TextMeshProUGUI resourceTypeText;
 
     private float outputRate;
+    [HideInInspector]
+    public float workersCurrentlyInTheBuilding = 0;
 
 
     [Space(20)]
@@ -114,6 +116,8 @@ public class Building : MonoBehaviour
             
             UnitSelection.Instance.unitList.Add(workersCurrentlyWorking[0]);
             workersCurrentlyWorking.Remove(workersCurrentlyWorking[0]);
+
+            workersCurrentlyInTheBuilding--;
 
             //Update the production stuff, capacity and output
         }

@@ -92,6 +92,7 @@ MonoBehaviour:
   workersCurrentlyWorkingText: {fileID: 1508232573998515150}
   outputRateText: {fileID: 5927529203766785153}
   resourceTypeText: {fileID: 8445133546949129289}
+  workersCurrentlyInTheBuilding: 0
   infoPanel: {fileID: 1416146887417991916}
   buildingHealthbar: {fileID: 7912339036743519461}
   buildingHealthText: {fileID: 4050746067929158666}
@@ -284,7 +285,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.6, y: 1, z: 1.6}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &6777149458869397858
 Rigidbody:

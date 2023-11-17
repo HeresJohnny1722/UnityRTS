@@ -84,15 +84,28 @@ public class UnitSelection : MonoBehaviour
 
                     if (unit.unitSO.unitType == UnitSO.UnitType.Worker)
                     {
-                        
-                            // Start coroutine to check for collision with the building
+
+                        // Start coroutine to check for collision with the buildingworkersCurrentlyInTheBuildingc
+                        if (buildingToEnter.parent.GetComponent<Building>().buildingSO.workerCapacity > buildingToEnter.parent.GetComponent<Building>().workersCurrentlyInTheBuilding) {
+                            buildingToEnter.parent.GetComponent<Building>().workersCurrentlyInTheBuilding++;
                             StartCoroutine(MoveWorkerToBuilding(unitSelected, buildingToEnter));
+                        }
+                        
+                            
                             
                         
                         
                     }
                 }
             }
+        }
+    }
+
+    private void Update()
+    {
+        if (unitsSelected.Count == 0)
+        {
+            unitInfoPanel.SetActive(false);
         }
     }
 
@@ -122,18 +135,25 @@ public class UnitSelection : MonoBehaviour
             if (worker.GetComponent<Unit>().unitSO.unitType == UnitSO.UnitType.Worker)
             {
                 // Start coroutine to check for collision with the building
+                
+                    
+                    buildingToEnter.parent.GetComponent<Building>().addWorker(worker);
+                    worker.SetActive(false);
+                    unitScript = worker.GetComponent<Unit>();
+                    unitScript.deselectUnit();
+                    UnitSelection.Instance.unitsSelected.Remove(worker);
+                    UnitSelection.Instance.unitList.Remove(worker);
+                    updateInfoPanelForUnits();
+                    //Destroy(worker);
+                        
+                
+                
 
-                buildingToEnter.parent.GetComponent<Building>().addWorker(worker);
-                worker.SetActive(false);
-                unitScript = worker.GetComponent<Unit>();
-                unitScript.deselectUnit();
-                UnitSelection.Instance.unitsSelected.Remove(worker);
-                UnitSelection.Instance.unitList.Remove(worker);
-                //Destroy(worker);
+                
             }
         } else
         {
-            float spawnRadius = 5; // Set your desired radius here
+            float spawnRadius = 1.5f; // Set your desired radius here
 
             Vector2 randomPoint = UnityEngine.Random.insideUnitCircle * spawnRadius;
             Vector3 newPosition = transform.position + new Vector3(randomPoint.x, 0, randomPoint.y);
