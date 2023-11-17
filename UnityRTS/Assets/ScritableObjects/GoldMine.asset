@@ -16,9 +16,11 @@ MonoBehaviour:
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
-  resourceOutputRate: 2
   outputWorkerMultiplyer: 2
   workerCapacity: 10
+  nodeName: Gold Node
+  nodeDescription: This is a gold node
+  stage: 1
   name: Gold Mine
   description: Place this on a gold node and put workers in it to start mining
   startingHealth: 400

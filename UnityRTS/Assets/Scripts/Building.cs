@@ -26,6 +26,14 @@ public class Building : MonoBehaviour
     [SerializeField] private TextMeshProUGUI outputRateText;
     [SerializeField] private TextMeshProUGUI resourceTypeText;
 
+    [SerializeField] private GameObject nodePanel;
+    [SerializeField] private TextMeshProUGUI nodeGoldCostText;
+    [SerializeField] private TextMeshProUGUI nodeCoalCostText;
+    [SerializeField] private TextMeshProUGUI nodeCopperCostText;
+
+    public GameObject Node;
+    public GameObject ProductionBuilding;
+
     private float outputRate;
     [HideInInspector]
     public float workersCurrentlyInTheBuilding = 0;
@@ -50,9 +58,11 @@ public class Building : MonoBehaviour
     private Queue<UnitSO> troopQueue = new Queue<UnitSO>();
     private bool isTraining = false;
 
+    private float stage;
 
     void Start()
     {
+        
         HideShowBuildingStuff(false);
         buildingHealth = buildingSO.startingHealth;
         buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
@@ -87,8 +97,22 @@ public class Building : MonoBehaviour
 
         if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
         {
-            outputRate = buildingSO.resourceOutputRate;
+            stage = buildingSO.stage;
+            if (stage == 1)
+            {
+                Node.SetActive(true);
+                ProductionBuilding.SetActive(false);
+            } else if (stage == 2)
+            {
+                Node.SetActive(false);
+                ProductionBuilding.SetActive(true);
+            }
         }
+
+        
+
+
+
 
     }
 
@@ -101,6 +125,8 @@ public class Building : MonoBehaviour
 
         }
     }
+
+
 
     public void removeOneWorker()
     {
@@ -120,6 +146,77 @@ public class Building : MonoBehaviour
             workersCurrentlyInTheBuilding--;
 
             //Update the production stuff, capacity and output
+        }
+
+        //Production
+        if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
+        {
+            workersCurrentlyWorkingText.text = workersCurrentlyWorking.Count + "/" + buildingSO.workerCapacity.ToString() + " Workers";
+            
+        }
+    }
+
+    public void addWorker(GameObject worker)
+    {
+        workersCurrentlyWorking.Add(worker);
+
+
+        //Production
+        if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
+        {
+            workersCurrentlyWorkingText.text = workersCurrentlyWorking.Count + "/" + buildingSO.workerCapacity.ToString() + " Workers";
+            outputRateText.text = "Output rate: " + outputRate + " " + buildingSO.resourceType.ToString() + "/second";
+            resourceTypeText.text = buildingSO.resourceType.ToString();
+        }
+
+    }
+
+    public void produceResource()
+    {
+        if (buildingSO.buildingType == BuildingSO.BuildingType.Production && workersCurrentlyWorking.Count > 0)
+        {
+            float outputRate =  workersCurrentlyWorking.Count * buildingSO.outputWorkerMultiplyer;
+            Debug.Log(outputRate);
+            //buildingSO.resourceOutputRate *
+
+            workersCurrentlyWorkingText.text = workersCurrentlyWorking.Count + "/" + buildingSO.workerCapacity.ToString() + " Workers";
+            outputRateText.text = "Output rate: " + outputRate + " " + buildingSO.resourceType.ToString() + "/second";
+            resourceTypeText.text = buildingSO.resourceType.ToString();
+
+            // Update your resource quantity here (assuming you have an InventoryManager)
+            // You can replace "InventoryManager.instance" with your actual reference to the InventoryManager
+            if (buildingSO.resourceType == BuildingSO.ResourceType.Gold)
+            {
+                InventoryManager.instance.AddResources(0, (int)outputRate, 0, 0, 0);
+
+            } else if (buildingSO.resourceType == BuildingSO.ResourceType.Coal)
+            {
+                InventoryManager.instance.AddResources(0, 0, (int)outputRate, 0, 0);
+
+            } else if (buildingSO.resourceType == BuildingSO.ResourceType.Copper)
+            {
+                InventoryManager.instance.AddResources(0, 0, 0, (int)outputRate,0);
+
+            } else if (buildingSO.resourceType == BuildingSO.ResourceType.Energy)
+            {
+                InventoryManager.instance.AddResources(0, 0, 0, 0, (int)outputRate);
+            }
+
+            
+        }
+    }
+
+    private float productionTimer = 0f;
+    private float productionInterval = 1f; // Set the production interval to 1 second
+
+    private void Update()
+    {
+        productionTimer += Time.deltaTime;
+
+        if (productionTimer >= productionInterval)
+        {
+            produceResource();
+            productionTimer = 0f; // Reset the timer
         }
     }
 
@@ -143,11 +240,8 @@ public class Building : MonoBehaviour
         buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
     }
 
-    public void addWorker(GameObject worker)
+    public void BuildingSelected()
     {
-        workersCurrentlyWorking.Add(worker);
-       
-
         //Production
         if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
         {
@@ -155,20 +249,29 @@ public class Building : MonoBehaviour
             outputRateText.text = "Output rate: " + outputRate + " " + buildingSO.resourceType.ToString() + "/second";
             resourceTypeText.text = buildingSO.resourceType.ToString();
         }
-
-    }
-
-    public void BuildingSelected()
-    {
-
         HideShowBuildingStuff(true);
         if (buildingSO.startingHealth == buildingHealth)
         {
             buildingHealthbar.gameObject.SetActive(false);
 
         }
-        infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = buildingSO.name;
-        infoPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = buildingSO.description;
+
+        if (stage == 1)
+        {
+            infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = buildingSO.nodeName;
+            infoPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = buildingSO.nodeDescription;
+            nodeGoldCostText.text = "Gold: " + buildingSO.goldCost.ToString();
+            nodeCoalCostText.text = "Coal: " + buildingSO.coalCost.ToString();
+            nodeCopperCostText.text = "Copper: " + buildingSO.copperCost.ToString();
+            nodePanel.SetActive(true);
+        }
+        else if (stage == 2)
+        {
+            infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = buildingSO.name;
+            infoPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = buildingSO.description;
+            nodePanel.SetActive(false);
+        }
+        
 
 
         //Barracks
@@ -184,9 +287,19 @@ public class Building : MonoBehaviour
 
     public void deselectBuilding()
     {
-
+        nodePanel.SetActive(false);
         HideShowBuildingStuff(false);
 
+    }
+
+    public void nextStage()
+    {
+        stage = 2;
+        Node.SetActive(false);
+        ProductionBuilding.SetActive(true);
+        productionPanel.SetActive(true);
+        nodePanel.SetActive(false);
+        //Make it cost resources
     }
 
     void HideShowBuildingStuff(bool visible)
@@ -199,7 +312,11 @@ public class Building : MonoBehaviour
         }
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
         {
-            productionPanel.SetActive(visible);
+            if (stage == 2)
+            {
+                productionPanel.SetActive(visible);
+            } 
+            
         }
         infoPanel.SetActive(visible);
         buildingHealthbar.gameObject.SetActive(visible);
@@ -209,19 +326,26 @@ public class Building : MonoBehaviour
 
     public void spawnTroop(int index)
     {
-
-        unitSpawnPoint = this.transform.GetChild(2).transform;
-        unitMovePoint = barracksSpawnFlag.transform;
-
-        //if (checkIfEnoughResources(resources that are being taken, would be in the buildingSO, cost
-        troopQueue.Enqueue(buildingSO.unitsToTrain[index]);
-        UpdateQueueSizeText();
-
-        if (!isTraining)
+        if (InventoryManager.instance.AreResourcesAvailable(0, (int)buildingSO.unitsToTrain[index].goldCost, (int)buildingSO.unitsToTrain[index].coalCost, (int)buildingSO.unitsToTrain[index].copperCost, 0))
         {
+            InventoryManager.instance.RemoveResources(0, (int)buildingSO.unitsToTrain[index].goldCost, (int)buildingSO.unitsToTrain[index].coalCost, (int)buildingSO.unitsToTrain[index].copperCost, 0);
+            unitSpawnPoint = this.transform.GetChild(2).transform;
+            unitMovePoint = barracksSpawnFlag.transform;
 
-            StartCoroutine(TrainTroops());
+            //if (checkIfEnoughResources(resources that are being taken, would be in the buildingSO, cost
+            troopQueue.Enqueue(buildingSO.unitsToTrain[index]);
+            UpdateQueueSizeText();
+
+            if (!isTraining)
+            {
+
+                StartCoroutine(TrainTroops());
+            }
+        } else
+        {
+            Debug.Log("Not enough resources");
         }
+        
 
 
     }

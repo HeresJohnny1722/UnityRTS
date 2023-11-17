@@ -56,7 +56,7 @@ public class UnitDrag : MonoBehaviour
         {
             if (startPosition == Vector2.zero)
             {
-                Debug.Log("Trying to drag select a building");
+                //Debug.Log("Trying to drag select a building");
             }
             else
             {
@@ -72,7 +72,7 @@ public class UnitDrag : MonoBehaviour
         {
             if (startPosition == Vector2.zero)
             {
-                Debug.Log("Trying to drag select a building");
+                //Debug.Log("Trying to drag select a building");
             }
             else
             {

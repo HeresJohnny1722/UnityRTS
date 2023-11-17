@@ -17,7 +17,8 @@ public class BuildingSO : ScriptableObject
     {
         Gold,
         Copper,
-        Coal
+        Coal,
+        Energy,
     }
 
     public BuildingType buildingType;
@@ -28,9 +29,11 @@ public class BuildingSO : ScriptableObject
 
     [Header("Only for Production Type")]
     public ResourceType resourceType;
-    public float resourceOutputRate;
     public float outputWorkerMultiplyer;
     public float workerCapacity;
+    public new string nodeName;
+    public string nodeDescription;
+    public float stage = 1;
 
     [Header("Needed for all Types")]
     public new string name;
