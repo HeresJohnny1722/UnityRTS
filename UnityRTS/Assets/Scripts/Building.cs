@@ -260,10 +260,14 @@ public class Building : MonoBehaviour
         {
             infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = buildingSO.nodeName;
             infoPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = buildingSO.nodeDescription;
-            nodeGoldCostText.text = "Gold: " + buildingSO.goldCost.ToString();
-            nodeCoalCostText.text = "Coal: " + buildingSO.coalCost.ToString();
-            nodeCopperCostText.text = "Copper: " + buildingSO.copperCost.ToString();
-            nodePanel.SetActive(true);
+            if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
+            {
+                nodeGoldCostText.text = "Gold: " + buildingSO.goldCost.ToString();
+                nodeCoalCostText.text = "Coal: " + buildingSO.coalCost.ToString();
+                nodeCopperCostText.text = "Copper: " + buildingSO.copperCost.ToString();
+                nodePanel.SetActive(true);
+            }
+            
         }
         else if (stage == 2)
         {
