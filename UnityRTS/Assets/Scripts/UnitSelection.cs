@@ -70,7 +70,7 @@ public class UnitSelection : MonoBehaviour
 
     public void moveWorkersIntoProductionBuilding(Transform buildingToEnter)
     {
-        if (unitsSelected.Count > 0)
+        if (unitsSelected.Count > 0 && buildingToEnter.parent.GetComponent<Building>().stage == 2)
         {
             // Highlight the resource node
 

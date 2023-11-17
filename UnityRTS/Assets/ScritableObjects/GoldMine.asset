@@ -25,6 +25,6 @@ MonoBehaviour:
   description: Place this on a gold node and put workers in it to start mining
   startingHealth: 400
   timeToBuild: 2
-  goldCost: 234
-  coalCost: 234
+  goldCost: 23
+  coalCost: 23
   copperCost: 23

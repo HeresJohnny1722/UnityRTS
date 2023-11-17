@@ -58,7 +58,7 @@ public class Building : MonoBehaviour
     private Queue<UnitSO> troopQueue = new Queue<UnitSO>();
     private bool isTraining = false;
 
-    private float stage;
+    public float stage;
 
     void Start()
     {
@@ -269,7 +269,11 @@ public class Building : MonoBehaviour
         {
             infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = buildingSO.name;
             infoPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = buildingSO.description;
-            nodePanel.SetActive(false);
+            if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
+            {
+                nodePanel.SetActive(false);
+            }
+            
         }
         
 
@@ -287,19 +291,28 @@ public class Building : MonoBehaviour
 
     public void deselectBuilding()
     {
-        nodePanel.SetActive(false);
+        if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
+        {
+            nodePanel.SetActive(false);
+
+        }
+        
         HideShowBuildingStuff(false);
 
     }
 
-    public void nextStage()
+    public void nodeToBuilding()
     {
-        stage = 2;
-        Node.SetActive(false);
-        ProductionBuilding.SetActive(true);
-        productionPanel.SetActive(true);
-        nodePanel.SetActive(false);
-        //Make it cost resources
+        if (InventoryManager.instance.AreResourcesAvailable(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0))
+        {
+            InventoryManager.instance.RemoveResources(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0);
+            stage = 2;
+            Node.SetActive(false);
+            ProductionBuilding.SetActive(true);
+            productionPanel.SetActive(true);
+            nodePanel.SetActive(false);
+            //Make it cost resources
+        }
     }
 
     void HideShowBuildingStuff(bool visible)

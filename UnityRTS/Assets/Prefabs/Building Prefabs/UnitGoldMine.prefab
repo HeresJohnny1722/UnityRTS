@@ -105,6 +105,7 @@ MonoBehaviour:
   buildingHealthbar: {fileID: 7912339036743519461}
   buildingHealthText: {fileID: 4050746067929158666}
   buildingSO: {fileID: 11400000, guid: 054efb2fa23b440059c97fe2bacdd740, type: 2}
+  stage: 0
 --- !u!1 &2567535404669328232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,7 +1051,7 @@ PrefabInstance:
     - target: {fileID: 1774948239767775157, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: nextStage
+      value: nodeToBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 1983884910063581451, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
