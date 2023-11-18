@@ -100,6 +100,7 @@ public class Building : MonoBehaviour
             stage = buildingSO.stage;
             if (stage == 1)
             {
+                buildingHealthText.text = "";
                 Node.SetActive(true);
                 ProductionBuilding.SetActive(false);
             } else if (stage == 2)
@@ -223,21 +224,27 @@ public class Building : MonoBehaviour
 
     public void takeDamage(float damageAmount)
     {
-
-
-        buildingHealth -= damageAmount;
-
-        if (buildingHealth <= 0)
+        if (stage == 1)
         {
-            deselectBuilding();
+            buildingHealthText.text = "";
+        } else
+        {
+            buildingHealth -= damageAmount;
 
-            BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
-            Destroy(this.gameObject);
+            if (buildingHealth <= 0)
+            {
+                deselectBuilding();
 
+                BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
+                Destroy(this.gameObject);
+
+            }
+            buildingHealthText.text = "Health: " + buildingHealth.ToString();
+            HideShowBuildingStuff(true);
+            buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
         }
-        buildingHealthText.text = "Health: " + buildingHealth.ToString();
-        HideShowBuildingStuff(true);
-        buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
+
+        
     }
 
     public void BuildingSelected()
@@ -267,7 +274,8 @@ public class Building : MonoBehaviour
                 nodeCopperCostText.text = "Copper: " + buildingSO.copperCost.ToString();
                 nodePanel.SetActive(true);
             }
-            
+            buildingHealthText.text = "";
+
         }
         else if (stage == 2)
         {
@@ -311,6 +319,7 @@ public class Building : MonoBehaviour
         {
             InventoryManager.instance.RemoveResources(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0);
             stage = 2;
+            buildingHealthText.text = "Health: " + buildingHealth.ToString();
             Node.SetActive(false);
             ProductionBuilding.SetActive(true);
             productionPanel.SetActive(true);
