@@ -10,16 +10,19 @@ public class PlacementState : IBuildingState
     PreviewSystem previewSystem;
     ObjectsDatabaseSO database;
     GridData buildingData;
+    GridData obstacleData;
     ObjectPlacer objectPlacer;
     SoundFeedback soundFeedback;
 
-    public PlacementState(int iD, Grid grid, PreviewSystem previewSystem, ObjectsDatabaseSO database, GridData buildingData, ObjectPlacer objectPlacer, SoundFeedback soundFeedback)
+
+    public PlacementState(int iD, Grid grid, PreviewSystem previewSystem, ObjectsDatabaseSO database, GridData buildingData, GridData obstacleData,ObjectPlacer objectPlacer, SoundFeedback soundFeedback)
     {
         ID = iD;
         this.grid = grid;
         this.previewSystem = previewSystem;
         this.database = database;
         this.buildingData = buildingData;
+        this.obstacleData = obstacleData;
         this.objectPlacer = objectPlacer;
         this.soundFeedback = soundFeedback;
 
@@ -43,6 +46,7 @@ public class PlacementState : IBuildingState
 
     public void OnAction(Vector3Int gridPosition)
     {
+        
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
         if (placementValidity == false)
         {

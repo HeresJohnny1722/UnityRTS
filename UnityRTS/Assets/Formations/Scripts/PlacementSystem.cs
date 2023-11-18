@@ -20,7 +20,7 @@ public class PlacementSystem : MonoBehaviour
 
     
 
-    private GridData floorData,buildingData;
+    private GridData obstacleData,buildingData;
 
 
 
@@ -39,7 +39,7 @@ public class PlacementSystem : MonoBehaviour
     private void Start()
     {
         StopPlacement();
-        floorData = new GridData();
+        obstacleData = new GridData();
         buildingData = new GridData();
         gridVisualization.SetActive(false);
         
@@ -50,7 +50,7 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
         soundFeedback.PlaySound(SoundType.Click);
         gridVisualization.SetActive(true);
-        buildingState = new PlacementState(ID, grid, preview, database, buildingData, objectPlacer, soundFeedback);
+        buildingState = new PlacementState(ID, grid, preview, database, buildingData, obstacleData, objectPlacer, soundFeedback);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
