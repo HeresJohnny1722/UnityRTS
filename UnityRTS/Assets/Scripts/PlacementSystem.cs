@@ -9,8 +9,8 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private InputManager inputManager;
 
-    [SerializeField]
-    private Grid grid;
+    
+    public Grid grid;
 
     [SerializeField]
     private ObjectsDatabaseSO database;
@@ -20,7 +20,7 @@ public class PlacementSystem : MonoBehaviour
 
     
 
-    private GridData obstacleData,buildingData;
+    public GridData obstacleData,buildingData;
 
 
 

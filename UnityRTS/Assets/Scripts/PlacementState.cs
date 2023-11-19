@@ -15,6 +15,11 @@ public class PlacementState : IBuildingState
     SoundFeedback soundFeedback;
 
 
+    public void Start()
+    {
+
+    }
+
     public PlacementState(int iD, Grid grid, PreviewSystem previewSystem, ObjectsDatabaseSO database, GridData buildingData, GridData obstacleData,ObjectPlacer objectPlacer, SoundFeedback soundFeedback)
     {
         ID = iD;
@@ -26,6 +31,7 @@ public class PlacementState : IBuildingState
         this.objectPlacer = objectPlacer;
         this.soundFeedback = soundFeedback;
 
+        //index of what we are trying to place
         selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
         if (selectedObjectIndex > -1)
         {
@@ -71,7 +77,7 @@ public class PlacementState : IBuildingState
     {
         GridData selectedData = buildingData;
 
-        return selectedData.CanPlaceObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
+        return selectedData.CanPlaceObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size) && obstacleData.CanPlaceObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
     }
 
     public void UpdateState(Vector3Int gridPosition)

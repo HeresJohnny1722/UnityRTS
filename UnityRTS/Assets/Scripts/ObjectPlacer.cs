@@ -20,6 +20,7 @@ public class ObjectPlacer : MonoBehaviour
 
     internal void RemoveObjectAt(int gameObjectIndex)
     {
+        //check if its a obstacle
         if (placedGameObject.Count <= gameObjectIndex || placedGameObject[gameObjectIndex] == null)
             return;
         Destroy(placedGameObject[gameObjectIndex]);
