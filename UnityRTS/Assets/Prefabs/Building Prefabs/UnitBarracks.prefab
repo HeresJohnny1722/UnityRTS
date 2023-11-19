@@ -27,9 +27,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4041391706098579659}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1.35, z: 1}
-  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5001, y: 1.1251, z: 0.5028}
+  m_LocalScale: {x: 1.7936, y: 1.30016, z: 1.8056}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5703970984420481760}
@@ -146,6 +146,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5703970984420481760}
   - component: {fileID: 6712343966138974176}
+  - component: {fileID: 2254554157729864186}
+  - component: {fileID: 7696372317717920712}
+  - component: {fileID: 8127375062773690525}
   m_Layer: 9
   m_Name: UnitBarracks
   m_TagString: Untagged
@@ -193,10 +196,91 @@ MonoBehaviour:
   barracksTrainingTimeLeftText: {fileID: 3031748581197004594}
   barracacksQueueSizeText: {fileID: 5526650171256587176}
   barracksUnitTrainingNameText: {fileID: 905681460775721516}
+  workersCurrentlyWorking: []
+  productionPanel: {fileID: 0}
+  workersCurrentlyWorkingText: {fileID: 0}
+  outputRateText: {fileID: 0}
+  resourceTypeText: {fileID: 0}
+  nodePanel: {fileID: 0}
+  nodeGoldCostText: {fileID: 0}
+  nodeCoalCostText: {fileID: 0}
+  nodeCopperCostText: {fileID: 0}
+  Node: {fileID: 0}
+  ProductionBuilding: {fileID: 0}
+  workersCurrentlyInTheBuilding: 0
   infoPanel: {fileID: 2816086458150400594}
   buildingHealthbar: {fileID: 3132801227203264435}
   buildingHealthText: {fileID: 902041227782714548}
   buildingSO: {fileID: 11400000, guid: 4977316ba35904bb5b35383b0f134d0f, type: 2}
+  stage: 0
+--- !u!54 &2254554157729864186
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389587925157907964}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &7696372317717920712
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389587925157907964}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.791632, y: 1.2651267, z: 1.7916322}
+  m_Center: {x: 0.51674074, y: 1.1309042, z: 0.5008004}
+--- !u!114 &8127375062773690525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389587925157907964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2576e8b2549d4482e9f25749f42b444e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  validPlacementMaterial: {fileID: 2100000, guid: dba464be4aa8646438aaf91d0ff6adf8,
+    type: 2}
+  invalidPlacementMaterial: {fileID: 2100000, guid: 928487912ea55417f9a7d3b0707069a3,
+    type: 2}
+  meshComponents:
+  - {fileID: 7895568652559848191}
+  hasValidPlacement: 0
+  isFixed: 0
 --- !u!1001 &2032991943204779554
 PrefabInstance:
   m_ObjectHideFlags: 0

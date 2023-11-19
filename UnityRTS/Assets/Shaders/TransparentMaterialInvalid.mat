@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TransparentMaterial
+  m_Name: TransparentMaterialInvalid
   m_Shader: {fileID: -6465566751694194690, guid: fa5d9a0760af04e92a6c3618ac77461b,
     type: 3}
   m_Parent: {fileID: 0}
@@ -54,5 +54,5 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 0.57054067, g: 1, b: 0.48584908, a: 0.4039216}
+    - _Color: {r: 1, g: 0.5248602, b: 0.48627448, a: 0.4039216}
   m_BuildTextureStacks: []
