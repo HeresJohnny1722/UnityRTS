@@ -33,27 +33,32 @@ public class BuildingSelection : MonoBehaviour
     {
         if (selectedBuilding != null && selectedBuilding != null)
         {
-            selectedBuilding.parent.GetComponent<Building>().takeDamage(damage);
+            selectedBuilding.GetComponent<Building>().takeDamage(damage);
         }
     }
 
     public void SelectBuilding(Transform buildingToSelect)
     {
+        Debug.Log("selecting building");
+        
         if (buildingGridPlacer._buildingPrefab != null)
         {
             Debug.Log("sorry youre in building mode");
         } else
         {
             
+                Debug.Log("not selecting a production building");
                 UnitSelection.Instance.DeselectAll();
                 DeselectBuilding();
                 selectedBuilding = buildingToSelect;
-                building = selectedBuilding.parent.GetComponent<Building>();
+                building = selectedBuilding.GetComponent<Building>();
                 building.BuildingSelected();
+            }
+                
             
             
-        }
         
+
     }
 
 

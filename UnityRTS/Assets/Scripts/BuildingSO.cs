@@ -34,6 +34,7 @@ public class BuildingSO : ScriptableObject
     public new string nodeName;
     public string nodeDescription;
     public float stage = 1;
+    public float factoryProximityRadius;
 
     [Header("Needed for all Types")]
     public new string name;

@@ -26,6 +26,8 @@ public class UnitSelection : MonoBehaviour
 
     private Unit unitScript;
 
+    private float proximityRadius;
+
     private FormationBase _formationBase;
 
     public FormationBase Formation
@@ -70,12 +72,12 @@ public class UnitSelection : MonoBehaviour
 
     public void moveWorkersIntoProductionBuilding(Transform buildingToEnter)
     {
-        if (unitsSelected.Count > 0 && buildingToEnter.parent.GetComponent<Building>().stage == 2)
+        if (unitsSelected.Count > 0 && buildingToEnter.GetComponent<Building>().stage == 2)
         {
             // Highlight the resource node
 
             // If the building is a production building
-            if (buildingToEnter.parent.GetComponent<Building>().buildingSO.buildingType == BuildingSO.BuildingType.Production)
+            if (buildingToEnter.GetComponent<Building>().buildingSO.buildingType == BuildingSO.BuildingType.Production)
             {
                 
                 foreach (var unitSelected in unitsSelected)
@@ -86,8 +88,8 @@ public class UnitSelection : MonoBehaviour
                     {
 
                         // Start coroutine to check for collision with the buildingworkersCurrentlyInTheBuildingc
-                        if (buildingToEnter.parent.GetComponent<Building>().buildingSO.workerCapacity > buildingToEnter.parent.GetComponent<Building>().workersCurrentlyInTheBuilding) {
-                            buildingToEnter.parent.GetComponent<Building>().workersCurrentlyInTheBuilding++;
+                        if (buildingToEnter.GetComponent<Building>().buildingSO.workerCapacity > buildingToEnter.GetComponent<Building>().workersCurrentlyInTheBuilding) {
+                            buildingToEnter.GetComponent<Building>().workersCurrentlyInTheBuilding++;
                             StartCoroutine(MoveWorkerToBuilding(unitSelected, buildingToEnter));
                         }
                         
@@ -120,9 +122,9 @@ public class UnitSelection : MonoBehaviour
         myAgent.SetDestination(hit.position);
 
         // Wait for the worker to collide with the building
-        yield return StartCoroutine(WaitForCollisionWithBuilding(worker, buildingToEnter));
+        yield return StartCoroutine(WaitForProximityToBuilding(worker, buildingToEnter));
 
-        if (buildingToEnter.parent.GetComponent<Building>().workersCurrentlyWorking.Count < buildingToEnter.parent.GetComponent<Building>().buildingSO.workerCapacity)
+        if (buildingToEnter.GetComponent<Building>().workersCurrentlyWorking.Count < buildingToEnter.GetComponent<Building>().buildingSO.workerCapacity)
         {
             // Additional logic after reaching the destination (if needed)
             // ...
@@ -137,7 +139,7 @@ public class UnitSelection : MonoBehaviour
                 // Start coroutine to check for collision with the building
                 
                     
-                    buildingToEnter.parent.GetComponent<Building>().addWorker(worker);
+                    buildingToEnter.GetComponent<Building>().addWorker(worker);
                     worker.SetActive(false);
                     unitScript = worker.GetComponent<Unit>();
                     unitScript.deselectUnit();
@@ -166,14 +168,15 @@ public class UnitSelection : MonoBehaviour
         
     }
 
-    private IEnumerator WaitForCollisionWithBuilding(GameObject worker, Transform buildingToEnter)
+    private IEnumerator WaitForProximityToBuilding(GameObject worker, Transform buildingToEnter)
     {
-        Collider buildingCollider = buildingToEnter.GetComponent<Collider>();
         while (true)
         {
-            if (buildingCollider.bounds.Contains(worker.transform.position))
+            float distance = Vector3.Distance(worker.transform.position, buildingToEnter.position);
+            proximityRadius = buildingToEnter.GetComponent<Building>().buildingSO.factoryProximityRadius;
+            if (distance <= proximityRadius)
             {
-                // Worker has collided with the building
+                // Worker is within the specified radius of the building
                 yield break;
             }
             yield return null;
