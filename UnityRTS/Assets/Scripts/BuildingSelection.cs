@@ -14,6 +14,8 @@ public class BuildingSelection : MonoBehaviour
 
     private Building building;
 
+    [SerializeField] BuildingGridPlacer buildingGridPlacer;
+
 
     void Awake()
     {
@@ -29,7 +31,7 @@ public class BuildingSelection : MonoBehaviour
 
     public void takeDamageBuildingTest(float damage)
     {
-        if (selectedBuilding != null && selectedBuilding.parent != null)
+        if (selectedBuilding != null && selectedBuilding != null)
         {
             selectedBuilding.parent.GetComponent<Building>().takeDamage(damage);
         }
@@ -37,11 +39,21 @@ public class BuildingSelection : MonoBehaviour
 
     public void SelectBuilding(Transform buildingToSelect)
     {
-        UnitSelection.Instance.DeselectAll();
-        DeselectBuilding();
-        selectedBuilding = buildingToSelect;
-        building = selectedBuilding.parent.GetComponent<Building>();
-        building.BuildingSelected();
+        if (buildingGridPlacer._buildingPrefab != null)
+        {
+            Debug.Log("sorry youre in building mode");
+        } else
+        {
+            
+                UnitSelection.Instance.DeselectAll();
+                DeselectBuilding();
+                selectedBuilding = buildingToSelect;
+                building = selectedBuilding.parent.GetComponent<Building>();
+                building.BuildingSelected();
+            
+            
+        }
+        
     }
 
 

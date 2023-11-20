@@ -9,7 +9,7 @@ public class BuildingPlacer : MonoBehaviour
 
     public LayerMask groundLayerMask;
 
-    protected GameObject _buildingPrefab;
+    public GameObject _buildingPrefab;
     protected GameObject _toBuild;
 
     protected Camera _mainCamera;
@@ -63,20 +63,23 @@ public class BuildingPlacer : MonoBehaviour
                     BuildingManager m = _toBuild.GetComponent<BuildingManager>();
                     if (m.hasValidPlacement)
                     {
+                        
                         m.SetPlacementMode(PlacementMode.Fixed);
 
+                        /*
                         // shift-key: chain builds
                         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                         {
                             _toBuild = null; // (to avoid destruction)
                             _PrepareBuilding();
-                        }
+                        } 
                         // exit build mode
                         else
-                        {
+                        {*/
                             _buildingPrefab = null;
                             _toBuild = null;
-                        }
+                        BuildingSelection.Instance.DeselectBuilding();
+                        //}
                     }
                 }
 
@@ -87,9 +90,15 @@ public class BuildingPlacer : MonoBehaviour
 
     public void SetBuildingPrefab(GameObject prefab)
     {
-        _buildingPrefab = prefab;
-        _PrepareBuilding();
-        EventSystem.current.SetSelectedGameObject(null); // cancel keyboard UI nav
+        Building building = prefab.GetComponent<Building>();
+        if (InventoryManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.coalCost, (int)building.buildingSO.copperCost, 0))
+        {
+            
+            BuildingSelection.Instance.DeselectBuilding();
+            _buildingPrefab = prefab;
+            _PrepareBuilding();
+            EventSystem.current.SetSelectedGameObject(null); // cancel keyboard UI nav
+        }
     }
 
     protected virtual void _PrepareBuilding()

@@ -62,6 +62,9 @@ public class BuildingGridPlacer : BuildingPlacer
                     BuildingManager m = _toBuild.GetComponent<BuildingManager>();
                     if (m.hasValidPlacement)
                     {
+                        Building building = _toBuild.GetComponent<Building>();
+                        InventoryManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.coalCost, (int)building.buildingSO.copperCost, 0);
+                        Debug.Log("Testing Building Resources");
                         m.SetPlacementMode(PlacementMode.Fixed);
 
                         // shift-key: chain builds
