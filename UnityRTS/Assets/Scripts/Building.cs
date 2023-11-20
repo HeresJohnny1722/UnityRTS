@@ -47,6 +47,7 @@ public class Building : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI buildingHealthText;
     public BuildingSO buildingSO;
+    public GameObject removeButton;
 
 
     private float buildingHealth;
@@ -62,7 +63,7 @@ public class Building : MonoBehaviour
 
     void Start()
     {
-        
+        removeButton.SetActive(true);
         HideShowBuildingStuff(false);
         buildingHealth = buildingSO.startingHealth;
         buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
@@ -100,11 +101,13 @@ public class Building : MonoBehaviour
             stage = buildingSO.stage;
             if (stage == 1)
             {
+                removeButton.SetActive(false);
                 buildingHealthText.text = "";
                 Node.SetActive(true);
                 ProductionBuilding.SetActive(false);
             } else if (stage == 2)
             {
+                removeButton.SetActive(true);
                 Node.SetActive(false);
                 ProductionBuilding.SetActive(true);
             }
@@ -133,7 +136,7 @@ public class Building : MonoBehaviour
     {
         if (workersCurrentlyWorking.Count > 0)
         {
-            float radius = 1.5f; // Set your desired radius here
+            float radius = 3f; // Set your desired radius here
 
             Vector2 randomPoint = Random.insideUnitCircle * radius;
             Vector3 newPosition = transform.position + new Vector3(randomPoint.x, 0, randomPoint.y);
@@ -247,6 +250,32 @@ public class Building : MonoBehaviour
         
     }
 
+    public void removeBuilding()
+    {
+        if (stage == 1)
+        {
+            //buildingHealthText.text = "";
+        }
+        else
+        {
+            buildingHealth -= buildingHealth;
+            InventoryManager.instance.AddResources(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0);
+
+            if (buildingHealth <= 0)
+            {
+                
+                deselectBuilding();
+
+                BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
+                Destroy(this.gameObject);
+
+            }
+            
+        }
+
+
+    }
+
     public void BuildingSelected()
     {
         //Production
@@ -317,6 +346,7 @@ public class Building : MonoBehaviour
     {
         if (InventoryManager.instance.AreResourcesAvailable(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0))
         {
+            removeButton.SetActive(false);
             InventoryManager.instance.RemoveResources(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0);
             stage = 2;
             buildingHealthText.text = "Health: " + buildingHealth.ToString();
