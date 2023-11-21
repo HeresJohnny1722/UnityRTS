@@ -8,7 +8,8 @@ public class InventoryManager : MonoBehaviour
 
     // Inventory variables
     public int currentPopulation = 0;
-    public int maxPopulation = 30;
+    public int populationCap = 30;
+    public int maxedPopulation = 50;
     public int gold = 0;
     public int coal = 0;
     public int copper = 0;
@@ -43,7 +44,7 @@ public class InventoryManager : MonoBehaviour
     // Add resources to the inventory
     public void AddResources(int addedPopulation, int addedGold, int addedCoal, int addedCopper, int addedEnergy)
     {
-        if (maxPopulation >= (currentPopulation += addedPopulation))
+        if (populationCap >= (currentPopulation + addedPopulation))
         {
             currentPopulation += addedPopulation;
         }
@@ -57,6 +58,14 @@ public class InventoryManager : MonoBehaviour
 
         // Trigger event to notify that the inventory has changed
         InventoryChanged?.Invoke();
+    }
+
+    public void AddMaxPopulation(int populationIncrease)
+    {
+        if (maxedPopulation >= (populationCap + populationIncrease))
+        {
+            populationCap += populationIncrease;
+        }
     }
 
     // Remove resources from the inventory
@@ -85,7 +94,7 @@ public class InventoryManager : MonoBehaviour
 
     public bool AreResourcesAvailable(int requiredPopulation, int requiredGold, int requiredCoal, int requiredCopper, int requiredEnergy)
     {
-        return maxPopulation >= (currentPopulation += requiredPopulation) &&
+        return populationCap >= (currentPopulation + requiredPopulation) &&
                gold >= requiredGold &&
                coal >= requiredCoal &&
                copper >= requiredCopper &&
@@ -93,10 +102,10 @@ public class InventoryManager : MonoBehaviour
     }
 
     // Update TextMeshPro fields with current inventory values
-    private void UpdateTextFields()
+    public void UpdateTextFields()
     {
         if (populationText != null)
-            populationText.text = "Population: " + currentPopulation.ToString() + "/" + maxPopulation.ToString();
+            populationText.text = "Population: " + currentPopulation.ToString() + "/" + populationCap.ToString();
 
         if (goldText != null)
             goldText.text = "Gold: " + gold.ToString();

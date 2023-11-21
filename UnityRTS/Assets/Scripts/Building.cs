@@ -63,6 +63,12 @@ public class Building : MonoBehaviour
 
     void Start()
     {
+        InventoryManager.instance.populationCap += buildingSO.populationIncrease;
+        //InventoryManager.instance.UpdateTextFields();
+
+
+
+
         removeButton.SetActive(true);
         HideShowBuildingStuff(false);
         buildingHealth = buildingSO.startingHealth;
@@ -303,6 +309,10 @@ public class Building : MonoBehaviour
                 }
                 else
                 {
+                    InventoryManager.instance.populationCap += buildingSO.populationIncrease;
+                    InventoryManager.instance.UpdateTextFields();
+
+
                     deselectBuilding();
                     //SoundFeedback.Instance.PlaySound(SoundType.Remove);
                     BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
@@ -332,7 +342,11 @@ public class Building : MonoBehaviour
             SoundFeedback.Instance.PlaySound(SoundType.Remove);
             buildingHealth -= buildingHealth;
             InventoryManager.instance.AddResources(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0);
-            InventoryManager.instance.RemoveResources((int)buildingSO.populationIncrease,0, 0, 0, 0);
+
+            //InventoryManager.instance.RemoveResources((int)buildingSO.populationIncrease,0, 0, 0, 0);
+            InventoryManager.instance.populationCap -= buildingSO.populationIncrease;
+
+            InventoryManager.instance.UpdateTextFields();
 
             if (buildingHealth <= 0)
             {
