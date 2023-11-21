@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
-  m_Name: GoldMine
+  m_Name: EnergyMineFactory
   m_EditorClassIdentifier: 
   buildingType: 2
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
-  resourceType: 0
+  resourceType: 3
   outputWorkerMultiplyer: 2
   workerCapacity: 10
-  nodeName: 
-  nodeDescription: 
-  stage: 2
-  factoryProximityRadius: 1.15
-  name: Gold Mine
-  description: Put workers inside of the building to start producing gold
-  startingHealth: 400
+  nodeName: Energy Node
+  nodeDescription: This is an energy node, create a factory on it to start production
+  stage: 1
+  factoryProximityRadius: 1.55
+  name: Energy Mine
+  description: Add workers to start production
+  startingHealth: 100
   timeToBuild: 2
-  goldCost: 23
-  coalCost: 23
-  copperCost: 23
+  goldCost: 100
+  coalCost: 100
+  copperCost: 100

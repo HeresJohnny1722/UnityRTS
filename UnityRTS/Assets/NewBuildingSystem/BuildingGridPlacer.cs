@@ -62,24 +62,30 @@ public class BuildingGridPlacer : BuildingPlacer
                     BuildingManager m = _toBuild.GetComponent<BuildingManager>();
                     if (m.hasValidPlacement)
                     {
+                        SoundFeedback.Instance.PlaySound(SoundType.Place);
                         Building building = _toBuild.GetComponent<Building>();
                         InventoryManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.coalCost, (int)building.buildingSO.copperCost, 0);
+                        //(int)building.buildingSO.populationIncrease
+                        //InventoryManager.instance.AddResources((int)building.buildingSO.populationIncrease, 0, 0, 0, 0);
                         Debug.Log("Testing Building Resources");
                         m.SetPlacementMode(PlacementMode.Fixed);
 
-                        // shift-key: chain builds
+                        /*// shift-key: chain builds
                         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                         {
                             _toBuild = null; // (to avoid destruction)
                             _PrepareBuilding();
-                        }
+                        }*/
                         // exit build mode
-                        else
-                        {
+                        //else {
                             _buildingPrefab = null;
                             _toBuild = null;
                             _EnableGridVisual(false);
-                        }
+                        NavmeshManager.Instance.UpdateNavmesh();
+                        //}
+                    } else
+                    {
+                        SoundFeedback.Instance.PlaySound(SoundType.wrongPlacement);
                     }
                 }
 

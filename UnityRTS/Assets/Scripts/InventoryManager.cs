@@ -7,7 +7,8 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager instance;
 
     // Inventory variables
-    public int population = 0;
+    public int currentPopulation = 0;
+    public int maxPopulation = 30;
     public int gold = 0;
     public int coal = 0;
     public int copper = 0;
@@ -42,7 +43,10 @@ public class InventoryManager : MonoBehaviour
     // Add resources to the inventory
     public void AddResources(int addedPopulation, int addedGold, int addedCoal, int addedCopper, int addedEnergy)
     {
-        population += addedPopulation;
+        if (maxPopulation >= (currentPopulation += addedPopulation))
+        {
+            currentPopulation += addedPopulation;
+        }
         gold += addedGold;
         coal += addedCoal;
         copper += addedCopper;
@@ -59,9 +63,9 @@ public class InventoryManager : MonoBehaviour
     public void RemoveResources(int removedPopulation, int removedGold, int removedCoal, int removedCopper, int removedEnergy)
     {
         // Check if there are enough resources to remove
-        if (population >= removedPopulation && gold >= removedGold && coal >= removedCoal && copper >= removedCopper && energy >= removedEnergy)
+        if (currentPopulation >= removedPopulation && gold >= removedGold && coal >= removedCoal && copper >= removedCopper && energy >= removedEnergy)
         {
-            population -= removedPopulation;
+            currentPopulation -= removedPopulation;
             gold -= removedGold;
             coal -= removedCoal;
             copper -= removedCopper;
@@ -81,7 +85,7 @@ public class InventoryManager : MonoBehaviour
 
     public bool AreResourcesAvailable(int requiredPopulation, int requiredGold, int requiredCoal, int requiredCopper, int requiredEnergy)
     {
-        return population >= requiredPopulation &&
+        return maxPopulation >= (currentPopulation += requiredPopulation) &&
                gold >= requiredGold &&
                coal >= requiredCoal &&
                copper >= requiredCopper &&
@@ -92,7 +96,7 @@ public class InventoryManager : MonoBehaviour
     private void UpdateTextFields()
     {
         if (populationText != null)
-            populationText.text = "Population: " + population.ToString();
+            populationText.text = "Population: " + currentPopulation.ToString() + "/" + maxPopulation.ToString();
 
         if (goldText != null)
             goldText.text = "Gold: " + gold.ToString();

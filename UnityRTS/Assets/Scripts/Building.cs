@@ -96,6 +96,8 @@ public class Building : MonoBehaviour
             //barracksSpawnFlag.transform.position = new Vector3((transform.position.x + 1) + Random.Range(-baracksStartRadius, baracksStartRadius), barracksSpawnFlag.transform.position.y, (transform.position.z + 1) + Random.Range(-baracksStartRadius, baracksStartRadius));
         }
 
+        //NavmeshManager.Instance.UpdateNavmesh();
+
         if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
         {
             stage = buildingSO.stage;
@@ -105,7 +107,8 @@ public class Building : MonoBehaviour
                 buildingHealthText.text = "";
                 Node.SetActive(true);
                 ProductionBuilding.SetActive(false);
-            } else if (stage == 2)
+            }
+            else if (stage == 2)
             {
                 removeButton.SetActive(true);
                 Node.SetActive(false);
@@ -114,8 +117,6 @@ public class Building : MonoBehaviour
         }
 
         
-
-
 
 
     }
@@ -130,7 +131,40 @@ public class Building : MonoBehaviour
         }
     }
 
+    public void removeAllWorkers()
+    {
+        if (workersCurrentlyWorking.Count > 0)
+        {
+            float radius = 3f; // Set your desired radius here
+            int workerCounter = (int) workersCurrentlyInTheBuilding;
 
+            for (int i = 0; i < workerCounter; i++)
+            {
+                Vector2 randomPoint = Random.insideUnitCircle * radius;
+                Vector3 newPosition = transform.position + new Vector3(randomPoint.x, 0, randomPoint.y);
+
+                workersCurrentlyWorking[i].transform.position = newPosition;
+                workersCurrentlyWorking[i].SetActive(true);
+
+                UnitSelection.Instance.unitList.Add(workersCurrentlyWorking[i]);
+                
+            }
+            workersCurrentlyWorking.Clear();
+
+
+            workersCurrentlyInTheBuilding = 0;
+
+            //Update the production stuff, capacity and output
+        }
+
+        //Production
+        if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
+        {
+            workersCurrentlyWorkingText.text = workersCurrentlyWorking.Count + "/" + buildingSO.workerCapacity.ToString() + " Workers";
+
+        }
+
+    }
 
     public void removeOneWorker()
     {
@@ -143,7 +177,7 @@ public class Building : MonoBehaviour
 
             workersCurrentlyWorking[0].transform.position = newPosition;
             workersCurrentlyWorking[0].SetActive(true);
-            
+
             UnitSelection.Instance.unitList.Add(workersCurrentlyWorking[0]);
             workersCurrentlyWorking.Remove(workersCurrentlyWorking[0]);
 
@@ -156,7 +190,7 @@ public class Building : MonoBehaviour
         if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
         {
             workersCurrentlyWorkingText.text = workersCurrentlyWorking.Count + "/" + buildingSO.workerCapacity.ToString() + " Workers";
-            
+
         }
     }
 
@@ -179,7 +213,7 @@ public class Building : MonoBehaviour
     {
         if (buildingSO.buildingType == BuildingSO.BuildingType.Production && workersCurrentlyWorking.Count > 0)
         {
-            float outputRate =  workersCurrentlyWorking.Count * buildingSO.outputWorkerMultiplyer;
+            float outputRate = workersCurrentlyWorking.Count * buildingSO.outputWorkerMultiplyer;
             Debug.Log(outputRate);
             //buildingSO.resourceOutputRate *
 
@@ -193,20 +227,23 @@ public class Building : MonoBehaviour
             {
                 InventoryManager.instance.AddResources(0, (int)outputRate, 0, 0, 0);
 
-            } else if (buildingSO.resourceType == BuildingSO.ResourceType.Coal)
+            }
+            else if (buildingSO.resourceType == BuildingSO.ResourceType.Coal)
             {
                 InventoryManager.instance.AddResources(0, 0, (int)outputRate, 0, 0);
 
-            } else if (buildingSO.resourceType == BuildingSO.ResourceType.Copper)
+            }
+            else if (buildingSO.resourceType == BuildingSO.ResourceType.Copper)
             {
-                InventoryManager.instance.AddResources(0, 0, 0, (int)outputRate,0);
+                InventoryManager.instance.AddResources(0, 0, 0, (int)outputRate, 0);
 
-            } else if (buildingSO.resourceType == BuildingSO.ResourceType.Energy)
+            }
+            else if (buildingSO.resourceType == BuildingSO.ResourceType.Energy)
             {
                 InventoryManager.instance.AddResources(0, 0, 0, 0, (int)outputRate);
             }
 
-            
+
         }
     }
 
@@ -230,16 +267,48 @@ public class Building : MonoBehaviour
         if (stage == 1)
         {
             buildingHealthText.text = "";
-        } else
+        }
+        else
         {
+
+
+
+
             buildingHealth -= damageAmount;
 
             if (buildingHealth <= 0)
             {
-                deselectBuilding();
 
-                BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
-                Destroy(this.gameObject);
+                if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
+                {
+                    removeAllWorkers();
+                    if (buildingSO.resourceType == BuildingSO.ResourceType.Energy)
+                    {
+                        
+                        removeButton.SetActive(false);
+                        buildingToNode();
+                        buildingHealth = buildingSO.startingHealth;
+                        buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
+                    }
+                    else
+                    {
+                        //Sound for destroying building
+                        //SoundFeedback.Instance.PlaySound(SoundType.Remove);
+                        removeButton.SetActive(true);
+                        deselectBuilding();
+
+                        BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
+                        Destroy(this.gameObject);
+                    }
+                }
+                else
+                {
+                    deselectBuilding();
+                    //SoundFeedback.Instance.PlaySound(SoundType.Remove);
+                    BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
+                    Destroy(this.gameObject);
+                }
+
 
             }
             buildingHealthText.text = "Health: " + buildingHealth.ToString();
@@ -247,7 +316,7 @@ public class Building : MonoBehaviour
             buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
         }
 
-        
+
     }
 
     public void removeBuilding()
@@ -258,19 +327,23 @@ public class Building : MonoBehaviour
         }
         else
         {
+
+
+            SoundFeedback.Instance.PlaySound(SoundType.Remove);
             buildingHealth -= buildingHealth;
             InventoryManager.instance.AddResources(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0);
+            InventoryManager.instance.RemoveResources((int)buildingSO.populationIncrease,0, 0, 0, 0);
 
             if (buildingHealth <= 0)
             {
-                
+
                 deselectBuilding();
 
                 BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
                 Destroy(this.gameObject);
 
             }
-            
+
         }
 
 
@@ -314,9 +387,9 @@ public class Building : MonoBehaviour
             {
                 nodePanel.SetActive(false);
             }
-            
+
         }
-        
+
 
 
         //Barracks
@@ -337,7 +410,7 @@ public class Building : MonoBehaviour
             nodePanel.SetActive(false);
 
         }
-        
+
         HideShowBuildingStuff(false);
 
     }
@@ -346,7 +419,15 @@ public class Building : MonoBehaviour
     {
         if (InventoryManager.instance.AreResourcesAvailable(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0))
         {
-            removeButton.SetActive(false);
+            if (buildingSO.resourceType == BuildingSO.ResourceType.Energy)
+            {
+                removeButton.SetActive(false);
+            }
+            else
+            {
+                removeButton.SetActive(true);
+            }
+
             InventoryManager.instance.RemoveResources(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0);
             stage = 2;
             buildingHealthText.text = "Health: " + buildingHealth.ToString();
@@ -357,8 +438,28 @@ public class Building : MonoBehaviour
             //Make it cost resources
             infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = buildingSO.name;
             infoPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = buildingSO.description;
-            
+
         }
+    }
+
+    public void buildingToNode()
+    {
+
+        
+        removeButton.SetActive(false);
+
+        buildingHealthbar.gameObject.SetActive(false);
+        stage = 1;
+        buildingHealthText.text = "";
+        Node.SetActive(true);
+        ProductionBuilding.SetActive(false);
+        productionPanel.SetActive(false);
+        nodePanel.SetActive(true);
+        
+        infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = buildingSO.nodeName;
+        infoPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = buildingSO.nodeDescription;
+
+
     }
 
     void HideShowBuildingStuff(bool visible)
@@ -374,8 +475,8 @@ public class Building : MonoBehaviour
             if (stage == 2)
             {
                 productionPanel.SetActive(visible);
-            } 
-            
+            }
+
         }
         infoPanel.SetActive(visible);
         buildingHealthbar.gameObject.SetActive(visible);
@@ -385,7 +486,7 @@ public class Building : MonoBehaviour
 
     public void spawnTroop(int index)
     {
-        if (InventoryManager.instance.AreResourcesAvailable(0, (int)buildingSO.unitsToTrain[index].goldCost, (int)buildingSO.unitsToTrain[index].coalCost, (int)buildingSO.unitsToTrain[index].copperCost, 0))
+        if (InventoryManager.instance.AreResourcesAvailable((int)buildingSO.unitsToTrain[index].populationCost, (int)buildingSO.unitsToTrain[index].goldCost, (int)buildingSO.unitsToTrain[index].coalCost, (int)buildingSO.unitsToTrain[index].copperCost, 0))
         {
             InventoryManager.instance.RemoveResources(0, (int)buildingSO.unitsToTrain[index].goldCost, (int)buildingSO.unitsToTrain[index].coalCost, (int)buildingSO.unitsToTrain[index].copperCost, 0);
             unitSpawnPoint = this.transform.GetChild(2).transform;
@@ -400,11 +501,12 @@ public class Building : MonoBehaviour
 
                 StartCoroutine(TrainTroops());
             }
-        } else
+        }
+        else
         {
             Debug.Log("Not enough resources");
         }
-        
+
 
 
     }

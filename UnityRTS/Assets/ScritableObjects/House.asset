@@ -12,11 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
   m_Name: House
   m_EditorClassIdentifier: 
-  unitsToTrain: []
   buildingType: 0
+  unitsToTrain: []
+  spawnFlagMoveToTroopOffset: 1
+  resourceType: 0
+  outputWorkerMultiplyer: 0
+  workerCapacity: 0
+  nodeName: 
+  nodeDescription: 
+  stage: 1
+  factoryProximityRadius: 0
+  populationIncrease: 2
   name: House
   description: Increases the population of your town
-  spawnOffset: 0
   startingHealth: 100
   timeToBuild: 4
   goldCost: 25

@@ -10,6 +10,21 @@ public class SoundFeedback : MonoBehaviour
     [SerializeField]
     private AudioSource audioSource;
 
+    private static SoundFeedback _instance;
+    public static SoundFeedback Instance { get { return _instance; } }
+
+    void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
     public void PlaySound(SoundType soundType)
     {
         switch (soundType)

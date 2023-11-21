@@ -36,6 +36,10 @@ public class BuildingSO : ScriptableObject
     public float stage = 1;
     public float factoryProximityRadius;
 
+
+    [Header("Only Buildings that increase population")]
+    public float populationIncrease;
+
     [Header("Needed for all Types")]
     public new string name;
     public string description;

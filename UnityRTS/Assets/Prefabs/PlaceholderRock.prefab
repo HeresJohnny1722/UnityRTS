@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7465885206275491785}
   - component: {fileID: 4685093149777766560}
   - component: {fileID: 2466969145674760095}
+  - component: {fileID: 6172312270131169055}
   m_Layer: 0
   m_Name: Rock (2)
   m_TagString: Untagged
@@ -105,6 +106,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &6172312270131169055
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4454043751301713671}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4572313618272421096
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,6 +168,7 @@ GameObject:
   - component: {fileID: 6578268203231131160}
   - component: {fileID: 8165502853314243085}
   - component: {fileID: 1648087894426795392}
+  - component: {fileID: 9015411563118083827}
   m_Layer: 0
   m_Name: Rock (1)
   m_TagString: Untagged
@@ -244,6 +262,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &9015411563118083827
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7606329174382828622}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8488975732320781414
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +290,7 @@ GameObject:
   - component: {fileID: 5051004332460899964}
   - component: {fileID: 4788161799673009941}
   - component: {fileID: 4336782301885528289}
+  - component: {fileID: 386015340810145338}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -349,3 +384,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &386015340810145338
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8488975732320781414}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

@@ -20,7 +20,8 @@ MonoBehaviour:
   workerCapacity: 10
   nodeName: Coal Node
   nodeDescription: This is a coal node
-  stage: 1
+  stage: 2
+  factoryProximityRadius: 1.15
   name: Coal Mine
   description: Place this on a coal node and put workers in it to start mining
   startingHealth: 400
