@@ -38,7 +38,7 @@ public class BuildingSO : ScriptableObject
 
 
     [Header("Only Buildings that increase population")]
-    public float populationIncrease;
+    public int populationIncrease;
 
     [Header("Needed for all Types")]
     public new string name;

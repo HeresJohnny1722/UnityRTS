@@ -59,6 +59,7 @@ public class BuildingPlacer : MonoBehaviour
                 _toBuild.transform.position = _hit.point;
 
                 if (Input.GetMouseButtonDown(0))
+
                 { // if left-click
                     BuildingManager m = _toBuild.GetComponent<BuildingManager>();
                     if (m.hasValidPlacement)
@@ -91,7 +92,7 @@ public class BuildingPlacer : MonoBehaviour
     public void SetBuildingPrefab(GameObject prefab)
     {
         Building building = prefab.GetComponent<Building>();
-        if (InventoryManager.instance.AreResourcesAvailable((int) building.buildingSO.populationIncrease, (int)building.buildingSO.goldCost, (int)building.buildingSO.coalCost, (int)building.buildingSO.copperCost, 0))
+        if (InventoryManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.coalCost, (int)building.buildingSO.copperCost, 0))
         {
             SoundFeedback.Instance.PlaySound(SoundType.Click);
             BuildingSelection.Instance.DeselectBuilding();
