@@ -22,7 +22,7 @@ MonoBehaviour:
   nodeDescription: 
   stage: 1
   factoryProximityRadius: 0
-  populationIncrease: 2
+  populationIncrease: 5
   name: House
   description: Increases the population of your town
   startingHealth: 100

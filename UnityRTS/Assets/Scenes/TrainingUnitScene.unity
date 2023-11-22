@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028353, g: 0.22571383, b: 0.30692253, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7436,12 +7436,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPopulation: 0
-  populationCap: 10
-  maxedPopulation: 30
+  populationCap: 30
+  maxedPopulation: 50
   gold: 300
   coal: 300
   copper: 300
   energy: 0
+  maxHouses: 5
+  maxBarracks: 3
+  maxGoldFactory: 2
+  maxCoalFactory: 2
+  houseCount: 0
+  barracksCount: 0
+  goldFactoryCount: 0
+  coalFactoryCount: 0
   populationText: {fileID: 212119450}
   goldText: {fileID: 1187557650}
   coalText: {fileID: 1767357423}

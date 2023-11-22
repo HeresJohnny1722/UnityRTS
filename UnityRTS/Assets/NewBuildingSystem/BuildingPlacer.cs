@@ -94,11 +94,20 @@ public class BuildingPlacer : MonoBehaviour
         Building building = prefab.GetComponent<Building>();
         if (InventoryManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.coalCost, (int)building.buildingSO.copperCost, 0))
         {
-            SoundFeedback.Instance.PlaySound(SoundType.Click);
-            BuildingSelection.Instance.DeselectBuilding();
-            _buildingPrefab = prefab;
-            _PrepareBuilding();
-            EventSystem.current.SetSelectedGameObject(null); // cancel keyboard UI nav
+            if (InventoryManager.instance.CheckBuildingCountAvailable(building.buildingSO))
+            {
+                SoundFeedback.Instance.PlaySound(SoundType.Click);
+                BuildingSelection.Instance.DeselectBuilding();
+                _buildingPrefab = prefab;
+                _PrepareBuilding();
+                EventSystem.current.SetSelectedGameObject(null); // cancel keyboard UI nav
+            } else
+            {
+                SoundFeedback.Instance.PlaySound(SoundType.wrongPlacement);
+            }
+            
+
+            
         }
     }
 
