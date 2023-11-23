@@ -525,6 +525,13 @@ MonoBehaviour:
   buildingSO: {fileID: 11400000, guid: 054efb2fa23b440059c97fe2bacdd740, type: 2}
   removeButton: {fileID: 9165405439583430663}
   stage: 0
+  blueConstructionMaterial: {fileID: 2100000, guid: 747eefa0b470d47a0b18c2a7a9e3c1d7,
+    type: 2}
+  yellowConstructingMaterial: {fileID: 2100000, guid: bf46d1512176e4050ba4381b9bddcae0,
+    type: 2}
+  meshComponents:
+  - {fileID: 3741923077160609152}
+  isUnderConstruction: 0
 --- !u!65 &22257681220232010
 BoxCollider:
   m_ObjectHideFlags: 0

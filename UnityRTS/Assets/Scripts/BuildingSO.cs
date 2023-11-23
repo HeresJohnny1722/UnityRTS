@@ -34,7 +34,7 @@ public class BuildingSO : ScriptableObject
     public new string nodeName;
     public string nodeDescription;
     public float stage = 1;
-    public float factoryProximityRadius;
+    
 
 
     [Header("Only Buildings that increase population")]
@@ -43,7 +43,7 @@ public class BuildingSO : ScriptableObject
     [Header("Needed for all Types")]
     public new string name;
     public string description;
-    
+    public float workerEnterRadius;
     public float startingHealth;
     public float timeToBuild;
     public float goldCost;

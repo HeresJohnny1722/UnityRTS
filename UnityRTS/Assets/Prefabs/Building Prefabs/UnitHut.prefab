@@ -175,7 +175,14 @@ MonoBehaviour:
   buildingHealthText: {fileID: 6411153642131242701}
   buildingSO: {fileID: 11400000, guid: 83b453ecbb6054e5387fc73b965d70de, type: 2}
   removeButton: {fileID: 2305233865030550208}
-  stage: 0
+  stage: 2
+  blueConstructionMaterial: {fileID: 2100000, guid: 747eefa0b470d47a0b18c2a7a9e3c1d7,
+    type: 2}
+  yellowConstructingMaterial: {fileID: 2100000, guid: bf46d1512176e4050ba4381b9bddcae0,
+    type: 2}
+  meshComponents:
+  - {fileID: 5940929024918481180}
+  isUnderConstruction: 0
 --- !u!65 &8891788161909323775
 BoxCollider:
   m_ObjectHideFlags: 0

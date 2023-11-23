@@ -64,6 +64,8 @@ public class BuildingGridPlacer : BuildingPlacer
                     {
                         SoundFeedback.Instance.PlaySound(SoundType.Place);
                         Building building = _toBuild.GetComponent<Building>();
+                        building.isUnderConstruction = true;
+                        
                         InventoryManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.coalCost, (int)building.buildingSO.copperCost, 0);
                         InventoryManager.instance.increaseBuildingCount(building.buildingSO);
                         InventoryManager.instance.changeMaxPopulation(building.buildingSO.populationIncrease);

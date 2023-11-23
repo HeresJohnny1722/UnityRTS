@@ -17,15 +17,16 @@ MonoBehaviour:
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
   outputWorkerMultiplyer: 2
-  workerCapacity: 10
+  workerCapacity: 3
   nodeName: 
   nodeDescription: 
   stage: 2
-  factoryProximityRadius: 1.15
+  populationIncrease: 0
   name: Gold Mine
   description: Put workers inside of the building to start producing gold
+  workerEnterRadius: 1.25
   startingHealth: 400
-  timeToBuild: 2
+  timeToBuild: 15
   goldCost: 23
   coalCost: 23
   copperCost: 23

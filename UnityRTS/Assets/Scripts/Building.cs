@@ -61,12 +61,21 @@ public class Building : MonoBehaviour
 
     public float stage;
 
+    public Material blueConstructionMaterial;
+    public Material yellowConstructingMaterial;
+    private Material[] originalMaterials;
+
+
+    public MeshRenderer[] meshComponents;
+    private Dictionary<MeshRenderer, List<Material>> initialMaterials;
+
     void Start()
     {
         //InventoryManager.instance.populationCap += buildingSO.populationIncrease;
         //InventoryManager.instance.UpdateTextFields();
 
-
+        // Store the original materials when the object is initialized
+        //_InitializeMaterials();
 
 
         removeButton.SetActive(true);
@@ -256,6 +265,13 @@ public class Building : MonoBehaviour
     private float productionTimer = 0f;
     private float productionInterval = 1f; // Set the production interval to 1 second
 
+    private float constructionTimer = 0f;
+    
+
+    public bool isUnderConstruction = false;
+
+
+
     private void Update()
     {
         productionTimer += Time.deltaTime;
@@ -265,7 +281,92 @@ public class Building : MonoBehaviour
             produceResource();
             productionTimer = 0f; // Reset the timer
         }
+
+        if (isUnderConstruction)
+        {
+            ConstructBuilding();
+        }
     }
+
+    public void ConstructBuilding()
+    {
+        SetMaterial();
+
+        if (workersCurrentlyWorking.Count > 0)
+        {
+            Debug.Log("is constructing");
+
+            constructionTimer += Time.deltaTime * workersCurrentlyWorking.Count;
+
+            if (constructionTimer >= buildingSO.timeToBuild)
+            {
+                CompleteConstruction();
+            }
+
+            SetMaterial();
+        }
+        
+    }
+
+    private void CompleteConstruction()
+    {
+        Debug.Log("completed constructing");
+        removeAllWorkers();
+        isUnderConstruction = false;
+        SetMaterial();
+        constructionTimer = 0f; // Reset the timer
+
+        //Change the material of the building
+
+        // Add any additional logic for a fully constructed building here
+    }
+
+    public void SetMaterial()
+    {
+        BuildingManager buildingManager = gameObject.GetComponent<BuildingManager>();
+        // Construction material
+        if (isUnderConstruction)
+        {
+            if (workersCurrentlyWorking.Count > 0)
+            {
+                Material matToApply = yellowConstructingMaterial;
+
+                Material[] m; int nMaterials;
+                foreach (MeshRenderer r in meshComponents)
+                {
+                    nMaterials = buildingManager.initialMaterials[r].Count;
+                    m = new Material[nMaterials];
+                    for (int i = 0; i < nMaterials; i++)
+                        m[i] = matToApply;
+                    r.sharedMaterials = m;
+                }
+            } else
+            {
+                Material matToApply = blueConstructionMaterial;
+
+                Material[] m; int nMaterials;
+                foreach (MeshRenderer r in meshComponents)
+                {
+                    nMaterials = buildingManager.initialMaterials[r].Count;
+                    m = new Material[nMaterials];
+                    for (int i = 0; i < nMaterials; i++)
+                        m[i] = matToApply;
+                    r.sharedMaterials = m;
+                }
+            }
+            
+        }
+        // Set materials back to original when construction is complete
+        else
+        {
+            foreach (MeshRenderer r in meshComponents)
+                r.sharedMaterials = buildingManager.initialMaterials[r].ToArray();
+        }
+    }
+
+    
+
+    
 
 
     public void takeDamage(float damageAmount)
@@ -408,6 +509,8 @@ public class Building : MonoBehaviour
     {
         if (InventoryManager.instance.AreResourcesAvailable(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0))
         {
+            stage = 2;
+            isUnderConstruction = true;
             if (buildingSO.resourceType == BuildingSO.ResourceType.Energy)
             {
                 removeButton.SetActive(false);
@@ -418,7 +521,7 @@ public class Building : MonoBehaviour
             }
 
             InventoryManager.instance.RemoveResources(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0);
-            stage = 2;
+            
             buildingHealthText.text = "Health: " + buildingHealth.ToString();
             Node.SetActive(false);
             ProductionBuilding.SetActive(true);
@@ -478,7 +581,7 @@ public class Building : MonoBehaviour
         if (InventoryManager.instance.AreResourcesAvailable((int)buildingSO.unitsToTrain[index].populationCost, (int)buildingSO.unitsToTrain[index].goldCost, (int)buildingSO.unitsToTrain[index].coalCost, (int)buildingSO.unitsToTrain[index].copperCost, 0))
         {
             InventoryManager.instance.RemoveResources(0, (int)buildingSO.unitsToTrain[index].goldCost, (int)buildingSO.unitsToTrain[index].coalCost, (int)buildingSO.unitsToTrain[index].copperCost, 0);
-            InventoryManager.instance.changeCurrentPopulation((int)buildingSO.unitsToTrain[index].populationCost);
+            
             unitSpawnPoint = this.transform.GetChild(2).transform;
             unitMovePoint = barracksSpawnFlag.transform;
 
@@ -549,6 +652,8 @@ public class Building : MonoBehaviour
 
 
             GameObject troop = Instantiate(unit.prefab, unitSpawnPoint.position, Quaternion.identity);
+           
+            InventoryManager.instance.changeCurrentPopulation( (int) unit.populationCost);
             // Reset time left text and unit name
             barracksTrainingTimeLeftText.text = "Training Time: 0s";
             barracksUnitTrainingNameText.text = "No unit training";
@@ -584,6 +689,7 @@ public class Building : MonoBehaviour
         return false;
     }
 
+    //public void (Start)
 
     private void UpdateQueueSizeText()
     {

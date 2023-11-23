@@ -22,4 +22,5 @@ MonoBehaviour:
   goldCost: 2
   coalCost: 2
   copperCost: 2
+  populationCost: 1
   gatheringSpeed: 5

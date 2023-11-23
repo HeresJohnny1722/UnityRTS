@@ -15,7 +15,7 @@ public class BuildingManager : MonoBehaviour
     public Material invalidPlacementMaterial;
 
     public MeshRenderer[] meshComponents;
-    private Dictionary<MeshRenderer, List<Material>> initialMaterials;
+    public Dictionary<MeshRenderer, List<Material>> initialMaterials;
 
     [HideInInspector] public bool hasValidPlacement;
     [HideInInspector] public bool isFixed;
@@ -103,7 +103,7 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
-    private void _InitializeMaterials()
+    public void _InitializeMaterials()
     {
         if (initialMaterials == null)
             initialMaterials = new Dictionary<MeshRenderer, List<Material>>();

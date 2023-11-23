@@ -35,7 +35,7 @@ public class Unit : MonoBehaviour
         if (unitHealth <= 0)
         {
             deselectUnit();
-
+            InventoryManager.instance.changeCurrentPopulation(-(int)unitSO.populationCost);
             UnitSelection.Instance.unitsSelected.Remove(this.gameObject);
             UnitSelection.Instance.unitList.Remove(this.gameObject);
             Destroy(this.gameObject);

@@ -17,15 +17,16 @@ MonoBehaviour:
   spawnFlagMoveToTroopOffset: 1
   resourceType: 2
   outputWorkerMultiplyer: 2
-  workerCapacity: 10
+  workerCapacity: 3
   nodeName: Coal Node
   nodeDescription: This is a coal node
   stage: 2
-  factoryProximityRadius: 1.15
+  populationIncrease: 0
   name: Coal Mine
   description: Place this on a coal node and put workers in it to start mining
+  workerEnterRadius: 1.25
   startingHealth: 400
-  timeToBuild: 2
+  timeToBuild: 15
   goldCost: 55
   coalCost: 55
   copperCost: 55

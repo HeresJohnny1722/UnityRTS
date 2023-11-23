@@ -17,16 +17,16 @@ MonoBehaviour:
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
   outputWorkerMultiplyer: 0
-  workerCapacity: 0
+  workerCapacity: 3
   nodeName: 
   nodeDescription: 
-  stage: 1
-  factoryProximityRadius: 0
+  stage: 2
   populationIncrease: 5
   name: House
   description: Increases the population of your town
+  workerEnterRadius: 1.25
   startingHealth: 100
-  timeToBuild: 4
+  timeToBuild: 10
   goldCost: 25
   coalCost: 25
   copperCost: 25

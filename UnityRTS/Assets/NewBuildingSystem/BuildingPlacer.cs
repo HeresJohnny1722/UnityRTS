@@ -96,6 +96,7 @@ public class BuildingPlacer : MonoBehaviour
         {
             if (InventoryManager.instance.CheckBuildingCountAvailable(building.buildingSO))
             {
+                //building.setMaterials();
                 SoundFeedback.Instance.PlaySound(SoundType.Click);
                 BuildingSelection.Instance.DeselectBuilding();
                 _buildingPrefab = prefab;

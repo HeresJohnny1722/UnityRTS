@@ -313,7 +313,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4463937c36e2f46a9a6847d70798ac1d, type: 2}
+  - {fileID: 2100000, guid: 1c1b6a7feefe840e9935cb9eb6c65538, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -789,6 +789,13 @@ MonoBehaviour:
   buildingSO: {fileID: 11400000, guid: 9df345d6fbfbe440388513bf2228af63, type: 2}
   removeButton: {fileID: 6657171832193548002}
   stage: 0
+  blueConstructionMaterial: {fileID: 2100000, guid: 747eefa0b470d47a0b18c2a7a9e3c1d7,
+    type: 2}
+  yellowConstructingMaterial: {fileID: 2100000, guid: bf46d1512176e4050ba4381b9bddcae0,
+    type: 2}
+  meshComponents:
+  - {fileID: 9001048531470877189}
+  isUnderConstruction: 0
 --- !u!65 &7170078664535787920
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -70,14 +70,39 @@ public class UnitSelection : MonoBehaviour
         }
     }
 
-    public void moveWorkersIntoProductionBuilding(Transform buildingToEnter)
+    public void moveWorkersIntoBuilding(Transform buildingToEnter)
     {
-        if (unitsSelected.Count > 0 && buildingToEnter.GetComponent<Building>().stage == 2)
+        Building building = buildingToEnter.GetComponent<Building>();
+
+        if (unitsSelected.Count > 0 && building.stage == 2)
         {
             // Highlight the resource node
 
             // If the building is a production building
-            if (buildingToEnter.GetComponent<Building>().buildingSO.buildingType == BuildingSO.BuildingType.Production)
+            //Check if the building is being constructed
+            
+
+            if (building.isUnderConstruction)
+            {
+
+                foreach (var unitSelected in unitsSelected)
+                {
+                    Unit unit = unitSelected.GetComponent<Unit>();
+
+                    if (unit.unitSO.unitType == UnitSO.UnitType.Worker)
+                    {
+
+                        //Start coroutine
+                        if (building.buildingSO.workerCapacity > building.workersCurrentlyInTheBuilding)
+                        {
+                            building.workersCurrentlyInTheBuilding++;
+                            StartCoroutine(MoveWorkerToBuilding(unitSelected, buildingToEnter));
+                        }
+
+                    }
+                }
+
+            } else if (building.buildingSO.buildingType == BuildingSO.BuildingType.Production)
             {
                 
                 foreach (var unitSelected in unitsSelected)
@@ -173,7 +198,7 @@ public class UnitSelection : MonoBehaviour
         while (true)
         {
             float distance = Vector3.Distance(worker.transform.position, buildingToEnter.position);
-            proximityRadius = buildingToEnter.GetComponent<Building>().buildingSO.factoryProximityRadius;
+            proximityRadius = buildingToEnter.GetComponent<Building>().buildingSO.workerEnterRadius;
             if (distance <= proximityRadius)
             {
                 // Worker is within the specified radius of the building
