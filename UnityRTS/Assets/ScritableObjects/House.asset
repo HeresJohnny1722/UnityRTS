@@ -24,7 +24,7 @@ MonoBehaviour:
   populationIncrease: 5
   name: House
   description: Increases the population of your town
-  workerEnterRadius: 1.25
+  workerEnterRadius: 1.5
   startingHealth: 100
   timeToBuild: 10
   goldCost: 25

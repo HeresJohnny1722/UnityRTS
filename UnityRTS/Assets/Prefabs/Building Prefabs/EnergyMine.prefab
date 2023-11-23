@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 6803192920547331701}
   - component: {fileID: 8560756082591333702}
   - component: {fileID: 5708395835832220400}
+  - component: {fileID: 4663042497775243998}
   m_Layer: 9
   m_Name: GoldNode (10)
   m_TagString: Untagged
@@ -167,6 +168,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &4663042497775243998
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359355290977788720}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1182568865259130316
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +195,7 @@ GameObject:
   - component: {fileID: 1526755802204089767}
   - component: {fileID: 8878640203126042110}
   - component: {fileID: 6301370909844025640}
+  - component: {fileID: 5563416526456495110}
   m_Layer: 9
   m_Name: GoldNode (1)
   m_TagString: Untagged
@@ -250,6 +268,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &5563416526456495110
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182568865259130316}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1539467401818448511
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +423,7 @@ GameObject:
   - component: {fileID: 6859249225377587314}
   - component: {fileID: 3112566811767820184}
   - component: {fileID: 7775954573017121475}
+  - component: {fileID: 3775117533140253269}
   m_Layer: 9
   m_Name: GoldNode (21)
   m_TagString: Untagged
@@ -461,6 +496,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &3775117533140253269
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613321621064214544}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1615720768358254036
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +523,7 @@ GameObject:
   - component: {fileID: 3944754362316148799}
   - component: {fileID: 5410741954977821751}
   - component: {fileID: 5121857918221273430}
+  - component: {fileID: 1142476999860245679}
   m_Layer: 9
   m_Name: GoldNode (2)
   m_TagString: Untagged
@@ -544,6 +596,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &1142476999860245679
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615720768358254036}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1961630650370823519
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +623,7 @@ GameObject:
   - component: {fileID: 3561439085506225082}
   - component: {fileID: 5712183778615968187}
   - component: {fileID: 1131261472369502639}
+  - component: {fileID: 7679675929002204662}
   m_Layer: 9
   m_Name: GoldNode (15)
   m_TagString: Untagged
@@ -627,6 +696,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &7679675929002204662
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961630650370823519}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2380429015128231056
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +723,7 @@ GameObject:
   - component: {fileID: 6090565668497519642}
   - component: {fileID: 2975008076843460448}
   - component: {fileID: 902774878829818454}
+  - component: {fileID: 2414531672336014345}
   m_Layer: 9
   m_Name: GoldNode (14)
   m_TagString: Untagged
@@ -710,6 +796,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &2414531672336014345
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380429015128231056}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2738341042349444136
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,6 +846,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5009348388414181683}
+  - {fileID: 5061517351231173887}
   - {fileID: 5480527441364623881}
   - {fileID: 6525879428944242110}
   - {fileID: 2633757670151841794}
@@ -875,6 +978,7 @@ GameObject:
   - component: {fileID: 1347694938481510794}
   - component: {fileID: 2847816702503114631}
   - component: {fileID: 6335145631079031308}
+  - component: {fileID: 1596810502975242906}
   m_Layer: 9
   m_Name: GoldNode (18)
   m_TagString: Untagged
@@ -947,6 +1051,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &1596810502975242906
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2895471237450108570}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2999178778825168269
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,6 +1078,7 @@ GameObject:
   - component: {fileID: 876099774747508181}
   - component: {fileID: 2709254661762425345}
   - component: {fileID: 8091707727613575111}
+  - component: {fileID: 3153986774477635603}
   m_Layer: 9
   m_Name: GoldNode (22)
   m_TagString: Untagged
@@ -1030,6 +1151,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &3153986774477635603
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2999178778825168269}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3325026407519526923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,6 +1360,7 @@ GameObject:
   - component: {fileID: 265499019310831757}
   - component: {fileID: 6102452977360453790}
   - component: {fileID: 7828020360299721442}
+  - component: {fileID: 8706287713513452995}
   m_Layer: 9
   m_Name: GoldNode (20)
   m_TagString: Untagged
@@ -1295,6 +1433,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &8706287713513452995
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3696649865897194698}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3788252452675486697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1460,7 @@ GameObject:
   - component: {fileID: 6375833198387733103}
   - component: {fileID: 5270885112596010515}
   - component: {fileID: 6973242999017681314}
+  - component: {fileID: 1547176818583603495}
   m_Layer: 9
   m_Name: GoldNode
   m_TagString: Untagged
@@ -1378,6 +1533,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &1547176818583603495
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3788252452675486697}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3908637326916731562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,6 +1560,7 @@ GameObject:
   - component: {fileID: 7909016819755627615}
   - component: {fileID: 1459856122233213528}
   - component: {fileID: 7681062306541236536}
+  - component: {fileID: 4714889988958393751}
   m_Layer: 9
   m_Name: GoldNode (4)
   m_TagString: Untagged
@@ -1461,6 +1633,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &4714889988958393751
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3908637326916731562}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4636037464193886402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,6 +1660,7 @@ GameObject:
   - component: {fileID: 7273559355427255205}
   - component: {fileID: 1462305016420575001}
   - component: {fileID: 6010726348774824663}
+  - component: {fileID: 3614495533804642266}
   m_Layer: 9
   m_Name: GoldNode (6)
   m_TagString: Untagged
@@ -1544,6 +1733,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &3614495533804642266
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636037464193886402}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4752286812158845246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,6 +1760,7 @@ GameObject:
   - component: {fileID: 2016125691312122530}
   - component: {fileID: 4071715043967155453}
   - component: {fileID: 4057552158765647905}
+  - component: {fileID: 6498766169270478503}
   m_Layer: 9
   m_Name: GoldNode (8)
   m_TagString: Untagged
@@ -1627,6 +1833,53 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &6498766169270478503
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4752286812158845246}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!1 &5063276022781727176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5061517351231173887}
+  m_Layer: 9
+  m_Name: CenterOfBuilding
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5061517351231173887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5063276022781727176}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.486, y: 0.875, z: 0.473}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4883820705058911029}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5157848060404811601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,6 +1891,7 @@ GameObject:
   - component: {fileID: 2777929103363539021}
   - component: {fileID: 5521071830281123870}
   - component: {fileID: 2913495251254610774}
+  - component: {fileID: 6326862464747567250}
   m_Layer: 9
   m_Name: GoldNode (16)
   m_TagString: Untagged
@@ -1710,6 +1964,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &6326862464747567250
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157848060404811601}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5439449662616500342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,6 +2090,7 @@ GameObject:
   - component: {fileID: 9031969832202672734}
   - component: {fileID: 3808385591005174940}
   - component: {fileID: 5977583422691142297}
+  - component: {fileID: 5044160611945073039}
   m_Layer: 9
   m_Name: GoldNode (19)
   m_TagString: Untagged
@@ -1892,6 +2163,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &5044160611945073039
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5797069463601538518}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5803329181562918845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,6 +2190,7 @@ GameObject:
   - component: {fileID: 7050343930166493260}
   - component: {fileID: 2412652204611000136}
   - component: {fileID: 7583366562960891774}
+  - component: {fileID: 5112046641416466802}
   m_Layer: 9
   m_Name: GoldNode (3)
   m_TagString: Untagged
@@ -1975,6 +2263,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &5112046641416466802
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5803329181562918845}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5872343798177798475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1986,6 +2290,7 @@ GameObject:
   - component: {fileID: 5273477564915406711}
   - component: {fileID: 2023070387810840644}
   - component: {fileID: 4410059904883567392}
+  - component: {fileID: 3046701015683818269}
   m_Layer: 9
   m_Name: GoldNode (7)
   m_TagString: Untagged
@@ -2058,6 +2363,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &3046701015683818269
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872343798177798475}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &6227074567484353060
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,6 +2453,7 @@ GameObject:
   - component: {fileID: 4670132998665759279}
   - component: {fileID: 649886620815157127}
   - component: {fileID: 300865845269949788}
+  - component: {fileID: 8546938260816863485}
   m_Layer: 9
   m_Name: GoldNode (17)
   m_TagString: Untagged
@@ -2204,6 +2526,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &8546938260816863485
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6921409510201231790}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &6933036331778100904
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,6 +2629,7 @@ GameObject:
   - component: {fileID: 7451446384070374060}
   - component: {fileID: 2364488686283932969}
   - component: {fileID: 2050036508543719207}
+  - component: {fileID: 7146167933591938407}
   m_Layer: 9
   m_Name: GoldNode (12)
   m_TagString: Untagged
@@ -2363,6 +2702,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &7146167933591938407
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7769079128632879082}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7992121782390616979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2374,6 +2729,7 @@ GameObject:
   - component: {fileID: 4931893955860418922}
   - component: {fileID: 1152101778452573553}
   - component: {fileID: 7611269045506366209}
+  - component: {fileID: 1523152398197305142}
   m_Layer: 9
   m_Name: GoldNode (11)
   m_TagString: Untagged
@@ -2446,6 +2802,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &1523152398197305142
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7992121782390616979}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8013025865874721683
 GameObject:
   m_ObjectHideFlags: 0
@@ -2532,6 +2904,7 @@ GameObject:
   - component: {fileID: 6266008707481960767}
   - component: {fileID: 7412697371082114472}
   - component: {fileID: 7131040301706379335}
+  - component: {fileID: 2186823851679397620}
   m_Layer: 9
   m_Name: GoldNode (9)
   m_TagString: Untagged
@@ -2604,6 +2977,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &2186823851679397620
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8733605246411019395}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &9040617586719740876
 GameObject:
   m_ObjectHideFlags: 0
@@ -2615,6 +3004,7 @@ GameObject:
   - component: {fileID: 8937473711722548956}
   - component: {fileID: 4065916920497121047}
   - component: {fileID: 1912574964418712303}
+  - component: {fileID: 8249176343268489856}
   m_Layer: 9
   m_Name: GoldNode (5)
   m_TagString: Untagged
@@ -2687,6 +3077,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &8249176343268489856
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9040617586719740876}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &9202642020561614233
 GameObject:
   m_ObjectHideFlags: 0
@@ -2698,6 +3104,7 @@ GameObject:
   - component: {fileID: 4647159805769532387}
   - component: {fileID: 8104132397098208848}
   - component: {fileID: 8480707007305748889}
+  - component: {fileID: 1397451998663599175}
   m_Layer: 9
   m_Name: GoldNode (13)
   m_TagString: Untagged
@@ -2770,6 +3177,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &1397451998663599175
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9202642020561614233}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &852376503786881145
 PrefabInstance:
   m_ObjectHideFlags: 0

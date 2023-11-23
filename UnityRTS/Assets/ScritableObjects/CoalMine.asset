@@ -24,7 +24,7 @@ MonoBehaviour:
   populationIncrease: 0
   name: Coal Mine
   description: Place this on a coal node and put workers in it to start mining
-  workerEnterRadius: 1.25
+  workerEnterRadius: 3
   startingHealth: 400
   timeToBuild: 15
   goldCost: 55

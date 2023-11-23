@@ -76,7 +76,7 @@ public class Building : MonoBehaviour
 
         // Store the original materials when the object is initialized
         //_InitializeMaterials();
-
+        stage = buildingSO.stage;
 
         removeButton.SetActive(true);
         HideShowBuildingStuff(false);
@@ -115,7 +115,7 @@ public class Building : MonoBehaviour
 
         if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
         {
-            stage = buildingSO.stage;
+            
             if (stage == 1)
             {
                 removeButton.SetActive(false);
@@ -581,7 +581,7 @@ public class Building : MonoBehaviour
         if (InventoryManager.instance.AreResourcesAvailable((int)buildingSO.unitsToTrain[index].populationCost, (int)buildingSO.unitsToTrain[index].goldCost, (int)buildingSO.unitsToTrain[index].coalCost, (int)buildingSO.unitsToTrain[index].copperCost, 0))
         {
             InventoryManager.instance.RemoveResources(0, (int)buildingSO.unitsToTrain[index].goldCost, (int)buildingSO.unitsToTrain[index].coalCost, (int)buildingSO.unitsToTrain[index].copperCost, 0);
-            
+            InventoryManager.instance.changeCurrentPopulation((int)buildingSO.unitsToTrain[index].populationCost);
             unitSpawnPoint = this.transform.GetChild(2).transform;
             unitMovePoint = barracksSpawnFlag.transform;
 
@@ -653,7 +653,7 @@ public class Building : MonoBehaviour
 
             GameObject troop = Instantiate(unit.prefab, unitSpawnPoint.position, Quaternion.identity);
            
-            InventoryManager.instance.changeCurrentPopulation( (int) unit.populationCost);
+            
             // Reset time left text and unit name
             barracksTrainingTimeLeftText.text = "Training Time: 0s";
             barracksUnitTrainingNameText.text = "No unit training";

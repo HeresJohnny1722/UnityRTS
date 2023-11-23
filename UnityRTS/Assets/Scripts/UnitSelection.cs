@@ -141,10 +141,11 @@ public class UnitSelection : MonoBehaviour
         myAgent = worker.GetComponent<NavMeshAgent>();
         float radius = 1f;
 
-        NavMesh.SamplePosition(buildingToEnter.position, out NavMeshHit hit, radius, NavMesh.AllAreas);
+        //NavMesh.SamplePosition(buildingToEnter.position, out NavMeshHit hit, radius, NavMesh.AllAreas);
 
         // Set destination for the agent to the closest point on the nav mesh
-        myAgent.SetDestination(hit.position);
+        //myAgent.SetDestination(hit.position);
+        myAgent.SetDestination(buildingToEnter.position);
 
         // Wait for the worker to collide with the building
         yield return StartCoroutine(WaitForProximityToBuilding(worker, buildingToEnter));
@@ -195,18 +196,25 @@ public class UnitSelection : MonoBehaviour
 
     private IEnumerator WaitForProximityToBuilding(GameObject worker, Transform buildingToEnter)
     {
+        Building building = buildingToEnter.GetComponent<Building>();
+        float proximityRadius = building.buildingSO.workerEnterRadius;
+
         while (true)
         {
-            float distance = Vector3.Distance(worker.transform.position, buildingToEnter.position);
-            proximityRadius = buildingToEnter.GetComponent<Building>().buildingSO.workerEnterRadius;
+            float distance = Vector3.Distance(worker.transform.position, buildingToEnter.GetChild(1).position);
+
             if (distance <= proximityRadius)
             {
                 // Worker is within the specified radius of the building
                 yield break;
             }
+
             yield return null;
         }
     }
+
+
+
 
 
     public void UnitEnterBuilding(GameObject unitAddingIntoBuilding)

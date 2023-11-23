@@ -24,7 +24,7 @@ MonoBehaviour:
   populationIncrease: 0
   name: Energy Mine
   description: Add workers to start production
-  workerEnterRadius: 1.25
+  workerEnterRadius: 2
   startingHealth: 100
   timeToBuild: 8
   goldCost: 100

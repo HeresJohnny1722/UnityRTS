@@ -20,14 +20,14 @@ MonoBehaviour:
   spawnFlagMoveToTroopOffset: 1.5
   resourceType: 0
   outputWorkerMultiplyer: 0
-  workerCapacity: 0
+  workerCapacity: 3
   nodeName: 
   nodeDescription: 
   stage: 2
   populationIncrease: 0
   name: Unit Barracks
   description: This building spawns troops
-  workerEnterRadius: 1.25
+  workerEnterRadius: 2
   startingHealth: 300
   timeToBuild: 15
   goldCost: 50

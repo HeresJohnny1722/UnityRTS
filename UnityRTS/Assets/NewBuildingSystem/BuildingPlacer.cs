@@ -91,6 +91,7 @@ public class BuildingPlacer : MonoBehaviour
 
     public void SetBuildingPrefab(GameObject prefab)
     {
+        UnitSelection.Instance.DeselectAll();
         Building building = prefab.GetComponent<Building>();
         if (InventoryManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.coalCost, (int)building.buildingSO.copperCost, 0))
         {

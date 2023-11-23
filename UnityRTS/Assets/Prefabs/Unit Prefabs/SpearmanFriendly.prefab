@@ -336,6 +336,7 @@ MonoBehaviour:
   unitSO: {fileID: 11400000, guid: 7c537220440294dfb9387dc9a5a5ec4e, type: 2}
   unitFloorHighlight: {fileID: 5303709698050344263}
   unitHealthbar: {fileID: 4979280067730876138}
+  isEnteringProduction: 0
 --- !u!195 &2958555681735352451
 NavMeshAgent:
   m_ObjectHideFlags: 0

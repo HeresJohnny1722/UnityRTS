@@ -24,7 +24,7 @@ MonoBehaviour:
   populationIncrease: 0
   name: Gold Mine
   description: Put workers inside of the building to start producing gold
-  workerEnterRadius: 1.25
+  workerEnterRadius: 3
   startingHealth: 400
   timeToBuild: 15
   goldCost: 23
