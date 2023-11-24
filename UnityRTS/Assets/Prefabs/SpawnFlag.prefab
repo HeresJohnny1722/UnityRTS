@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7911759402223663246}
   - component: {fileID: 3680682371096321327}
   - component: {fileID: 3573255654018810626}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FlagObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

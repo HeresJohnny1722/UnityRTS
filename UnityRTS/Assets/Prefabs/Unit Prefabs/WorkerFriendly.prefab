@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5309887097401724298}
   - component: {fileID: 656978382502123357}
   - component: {fileID: 7478809669063766955}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 5284176196244828833}
   - component: {fileID: 8213333607315947265}
   - component: {fileID: 3836812692348034732}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: HealthBar Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 5964341189829449915}
   - component: {fileID: 5038432869433456507}
   - component: {fileID: 127648911269447297}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Face (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 7176585462282162098}
   - component: {fileID: 5573788712359652186}
   - component: {fileID: 6642199755265422164}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Face (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 8918921357526057030}
   - component: {fileID: 8828363174972229611}
   - component: {fileID: 4156450576419009732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -651,7 +651,7 @@ GameObject:
   - component: {fileID: 6138270303737308532}
   - component: {fileID: 88190968751159212}
   - component: {fileID: 3272839746146081396}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -725,7 +725,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7756875590702860958}
   - component: {fileID: 3816188805883995010}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UnitHighlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -488,7 +488,7 @@ public class Building : MonoBehaviour
             workersCurrentlyWorkingText.text = workersCurrentlyWorking.Count + "/" + buildingSO.workerCapacity.ToString() + " Workers";
             outputRateText.text = "Output rate: " + outputRate + " " + buildingSO.resourceType.ToString() + "/second";
             resourceTypeText.text = buildingSO.resourceType.ToString();
-        }
+        } 
         HideShowBuildingStuff(true);
         if (buildingSO.startingHealth == buildingHealth)
         {
@@ -640,6 +640,7 @@ public class Building : MonoBehaviour
             unitMovePoint = barracksSpawnFlag.transform;
 
             //if (checkIfEnoughResources(resources that are being taken, would be in the buildingSO, cost
+            UpdateQueueSizeText();
             troopQueue.Enqueue(buildingSO.unitsToTrain[index]);
             UpdateQueueSizeText();
 
@@ -660,14 +661,14 @@ public class Building : MonoBehaviour
 
     private IEnumerator TrainTroops()
     {
-
+        UpdateQueueSizeText();
         isTraining = true;
 
         while (troopQueue.Count > 0)
         {
-
+            UpdateQueueSizeText();
             UnitSO unit = troopQueue.Dequeue();
-
+            UpdateQueueSizeText();
             barracksUnitTrainingNameText.text = unit.name;
 
 
@@ -747,7 +748,8 @@ public class Building : MonoBehaviour
 
     private void UpdateQueueSizeText()
     {
-        barracacksQueueSizeText.text = "Queue Size: " + troopQueue.Count;
+        float queueCount = troopQueue.Count + 1;
+        barracacksQueueSizeText.text = "Queue Size: " + queueCount;
     }
 
 

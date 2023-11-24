@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3399334046784137401}
   - component: {fileID: 6506683193142339336}
   - component: {fileID: 2362024488943606787}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 7377415939579120596}
   - component: {fileID: 4283427012952137250}
   - component: {fileID: 1197893651876075905}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,6 +422,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitHighlight
       objectReference: {fileID: 0}
+    - target: {fileID: 5134046670470456204, guid: 82da6c8d2718a4d29b2b1543a2258251,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -554,6 +559,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1598209828171881189, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598209828171881189, guid: 40a912277b5d341eab3146133c11d5ac,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -562,6 +572,16 @@ PrefabInstance:
       propertyPath: _healthbarSprite
       value: 
       objectReference: {fileID: 877687429505301384}
+    - target: {fileID: 2632009158659996099, guid: 40a912277b5d341eab3146133c11d5ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3149950671383506397, guid: 40a912277b5d341eab3146133c11d5ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3310764158376026943, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_SizeDelta.x
