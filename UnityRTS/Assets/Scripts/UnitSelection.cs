@@ -93,7 +93,7 @@ public class UnitSelection : MonoBehaviour
                     {
 
                         //Start coroutine
-                        if (building.buildingSO.workerCapacity > building.workersCurrentlyInTheBuilding)
+                        if (building.buildingSO.constructionCapacity > building.workersCurrentlyInTheBuilding)
                         {
                             building.workersCurrentlyInTheBuilding++;
                             StartCoroutine(MoveWorkerToBuilding(unitSelected, buildingToEnter));
@@ -150,8 +150,7 @@ public class UnitSelection : MonoBehaviour
         // Wait for the worker to collide with the building
         yield return StartCoroutine(WaitForProximityToBuilding(worker, buildingToEnter));
 
-        if (buildingToEnter.GetComponent<Building>().workersCurrentlyWorking.Count < buildingToEnter.GetComponent<Building>().buildingSO.workerCapacity)
-        {
+        
             // Additional logic after reaching the destination (if needed)
             // ...
 
@@ -179,7 +178,7 @@ public class UnitSelection : MonoBehaviour
 
                 
             }
-        } else
+         /*else
         {
             float spawnRadius = 1.5f; // Set your desired radius here
 
@@ -190,7 +189,7 @@ public class UnitSelection : MonoBehaviour
 
             // Additional logic or messages if needed
             Debug.Log("Worker capacity reached. Moving to a random spot around the building.");
-        }
+        }*/
         
     }
 

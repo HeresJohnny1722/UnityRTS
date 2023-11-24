@@ -43,6 +43,7 @@ public class BuildingSO : ScriptableObject
     [Header("Needed for all Types")]
     public new string name;
     public string description;
+    public float constructionCapacity;
     public float workerEnterRadius;
     public float startingHealth;
     public float timeToBuild;

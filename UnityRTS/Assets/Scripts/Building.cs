@@ -71,14 +71,28 @@ public class Building : MonoBehaviour
 
     void Start()
     {
-        //InventoryManager.instance.populationCap += buildingSO.populationIncrease;
-        //InventoryManager.instance.UpdateTextFields();
+        InitializeBuilding();
 
-        // Store the original materials when the object is initialized
-        //_InitializeMaterials();
+        if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
+        {
+            if (stage == 1)
+            {
+                SetStageOneProperties();
+            }
+            else if (stage == 2)
+            {
+                SetStageTwoProperties();
+            }
+        }
+        
+
+    }
+
+    private void InitializeBuilding()
+    {
+        // ... (initialization logic)
+
         stage = buildingSO.stage;
-
-        removeButton.SetActive(true);
         HideShowBuildingStuff(false);
         buildingHealth = buildingSO.startingHealth;
         buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
@@ -110,30 +124,46 @@ public class Building : MonoBehaviour
 
             //barracksSpawnFlag.transform.position = new Vector3((transform.position.x + 1) + Random.Range(-baracksStartRadius, baracksStartRadius), barracksSpawnFlag.transform.position.y, (transform.position.z + 1) + Random.Range(-baracksStartRadius, baracksStartRadius));
         }
+    }
 
-        //NavmeshManager.Instance.UpdateNavmesh();
+    private void SetStageOneProperties()
+    {
+        removeButton.SetActive(false);
+        buildingHealthText.text = "";
+        Node.SetActive(true);
+        ProductionBuilding.SetActive(false);
+    }
 
-        if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
+    private void SetStageTwoProperties()
+    {
+        removeButton.SetActive(true);
+        Node.SetActive(false);
+        ProductionBuilding.SetActive(true);
+    }
+
+    private void Update()
+    {
+        UpdateProduction();
+        UpdateConstruction();
+    }
+
+    private void UpdateProduction()
+    {
+        productionTimer += Time.deltaTime;
+
+        if (productionTimer >= productionInterval)
         {
-            
-            if (stage == 1)
-            {
-                removeButton.SetActive(false);
-                buildingHealthText.text = "";
-                Node.SetActive(true);
-                ProductionBuilding.SetActive(false);
-            }
-            else if (stage == 2)
-            {
-                removeButton.SetActive(true);
-                Node.SetActive(false);
-                ProductionBuilding.SetActive(true);
-            }
+            ProduceResource();
+            productionTimer = 0f; // Reset the timer
         }
+    }
 
-
-
-
+    private void UpdateConstruction()
+    {
+        if (isUnderConstruction)
+        {
+            ConstructBuilding();
+        }
     }
 
     public void moveFlag(Vector3 point)
@@ -224,7 +254,7 @@ public class Building : MonoBehaviour
 
     }
 
-    public void produceResource()
+    public void ProduceResource()
     {
         if (buildingSO.buildingType == BuildingSO.BuildingType.Production && workersCurrentlyWorking.Count > 0)
         {
@@ -272,21 +302,7 @@ public class Building : MonoBehaviour
 
 
 
-    private void Update()
-    {
-        productionTimer += Time.deltaTime;
-
-        if (productionTimer >= productionInterval)
-        {
-            produceResource();
-            productionTimer = 0f; // Reset the timer
-        }
-
-        if (isUnderConstruction)
-        {
-            ConstructBuilding();
-        }
-    }
+    
 
     public void ConstructBuilding()
     {
@@ -294,7 +310,7 @@ public class Building : MonoBehaviour
 
         if (workersCurrentlyWorking.Count > 0)
         {
-            Debug.Log("is constructing");
+            //Debug.Log("is constructing");
 
             constructionTimer += Time.deltaTime * workersCurrentlyWorking.Count;
 
@@ -310,6 +326,7 @@ public class Building : MonoBehaviour
 
     private void CompleteConstruction()
     {
+        InventoryManager.instance.changeMaxPopulation(buildingSO.populationIncrease);
         Debug.Log("completed constructing");
         removeAllWorkers();
         isUnderConstruction = false;
