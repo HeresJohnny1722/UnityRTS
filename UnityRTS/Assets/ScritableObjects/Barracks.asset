@@ -27,6 +27,7 @@ MonoBehaviour:
   populationIncrease: 0
   name: Unit Barracks
   description: This building spawns troops
+  constructionCapacity: 4
   workerEnterRadius: 2
   startingHealth: 300
   timeToBuild: 15

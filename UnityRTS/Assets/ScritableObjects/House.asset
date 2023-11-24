@@ -24,6 +24,7 @@ MonoBehaviour:
   populationIncrease: 5
   name: House
   description: Increases the population of your town
+  constructionCapacity: 4
   workerEnterRadius: 1.5
   startingHealth: 100
   timeToBuild: 10

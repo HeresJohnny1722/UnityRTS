@@ -17,13 +17,14 @@ MonoBehaviour:
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
   outputWorkerMultiplyer: 2
-  workerCapacity: 3
+  workerCapacity: 5
   nodeName: 
   nodeDescription: 
   stage: 2
   populationIncrease: 0
   name: Gold Mine
   description: Put workers inside of the building to start producing gold
+  constructionCapacity: 4
   workerEnterRadius: 3
   startingHealth: 400
   timeToBuild: 15

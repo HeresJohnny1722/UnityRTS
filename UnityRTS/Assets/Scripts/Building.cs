@@ -42,6 +42,12 @@ public class Building : MonoBehaviour
     [Space(20)]
     [Header("General Building Stuff")]
 
+    [SerializeField] private GameObject constructionPanel;
+    [SerializeField] private TextMeshProUGUI constructionText;
+    [SerializeField] private Image constructionProgressSprite;
+    private float target = 1f;
+
+
     [SerializeField] private GameObject infoPanel;
     [SerializeField] private Healthbar buildingHealthbar;
 
@@ -300,19 +306,26 @@ public class Building : MonoBehaviour
 
     public bool isUnderConstruction = false;
 
-
-
-    
-
     public void ConstructBuilding()
     {
+
+        
         SetMaterial();
 
         if (workersCurrentlyWorking.Count > 0)
         {
             //Debug.Log("is constructing");
 
+
+
             constructionTimer += Time.deltaTime * workersCurrentlyWorking.Count;
+            constructionText.text = "Workers currently constructing: " + workersCurrentlyWorking.Count.ToString() + "/" + buildingSO.constructionCapacity;
+
+            target = constructionTimer / buildingSO.timeToBuild;
+
+
+            float speed = 0.001f;
+            constructionProgressSprite.fillAmount = target;
 
             if (constructionTimer >= buildingSO.timeToBuild)
             {
@@ -324,6 +337,11 @@ public class Building : MonoBehaviour
         
     }
 
+    public void showConstructionPanel()
+    {
+        constructionPanel.SetActive(true);
+    }
+
     private void CompleteConstruction()
     {
         InventoryManager.instance.changeMaxPopulation(buildingSO.populationIncrease);
@@ -332,6 +350,7 @@ public class Building : MonoBehaviour
         isUnderConstruction = false;
         SetMaterial();
         constructionTimer = 0f; // Reset the timer
+        constructionPanel.SetActive(false);
 
         //Change the material of the building
 
@@ -410,8 +429,8 @@ public class Building : MonoBehaviour
         }
         else
         {
+            removeAllWorkers();
 
-            
 
             if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
             {
@@ -448,7 +467,12 @@ public class Building : MonoBehaviour
 
             InventoryManager.instance.decreaseBuildingCount(buildingSO);
             InventoryManager.instance.AddResources(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0);
-            InventoryManager.instance.changeMaxPopulation(-buildingSO.populationIncrease);
+
+            if (!isUnderConstruction)
+            {
+                InventoryManager.instance.changeMaxPopulation(-buildingSO.populationIncrease);
+            }
+            
 
 
         }
@@ -497,6 +521,14 @@ public class Building : MonoBehaviour
 
         }
 
+        if (!isUnderConstruction)
+        {
+            constructionPanel.SetActive(false);
+        } else
+        {
+            removeButton.SetActive(false);
+        }
+
 
 
         //Barracks
@@ -519,6 +551,7 @@ public class Building : MonoBehaviour
         }
 
         HideShowBuildingStuff(false);
+        constructionPanel.SetActive(false);
 
     }
 
@@ -573,7 +606,11 @@ public class Building : MonoBehaviour
 
     void HideShowBuildingStuff(bool visible)
     {
-        if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
+        
+        if (isUnderConstruction)
+        {
+            constructionPanel.SetActive(true);
+        } else if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
         {
             barracksButtonLayout.SetActive(visible);
             barracksPanel.SetActive(visible);

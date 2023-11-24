@@ -17,13 +17,14 @@ MonoBehaviour:
   spawnFlagMoveToTroopOffset: 1
   resourceType: 2
   outputWorkerMultiplyer: 2
-  workerCapacity: 3
+  workerCapacity: 5
   nodeName: Coal Node
   nodeDescription: This is a coal node
   stage: 2
   populationIncrease: 0
   name: Coal Mine
   description: Place this on a coal node and put workers in it to start mining
+  constructionCapacity: 4
   workerEnterRadius: 3
   startingHealth: 400
   timeToBuild: 15
