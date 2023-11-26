@@ -193,10 +193,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5703970984420481760}
+  - component: {fileID: 4618329026117628036}
   - component: {fileID: 6712343966138974176}
+  - component: {fileID: 3255677061070991677}
+  - component: {fileID: 8127375062773690525}
   - component: {fileID: 2254554157729864186}
   - component: {fileID: 7696372317717920712}
-  - component: {fileID: 8127375062773690525}
   m_Layer: 9
   m_Name: UnitBarracks
   m_TagString: Untagged
@@ -226,6 +228,28 @@ Transform:
   - {fileID: 2698996160584153938}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4618329026117628036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389587925157907964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fda4822cc932457b983eabcd1575f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUnderConstruction: 0
+  constructionPanel: {fileID: 4299214974658011055}
+  constructionText: {fileID: 7676653279871497201}
+  constructionProgressSprite: {fileID: 303786713941927314}
+  blueConstructionMaterial: {fileID: 2100000, guid: 747eefa0b470d47a0b18c2a7a9e3c1d7,
+    type: 2}
+  yellowConstructingMaterial: {fileID: 2100000, guid: bf46d1512176e4050ba4381b9bddcae0,
+    type: 2}
+  meshComponents:
+  - {fileID: 7895568652559848191}
 --- !u!114 &6712343966138974176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +262,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf8c699281a0497db41e1ef11678c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingTraining: {fileID: 3255677061070991677}
+  buildingProduction: {fileID: 0}
+  buildingConstruction: {fileID: 4618329026117628036}
+  buildingSO: {fileID: 11400000, guid: 4977316ba35904bb5b35383b0f134d0f, type: 2}
+  buildingHealth: 0
+  stage: 0
+  infoPanel: {fileID: 2816086458150400594}
+  removeButton: {fileID: 5440799210637691065}
+  buildingHealthbar: {fileID: 3132801227203264435}
+  buildingHealthText: {fileID: 902041227782714548}
+  workersInside: []
+--- !u!114 &3255677061070991677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389587925157907964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff48a2e41e56142be835145301a68d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   barracksSpawnFlag: {fileID: 2230354879099446245}
   baracksStartFlagRadius: 5
   barracksPanel: {fileID: 1646429084274468258}
@@ -245,37 +292,30 @@ MonoBehaviour:
   barracksTrainingTimeLeftText: {fileID: 3031748581197004594}
   barracacksQueueSizeText: {fileID: 5526650171256587176}
   barracksUnitTrainingNameText: {fileID: 905681460775721516}
-  workersCurrentlyWorking: []
-  productionPanel: {fileID: 0}
-  workersCurrentlyWorkingText: {fileID: 0}
-  outputRateText: {fileID: 0}
-  resourceTypeText: {fileID: 0}
-  nodePanel: {fileID: 0}
-  nodeGoldCostText: {fileID: 0}
-  nodeCoalCostText: {fileID: 0}
-  nodeCopperCostText: {fileID: 0}
-  Node: {fileID: 0}
-  ProductionBuilding: {fileID: 0}
-  workersCurrentlyInTheBuilding: 0
-  constructionPanel: {fileID: 4299214974658011055}
-  constructionText: {fileID: 7676653279871497201}
-  constructionProgressSprite: {fileID: 303786713941927314}
-  infoPanel: {fileID: 2816086458150400594}
-  buildingHealthbar: {fileID: 3132801227203264435}
-  buildingHealthText: {fileID: 902041227782714548}
-  buildingSO: {fileID: 11400000, guid: 4977316ba35904bb5b35383b0f134d0f, type: 2}
-  removeButton: {fileID: 5440799210637691065}
-  stage: 0
-  blueConstructionMaterial: {fileID: 2100000, guid: 747eefa0b470d47a0b18c2a7a9e3c1d7,
+  unitFlagOffset: 1
+  unitSpawnPoint: {fileID: 0}
+  unitMovePoint: {fileID: 0}
+  isTraining: 0
+--- !u!114 &8127375062773690525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389587925157907964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2576e8b2549d4482e9f25749f42b444e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  validPlacementMaterial: {fileID: 2100000, guid: dba464be4aa8646438aaf91d0ff6adf8,
     type: 2}
-  yellowConstructingMaterial: {fileID: 2100000, guid: bf46d1512176e4050ba4381b9bddcae0,
+  invalidPlacementMaterial: {fileID: 2100000, guid: 928487912ea55417f9a7d3b0707069a3,
     type: 2}
   meshComponents:
   - {fileID: 7895568652559848191}
-  buildingLayerMask:
-    serializedVersion: 2
-    m_Bits: 512
-  isUnderConstruction: 0
+  hasValidPlacement: 0
+  isFixed: 0
 --- !u!54 &2254554157729864186
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -324,26 +364,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.791632, y: 1.2651267, z: 1.7916322}
   m_Center: {x: 0.51674074, y: 1.1309042, z: 0.5008004}
---- !u!114 &8127375062773690525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5389587925157907964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2576e8b2549d4482e9f25749f42b444e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  validPlacementMaterial: {fileID: 2100000, guid: dba464be4aa8646438aaf91d0ff6adf8,
-    type: 2}
-  invalidPlacementMaterial: {fileID: 2100000, guid: 928487912ea55417f9a7d3b0707069a3,
-    type: 2}
-  meshComponents:
-  - {fileID: 7895568652559848191}
-  hasValidPlacement: 0
-  isFixed: 0
 --- !u!1001 &1616768295743457409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -355,7 +375,7 @@ PrefabInstance:
     - target: {fileID: 620412359465184100, guid: a2ea238c7af204bb9baeb3b6866db280,
         type: 3}
       propertyPath: m_Name
-      value: SpawnFlag (1)
+      value: SpawnFlag
       objectReference: {fileID: 0}
     - target: {fileID: 7757094118807142536, guid: a2ea238c7af204bb9baeb3b6866db280,
         type: 3}
@@ -562,6 +582,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2496729810963948793, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2543926929055434788, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -596,12 +621,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6712343966138974176}
+      objectReference: {fileID: 3255677061070991677}
+    - target: {fileID: 4023736885632235162, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BuildingTraining, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4274729731681897862, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6712343966138974176}
+      objectReference: {fileID: 3255677061070991677}
+    - target: {fileID: 4274729731681897862, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BuildingTraining, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4847257150891387452, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
       propertyPath: m_Name
@@ -611,7 +646,42 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6712343966138974176}
+      objectReference: {fileID: 3255677061070991677}
+    - target: {fileID: 6202076081818643482, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BuildingTraining, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7397670692434551576, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7397670692434551576, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7397670692434551576, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 104
+      objectReference: {fileID: 0}
+    - target: {fileID: 7397670692434551576, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7397670692434551576, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 57
+      objectReference: {fileID: 0}
+    - target: {fileID: 7397670692434551576, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20
+      objectReference: {fileID: 0}
     - target: {fileID: 8809062781159795514, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

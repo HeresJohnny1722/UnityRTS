@@ -82,7 +82,7 @@ public class UnitSelection : MonoBehaviour
             //Check if the building is being constructed
             
 
-            if (building.isUnderConstruction)
+            if (building.buildingConstruction.isUnderConstruction)
             {
 
                 foreach (var unitSelected in unitsSelected)
@@ -93,9 +93,9 @@ public class UnitSelection : MonoBehaviour
                     {
 
                         //Start coroutine
-                        if (building.buildingSO.constructionCapacity > building.workersCurrentlyInTheBuilding)
+                        if (building.buildingSO.constructionCapacity > building.workersInside.Count)
                         {
-                            building.workersCurrentlyInTheBuilding++;
+                            //building.buildingProduction.workersCurrentlyInTheBuilding++;
                             StartCoroutine(MoveWorkerToBuilding(unitSelected, buildingToEnter));
                         }
 
@@ -113,8 +113,8 @@ public class UnitSelection : MonoBehaviour
                     {
 
                         // Start coroutine to check for collision with the buildingworkersCurrentlyInTheBuildingc
-                        if (buildingToEnter.GetComponent<Building>().buildingSO.workerCapacity > buildingToEnter.GetComponent<Building>().workersCurrentlyInTheBuilding) {
-                            buildingToEnter.GetComponent<Building>().workersCurrentlyInTheBuilding++;
+                        if (buildingToEnter.GetComponent<Building>().buildingSO.workerCapacity > buildingToEnter.GetComponent<Building>().workersInside.Count) {
+                            //buildingToEnter.GetComponent<Building>().buildingProduction.workersCurrentlyInTheBuilding++;
                             StartCoroutine(MoveWorkerToBuilding(unitSelected, buildingToEnter));
                         }
                         

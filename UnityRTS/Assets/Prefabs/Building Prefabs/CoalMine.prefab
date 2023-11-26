@@ -679,10 +679,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7403444059387396092}
+  - component: {fileID: 8847013414995251265}
   - component: {fileID: 5619884489375765989}
+  - component: {fileID: 5226236407002545820}
+  - component: {fileID: 6528371850163622390}
   - component: {fileID: 1365973829521450280}
   - component: {fileID: 8416031273258201355}
-  - component: {fileID: 5226236407002545820}
   m_Layer: 9
   m_Name: CoalMine
   m_TagString: Untagged
@@ -712,6 +714,27 @@ Transform:
   - {fileID: 7165226090593323788}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8847013414995251265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7401168792134477912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fda4822cc932457b983eabcd1575f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUnderConstruction: 0
+  constructionPanel: {fileID: 6872528573511841026}
+  constructionText: {fileID: 1027157246396668252}
+  constructionProgressSprite: {fileID: 6989169935471546175}
+  blueConstructionMaterial: {fileID: 2100000, guid: 747eefa0b470d47a0b18c2a7a9e3c1d7,
+    type: 2}
+  yellowConstructingMaterial: {fileID: 2100000, guid: bf46d1512176e4050ba4381b9bddcae0,
+    type: 2}
+  meshComponents: []
 --- !u!114 &5619884489375765989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -724,14 +747,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf8c699281a0497db41e1ef11678c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barracksSpawnFlag: {fileID: 0}
-  baracksStartFlagRadius: 5
-  barracksPanel: {fileID: 0}
-  barracksButtonLayout: {fileID: 0}
-  barracksTrainingTimeLeftText: {fileID: 0}
-  barracacksQueueSizeText: {fileID: 0}
-  barracksUnitTrainingNameText: {fileID: 0}
-  workersCurrentlyWorking: []
+  buildingTraining: {fileID: 0}
+  buildingProduction: {fileID: 6528371850163622390}
+  buildingConstruction: {fileID: 8847013414995251265}
+  buildingSO: {fileID: 11400000, guid: 2f8dde67054ad4dbebf423fb806bbc3a, type: 2}
+  buildingHealth: 0
+  stage: 2
+  infoPanel: {fileID: 4890204237372676351}
+  removeButton: {fileID: 3407073589087429140}
+  buildingHealthbar: {fileID: 4135068086751922513}
+  buildingHealthText: {fileID: 7515787431130177049}
+  workersInside: []
+--- !u!114 &5226236407002545820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7401168792134477912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2576e8b2549d4482e9f25749f42b444e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  validPlacementMaterial: {fileID: 2100000, guid: dba464be4aa8646438aaf91d0ff6adf8,
+    type: 2}
+  invalidPlacementMaterial: {fileID: 2100000, guid: 928487912ea55417f9a7d3b0707069a3,
+    type: 2}
+  meshComponents:
+  - {fileID: 3427776897270181392}
+  hasValidPlacement: 0
+  isFixed: 0
+--- !u!114 &6528371850163622390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7401168792134477912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a18bdb4ea21f48b3b72855577295e5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   productionPanel: {fileID: 2975719795384529833}
   workersCurrentlyWorkingText: {fileID: 4941580496220752349}
   outputRateText: {fileID: 160023646740659858}
@@ -742,23 +800,8 @@ MonoBehaviour:
   nodeCopperCostText: {fileID: 7636776618444186432}
   Node: {fileID: 8996196709703802244}
   ProductionBuilding: {fileID: 5642378259083992230}
+  outputRate: 0
   workersCurrentlyInTheBuilding: 0
-  constructionPanel: {fileID: 6872528573511841026}
-  constructionText: {fileID: 1027157246396668252}
-  constructionProgressSprite: {fileID: 6989169935471546175}
-  infoPanel: {fileID: 4890204237372676351}
-  buildingHealthbar: {fileID: 4135068086751922513}
-  buildingHealthText: {fileID: 7515787431130177049}
-  buildingSO: {fileID: 11400000, guid: 2f8dde67054ad4dbebf423fb806bbc3a, type: 2}
-  removeButton: {fileID: 3407073589087429140}
-  stage: 2
-  blueConstructionMaterial: {fileID: 2100000, guid: 747eefa0b470d47a0b18c2a7a9e3c1d7,
-    type: 2}
-  yellowConstructingMaterial: {fileID: 2100000, guid: bf46d1512176e4050ba4381b9bddcae0,
-    type: 2}
-  meshComponents:
-  - {fileID: 3427776897270181392}
-  isUnderConstruction: 0
 --- !u!65 &1365973829521450280
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -807,26 +850,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5226236407002545820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7401168792134477912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2576e8b2549d4482e9f25749f42b444e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  validPlacementMaterial: {fileID: 2100000, guid: dba464be4aa8646438aaf91d0ff6adf8,
-    type: 2}
-  invalidPlacementMaterial: {fileID: 2100000, guid: 928487912ea55417f9a7d3b0707069a3,
-    type: 2}
-  meshComponents:
-  - {fileID: 3427776897270181392}
-  hasValidPlacement: 0
-  isFixed: 0
 --- !u!1 &8659021577888323396
 GameObject:
   m_ObjectHideFlags: 0

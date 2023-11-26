@@ -39,7 +39,7 @@ public class BuildingSelection : MonoBehaviour
 
     public void SelectBuilding(Transform buildingToSelect)
     {
-        Debug.Log("selecting building");
+        //Debug.Log("selecting building");
 
         DeselectBuilding();
         selectedBuilding = null;
@@ -84,6 +84,6 @@ public class BuildingSelection : MonoBehaviour
     
     public void MoveFlag(Vector3 point)
     {
-        building.moveFlag(point);
+        building.buildingTraining.moveFlag(point);
     }
 }

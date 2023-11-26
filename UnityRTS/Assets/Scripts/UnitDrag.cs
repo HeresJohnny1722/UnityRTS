@@ -40,7 +40,7 @@ public class UnitDrag : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, building))
             {
-                Debug.Log("Trying to drag select a building");
+                //Debug.Log("Trying to drag select a building");
             }
             else
             {

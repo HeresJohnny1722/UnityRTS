@@ -822,9 +822,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4883820705058911029}
   - component: {fileID: 2147218371865395686}
+  - component: {fileID: 8787980718354081235}
   - component: {fileID: 7170078664535787920}
   - component: {fileID: 9037778772226046034}
   - component: {fileID: 6275280316961692296}
+  - component: {fileID: 1037722016175015848}
   m_Layer: 9
   m_Name: EnergyMine
   m_TagString: Untagged
@@ -867,41 +869,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf8c699281a0497db41e1ef11678c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barracksSpawnFlag: {fileID: 0}
-  baracksStartFlagRadius: 5
-  barracksPanel: {fileID: 0}
-  barracksButtonLayout: {fileID: 0}
-  barracksTrainingTimeLeftText: {fileID: 0}
-  barracacksQueueSizeText: {fileID: 0}
-  barracksUnitTrainingNameText: {fileID: 0}
-  workersCurrentlyWorking: []
-  productionPanel: {fileID: 6512412325183762271}
-  workersCurrentlyWorkingText: {fileID: 4017026861446370603}
-  outputRateText: {fileID: 8148095064978596452}
-  resourceTypeText: {fileID: 6224587225624961708}
-  nodePanel: {fileID: 2986473017472263296}
-  nodeGoldCostText: {fileID: 8845882526368166439}
-  nodeCoalCostText: {fileID: 7818165453039409170}
-  nodeCopperCostText: {fileID: 1932073092135649206}
-  Node: {fileID: 3325026407519526923}
-  ProductionBuilding: {fileID: 3493595052512707780}
-  workersCurrentlyInTheBuilding: 0
+  buildingTraining: {fileID: 0}
+  buildingProduction: {fileID: 1037722016175015848}
+  buildingConstruction: {fileID: 8787980718354081235}
+  buildingSO: {fileID: 11400000, guid: 9df345d6fbfbe440388513bf2228af63, type: 2}
+  buildingHealth: 0
+  stage: 0
+  infoPanel: {fileID: 3528046090311910409}
+  removeButton: {fileID: 6657171832193548002}
+  buildingHealthbar: {fileID: 6105141208907548890}
+  buildingHealthText: {fileID: 1974315218147607279}
+  workersInside: []
+--- !u!114 &8787980718354081235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2738341042349444136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fda4822cc932457b983eabcd1575f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUnderConstruction: 0
   constructionPanel: {fileID: 3191782961954367988}
   constructionText: {fileID: 9037158682822641066}
   constructionProgressSprite: {fileID: 1429286932891112393}
-  infoPanel: {fileID: 3528046090311910409}
-  buildingHealthbar: {fileID: 6105141208907548890}
-  buildingHealthText: {fileID: 1974315218147607279}
-  buildingSO: {fileID: 11400000, guid: 9df345d6fbfbe440388513bf2228af63, type: 2}
-  removeButton: {fileID: 6657171832193548002}
-  stage: 0
   blueConstructionMaterial: {fileID: 2100000, guid: 747eefa0b470d47a0b18c2a7a9e3c1d7,
     type: 2}
   yellowConstructingMaterial: {fileID: 2100000, guid: bf46d1512176e4050ba4381b9bddcae0,
     type: 2}
   meshComponents:
   - {fileID: 9001048531470877189}
-  isUnderConstruction: 0
 --- !u!65 &7170078664535787920
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -970,6 +970,30 @@ MonoBehaviour:
   - {fileID: 9001048531470877189}
   hasValidPlacement: 0
   isFixed: 0
+--- !u!114 &1037722016175015848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2738341042349444136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a18bdb4ea21f48b3b72855577295e5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productionPanel: {fileID: 6512412325183762271}
+  workersCurrentlyWorkingText: {fileID: 4017026861446370603}
+  outputRateText: {fileID: 8148095064978596452}
+  resourceTypeText: {fileID: 6224587225624961708}
+  nodePanel: {fileID: 2986473017472263296}
+  nodeGoldCostText: {fileID: 8845882526368166439}
+  nodeCoalCostText: {fileID: 7818165453039409170}
+  nodeCopperCostText: {fileID: 1932073092135649206}
+  Node: {fileID: 3325026407519526923}
+  ProductionBuilding: {fileID: 3493595052512707780}
+  outputRate: 0
+  workersCurrentlyInTheBuilding: 0
 --- !u!1 &2895471237450108570
 GameObject:
   m_ObjectHideFlags: 0
@@ -3238,7 +3262,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2147218371865395686}
+      objectReference: {fileID: 1037722016175015848}
+    - target: {fileID: 1774948239767775157, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BuildingProduction, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1983884910063581451, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3388,6 +3417,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: removeAllWorkers
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421080645803891868, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_Name
+      value: NodeTextPanel
       objectReference: {fileID: 0}
     - target: {fileID: 8809062781159795514, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}

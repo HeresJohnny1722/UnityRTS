@@ -72,7 +72,7 @@ public class Click : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, building))
             {
-                Debug.Log("Trying to move to a building");
+                //Debug.Log("Trying to move to a building");
                 UnitSelection.Instance.moveWorkersIntoBuilding(hit.transform);
 
             }

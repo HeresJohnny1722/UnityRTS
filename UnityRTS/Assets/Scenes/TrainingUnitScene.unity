@@ -6683,7 +6683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
   _buildingPrefab: {fileID: 0}
   cellSize: 1
   gridOffset: {x: 0, y: 0}
@@ -8446,6 +8446,11 @@ PrefabInstance:
     - target: {fileID: 280479551308905105, guid: 8cec6ce0cf94d47c3a908cfd866c17b3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2147218371865395686, guid: 8cec6ce0cf94d47c3a908cfd866c17b3,
+        type: 3}
+      propertyPath: stage
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2738341042349444136, guid: 8cec6ce0cf94d47c3a908cfd866c17b3,
