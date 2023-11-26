@@ -23,6 +23,14 @@ public class EnemyAI : MonoBehaviour
 
     public Transform playerTransform;
 
+    public LayerMask playersLayerMask;
+
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Transform firePoint;
+    [SerializeField] float bulletSpeed;
+
+    [SerializeField] float rotationSpeed = 5f;
+
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -55,7 +63,8 @@ public class EnemyAI : MonoBehaviour
                 FindTarget();
                 break;
             case State.ChaseTarget:
-                navMeshAgent.SetDestination(playerTransform.position);
+                RotateTowardsPlayer();
+                //navMeshAgent.SetDestination(playerTransform.position);
 
                 //aimShootAnims.SetAimTarget(playerTransform);
 
@@ -65,19 +74,27 @@ public class EnemyAI : MonoBehaviour
                     // Target within attack range
                     if (Time.time > nextShootTime)
                     {
-                        navMeshAgent.isStopped = true;
+                        navMeshAgent.SetDestination(transform.position);
                         state = State.ShootingTarget;
-                        /*aimShootAnims.ShootTarget(playerTransform.position, () => {
-                            
-                        });*/
-                        //shoot target
-                        state = State.ChaseTarget;
-                        float fireRate = 0.15f;
-                        nextShootTime = Time.time + fireRate;
+
+                        // shoot target
+                        Debug.Log("Enemy shooting");
+                        ShootAtPlayer();
+
+                        StartCoroutine(WaitAndContinue(2f, () =>
+                        {
+                            //navMeshAgent.isStopped = false;
+                            state = State.ChaseTarget;
+                            float fireRate = 0.15f;
+                            nextShootTime = Time.time + fireRate;
+                        }));
                     }
+                } else
+                {
+                    navMeshAgent.SetDestination(playerTransform.position);
                 }
 
-                float stopChaseDistance = 80f;
+                float stopChaseDistance = 15f;
                 if (Vector3.Distance(transform.position, playerTransform.position) > stopChaseDistance)
                 {
                     // Too far, stop chasing
@@ -98,6 +115,46 @@ public class EnemyAI : MonoBehaviour
                 break;
         }
     }
+
+    private void RotateTowardsPlayer()
+    {
+        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToPlayer.x, 0f, directionToPlayer.z));
+
+        // Use Lerp to smoothly rotate the enemy towards the player
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+    }
+
+    private IEnumerator WaitAndContinue(float waitTime, System.Action onWaitComplete)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        // Code to be executed after waiting for 'waitTime' seconds
+        Debug.Log("Waited for " + waitTime + " seconds.");
+
+        onWaitComplete?.Invoke(); // Invoke the provided action after the wait time
+    }
+
+    private void ShootAtPlayer()
+    {
+        float sphereRadius = 0.5f; // Adjust the sphere radius as needed
+
+        RaycastHit hit;
+
+        if (Physics.SphereCast(firePoint.position, sphereRadius, firePoint.forward, out hit, Mathf.Infinity, playersLayerMask))
+        {
+            Debug.Log("SphereCast hit something on the player layer");
+            // Additional actions for hitting a player can be added here
+        }
+
+        // Perform the shooting logic (instantiating a bullet, applying force, destroying the bullet, etc.)
+        GameObject bulletObj = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation) as GameObject;
+        Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
+        bulletRig.AddForce(bulletRig.transform.forward * bulletSpeed * Time.deltaTime);
+        Destroy(bulletObj, 1f);
+    }
+
+
 
     private Vector3 GetRoamingPosition()
     {
