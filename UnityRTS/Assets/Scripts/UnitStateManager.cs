@@ -7,7 +7,7 @@ public class UnitStateManager : MonoBehaviour
 
     UnitBaseState currentState;
     public UnitIdleState IdleState = new UnitIdleState();
-    public UnitBuildingState BuildingState = new UnitBuildingState();
+    //public UnitBuildingState BuildingState = new UnitBuildingState();
     public UnitGatheringState GatheringState = new UnitGatheringState();
     public UnitMoveState MovingState = new UnitMoveState();
 
