@@ -32,14 +32,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] EnemyAISO enemyAISO;
 
     private float startingHealth;
-    private float fireRate;
-    private float attackRange;
-    private float roamingReachedPositionDistance;
-    private float rotationSpeed;
-    private float bulletSpeed;
-    private float stopChaseDistance;
-    private float reachedStartPositionDistance;
-    private float searchRange;
+    
 
     private void Awake()
     {
@@ -48,14 +41,7 @@ public class EnemyAI : MonoBehaviour
         //aimShootAnims = GetComponent<IAimShootAnims>();
         state = State.Roaming;
         startingHealth = enemyAISO.startingHealth;
-        fireRate = enemyAISO.fireRate;
-        attackRange = enemyAISO.attackRange;
-        roamingReachedPositionDistance = enemyAISO.roamingReachedPositionDistance;
-        rotationSpeed = enemyAISO.rotationSpeed;
-        bulletSpeed = enemyAISO.bulletSpeed;
-        stopChaseDistance = enemyAISO.stopChaseDistance;
-        reachedStartPositionDistance = enemyAISO.reachedStartPositionDistance;
-        searchRange = enemyAISO.searchRange;
+        
 
     }
 
@@ -76,7 +62,7 @@ public class EnemyAI : MonoBehaviour
                     navMeshAgent.SetDestination(roamPosition);
 
                     //float reachedPositionDistance = 1f;
-                    if (Vector3.Distance(transform.position, roamPosition) < roamingReachedPositionDistance)
+                    if (Vector3.Distance(transform.position, roamPosition) < enemyAISO.roamingReachedPositionDistance)
                     {
                         // Reached Roam Position
                         roamPosition = GetRoamingPosition();
@@ -93,7 +79,7 @@ public class EnemyAI : MonoBehaviour
                 //float attackRange = 3f;
                 if (playerTransform != null)
                 {
-                    if (Vector3.Distance(transform.position, playerTransform.position) < attackRange)
+                    if (Vector3.Distance(transform.position, playerTransform.position) < enemyAISO.attackRange)
                     {
                         // Target within attack range
                         if (Time.time > nextShootTime)
@@ -120,7 +106,7 @@ public class EnemyAI : MonoBehaviour
                                 //Did not hit a unit
                             }
 
-                            StartCoroutine(WaitAndContinue(2f, () =>
+                            StartCoroutine(WaitAndContinue(0f, () =>
                             {
 
                                 if (playerHealth == 0)
@@ -142,7 +128,7 @@ public class EnemyAI : MonoBehaviour
                                 //navMeshAgent.isStopped = false;
                                 //state = State.ChaseTarget;
                                 //float fireRate = 0.15f;
-                                nextShootTime = Time.time + fireRate;
+                                nextShootTime = Time.time + enemyAISO.fireRate;
                             }));
                         }
                     }
@@ -153,7 +139,7 @@ public class EnemyAI : MonoBehaviour
 
 
                     //float stopChaseDistance = 15f;
-                    if (Vector3.Distance(transform.position, playerTransform.position) > stopChaseDistance)
+                    if (Vector3.Distance(transform.position, playerTransform.position) > enemyAISO.stopChaseDistance)
                     {
                         // Too far, stop chasing
                         state = State.GoingBackToStart;
@@ -166,7 +152,7 @@ public class EnemyAI : MonoBehaviour
                     navMeshAgent.SetDestination(startingPosition);
 
                     //reachedStartPositionDistance = 10f;
-                    if (Vector3.Distance(transform.position, startingPosition) < reachedStartPositionDistance)
+                    if (Vector3.Distance(transform.position, startingPosition) < enemyAISO.reachedStartPositionDistance)
                     {
                         // Reached Start Position
                         state = State.Roaming;
@@ -184,7 +170,7 @@ public class EnemyAI : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToPlayer.x, 0f, directionToPlayer.z));
 
             // Use Lerp to smoothly rotate the enemy towards the player
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * enemyAISO.rotationSpeed);
         }
     }
 
@@ -200,21 +186,27 @@ public class EnemyAI : MonoBehaviour
 
     private float ShootAtPlayer()
     {
+        RotateTowardsPlayer();
         //muzzleFlash.SetActive(true);
         GameObject mzlLFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
-        float sphereRadius = 0.5f; // Adjust the sphere radius as needed
+        Destroy(mzlLFlash, 1f);
+        float sphereRadius = 1f; // Adjust the sphere radius as needed
 
         RaycastHit hit;
 
         if (Physics.SphereCast(firePoint.position, sphereRadius, firePoint.forward, out hit, Mathf.Infinity, playersLayerMask))
         {
+            float health = 0;
+            float unitHealth;
             Debug.Log("SphereCast hit something on the player layer");
             if (hit.transform.GetComponent<Unit>())
             {
+                unitHealth = (hit.transform.GetComponent<Unit>().unitHealth);
+                health = unitHealth - enemyAISO.damageAmountPerBullet;
                 hit.transform.GetComponent<Unit>().takeDamage(enemyAISO.damageAmountPerBullet);
             }
 
-            if (hit.transform.GetComponent<Unit>().unitHealth <= 0)
+            if (health <= 0)
             {
                 //state = State.Roaming;
                 //FindTarget();
@@ -248,11 +240,14 @@ public class EnemyAI : MonoBehaviour
 
     private void FindTarget()
     {
-        
-        if (Vector3.Distance(transform.position, playerTransform.position) < searchRange)
+        if (playerTransform != null)
         {
-            // Player within target range
-            state = State.ChaseTarget;
+            if (Vector3.Distance(transform.position, playerTransform.position) < enemyAISO.searchRange)
+            {
+                // Player within target range
+                state = State.ChaseTarget;
+            }
         }
+        
     }
 }

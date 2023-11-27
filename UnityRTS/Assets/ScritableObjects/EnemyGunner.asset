@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 1
   startingHealth: 50
-  damageAmountPerBullet: 25
+  damageAmountPerBullet: 1
   fireRate: 0.15
   attackRange: 3
-  searchRange: 5
+  searchRange: 15
   romingRange: 5
   roamingReachedPositionDistance: 1
   rotationSpeed: 15
