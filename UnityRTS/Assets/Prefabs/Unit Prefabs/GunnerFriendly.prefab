@@ -230,6 +230,7 @@ MonoBehaviour:
   unitSO: {fileID: 11400000, guid: f8589073340ec4464a11392c28e3c57f, type: 2}
   unitFloorHighlight: {fileID: 5002796200387514402}
   unitHealthbar: {fileID: 1125452986729795654}
+  unitHealth: 0
   isEnteringProduction: 0
 --- !u!195 &2958555681735352451
 NavMeshAgent:

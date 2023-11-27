@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5218c7e841b4120a4ba6015230572d, type: 3}
   m_Name: BasicEnemy
   m_EditorClassIdentifier: 
-  enemyType: 0
+  enemyType: 1
   startingHealth: 50
-  damageAmountPerAttack: 0
-  fireRate: 0.15
-  attackRange: 0.7
+  damageAmountPerAttack: 15
+  fireRate: 1
+  attackRange: 3
   searchRange: 15
   romingRange: 5
   roamingReachedPositionDistance: 1

@@ -94,7 +94,7 @@ public class EnemyAI : MonoBehaviour
 
                             // shoot target
                             //Debug.Log("Enemy shooting");
-                            float playerHealth = ShootAtPlayer();
+                            float playerHealth = AttackUnit();
 
 
                             
@@ -205,7 +205,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private float ShootAtPlayer()
+    private float AttackUnit()
     {
         RotateTowardsPlayer();
         //muzzleFlash.SetActive(true);
@@ -220,7 +220,7 @@ public class EnemyAI : MonoBehaviour
             Destroy(mleSlash, .5f);
         }
         
-        float sphereRadius = .125f; // Adjust the sphere radius as needed
+        float sphereRadius = .25f; // Adjust the sphere radius as needed
 
         RaycastHit hit;
 
