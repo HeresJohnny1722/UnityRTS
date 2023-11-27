@@ -14,7 +14,7 @@ public class EnemyAISO : ScriptableObject
 
     public EnemyType enemyType;
     public float startingHealth;
-    public float damageAmountPerBullet;
+    public float damageAmountPerAttack;
     public float fireRate;
     public float attackRange;
     public float searchRange;

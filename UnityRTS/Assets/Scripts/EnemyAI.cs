@@ -6,7 +6,7 @@ using CodeMonkey.Utils;
 
 public class EnemyAI : MonoBehaviour
 {
-    private enum State
+    public enum State
     {
         Roaming,
         ChaseTarget,
@@ -19,9 +19,10 @@ public class EnemyAI : MonoBehaviour
     private Vector3 startingPosition;
     private Vector3 roamPosition;
     private float nextShootTime;
-    private State state;
+    public State state;
 
     [SerializeField] GameObject muzzleFlash;
+    [SerializeField] GameObject meleeSlash;
 
     public Transform playerTransform;
 
@@ -29,13 +30,17 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
+    [SerializeField] Transform raycastPoint;
     [SerializeField] EnemyAISO enemyAISO;
 
     private float startingHealth;
-    
+
+    ///public EnemyManager enemyManager;
+
 
     private void Awake()
     {
+        //enemyManager.enemyList.Add(gameObject);
         //muzzleFlash.SetActive(false);
         navMeshAgent = GetComponent<NavMeshAgent>();
         //aimShootAnims = GetComponent<IAimShootAnims>();
@@ -99,6 +104,7 @@ public class EnemyAI : MonoBehaviour
 
                                 if (playerHealth == 0)
                                 {
+                                    
                                     state = State.Roaming;
                                     //Means the player is dead
                                 }
@@ -132,6 +138,9 @@ public class EnemyAI : MonoBehaviour
                         // Too far, stop chasing
                         state = State.GoingBackToStart;
                     }
+                } else
+                {
+                    state = State.Roaming;
                 }
                     break;
                 case State.ShootingTarget:
@@ -200,13 +209,23 @@ public class EnemyAI : MonoBehaviour
     {
         RotateTowardsPlayer();
         //muzzleFlash.SetActive(true);
-        GameObject mzlLFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
-        Destroy(mzlLFlash, .5f);
-        float sphereRadius = 1f; // Adjust the sphere radius as needed
+        if (enemyAISO.enemyType == EnemyAISO.EnemyType.Ranged)
+        {
+            GameObject mzlLFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
+            Destroy(mzlLFlash, .5f);
+
+        } else if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
+        {
+            GameObject mleSlash = Instantiate(meleeSlash, firePoint.position, firePoint.rotation);
+            Destroy(mleSlash, .5f);
+        }
+        
+        float sphereRadius = .125f; // Adjust the sphere radius as needed
 
         RaycastHit hit;
 
-        if (Physics.SphereCast(firePoint.position, sphereRadius, firePoint.forward, out hit, Mathf.Infinity, playersLayerMask))
+      
+        if (Physics.SphereCast(raycastPoint.position, sphereRadius, raycastPoint.forward, out hit, Mathf.Infinity, playersLayerMask))
         {
             float health = 0;
             float unitHealth;
@@ -214,8 +233,8 @@ public class EnemyAI : MonoBehaviour
             if (hit.transform.GetComponent<Unit>())
             {
                 unitHealth = (hit.transform.GetComponent<Unit>().unitHealth);
-                health = unitHealth - enemyAISO.damageAmountPerBullet;
-                hit.transform.GetComponent<Unit>().takeDamage(enemyAISO.damageAmountPerBullet);
+                health = unitHealth - enemyAISO.damageAmountPerAttack;
+                hit.transform.GetComponent<Unit>().takeDamage(enemyAISO.damageAmountPerAttack);
             }
 
             if (health <= 0)
@@ -262,4 +281,6 @@ public class EnemyAI : MonoBehaviour
         }
         
     }
+
+    
 }
