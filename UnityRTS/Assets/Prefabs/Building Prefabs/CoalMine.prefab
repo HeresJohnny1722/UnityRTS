@@ -775,6 +775,8 @@ MonoBehaviour:
     type: 2}
   invalidPlacementMaterial: {fileID: 2100000, guid: 928487912ea55417f9a7d3b0707069a3,
     type: 2}
+  meshComponents:
+  - {fileID: 3427776897270181392}
   hasValidPlacement: 0
   isFixed: 0
 --- !u!114 &6528371850163622390

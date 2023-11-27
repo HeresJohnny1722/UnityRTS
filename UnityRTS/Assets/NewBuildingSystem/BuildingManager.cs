@@ -14,7 +14,7 @@ public class BuildingManager : MonoBehaviour
     public Material validPlacementMaterial;
     public Material invalidPlacementMaterial;
 
-    private MeshRenderer[] meshComponents;
+    public MeshRenderer[] meshComponents;
     public Dictionary<MeshRenderer, List<Material>> initialMaterials;
 
     [HideInInspector] public bool hasValidPlacement;
@@ -24,7 +24,7 @@ public class BuildingManager : MonoBehaviour
 
     private void Awake()
     {
-        meshComponents = this.GetComponent<BuildingConstruction>().meshComponents;
+        //meshComponents = this.GetComponent<BuildingConstruction>().meshComponents;
         hasValidPlacement = true;
         isFixed = true;
         _nObstacles = 0;
