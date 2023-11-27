@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 1
   startingHealth: 50
-  damageAmountPerBullet: 1
+  damageAmountPerBullet: 3
   fireRate: 0.15
   attackRange: 3
   searchRange: 15
