@@ -61,16 +61,16 @@ public class EnemyAI : MonoBehaviour
                 case State.Roaming:
                     navMeshAgent.SetDestination(roamPosition);
 
-                    //float reachedPositionDistance = 1f;
                     if (Vector3.Distance(transform.position, roamPosition) < enemyAISO.roamingReachedPositionDistance)
                     {
-                        // Reached Roam Position
                         roamPosition = GetRoamingPosition();
                     }
 
+                    CheckForUnitsInRange(); // Check for units before transitioning to ChaseTarget
                     FindTarget();
-                    break;
-                case State.ChaseTarget:
+                break;
+
+            case State.ChaseTarget:
                     RotateTowardsPlayer();
                 //navMeshAgent.SetDestination(playerTransform.position);
 
@@ -88,23 +88,11 @@ public class EnemyAI : MonoBehaviour
                             state = State.ShootingTarget;
 
                             // shoot target
-                            Debug.Log("Enemy shooting");
+                            //Debug.Log("Enemy shooting");
                             float playerHealth = ShootAtPlayer();
 
 
-                            bool isPlayerDead;
-                            if (playerHealth == 0)
-                            {
-                                //Means the player is dead
-                            }
-                            else if (playerHealth == -1)
-                            {
-                                //Player is not dead
-                            }
-                            else if (playerHealth == 1)
-                            {
-                                //Did not hit a unit
-                            }
+                            
 
                             StartCoroutine(WaitAndContinue(0f, () =>
                             {
@@ -184,12 +172,36 @@ public class EnemyAI : MonoBehaviour
         onWaitComplete?.Invoke(); // Invoke the provided action after the wait time
     }
 
+    private void CheckForUnitsInRange()
+    {
+        float closestDistance = float.MaxValue;
+        Transform closestUnit = null;
+
+        foreach (var unit in UnitSelection.Instance.unitList)
+        {
+            float distance = Vector3.Distance(transform.position, unit.transform.position);
+
+            // Check if the unit is within the search radius and closer than the current closest unit
+            if (distance < enemyAISO.searchRange && distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestUnit = unit.transform;
+            }
+        }
+
+        // If a closest unit is found, set playerTransform to the transform of that unit
+        if (closestUnit != null)
+        {
+            playerTransform = closestUnit;
+        }
+    }
+
     private float ShootAtPlayer()
     {
         RotateTowardsPlayer();
         //muzzleFlash.SetActive(true);
         GameObject mzlLFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
-        Destroy(mzlLFlash, 1f);
+        Destroy(mzlLFlash, .5f);
         float sphereRadius = 1f; // Adjust the sphere radius as needed
 
         RaycastHit hit;
