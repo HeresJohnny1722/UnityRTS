@@ -21,21 +21,42 @@ public class EnemyAI : MonoBehaviour
     private float nextShootTime;
     private State state;
 
+    [SerializeField] GameObject muzzleFlash;
+
     public Transform playerTransform;
 
     public LayerMask playersLayerMask;
 
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
-    [SerializeField] float bulletSpeed;
+    [SerializeField] EnemyAISO enemyAISO;
 
-    [SerializeField] float rotationSpeed = 5f;
+    private float startingHealth;
+    private float fireRate;
+    private float attackRange;
+    private float roamingReachedPositionDistance;
+    private float rotationSpeed;
+    private float bulletSpeed;
+    private float stopChaseDistance;
+    private float reachedStartPositionDistance;
+    private float searchRange;
 
     private void Awake()
     {
+        //muzzleFlash.SetActive(false);
         navMeshAgent = GetComponent<NavMeshAgent>();
         //aimShootAnims = GetComponent<IAimShootAnims>();
         state = State.Roaming;
+        startingHealth = enemyAISO.startingHealth;
+        fireRate = enemyAISO.fireRate;
+        attackRange = enemyAISO.attackRange;
+        roamingReachedPositionDistance = enemyAISO.roamingReachedPositionDistance;
+        rotationSpeed = enemyAISO.rotationSpeed;
+        bulletSpeed = enemyAISO.bulletSpeed;
+        stopChaseDistance = enemyAISO.stopChaseDistance;
+        reachedStartPositionDistance = enemyAISO.reachedStartPositionDistance;
+        searchRange = enemyAISO.searchRange;
+
     }
 
     private void Start()
@@ -53,8 +74,8 @@ public class EnemyAI : MonoBehaviour
             case State.Roaming:
                 navMeshAgent.SetDestination(roamPosition);
 
-                float reachedPositionDistance = 1f;
-                if (Vector3.Distance(transform.position, roamPosition) < reachedPositionDistance)
+                //float reachedPositionDistance = 1f;
+                if (Vector3.Distance(transform.position, roamPosition) < roamingReachedPositionDistance)
                 {
                     // Reached Roam Position
                     roamPosition = GetRoamingPosition();
@@ -68,7 +89,7 @@ public class EnemyAI : MonoBehaviour
 
                 //aimShootAnims.SetAimTarget(playerTransform);
 
-                float attackRange = 3f;
+                //float attackRange = 3f;
                 if (Vector3.Distance(transform.position, playerTransform.position) < attackRange)
                 {
                     // Target within attack range
@@ -85,7 +106,7 @@ public class EnemyAI : MonoBehaviour
                         {
                             //navMeshAgent.isStopped = false;
                             state = State.ChaseTarget;
-                            float fireRate = 0.15f;
+                            //float fireRate = 0.15f;
                             nextShootTime = Time.time + fireRate;
                         }));
                     }
@@ -94,7 +115,7 @@ public class EnemyAI : MonoBehaviour
                     navMeshAgent.SetDestination(playerTransform.position);
                 }
 
-                float stopChaseDistance = 15f;
+                //float stopChaseDistance = 15f;
                 if (Vector3.Distance(transform.position, playerTransform.position) > stopChaseDistance)
                 {
                     // Too far, stop chasing
@@ -106,8 +127,8 @@ public class EnemyAI : MonoBehaviour
             case State.GoingBackToStart:
                 navMeshAgent.SetDestination(startingPosition);
 
-                reachedPositionDistance = 10f;
-                if (Vector3.Distance(transform.position, startingPosition) < reachedPositionDistance)
+                //reachedStartPositionDistance = 10f;
+                if (Vector3.Distance(transform.position, startingPosition) < reachedStartPositionDistance)
                 {
                     // Reached Start Position
                     state = State.Roaming;
@@ -137,6 +158,8 @@ public class EnemyAI : MonoBehaviour
 
     private void ShootAtPlayer()
     {
+        //muzzleFlash.SetActive(true);
+        GameObject mzlLFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
         float sphereRadius = 0.5f; // Adjust the sphere radius as needed
 
         RaycastHit hit;
@@ -144,29 +167,27 @@ public class EnemyAI : MonoBehaviour
         if (Physics.SphereCast(firePoint.position, sphereRadius, firePoint.forward, out hit, Mathf.Infinity, playersLayerMask))
         {
             Debug.Log("SphereCast hit something on the player layer");
+            hit.transform.GetComponent<Unit>().takeDamage(enemyAISO.damageAmountPerBullet);
             // Additional actions for hitting a player can be added here
         }
 
-        // Perform the shooting logic (instantiating a bullet, applying force, destroying the bullet, etc.)
-        GameObject bulletObj = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation) as GameObject;
-        Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
-        bulletRig.AddForce(bulletRig.transform.forward * bulletSpeed * Time.deltaTime);
-        Destroy(bulletObj, 1f);
+        //no bullets
+        //just a muzzle flash
     }
 
 
 
     private Vector3 GetRoamingPosition()
     {
-        float range = 5f; // Half of the desired square area size
-        return startingPosition + new Vector3(Random.Range(-range, range), 0f, Random.Range(-range, range));
+        //float range = 5f; // Half of the desired square area size
+        return startingPosition + new Vector3(Random.Range(-enemyAISO.romingRange, enemyAISO.romingRange), 0f, Random.Range(-enemyAISO.romingRange, enemyAISO.romingRange));
     }
 
 
     private void FindTarget()
     {
-        float targetRange = 5f;
-        if (Vector3.Distance(transform.position, playerTransform.position) < targetRange)
+        
+        if (Vector3.Distance(transform.position, playerTransform.position) < searchRange)
         {
             // Player within target range
             state = State.ChaseTarget;
