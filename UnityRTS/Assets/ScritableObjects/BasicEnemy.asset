@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5218c7e841b4120a4ba6015230572d, type: 3}
   m_Name: BasicEnemy
   m_EditorClassIdentifier: 
-  enemyType: 1
+  enemyType: 0
   startingHealth: 50
   damageAmountPerAttack: 15
   fireRate: 1
-  attackRange: 3
+  attackRange: 1.5
   searchRange: 15
   romingRange: 5
   roamingReachedPositionDistance: 1
-  rotationSpeed: 15
+  rotationSpeed: 30
   bulletSpeed: 5000
   stopChaseDistance: 15
   reachedStartPositionDistance: 10
