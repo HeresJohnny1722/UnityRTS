@@ -43,10 +43,11 @@ public class EnemyAI : MonoBehaviour
         //enemyManager.enemyList.Add(gameObject);
         //muzzleFlash.SetActive(false);
         navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.speed = enemyAISO.speed;
         //aimShootAnims = GetComponent<IAimShootAnims>();
         state = State.Roaming;
         startingHealth = enemyAISO.startingHealth;
-        
+
 
     }
 
@@ -64,11 +65,24 @@ public class EnemyAI : MonoBehaviour
         {
             default:
             case State.Roaming:
-                navMeshAgent.SetDestination(roamPosition);
+                
 
                 if (Vector3.Distance(transform.position, roamPosition) < enemyAISO.roamingReachedPositionDistance)
                 {
-                    roamPosition = GetRoamingPosition();
+                    //wait for roamingWaitTime
+                    navMeshAgent.SetDestination(transform.position);
+                    StartCoroutine(WaitAndContinue(enemyAISO.roamingWaitTime, () =>
+                    {
+
+                        roamPosition = GetRoamingPosition();
+                        navMeshAgent.SetDestination(roamPosition);
+
+                    }));
+
+                   
+                } else
+                {
+                    navMeshAgent.SetDestination(roamPosition);
                 }
 
                 CheckForUnitsInRange(); // Check for units before transitioning to ChaseTarget
@@ -76,7 +90,7 @@ public class EnemyAI : MonoBehaviour
                 break;
 
             case State.ChaseTarget:
-                
+
 
                 if (playerTransform != null)
                 {
@@ -194,17 +208,18 @@ public class EnemyAI : MonoBehaviour
             GameObject mzlLFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
             Destroy(mzlLFlash, .5f);
 
-        } else if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
+        }
+        else if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
         {
             GameObject mleSlash = Instantiate(meleeSlash, firePoint.position, firePoint.rotation);
             Destroy(mleSlash, .5f);
         }
-        
-        float sphereRadius = .25f; // Adjust the sphere radius as needed
+
+        float sphereRadius = .5f; // Adjust the sphere radius as needed
 
         RaycastHit hit;
 
-      
+
         if (Physics.SphereCast(raycastPoint.position, sphereRadius, raycastPoint.forward, out hit, Mathf.Infinity, playersLayerMask))
         {
             float health = 0;
@@ -222,15 +237,17 @@ public class EnemyAI : MonoBehaviour
                 //state = State.Roaming;
                 //FindTarget();
                 return 0;
-            } else
+            }
+            else
             {
 
                 //Unit is not dead
                 return -1;
             }
-            
+
             // Additional actions for hitting a player can be added here
-        } else
+        }
+        else
         {
             //Did not hit a player
             return 1;
@@ -259,8 +276,8 @@ public class EnemyAI : MonoBehaviour
                 state = State.ChaseTarget;
             }
         }
-        
+
     }
 
-    
+
 }

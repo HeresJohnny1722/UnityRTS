@@ -13,6 +13,7 @@ public class EnemyAISO : ScriptableObject
     }
 
     public EnemyType enemyType;
+    public float speed;
     public float startingHealth;
     public float damageAmountPerAttack;
     public float fireRate;
@@ -20,6 +21,7 @@ public class EnemyAISO : ScriptableObject
     public float searchRange;
     public float romingRange;
     public float roamingReachedPositionDistance;
+    public float roamingWaitTime;
     public float rotationSpeed;
     public float bulletSpeed;
     public float stopChaseDistance;

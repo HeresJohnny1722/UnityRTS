@@ -35,7 +35,7 @@ public class Unit : MonoBehaviour
         if (unitHealth <= 0)
         {
             //deselectUnit();
-            InventoryManager.instance.changeCurrentPopulation(-(int)unitSO.populationCost);
+            //InventoryManager.instance.changeCurrentPopulation(-(int)unitSO.populationCost);
 
             if (UnitSelection.Instance.unitsSelected.Contains(this.gameObject))
             {
