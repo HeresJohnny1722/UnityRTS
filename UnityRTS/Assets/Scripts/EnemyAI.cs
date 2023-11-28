@@ -59,104 +59,84 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        
-            switch (state)
-            {
-                default:
-                case State.Roaming:
-                    navMeshAgent.SetDestination(roamPosition);
 
-                    if (Vector3.Distance(transform.position, roamPosition) < enemyAISO.roamingReachedPositionDistance)
-                    {
-                        roamPosition = GetRoamingPosition();
-                    }
+        switch (state)
+        {
+            default:
+            case State.Roaming:
+                navMeshAgent.SetDestination(roamPosition);
 
-                    CheckForUnitsInRange(); // Check for units before transitioning to ChaseTarget
-                    FindTarget();
+                if (Vector3.Distance(transform.position, roamPosition) < enemyAISO.roamingReachedPositionDistance)
+                {
+                    roamPosition = GetRoamingPosition();
+                }
+
+                CheckForUnitsInRange(); // Check for units before transitioning to ChaseTarget
+                FindTarget();
                 break;
 
             case State.ChaseTarget:
-                    RotateTowardsPlayer();
-                //navMeshAgent.SetDestination(playerTransform.position);
+                
 
-                //aimShootAnims.SetAimTarget(playerTransform);
-
-                //float attackRange = 3f;
                 if (playerTransform != null)
                 {
+                    RotateTowardsPlayer();
+                    navMeshAgent.SetDestination(playerTransform.position);
+
                     if (Vector3.Distance(transform.position, playerTransform.position) < enemyAISO.attackRange)
                     {
+                        navMeshAgent.SetDestination(transform.position);
+                        RotateTowardsPlayer();
                         // Target within attack range
                         if (Time.time > nextShootTime)
                         {
-                            navMeshAgent.SetDestination(transform.position);
                             state = State.ShootingTarget;
-
-                            // shoot target
-                            //Debug.Log("Enemy shooting");
                             float playerHealth = AttackUnit();
 
 
-                            
-
-                            StartCoroutine(WaitAndContinue(0f, () =>
+                            if (playerHealth == 0)
                             {
 
-                                if (playerHealth == 0)
-                                {
-                                    
-                                    state = State.Roaming;
-                                    //Means the player is dead
-                                }
-                                else if (playerHealth == -1)
-                                {
-                                    //Player is not dead
-                                    state = State.ChaseTarget;
-                                }
-                                else if (playerHealth == 1)
-                                {
-                                    //Did not hit a unit
-                                    state = State.ChaseTarget;
-                                }
+                                state = State.Roaming;
+                                //Means the player is dead
+                            }
+                            else if (playerHealth == -1)
+                            {
+                                //Player is not dead
+                                state = State.ChaseTarget;
+                            }
+                            else if (playerHealth == 1)
+                            {
+                                //Did not hit a unit
+                                state = State.ChaseTarget;
+                            }
 
-                                //navMeshAgent.isStopped = false;
-                                //state = State.ChaseTarget;
-                                //float fireRate = 0.15f;
-                                nextShootTime = Time.time + enemyAISO.fireRate;
-                            }));
+
+                            nextShootTime = Time.time + enemyAISO.fireRate;
+
                         }
                     }
-                    else
-                    {
-                        navMeshAgent.SetDestination(playerTransform.position);
-                    }
 
-
-                    //float stopChaseDistance = 15f;
-                    if (Vector3.Distance(transform.position, playerTransform.position) > enemyAISO.stopChaseDistance)
-                    {
-                        // Too far, stop chasing
-                        state = State.GoingBackToStart;
-                    }
-                } else
+                }
+                else
                 {
                     state = State.Roaming;
                 }
-                    break;
-                case State.ShootingTarget:
-                    break;
-                case State.GoingBackToStart:
-                    navMeshAgent.SetDestination(startingPosition);
+                break;
+            case State.ShootingTarget:
+                break;
+            case State.GoingBackToStart:
+                navMeshAgent.SetDestination(startingPosition);
 
-                    //reachedStartPositionDistance = 10f;
-                    if (Vector3.Distance(transform.position, startingPosition) < enemyAISO.reachedStartPositionDistance)
-                    {
-                        // Reached Start Position
-                        state = State.Roaming;
-                    }
-                    break;
-            }
-        
+                //reachedStartPositionDistance = 10f;
+                if (Vector3.Distance(transform.position, startingPosition) < enemyAISO.reachedStartPositionDistance)
+                {
+                    // Reached Start Position
+                    state = State.Roaming;
+                }
+                break;
+        }
+
     }
 
     private void RotateTowardsPlayer()
