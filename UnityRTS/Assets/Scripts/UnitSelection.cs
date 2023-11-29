@@ -68,7 +68,7 @@ public class UnitSelection : MonoBehaviour
                 myAgent.SetDestination(_points[i] + moveToPosition);
                 
                 Unit unit = unitsSelected[i].GetComponent<Unit>();
-                //unit.moveToPosition = _points[i] + moveToPosition;
+                unit.moveToPosition = _points[i] + moveToPosition;
                 //unit.currentState = Unit.UnitState.Moving;
                 //Debug.Log(unit.currentState);
                 //unit.muzzleFlash.SetActive(false);

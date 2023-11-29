@@ -78,8 +78,21 @@ public class Unit : MonoBehaviour
             currentState = UnitState.Moving;
         }*/
 
-        Debug.Log(transform.position);
-        Debug.Log(moveToPosition);
+        if (transform.position.x == moveToPosition.x && transform.position.z == moveToPosition.z)
+        {
+            Debug.Log("at destination");
+            isMoving = false;
+
+            if (currentState == UnitState.Moving)
+            {
+                currentState = UnitState.Idle;
+            }
+        } else
+        {
+            Debug.Log("moving");
+            isMoving = true;
+            currentState = UnitState.Moving;
+        }
 
         switch (currentState)
         {
@@ -174,8 +187,7 @@ public class Unit : MonoBehaviour
 
     private void ShootEnemy()
     {
-        if (currentState == UnitState.Shooting)
-        {
+        
             float sphereRadius = .25f; // Adjust the sphere radius as needed
 
             RaycastHit hit;
@@ -187,7 +199,7 @@ public class Unit : MonoBehaviour
                 //Debug.Log("SphereCast hit something on the enemy layer");
                 if (currentTarget.GetComponent<EnemyAI>() != null)
                 {
-                    //Debug.Log("SphereCast hit something WITH A ENEMYAI");
+                    Debug.Log("SphereCast hit something WITH A ENEMYAI");
 
                     //GameObject mzlLFlash = Instantiate(muzzleFlash, muzzlePoint.position, muzzlePoint.rotation);
                     //Destroy(mzlLFlash, unitSO.fireRate);
@@ -226,7 +238,7 @@ public class Unit : MonoBehaviour
                 currentState = UnitState.Idle;
                 currentTarget = null;
             }
-        }
+        
         
     }
 
