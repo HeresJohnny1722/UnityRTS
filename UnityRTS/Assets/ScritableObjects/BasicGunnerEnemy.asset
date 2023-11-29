@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: BasicGunnerEnemy
   m_EditorClassIdentifier: 
   enemyType: 1
+  speed: 1
   startingHealth: 50
-  damageAmountPerAttack: 1
+  damageAmountPerAttack: 3
   fireRate: 0.05
   attackRange: 3
   searchRange: 15
   romingRange: 5
   roamingReachedPositionDistance: 1
+  roamingWaitTime: 0
   rotationSpeed: 45
   bulletSpeed: 5000
   stopChaseDistance: 15

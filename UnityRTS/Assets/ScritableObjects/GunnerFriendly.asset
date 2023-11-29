@@ -17,7 +17,11 @@ MonoBehaviour:
   name: Gunner
   trainingTime: 2
   startingHealth: 50
-  speed: 8
+  attackRange: 9
+  attackDamage: 1
+  fireRate: 0.15
+  speed: 5
+  rotationSpeed: 5
   description: Gunner  description
   goldCost: 5
   coalCost: 5

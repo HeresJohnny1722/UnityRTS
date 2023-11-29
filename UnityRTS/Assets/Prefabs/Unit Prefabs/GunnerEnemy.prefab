@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 729899698755872669}
   - component: {fileID: 3620629729604081956}
   - component: {fileID: 7104873284237027738}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8680100335481457494}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 8536015306860708634}
   - component: {fileID: 4865517642062046729}
   - component: {fileID: 654403892452411636}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 7218826587513064302}
   - component: {fileID: 8274094592914759465}
   - component: {fileID: 3420324041139886051}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: GunnerEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 1906590614328656879}
   - component: {fileID: 2229852463790219084}
   - component: {fileID: 6011703101206353319}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 7799108981326225092}
   - component: {fileID: 7001179423011737478}
   - component: {fileID: 7625118666077080262}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: HealthBar Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +587,7 @@ GameObject:
   - component: {fileID: 4898840591072911500}
   - component: {fileID: 406122653059675727}
   - component: {fileID: 1472295883661482319}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -662,7 +662,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1558364647507624251}
   - component: {fileID: 7096100268155699437}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: UnitHighlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -745,7 +745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4040851737030493393}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: raycastPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}

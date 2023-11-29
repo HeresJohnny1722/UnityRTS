@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: BasicMeleeEnemy
   m_EditorClassIdentifier: 
   enemyType: 0
+  speed: 2.5
   startingHealth: 50
   damageAmountPerAttack: 15
-  fireRate: 1
+  fireRate: 2
   attackRange: 0.7
-  searchRange: 15
+  searchRange: 30
   romingRange: 5
   roamingReachedPositionDistance: 1
+  roamingWaitTime: 0
   rotationSpeed: 45
   bulletSpeed: 5000
   stopChaseDistance: 15

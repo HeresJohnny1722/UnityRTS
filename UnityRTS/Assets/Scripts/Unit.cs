@@ -11,20 +11,189 @@ public class Unit : MonoBehaviour
     [SerializeField] private GameObject unitFloorHighlight;
     [SerializeField] private Healthbar unitHealthbar;
 
+    [SerializeField] GameObject muzzleFlash;
+
+    [SerializeField] GameObject deathEffect;
+
     public float unitHealth;
-    private float unitWalkingSpeed;
+    private float nextShootTime;
+
+    [SerializeField] Transform muzzlePoint;
+    [SerializeField] Transform raycastPoint;
 
     private NavMeshAgent myAgent;
 
+    
+
+    public enum UnitState
+    {
+        Idle,
+        Shooting,
+        Moving,
+    }
+
+    public UnitState currentState;
+
+    public Transform currentTarget;
+
+
+
     void Start()
     {
+        myAgent = GetComponent<NavMeshAgent>();
+        myAgent.speed = unitSO.speed;
         unitHealth = unitSO.startingHealth;
         unitHealthbar.UpdateHealthBar(unitSO.startingHealth, unitHealth);
         unitHealthbar.gameObject.SetActive(false);
 
         UnitSelection.Instance.unitList.Add(this.gameObject);
 
+        currentState = UnitState.Idle;
 
+
+    }
+
+    private void Update()
+    {
+        switch (currentState)
+        {
+            case UnitState.Idle:
+                muzzleFlash.SetActive(false);
+                CheckForEnemies();
+                break;
+
+            case UnitState.Shooting:
+                if (currentTarget != null)
+                {
+                    RotateToTarget();
+
+                    if (Time.time > nextShootTime)
+                    {
+                        
+                        ShootEnemy();
+
+                        nextShootTime = Time.time + unitSO.fireRate;
+
+                    }
+                    
+                } else
+                {
+                    currentState = UnitState.Idle;
+                }
+                
+                break;
+
+            case UnitState.Moving:
+                // Handle moving state logic here if needed
+                muzzleFlash.SetActive(false);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public LayerMask enemyLayerMask;
+
+    private void CheckForEnemies()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, unitSO.attackRange, enemyLayerMask);
+
+        if (colliders.Length > 0)
+        {
+            // Found an enemy
+            Transform closestEnemy = GetClosestEnemy(colliders);
+            if (closestEnemy != null)
+            {
+                currentTarget = closestEnemy;
+                currentState = UnitState.Shooting;
+            }
+        }
+    }
+
+    private Transform GetClosestEnemy(Collider[] colliders)
+    {
+        Transform closestEnemy = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (Collider collider in colliders)
+        {
+            float distance = Vector3.Distance(transform.position, collider.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestEnemy = collider.transform;
+            }
+        }
+
+        return closestEnemy;
+    }
+
+    private void RotateToTarget()
+    {
+        if (currentTarget != null)
+        {
+            Vector3 directionToTarget = (currentTarget.position - transform.position).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0f, directionToTarget.z));
+
+            // Use Slerp instead of Lerp to smoothly rotate towards the target continuously
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * unitSO.rotationSpeed);
+        }
+    }
+
+
+    private void ShootEnemy()
+    {
+        
+        float sphereRadius = .25f; // Adjust the sphere radius as needed
+
+        RaycastHit hit;
+
+
+        if (Physics.SphereCast(raycastPoint.position, sphereRadius, (currentTarget.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, enemyLayerMask))
+        {
+            
+            //Debug.Log("SphereCast hit something on the enemy layer");
+            if (currentTarget.GetComponent<EnemyAI>() != null)
+            {
+                //Debug.Log("SphereCast hit something WITH A ENEMYAI");
+
+                //GameObject mzlLFlash = Instantiate(muzzleFlash, muzzlePoint.position, muzzlePoint.rotation);
+                //Destroy(mzlLFlash, unitSO.fireRate);
+                //muzzleFlash.SetActive(false);
+                muzzleFlash.SetActive(true);
+
+                currentTarget.GetComponent<EnemyAI>().takeDamage(unitSO.attackDamage);
+                Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
+
+                
+
+                Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
+            }
+
+            if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)
+            {
+                //state = State.Roaming;
+                //FindTarget();
+                //return 0;
+                currentTarget = null;
+            }
+            
+
+            // Additional actions for hitting a player can be added here
+        } else
+        {
+            //Probably switch the target because the target is blocked probably
+        }
+        
+
+        // Check if the enemy is still in attack range
+        if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.position) > unitSO.attackRange)
+        {
+            // Enemy left the attack radius or is dead, find a new enemy
+            currentState = UnitState.Idle;
+            currentTarget = null;
+        }
     }
 
 
@@ -43,7 +212,12 @@ public class Unit : MonoBehaviour
             }
             
             UnitSelection.Instance.unitList.Remove(this.gameObject);
+
+            
+
             Destroy(this.gameObject);
+
+            
 
         }
         unitHealthbar.gameObject.SetActive(true);
@@ -89,15 +263,6 @@ public class Unit : MonoBehaviour
         buildingTransform = buildingToEnter;
     }
 
-
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform == buildingTransform)
-        {
-            Debug.Log("Entering Building");
-            buildingTransform = null;
-        }
-    }*/
 
 
 }
