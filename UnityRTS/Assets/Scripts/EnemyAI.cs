@@ -27,7 +27,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] GameObject meleeSlash;
     [SerializeField] GameObject deathEffect;
 
-    public Transform playerTransform;
+    public Transform targetTransform;
 
     public LayerMask playersLayerMask;
 
@@ -111,12 +111,12 @@ public class EnemyAI : MonoBehaviour
             case State.ChaseTarget:
                 
 
-                if (playerTransform != null)
+                if (targetTransform != null)
                 {
                     RotateTowardsPlayer();
-                    navMeshAgent.SetDestination(playerTransform.position);
+                    navMeshAgent.SetDestination(targetTransform.position);
 
-                    if (Vector3.Distance(transform.position, playerTransform.position) < enemyAISO.attackRange)
+                    if (Vector3.Distance(transform.position, targetTransform.position) < enemyAISO.attackRange)
                     {
                         navMeshAgent.SetDestination(transform.position);
 
@@ -174,9 +174,9 @@ public class EnemyAI : MonoBehaviour
 
     private void RotateTowardsPlayer()
     {
-        if (playerTransform != null)
+        if (targetTransform != null)
         {
-            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+            Vector3 directionToPlayer = (targetTransform.position - transform.position).normalized;
             Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToPlayer.x, 0f, directionToPlayer.z));
 
             // Use Lerp to smoothly rotate the enemy towards the player
@@ -214,7 +214,7 @@ public class EnemyAI : MonoBehaviour
         // If a closest unit is found, set playerTransform to the transform of that unit
         if (closestUnit != null)
         {
-            playerTransform = closestUnit;
+            targetTransform = closestUnit;
         }
     }
 
@@ -238,7 +238,7 @@ public class EnemyAI : MonoBehaviour
         RaycastHit hit;
 
       
-        if (Physics.SphereCast(raycastPoint.position, sphereRadius, raycastPoint.forward, out hit, Mathf.Infinity, playersLayerMask))
+        if (Physics.SphereCast(raycastPoint.position, sphereRadius, (targetTransform.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, playersLayerMask))
         {
             float health = 0;
             float unitHealth;
@@ -284,9 +284,9 @@ public class EnemyAI : MonoBehaviour
 
     private void FindTarget()
     {
-        if (playerTransform != null)
+        if (targetTransform != null)
         {
-            if (Vector3.Distance(transform.position, playerTransform.position) < enemyAISO.searchRange)
+            if (Vector3.Distance(transform.position, targetTransform.position) < enemyAISO.searchRange)
             {
                 // Player within target range
                 state = State.ChaseTarget;

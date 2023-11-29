@@ -18,8 +18,8 @@ TagManager:
   - ResourceNode
   - Obstacle
   - EnemyUnit
-  - 
-  - 
+  - MiniMap
+  - NormalCamera
   - 
   - 
   - 

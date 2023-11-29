@@ -262,7 +262,7 @@ MonoBehaviour:
     type: 3}
   deathEffect: {fileID: 5306868671923941460, guid: e63b6bfa5e8b0497681f3a318b0dceee,
     type: 3}
-  playerTransform: {fileID: 0}
+  targetTransform: {fileID: 0}
   playersLayerMask:
     serializedVersion: 2
     m_Bits: 256
