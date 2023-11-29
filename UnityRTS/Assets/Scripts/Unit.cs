@@ -11,7 +11,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private GameObject unitFloorHighlight;
     [SerializeField] private Healthbar unitHealthbar;
 
-    [SerializeField] GameObject muzzleFlash;
+    public GameObject muzzleFlash;
 
     [SerializeField] GameObject deathEffect;
 
@@ -36,6 +36,12 @@ public class Unit : MonoBehaviour
 
     public Transform currentTarget;
 
+    public bool isMoving;
+
+    public LayerMask enemyLayerMask;
+
+    public Vector3 moveToPosition;
+
 
 
     void Start()
@@ -48,13 +54,33 @@ public class Unit : MonoBehaviour
 
         UnitSelection.Instance.unitList.Add(this.gameObject);
 
+        moveToPosition = transform.position;
         currentState = UnitState.Idle;
 
+
+        //previousPosition = transform.position;
 
     }
 
     private void Update()
     {
+        /*if (transform.position == moveToPosition)
+        {
+            //Means the unit is not moving
+            if (currentState == UnitState.Moving)
+            {
+                currentState = UnitState.Idle;
+            }
+            
+        } else
+        {
+            //is moving
+            currentState = UnitState.Moving;
+        }*/
+
+        Debug.Log(transform.position);
+        Debug.Log(moveToPosition);
+
         switch (currentState)
         {
             case UnitState.Idle:
@@ -86,6 +112,9 @@ public class Unit : MonoBehaviour
             case UnitState.Moving:
                 // Handle moving state logic here if needed
                 muzzleFlash.SetActive(false);
+                currentTarget = null;
+
+                
                 break;
 
             default:
@@ -93,7 +122,8 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public LayerMask enemyLayerMask;
+
+
 
     private void CheckForEnemies()
     {
@@ -144,56 +174,60 @@ public class Unit : MonoBehaviour
 
     private void ShootEnemy()
     {
-        
-        float sphereRadius = .25f; // Adjust the sphere radius as needed
-
-        RaycastHit hit;
-
-
-        if (Physics.SphereCast(raycastPoint.position, sphereRadius, (currentTarget.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, enemyLayerMask))
+        if (currentState == UnitState.Shooting)
         {
-            
-            //Debug.Log("SphereCast hit something on the enemy layer");
-            if (currentTarget.GetComponent<EnemyAI>() != null)
+            float sphereRadius = .25f; // Adjust the sphere radius as needed
+
+            RaycastHit hit;
+
+
+            if (Physics.SphereCast(raycastPoint.position, sphereRadius, (currentTarget.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, enemyLayerMask))
             {
-                //Debug.Log("SphereCast hit something WITH A ENEMYAI");
 
-                //GameObject mzlLFlash = Instantiate(muzzleFlash, muzzlePoint.position, muzzlePoint.rotation);
-                //Destroy(mzlLFlash, unitSO.fireRate);
-                //muzzleFlash.SetActive(false);
-                muzzleFlash.SetActive(true);
+                //Debug.Log("SphereCast hit something on the enemy layer");
+                if (currentTarget.GetComponent<EnemyAI>() != null)
+                {
+                    //Debug.Log("SphereCast hit something WITH A ENEMYAI");
 
-                currentTarget.GetComponent<EnemyAI>().takeDamage(unitSO.attackDamage);
-                Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
+                    //GameObject mzlLFlash = Instantiate(muzzleFlash, muzzlePoint.position, muzzlePoint.rotation);
+                    //Destroy(mzlLFlash, unitSO.fireRate);
+                    //muzzleFlash.SetActive(false);
+                    muzzleFlash.SetActive(true);
 
-                
+                    currentTarget.GetComponent<EnemyAI>().takeDamage(unitSO.attackDamage);
+                    Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
 
-                Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
+
+
+                    Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
+                }
+
+                if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)
+                {
+                    //state = State.Roaming;
+                    //FindTarget();
+                    //return 0;
+                    currentTarget = null;
+                }
+
+
+                // Additional actions for hitting a player can be added here
+            }
+            else
+            {
+                //Probably switch the target because the target is blocked probably
             }
 
-            if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)
+
+            // Check if the enemy is still in attack range
+            if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.position) > unitSO.attackRange)
             {
-                //state = State.Roaming;
-                //FindTarget();
-                //return 0;
+                // Enemy left the attack radius or is dead, find a new enemy
+                currentState = UnitState.Idle;
                 currentTarget = null;
             }
-            
-
-            // Additional actions for hitting a player can be added here
-        } else
-        {
-            //Probably switch the target because the target is blocked probably
         }
         
-
-        // Check if the enemy is still in attack range
-        if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.position) > unitSO.attackRange)
-        {
-            // Enemy left the attack radius or is dead, find a new enemy
-            currentState = UnitState.Idle;
-            currentTarget = null;
-        }
     }
 
 
@@ -204,7 +238,7 @@ public class Unit : MonoBehaviour
         if (unitHealth <= 0)
         {
             //deselectUnit();
-            //InventoryManager.instance.changeCurrentPopulation(-(int)unitSO.populationCost);
+            InventoryManager.instance.changeCurrentPopulation(-(int)unitSO.populationCost);
 
             if (UnitSelection.Instance.unitsSelected.Contains(this.gameObject))
             {
@@ -213,7 +247,9 @@ public class Unit : MonoBehaviour
             
             UnitSelection.Instance.unitList.Remove(this.gameObject);
 
-            
+
+            GameObject deathEfct = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Destroy(deathEfct, 2f);
 
             Destroy(this.gameObject);
 

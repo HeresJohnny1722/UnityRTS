@@ -11,9 +11,9 @@ public class EnemyManager : MonoBehaviour
         Debug.Log("Changing target");
         foreach (var enemy in enemyList)
         {
-            if (enemy.GetComponent<EnemyAI>().playerTransform == unitRemoving)
+            if (enemy.GetComponent<EnemyAI>().targetTransform == unitRemoving)
             {
-                enemy.GetComponent<EnemyAI>().playerTransform = null;
+                enemy.GetComponent<EnemyAI>().targetTransform = null;
                 enemy.GetComponent<EnemyAI>().state = EnemyAI.State.Roaming;
             }
         }
