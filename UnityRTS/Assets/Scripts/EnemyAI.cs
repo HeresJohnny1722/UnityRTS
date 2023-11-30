@@ -307,7 +307,7 @@ public class EnemyAI : MonoBehaviour
         }
         else if (targetType == "Building")
         {
-            float sphereRadius = .5f; // Adjust the sphere radius as needed
+            float sphereRadius = 1f; // Adjust the sphere radius as needed
 
             RaycastHit hit;
 

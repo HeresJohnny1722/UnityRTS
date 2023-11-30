@@ -4844,6 +4844,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyMine
       objectReference: {fileID: 0}
+    - target: {fileID: 2738341042349444136, guid: 8cec6ce0cf94d47c3a908cfd866c17b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4883820705058911029, guid: 8cec6ce0cf94d47c3a908cfd866c17b3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5913,6 +5918,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitBarracks
       objectReference: {fileID: 0}
+    - target: {fileID: 5389587925157907964, guid: 7bd8cc6efb7cd45f0a20e167cb9d8b58,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5703970984420481760, guid: 7bd8cc6efb7cd45f0a20e167cb9d8b58,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6582,6 +6592,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BasicWatchtower
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985626473903513160, guid: 1dc7904cc8efe4fa6bae4e28a5bb10b2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9977,9 +9992,9 @@ SceneRoots:
   - {fileID: 1238748416}
   - {fileID: 1577875983}
   - {fileID: 1600756481}
+  - {fileID: 1564673432}
   - {fileID: 1215570654}
   - {fileID: 1675554484}
   - {fileID: 642004423}
   - {fileID: 1946131299}
-  - {fileID: 1564673432}
   - {fileID: 1662213696}
