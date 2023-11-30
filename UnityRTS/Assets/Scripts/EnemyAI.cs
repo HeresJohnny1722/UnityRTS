@@ -40,11 +40,17 @@ public class EnemyAI : MonoBehaviour
 
     public float enemyHealth;
 
+    public Material hitMaterial;
+
+    public MeshRenderer[] meshComponents;
+    public Dictionary<MeshRenderer, List<Material>> initialMaterials;
+
     ///public EnemyManager enemyManager;
 
 
     private void Awake()
     {
+        _InitializeMaterials();
         //enemyManager.enemyList.Add(gameObject);
         //muzzleFlash.SetActive(false);
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -54,6 +60,65 @@ public class EnemyAI : MonoBehaviour
         enemyHealth = enemyAISO.startingHealth;
 
 
+    }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        _InitializeMaterials();
+    }
+#endif
+
+    public void _InitializeMaterials()
+    {
+        if (initialMaterials == null)
+            initialMaterials = new Dictionary<MeshRenderer, List<Material>>();
+        if (initialMaterials.Count > 0)
+        {
+            foreach (var l in initialMaterials) l.Value.Clear();
+            initialMaterials.Clear();
+        }
+
+        foreach (MeshRenderer r in meshComponents)
+        {
+            initialMaterials[r] = new List<Material>(r.sharedMaterials);
+        }
+    }
+
+    
+
+    public void SetMaterialInitial()
+    {
+        
+         Debug.Log("Initial material");
+         foreach (MeshRenderer r in meshComponents)
+         r.sharedMaterials = initialMaterials[r].ToArray();
+        
+    }
+
+    public void SetMaterial(string material)
+    {
+        if (material == "Initial")
+        {
+            Debug.Log("Initial material");
+            foreach (MeshRenderer r in meshComponents)
+                r.sharedMaterials = initialMaterials[r].ToArray();
+        }
+        else if (material == "White")
+        {
+            Debug.Log("white material");
+            Material matToApply = hitMaterial;
+
+            Material[] m; int nMaterials;
+            foreach (MeshRenderer r in meshComponents)
+            {
+                nMaterials = initialMaterials[r].Count;
+                m = new Material[nMaterials];
+                for (int i = 0; i < nMaterials; i++)
+                    m[i] = matToApply;
+                r.sharedMaterials = m;
+            }
+        }
     }
 
     private void Start()
@@ -86,6 +151,9 @@ public class EnemyAI : MonoBehaviour
 
 
         }
+
+        SetMaterial("White");
+        Invoke("SetMaterialInitial", 0.15f);
         enemyHealthbar.gameObject.SetActive(true);
         enemyHealthbar.UpdateHealthBar(enemyAISO.startingHealth, enemyHealth);
         //unitHealthbar.gameObject.SetActive(true);

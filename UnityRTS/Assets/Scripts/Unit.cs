@@ -204,7 +204,7 @@ public class Unit : MonoBehaviour
                     //GameObject mzlLFlash = Instantiate(muzzleFlash, muzzlePoint.position, muzzlePoint.rotation);
                     //Destroy(mzlLFlash, unitSO.fireRate);
                     //muzzleFlash.SetActive(false);
-                    //muzzleFlash.SetActive(true);
+                    muzzleFlash.SetActive(true);
 
                     currentTarget.GetComponent<EnemyAI>().takeDamage(unitSO.attackDamage);
                     //Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);

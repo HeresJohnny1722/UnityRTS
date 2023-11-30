@@ -276,6 +276,11 @@ MonoBehaviour:
   raycastPoint: {fileID: 2261789503022339143}
   enemyAISO: {fileID: 11400000, guid: 65aedfb1b988e4e42bf0708e2da94b97, type: 2}
   enemyHealth: 0
+  hitMaterial: {fileID: 2100000, guid: e8be705e7cabf406288f67244b7021ef, type: 2}
+  meshComponents:
+  - {fileID: 8403668682998997236}
+  - {fileID: 6769538274000071115}
+  - {fileID: 8405109018329376935}
 --- !u!1 &2167770459861169287
 GameObject:
   m_ObjectHideFlags: 0

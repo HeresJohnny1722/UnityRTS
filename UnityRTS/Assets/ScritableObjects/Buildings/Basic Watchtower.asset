@@ -21,9 +21,9 @@ MonoBehaviour:
   nodeName: 
   nodeDescription: 
   stage: 2
-  fireRate: 1
-  attackDamage: 30
-  attackRange: 3
+  fireRate: 0.5
+  attackDamage: 5
+  attackRange: 12
   populationIncrease: 0
   name: Watchtower
   description: Shoot enemies
