@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 7462998351962582450, guid: dbb2d89fa05564e53a721066dfe8f072, type: 3}
   unitType: 0
   name: Gunner
-  trainingTime: 2
+  trainingTime: 0.5
   startingHealth: 50
   attackRange: 10
   attackDamage: 15
