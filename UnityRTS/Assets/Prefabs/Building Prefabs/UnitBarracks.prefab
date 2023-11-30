@@ -265,6 +265,7 @@ MonoBehaviour:
   buildingTraining: {fileID: 3255677061070991677}
   buildingProduction: {fileID: 0}
   buildingConstruction: {fileID: 4618329026117628036}
+  buildingDefense: {fileID: 0}
   buildingSO: {fileID: 11400000, guid: 4977316ba35904bb5b35383b0f134d0f, type: 2}
   buildingHealth: 250
   stage: 0
@@ -296,6 +297,7 @@ MonoBehaviour:
   unitSpawnPoint: {fileID: 0}
   unitMovePoint: {fileID: 0}
   isTraining: 0
+  movePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &8127375062773690525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,6 +747,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6356094146917287488, guid: d8f43148855d24b7aa08f4876f186f35, type: 3}
+    - {fileID: 578798141396578511, guid: d8f43148855d24b7aa08f4876f186f35, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8f43148855d24b7aa08f4876f186f35, type: 3}

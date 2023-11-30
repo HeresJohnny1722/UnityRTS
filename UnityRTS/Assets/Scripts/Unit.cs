@@ -204,7 +204,7 @@ public class Unit : MonoBehaviour
                     //GameObject mzlLFlash = Instantiate(muzzleFlash, muzzlePoint.position, muzzlePoint.rotation);
                     //Destroy(mzlLFlash, unitSO.fireRate);
                     //muzzleFlash.SetActive(false);
-                    muzzleFlash.SetActive(true);
+                    //muzzleFlash.SetActive(true);
 
                     currentTarget.GetComponent<EnemyAI>().takeDamage(unitSO.attackDamage);
                     //Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
@@ -260,8 +260,8 @@ public class Unit : MonoBehaviour
             UnitSelection.Instance.unitList.Remove(this.gameObject);
 
 
-            GameObject deathEfct = Instantiate(deathEffect, transform.position, Quaternion.identity);
-            Destroy(deathEfct, 2f);
+            //GameObject deathEfct = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            //Destroy(deathEfct, 2f);
 
             Destroy(this.gameObject);
 

@@ -101,10 +101,10 @@ public class BuildingDefense : MonoBehaviour
                 Vector3 flashPosition = raycastPoint.position + flashDistance * direction;
 
                 // Set the attack flash's position
-                attackFlash.transform.position = new Vector3(flashPosition.x, raycastPoint.position.y, flashPosition.z);
+                //attackFlash.transform.position = new Vector3(flashPosition.x, raycastPoint.position.y, flashPosition.z);
 
                 
-                attackFlash.SetActive(true);
+                //attackFlash.SetActive(true);
 
                 currentTarget.GetComponent<EnemyAI>().takeDamage(building.buildingSO.attackDamage);
             }

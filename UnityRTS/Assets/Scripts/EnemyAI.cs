@@ -78,8 +78,8 @@ public class EnemyAI : MonoBehaviour
             //}
 
             //UnitSelection.Instance.unitList.Remove(this.gameObject);
-            GameObject deathEfct = Instantiate(deathEffect, transform.position, Quaternion.identity);
-            Destroy(deathEfct, 2f);
+            //GameObject deathEfct = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            //Destroy(deathEfct, 2f);
 
             Destroy(this.gameObject);
 
@@ -307,7 +307,7 @@ public class EnemyAI : MonoBehaviour
         }
         else if (targetType == "Building")
         {
-            float sphereRadius = 1f; // Adjust the sphere radius as needed
+            float sphereRadius = .5f; // Adjust the sphere radius as needed
 
             RaycastHit hit;
 
