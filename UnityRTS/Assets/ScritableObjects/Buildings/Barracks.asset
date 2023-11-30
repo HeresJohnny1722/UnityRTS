@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
+  m_Name: Barracks
+  m_EditorClassIdentifier: 
+  buildingType: 1
+  unitsToTrain:
+  - {fileID: 11400000, guid: f8589073340ec4464a11392c28e3c57f, type: 2}
+  - {fileID: 11400000, guid: 75d9cbac6c28f476f95a83a913e205b9, type: 2}
+  spawnFlagMoveToTroopOffset: 1.5
+  resourceType: 0
+  outputWorkerMultiplyer: 0
+  workerCapacity: 3
+  nodeName: 
+  nodeDescription: 
+  stage: 2
+  fireRate: 0
+  damageAmount: 0
+  attackRange: 0
+  populationIncrease: 0
+  name: Unit Barracks
+  description: This building spawns troops
+  constructionCapacity: 4
+  workerEnterRadius: 2
+  startingHealth: 300
+  timeToBuild: 15
+  goldCost: 50
+  coalCost: 50
+  copperCost: 50

@@ -259,14 +259,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5389587925157907964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbf8c699281a0497db41e1ef11678c8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 33f27a12d912047c3b1e44928840ba76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buildingTraining: {fileID: 3255677061070991677}
   buildingProduction: {fileID: 0}
   buildingConstruction: {fileID: 4618329026117628036}
   buildingSO: {fileID: 11400000, guid: 4977316ba35904bb5b35383b0f134d0f, type: 2}
-  buildingHealth: 0
+  buildingHealth: 250
   stage: 0
   infoPanel: {fileID: 2816086458150400594}
   removeButton: {fileID: 5440799210637691065}
@@ -743,7 +743,8 @@ PrefabInstance:
       value: removeBuilding
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6356094146917287488, guid: d8f43148855d24b7aa08f4876f186f35, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8f43148855d24b7aa08f4876f186f35, type: 3}
@@ -916,7 +917,7 @@ PrefabInstance:
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.931
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
@@ -941,12 +942,12 @@ PrefabInstance:
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.985
+      value: 0.53
       objectReference: {fileID: 0}
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.732
+      value: 2.45
       objectReference: {fileID: 0}
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
@@ -971,7 +972,7 @@ PrefabInstance:
     - target: {fileID: 1598209828171881189, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2051232162735146575, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}

@@ -17,9 +17,9 @@ MonoBehaviour:
   name: Gunner
   trainingTime: 2
   startingHealth: 50
-  attackRange: 9
-  attackDamage: 1
-  fireRate: 0.15
+  attackRange: 10
+  attackDamage: 15
+  fireRate: 0.5
   speed: 5
   rotationSpeed: 5
   description: Gunner  description

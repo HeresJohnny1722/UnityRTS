@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d7d0a741b2b468782fb164ab03b0b2, type: 3}
   m_Name: HeavyGunnerFriendly
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7462998351962582450, guid: dbb2d89fa05564e53a721066dfe8f072, type: 3}
+  prefab: {fileID: 7156426443736594990, guid: 54189847d0acb4953bc5822da682e356, type: 3}
   unitType: 0
   name: Heavy Gunner
   trainingTime: 2
   startingHealth: 300
-  attackRange: 12
-  attackDamage: 3.5
-  fireRate: 0.03
+  attackRange: 7
+  attackDamage: 4
+  fireRate: 0.15
   speed: 5
-  rotationSpeed: 5
+  rotationSpeed: 2
   description: Gunner  description
   goldCost: 5
   coalCost: 5

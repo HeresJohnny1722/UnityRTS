@@ -27,6 +27,9 @@ public class BuildingTraining : MonoBehaviour
     public Queue<UnitSO> troopQueue = new Queue<UnitSO>();
     public bool isTraining = false;
 
+    [HideInInspector]
+    public Vector3 movePosition;
+
 
 
     private void Awake()
@@ -55,7 +58,15 @@ public class BuildingTraining : MonoBehaviour
     public void HideShowBarracks(bool visible)
     {
         barracksPanel.SetActive(visible);
-        barracksSpawnFlag.SetActive(visible);
+
+        if (building.buildingConstruction.isUnderConstruction)
+        {
+            barracksSpawnFlag.SetActive(false);
+        } else
+        {
+            barracksSpawnFlag.SetActive(visible);
+        }
+        
     }
 
     public void SetFlagStartPosition()
@@ -154,13 +165,7 @@ public class BuildingTraining : MonoBehaviour
             }
 
 
-
-            //Vector3 movePosition = new Vector3(unitMovePoint.position.x + Random.Range(-unitFlagOffset, unitFlagOffset), 0, unitMovePoint.position.z + Random.Range(-unitFlagOffset, unitFlagOffset));
-
-
-
-
-            Vector3 movePosition;
+            
             bool isOccupied;
 
             do
@@ -184,6 +189,7 @@ public class BuildingTraining : MonoBehaviour
 
             UpdateQueueSizeText(); // Update the queue size text when a troop is done training
             NavMeshAgent unitAgent = troop.GetComponent<NavMeshAgent>();
+            troop.GetComponent<Unit>().moveToPosition = movePosition;
             unitAgent.SetDestination(movePosition);
 
 

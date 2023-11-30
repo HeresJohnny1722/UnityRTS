@@ -10,7 +10,8 @@ public class BuildingSO : ScriptableObject
     {
         House,
         Barracks,
-        Production
+        Production,
+        Defense,
     }
 
     public enum ResourceType
@@ -34,7 +35,12 @@ public class BuildingSO : ScriptableObject
     public new string nodeName;
     public string nodeDescription;
     public float stage = 1;
-    
+
+
+    [Header("Only for Defense Type")]
+    public float fireRate;
+    public float attackDamage;
+    public float attackRange;
 
 
     [Header("Only Buildings that increase population")]

@@ -54,7 +54,7 @@ public class Unit : MonoBehaviour
 
         UnitSelection.Instance.unitList.Add(this.gameObject);
 
-        moveToPosition = transform.position;
+        //moveToPosition = transform.position;
         currentState = UnitState.Idle;
 
 
@@ -89,8 +89,8 @@ public class Unit : MonoBehaviour
             }
         } else
         {
-            Debug.Log("moving");
-            isMoving = true;
+            //Debug.Log("moving");
+            
             currentState = UnitState.Moving;
         }
 
@@ -199,7 +199,7 @@ public class Unit : MonoBehaviour
                 //Debug.Log("SphereCast hit something on the enemy layer");
                 if (currentTarget.GetComponent<EnemyAI>() != null)
                 {
-                    Debug.Log("SphereCast hit something WITH A ENEMYAI");
+                    //Debug.Log("SphereCast hit something WITH A ENEMYAI");
 
                     //GameObject mzlLFlash = Instantiate(muzzleFlash, muzzlePoint.position, muzzlePoint.rotation);
                     //Destroy(mzlLFlash, unitSO.fireRate);
@@ -207,11 +207,11 @@ public class Unit : MonoBehaviour
                     muzzleFlash.SetActive(true);
 
                     currentTarget.GetComponent<EnemyAI>().takeDamage(unitSO.attackDamage);
-                    Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
+                    //Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
 
 
 
-                    Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
+                    //Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
                 }
 
                 if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)

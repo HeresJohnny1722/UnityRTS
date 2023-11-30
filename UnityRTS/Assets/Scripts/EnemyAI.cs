@@ -28,8 +28,10 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] GameObject deathEffect;
 
     public Transform targetTransform;
+    public string targetType;
 
     public LayerMask playersLayerMask;
+    public LayerMask buildingsLayerMask;
 
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
@@ -50,7 +52,7 @@ public class EnemyAI : MonoBehaviour
         //aimShootAnims = GetComponent<IAimShootAnims>();
         state = State.Roaming;
         enemyHealth = enemyAISO.startingHealth;
-        
+
 
     }
 
@@ -81,7 +83,7 @@ public class EnemyAI : MonoBehaviour
 
             Destroy(this.gameObject);
 
-            
+
 
         }
         enemyHealthbar.gameObject.SetActive(true);
@@ -104,58 +106,63 @@ public class EnemyAI : MonoBehaviour
                     roamPosition = GetRoamingPosition();
                 }
 
-                CheckForUnitsInRange(); // Check for units before transitioning to ChaseTarget
+                CheckForUnitsAndBuildingsInRange(); // Check for units before transitioning to ChaseTarget
                 FindTarget();
                 break;
 
             case State.ChaseTarget:
-                
+
 
                 if (targetTransform != null)
                 {
-                    RotateTowardsPlayer();
+                    RotateTowardsPlayerOrBuilding();
                     navMeshAgent.SetDestination(targetTransform.position);
 
-                    if (Vector3.Distance(transform.position, targetTransform.position) < enemyAISO.attackRange)
+                    if (targetType == "Unit")
                     {
-                        navMeshAgent.SetDestination(transform.position);
-
-                        // Target within attack range
-                        if (Time.time > nextShootTime)
+                        if (Vector3.Distance(transform.position, targetTransform.position) < enemyAISO.attackRange)
                         {
-                            state = State.ShootingTarget;
-                            float playerHealth = AttackUnit();
+                            navMeshAgent.SetDestination(transform.position);
 
-
-                            if (playerHealth == 0)
+                            // Target within attack range
+                            if (Time.time > nextShootTime)
                             {
+                                state = State.ShootingTarget;
+                                AttackUnit();
 
-                                state = State.Roaming;
-                                //Means the player is dead
+                                nextShootTime = Time.time + enemyAISO.fireRate;
+
                             }
-                            else if (playerHealth == -1)
-                            {
-                                //Player is not dead
-                                state = State.ChaseTarget;
-                            }
-                            else if (playerHealth == 1)
-                            {
-                                //Did not hit a unit
-                                state = State.ChaseTarget;
-                            }
-
-
-                            nextShootTime = Time.time + enemyAISO.fireRate;
-
                         }
                     }
+                    else if (targetType == "Building")
+                    {
+                        if (Vector3.Distance(transform.position, targetTransform.position) < enemyAISO.attackRange + targetTransform.GetComponent<BoxCollider>().size.x / 1.25)
+                        {
+                            //Debug.Log(targetTransform.GetComponent<BoxCollider>().size.x);
+                            navMeshAgent.SetDestination(transform.position);
 
-                }
-                else
-                {
-                    state = State.Roaming;
-                }
-                break;
+                            // Target within attack range
+                            if (Time.time > nextShootTime)
+                            {
+                                Debug.Log("Shooting a building");
+                                
+                                state = State.ShootingTarget;
+                                AttackUnit();
+
+                                nextShootTime = Time.time + enemyAISO.fireRate;
+
+                            }
+                        }
+
+                    }
+
+                    }
+                    else
+                    {
+                        state = State.Roaming;
+                    }
+                    break;
             case State.ShootingTarget:
                 break;
             case State.GoingBackToStart:
@@ -172,7 +179,7 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    private void RotateTowardsPlayer()
+    private void RotateTowardsPlayerOrBuilding()
     {
         if (targetTransform != null)
         {
@@ -194,80 +201,161 @@ public class EnemyAI : MonoBehaviour
         onWaitComplete?.Invoke(); // Invoke the provided action after the wait time
     }
 
-    private void CheckForUnitsInRange()
+    private void CheckForUnitsAndBuildingsInRange()
     {
         float closestDistance = float.MaxValue;
-        Transform closestUnit = null;
+        Transform closestTarget = null;
 
+        // Check units
         foreach (var unit in UnitSelection.Instance.unitList)
         {
             float distance = Vector3.Distance(transform.position, unit.transform.position);
 
-            // Check if the unit is within the search radius and closer than the current closest unit
+            // Check if the unit is within the search radius and closer than the current closest target
             if (distance < enemyAISO.searchRange && distance < closestDistance)
             {
                 closestDistance = distance;
-                closestUnit = unit.transform;
+                closestTarget = unit.transform;
+                targetType = "Unit";
             }
         }
 
-        // If a closest unit is found, set playerTransform to the transform of that unit
-        if (closestUnit != null)
+        // Check buildings
+        foreach (var building in BuildingSelection.Instance.buildingsList)
         {
-            targetTransform = closestUnit;
+            if (building.GetComponent<Building>().stage != 1)
+            {
+                float distance = Vector3.Distance(transform.position, building.transform.position);
+
+                // Check if the building is within the search radius and closer than the current closest target
+                if (distance < enemyAISO.searchRange && distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestTarget = building.transform;
+                    targetType = "Building";
+                }
+            }
+        }
+
+        // If a closest target is found, set targetTransform to the transform of that target
+        if (closestTarget != null)
+        {
+            targetTransform = closestTarget;
         }
     }
 
-    private float AttackUnit()
+
+    private void AttackUnit()
     {
-        RotateTowardsPlayer();
+        RotateTowardsPlayerOrBuilding();
         //muzzleFlash.SetActive(true);
-        if (enemyAISO.enemyType == EnemyAISO.EnemyType.Ranged)
-        {
-            GameObject mzlLFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
-            Destroy(mzlLFlash, .5f);
 
-        } else if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
-        {
-            GameObject mleSlash = Instantiate(meleeSlash, firePoint.position, firePoint.rotation);
-            Destroy(mleSlash, .5f);
-        }
-        
-        float sphereRadius = .25f; // Adjust the sphere radius as needed
 
-        RaycastHit hit;
 
-      
-        if (Physics.SphereCast(raycastPoint.position, sphereRadius, (targetTransform.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, playersLayerMask))
+        if (targetType == "Unit")
         {
-            float health = 0;
-            float unitHealth;
-            Debug.Log("SphereCast hit something on the player layer");
-            if (hit.transform.GetComponent<Unit>())
+
+            float sphereRadius = .25f; // Adjust the sphere radius as needed
+
+            RaycastHit hit;
+
+
+            if (Physics.SphereCast(raycastPoint.position, sphereRadius, (targetTransform.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, playersLayerMask))
             {
-                unitHealth = (hit.transform.GetComponent<Unit>().unitHealth);
-                health = unitHealth - enemyAISO.damageAmountPerAttack;
-                hit.transform.GetComponent<Unit>().takeDamage(enemyAISO.damageAmountPerAttack);
+                if (enemyAISO.enemyType == EnemyAISO.EnemyType.Ranged)
+                {
+                    GameObject mzlLFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
+                    Destroy(mzlLFlash, .5f);
+
+                }
+                else if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
+                {
+                    GameObject mleSlash = Instantiate(meleeSlash, firePoint.position, firePoint.rotation);
+                    Destroy(mleSlash, .5f);
+                }
+
+                float health = 0;
+                float unitHealth;
+                //Debug.Log("SphereCast hit something on the player layer");
+                if (hit.transform.GetComponent<Unit>())
+                {
+                    unitHealth = (hit.transform.GetComponent<Unit>().unitHealth);
+                    health = unitHealth - enemyAISO.damageAmountPerAttack;
+                    hit.transform.GetComponent<Unit>().takeDamage(enemyAISO.damageAmountPerAttack);
+                }
+
+                if (health <= 0)
+                {
+                    state = State.Roaming;
+                    
+                }
+                else
+                {
+                    state = State.ChaseTarget;
+                }
+
+
+                // Additional actions for hitting a player can be added here
             }
 
-            if (health <= 0)
+            else
             {
-                //state = State.Roaming;
-                //FindTarget();
-                return 0;
+                targetTransform = null;
+                state = State.Roaming;
+            }
+
+        }
+        else if (targetType == "Building")
+        {
+            float sphereRadius = .5f; // Adjust the sphere radius as needed
+
+            RaycastHit hit;
+
+            Debug.Log("Trying to shoot a building");
+            if (Physics.SphereCast(raycastPoint.position, sphereRadius, (targetTransform.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, buildingsLayerMask))
+            {
+                Debug.Log("Shot" + targetTransform);
+                if (enemyAISO.enemyType == EnemyAISO.EnemyType.Ranged)
+                {
+                    GameObject mzlLFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
+                    Destroy(mzlLFlash, .5f);
+
+                }
+                else if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
+                {
+                    GameObject mleSlash = Instantiate(meleeSlash, firePoint.position, firePoint.rotation);
+                    Destroy(mleSlash, .5f);
+                }
+
+                float health = 0;
+                float buildingHealth;
+                Debug.Log("SphereCast hit something on the player layer");
+                if (hit.transform.GetComponent<Building>())
+                {
+                    buildingHealth = (hit.transform.GetComponent<Building>().buildingHealth);
+                    health = buildingHealth - enemyAISO.damageAmountPerAttack;
+                    hit.transform.GetComponent<Building>().takeDamage(enemyAISO.damageAmountPerAttack);
+                }
+
+                if (health <= 0)
+                {
+                    state = State.Roaming;
+                    
+                } else
+                {
+                    state = State.ChaseTarget;
+                }
+                
+
+                // Additional actions for hitting a player can be added here
             } else
             {
-
-                //Unit is not dead
-                return -1;
+                targetTransform = null;
+                state = State.Roaming;
             }
             
-            // Additional actions for hitting a player can be added here
-        } else
-        {
-            //Did not hit a player
-            return 1;
         }
+        
 
         //no bullets
         //just a muzzle flash
@@ -292,8 +380,8 @@ public class EnemyAI : MonoBehaviour
                 state = State.ChaseTarget;
             }
         }
-        
+
     }
 
-    
+
 }
