@@ -38,6 +38,7 @@ public class BuildingConstruction : MonoBehaviour
 
     public void ConstructBuilding()
     {
+        constructionProgressSprite.transform.parent.parent.gameObject.SetActive(true);
         SetMaterial();
 
         if (building.workersInside.Count > 0)
@@ -108,10 +109,10 @@ public class BuildingConstruction : MonoBehaviour
                 r.sharedMaterials = buildingManager.initialMaterials[r].ToArray();
         }
     }
-
     public void showConstructionPanel()
     {
         constructionPanel.SetActive(true);
+        constructionProgressSprite.transform.parent.parent.gameObject.SetActive(true);
     }
 
     private void CompleteConstruction()
@@ -123,6 +124,7 @@ public class BuildingConstruction : MonoBehaviour
         SetMaterial();
         constructionTimer = 0f; // Reset the timer
         constructionPanel.SetActive(false);
+        constructionProgressSprite.transform.parent.parent.gameObject.SetActive(false);
 
         //Change the material of the building
 

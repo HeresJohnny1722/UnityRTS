@@ -42,6 +42,8 @@ public class Unit : MonoBehaviour
 
     public Vector3 moveToPosition;
 
+    public TroopHit troopHit;
+
 
 
     void Start()
@@ -245,11 +247,13 @@ public class Unit : MonoBehaviour
 
     public void takeDamage(float damageAmount)
     {
+        troopHit.HitAnimation();
         unitHealth -= damageAmount;
 
         if (unitHealth <= 0)
         {
-            //deselectUnit();
+            
+            deselectUnit();
             InventoryManager.instance.changeCurrentPopulation(-(int)unitSO.populationCost);
 
             if (UnitSelection.Instance.unitsSelected.Contains(this.gameObject))
@@ -260,8 +264,8 @@ public class Unit : MonoBehaviour
             UnitSelection.Instance.unitList.Remove(this.gameObject);
 
 
-            //GameObject deathEfct = Instantiate(deathEffect, transform.position, Quaternion.identity);
-            //Destroy(deathEfct, 2f);
+            GameObject deathEfct = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Destroy(deathEfct, 2f);
 
             Destroy(this.gameObject);
 

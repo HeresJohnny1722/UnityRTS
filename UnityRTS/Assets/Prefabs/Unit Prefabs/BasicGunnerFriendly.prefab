@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 1917137532199594567}
   - component: {fileID: 8433340988126413272}
   - component: {fileID: 2958555681735352451}
+  - component: {fileID: 6277138043053486435}
   m_Layer: 8
   m_Name: BasicGunnerFriendly
   m_TagString: Untagged
@@ -365,9 +366,12 @@ MonoBehaviour:
   raycastPoint: {fileID: 6823466753969233120}
   currentState: 0
   currentTarget: {fileID: 0}
+  isMoving: 0
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 4096
+  moveToPosition: {x: 0, y: 0, z: 0}
+  troopHit: {fileID: 6277138043053486435}
   isEnteringProduction: 0
 --- !u!195 &2958555681735352451
 NavMeshAgent:
@@ -391,6 +395,23 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6277138043053486435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7462998351962582450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01acf2109a95f4f09b7bf5456a78037a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitMaterial: {fileID: 2100000, guid: e8be705e7cabf406288f67244b7021ef, type: 2}
+  meshComponents:
+  - {fileID: 7309633358022064761}
+  - {fileID: 6506683193142339336}
+  - {fileID: 6708440103928250828}
 --- !u!1001 &167280376353305518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -602,13 +623,23 @@ PrefabInstance:
     - target: {fileID: 1598209828171881189, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660429363526082665, guid: 40a912277b5d341eab3146133c11d5ac,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1612875
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660429363526082665, guid: 40a912277b5d341eab3146133c11d5ac,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 324.81
       objectReference: {fileID: 0}
     - target: {fileID: 2051232162735146575, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: _healthbarSprite
       value: 
-      objectReference: {fileID: 5091795748402203940}
+      objectReference: {fileID: 0}
     - target: {fileID: 2632009158659996099, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_Layer
@@ -650,18 +681,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1fd057853247b4bdfa4c3f57f4128976, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5091795748402203940 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6143094672007519021, guid: 40a912277b5d341eab3146133c11d5ac,
-    type: 3}
-  m_PrefabInstance: {fileID: 1434705787527222793}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3534876218939671130

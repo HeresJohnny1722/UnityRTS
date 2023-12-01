@@ -172,7 +172,8 @@ public class Building : MonoBehaviour
             }
 
             buildingHealthText.text = "Health: " + buildingHealth.ToString();
-            BuildingUIVisibility(true);
+            //BuildingUIVisibility(true);
+            buildingHealthbar.gameObject.SetActive(true);
             buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
         }
 
@@ -270,7 +271,7 @@ public class Building : MonoBehaviour
 
         if (buildingConstruction.isUnderConstruction)
         {
-            buildingConstruction.constructionPanel.SetActive(true);
+            buildingConstruction.showConstructionPanel();
         }
 
         infoPanel.SetActive(visible);

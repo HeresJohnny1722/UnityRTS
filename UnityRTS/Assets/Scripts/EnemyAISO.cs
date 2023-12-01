@@ -8,8 +8,7 @@ public class EnemyAISO : ScriptableObject
 {
     public enum EnemyType
     {
-        Melee,
-        Ranged
+        Melee
     }
 
     public EnemyType enemyType;

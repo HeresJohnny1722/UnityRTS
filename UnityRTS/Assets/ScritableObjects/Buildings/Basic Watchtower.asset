@@ -22,7 +22,7 @@ MonoBehaviour:
   nodeDescription: 
   stage: 2
   fireRate: 0.5
-  attackDamage: 5
+  attackDamage: 25
   attackRange: 12
   populationIncrease: 0
   name: Watchtower

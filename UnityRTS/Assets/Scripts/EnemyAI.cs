@@ -40,17 +40,18 @@ public class EnemyAI : MonoBehaviour
 
     public float enemyHealth;
 
-    public Material hitMaterial;
+    public TroopHit troopHit;
 
-    public MeshRenderer[] meshComponents;
-    public Dictionary<MeshRenderer, List<Material>> initialMaterials;
+    private bool isWaiting;
+
+
 
     ///public EnemyManager enemyManager;
 
 
     private void Awake()
     {
-        _InitializeMaterials();
+        
         //enemyManager.enemyList.Add(gameObject);
         //muzzleFlash.SetActive(false);
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -62,64 +63,9 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        _InitializeMaterials();
-    }
-#endif
 
-    public void _InitializeMaterials()
-    {
-        if (initialMaterials == null)
-            initialMaterials = new Dictionary<MeshRenderer, List<Material>>();
-        if (initialMaterials.Count > 0)
-        {
-            foreach (var l in initialMaterials) l.Value.Clear();
-            initialMaterials.Clear();
-        }
-
-        foreach (MeshRenderer r in meshComponents)
-        {
-            initialMaterials[r] = new List<Material>(r.sharedMaterials);
-        }
-    }
 
     
-
-    public void SetMaterialInitial()
-    {
-        
-         Debug.Log("Initial material");
-         foreach (MeshRenderer r in meshComponents)
-         r.sharedMaterials = initialMaterials[r].ToArray();
-        
-    }
-
-    public void SetMaterial(string material)
-    {
-        if (material == "Initial")
-        {
-            Debug.Log("Initial material");
-            foreach (MeshRenderer r in meshComponents)
-                r.sharedMaterials = initialMaterials[r].ToArray();
-        }
-        else if (material == "White")
-        {
-            Debug.Log("white material");
-            Material matToApply = hitMaterial;
-
-            Material[] m; int nMaterials;
-            foreach (MeshRenderer r in meshComponents)
-            {
-                nMaterials = initialMaterials[r].Count;
-                m = new Material[nMaterials];
-                for (int i = 0; i < nMaterials; i++)
-                    m[i] = matToApply;
-                r.sharedMaterials = m;
-            }
-        }
-    }
 
     private void Start()
     {
@@ -134,17 +80,9 @@ public class EnemyAI : MonoBehaviour
 
         if (enemyHealth <= 0)
         {
-            //deselectUnit();
-            //InventoryManager.instance.changeCurrentPopulation(-(int)unitSO.populationCost);
-
-            //if (UnitSelection.Instance.unitsSelected.Contains(this.gameObject))
-            //{
-            //UnitSelection.Instance.unitsSelected.Remove(this.gameObject);
-            //}
-
-            //UnitSelection.Instance.unitList.Remove(this.gameObject);
-            //GameObject deathEfct = Instantiate(deathEffect, transform.position, Quaternion.identity);
-            //Destroy(deathEfct, 2f);
+            
+            GameObject deathEfct = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Destroy(deathEfct, 2f);
 
             Destroy(this.gameObject);
 
@@ -152,8 +90,7 @@ public class EnemyAI : MonoBehaviour
 
         }
 
-        SetMaterial("White");
-        Invoke("SetMaterialInitial", 0.15f);
+        troopHit.HitAnimation();
         enemyHealthbar.gameObject.SetActive(true);
         enemyHealthbar.UpdateHealthBar(enemyAISO.startingHealth, enemyHealth);
         //unitHealthbar.gameObject.SetActive(true);
@@ -169,12 +106,12 @@ public class EnemyAI : MonoBehaviour
             case State.Roaming:
                 navMeshAgent.SetDestination(roamPosition);
 
-                if (Vector3.Distance(transform.position, roamPosition) < enemyAISO.roamingReachedPositionDistance)
+                if (!isWaiting && Vector3.Distance(transform.position, roamPosition) < enemyAISO.roamingReachedPositionDistance)
                 {
-                    roamPosition = GetRoamingPosition();
+                    StartCoroutine(WaitAndChangeRoamingPosition());
                 }
 
-                CheckForUnitsAndBuildingsInRange(); // Check for units before transitioning to ChaseTarget
+                CheckForUnitsAndBuildingsInRange();
                 FindTarget();
                 break;
 
@@ -205,7 +142,7 @@ public class EnemyAI : MonoBehaviour
                     }
                     else if (targetType == "Building")
                     {
-                        if (Vector3.Distance(transform.position, targetTransform.position) < enemyAISO.attackRange + targetTransform.GetComponent<BoxCollider>().size.x / 1.25)
+                        if (Vector3.Distance(transform.position, targetTransform.GetChild(1).position) < enemyAISO.attackRange + targetTransform.GetComponent<BoxCollider>().size.x / 1.25)
                         {
                             //Debug.Log(targetTransform.GetComponent<BoxCollider>().size.x);
                             navMeshAgent.SetDestination(transform.position);
@@ -245,6 +182,20 @@ public class EnemyAI : MonoBehaviour
                 break;
         }
 
+    }
+
+    private IEnumerator WaitAndChangeRoamingPosition()
+    {
+        isWaiting = true;
+
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(Random.Range(3, 7));
+
+        // Get the next roaming position after waiting
+        roamPosition = GetRoamingPosition();
+
+        // Reset the flag to allow movement again
+        isWaiting = false;
     }
 
     private void RotateTowardsPlayerOrBuilding()
@@ -291,9 +242,9 @@ public class EnemyAI : MonoBehaviour
         // Check buildings
         foreach (var building in BuildingSelection.Instance.buildingsList)
         {
-            if (building.GetComponent<Building>().stage != 1)
+            if (building.GetComponent<Building>().stage != 1 && building.GetComponent<BuildingManager>().isFixed)
             {
-                float distance = Vector3.Distance(transform.position, building.transform.position);
+                float distance = Vector3.Distance(transform.position, building.transform.GetChild(1).position);
 
                 // Check if the building is within the search radius and closer than the current closest target
                 if (distance < enemyAISO.searchRange && distance < closestDistance)
@@ -330,16 +281,10 @@ public class EnemyAI : MonoBehaviour
 
             if (Physics.SphereCast(raycastPoint.position, sphereRadius, (targetTransform.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, playersLayerMask))
             {
-                if (enemyAISO.enemyType == EnemyAISO.EnemyType.Ranged)
+                if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
                 {
-                    GameObject mzlLFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
-                    Destroy(mzlLFlash, .5f);
-
-                }
-                else if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
-                {
-                    GameObject mleSlash = Instantiate(meleeSlash, firePoint.position, firePoint.rotation);
-                    Destroy(mleSlash, .5f);
+                    meleeSlash.SetActive(false);
+                    meleeSlash.SetActive(true);
                 }
 
                 float health = 0;
@@ -375,21 +320,15 @@ public class EnemyAI : MonoBehaviour
         }
         else if (targetType == "Building")
         {
-            float sphereRadius = .5f; // Adjust the sphere radius as needed
+            //float sphereRadius = .5f; // Adjust the sphere radius as needed
+            float sphereRadius = targetTransform.GetComponent<BoxCollider>().size.x / 2f;
 
             RaycastHit hit;
 
             Debug.Log("Trying to shoot a building");
-            if (Physics.SphereCast(raycastPoint.position, sphereRadius, (targetTransform.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, buildingsLayerMask))
+            if (Physics.SphereCast(raycastPoint.position, sphereRadius, (targetTransform.GetChild(1).position - raycastPoint.position).normalized, out hit, Mathf.Infinity, buildingsLayerMask))
             {
-                Debug.Log("Shot" + targetTransform);
-                if (enemyAISO.enemyType == EnemyAISO.EnemyType.Ranged)
-                {
-                    GameObject mzlLFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
-                    Destroy(mzlLFlash, .5f);
-
-                }
-                else if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
+                if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
                 {
                     GameObject mleSlash = Instantiate(meleeSlash, firePoint.position, firePoint.rotation);
                     Destroy(mleSlash, .5f);
@@ -442,11 +381,24 @@ public class EnemyAI : MonoBehaviour
     {
         if (targetTransform != null)
         {
-            if (Vector3.Distance(transform.position, targetTransform.position) < enemyAISO.searchRange)
+            if (targetType == "Building")
             {
-                // Player within target range
-                state = State.ChaseTarget;
+                
+                if (Vector3.Distance(transform.position, targetTransform.GetChild(1).position) < enemyAISO.searchRange)
+                {
+                    // Player within target range
+                    state = State.ChaseTarget;
+                }
             }
+            else
+            {
+                if (Vector3.Distance(transform.position, targetTransform.position) < enemyAISO.searchRange)
+                {
+                    // Player within target range
+                    state = State.ChaseTarget;
+                }
+            }
+            
         }
 
     }

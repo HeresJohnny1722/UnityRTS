@@ -181,7 +181,7 @@ public class BuildingTraining : MonoBehaviour
 
 
             GameObject troop = Instantiate(unit.prefab, unitSpawnPoint.position, Quaternion.identity);
-
+            UpdateQueueSizeText();
 
             // Reset time left text and unit name
             barracksTrainingTimeLeftText.text = "Training Time: 0s";
@@ -223,6 +223,7 @@ public class BuildingTraining : MonoBehaviour
 
     private void UpdateQueueSizeText()
     {
+        
         float queueCount = troopQueue.Count + 1;
         barracacksQueueSizeText.text = "Queue Size: " + queueCount;
     }

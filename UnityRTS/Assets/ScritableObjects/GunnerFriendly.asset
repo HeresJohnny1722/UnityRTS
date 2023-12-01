@@ -19,7 +19,7 @@ MonoBehaviour:
   startingHealth: 50
   attackRange: 10
   attackDamage: 15
-  fireRate: 0.5
+  fireRate: 1
   speed: 5
   rotationSpeed: 5
   description: Gunner  description
