@@ -218,9 +218,10 @@ public class Unit : MonoBehaviour
 
                 if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)
                 {
-                    //state = State.Roaming;
-                    //FindTarget();
-                    //return 0;
+                //state = State.Roaming;
+                //FindTarget();
+                //return 0;
+                InventoryManager.instance.enemiesKilledCount++;
                     currentTarget = null;
                 }
 

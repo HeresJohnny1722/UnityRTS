@@ -6,6 +6,9 @@ public class InventoryManager : MonoBehaviour
     // Singleton instance
     public static InventoryManager instance;
 
+    public int enemiesKilledCount;
+    public TextMeshProUGUI enemiesKilledCountText;
+
     // Inventory variables
     public int currentPopulation = 0;
     public int maxedPopulation = 10;
@@ -47,6 +50,11 @@ public class InventoryManager : MonoBehaviour
         }
 
         UpdateTextFields();
+    }
+
+    private void Update()
+    {
+        enemiesKilledCountText.text = "Enemies killed: " + enemiesKilledCount.ToString();
     }
 
     // Add resources to the inventory

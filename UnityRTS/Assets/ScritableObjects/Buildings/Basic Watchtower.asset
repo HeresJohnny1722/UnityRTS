@@ -21,15 +21,15 @@ MonoBehaviour:
   nodeName: 
   nodeDescription: 
   stage: 2
-  fireRate: 0.5
-  attackDamage: 25
-  attackRange: 12
+  fireRate: 0.01
+  attackDamage: 50
+  attackRange: 5
   populationIncrease: 0
   name: Watchtower
   description: Shoot enemies
   constructionCapacity: 4
   workerEnterRadius: 1.5
-  startingHealth: 200
+  startingHealth: 4000
   timeToBuild: 10
   goldCost: 25
   coalCost: 25

@@ -23,24 +23,28 @@ public class BuildingDefense : MonoBehaviour
 
     private void Update()
     {
-        CheckForEnemies();
-
-        if (currentTarget != null)
+        if (!building.buildingConstruction.isUnderConstruction)
         {
-            //RotateToTarget();
+            CheckForEnemies();
 
-            if (Time.time > nextShootTime)
+            if (currentTarget != null)
             {
-                attackFlash.SetActive(false);
-                ShootEnemy();
+                //RotateToTarget();
 
-                nextShootTime = Time.time + building.buildingSO.fireRate;
+                if (Time.time > nextShootTime)
+                {
+                    attackFlash.SetActive(false);
+                    ShootEnemy();
+
+                    nextShootTime = Time.time + building.buildingSO.fireRate;
+
+                }
 
             }
-
-        } else
-        {
-            attackFlash.SetActive(false);
+            else
+            {
+                attackFlash.SetActive(false);
+            }
         }
 
     }
@@ -111,7 +115,7 @@ public class BuildingDefense : MonoBehaviour
 
             if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)
             {
-                
+                InventoryManager.instance.enemiesKilledCount++;
                 currentTarget = null;
             }
 
