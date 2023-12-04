@@ -27,8 +27,8 @@ using UnityEngine;
 
 
         [Header("Animation Settings")]
-        [SerializeField] private float initialScale = 1f;
-        [SerializeField] private float maximumScale = 1.3f;
+        public float initialScale = 1f;
+        public float maximumScale = 1.3f;
         [SerializeField] private bool resetToInitialScaleAfterAnimation = true;
         [SerializeField] private bool reverseAnimationCurveAfterPlaying;
         private bool _isReversed;

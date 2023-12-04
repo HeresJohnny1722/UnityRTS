@@ -30,7 +30,8 @@ public class BuildingGridPlacer : BuildingPlacer
             // right-click: cancel build mode
             if (Input.GetMouseButtonDown(1))
             {
-                Destroy(_toBuild);
+                _toBuild.GetComponent<Building>().CancelBuilding();
+                //Destroy(_toBuild);
                 _toBuild = null;
                 _buildingPrefab = null;
                 _EnableGridVisual(false);

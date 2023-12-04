@@ -167,6 +167,9 @@ public class Building : MonoBehaviour
     {
         if (stage != 1)
         {
+            buildingConstruction.squashAndStretch.maximumScale = 1.15f;
+            buildingConstruction.squashAndStretch.PlaySquashAndStretch();
+
             buildingHealth -= damageAmount;
 
             if (buildingHealth <= 0)
@@ -180,6 +183,15 @@ public class Building : MonoBehaviour
             buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
         }
 
+    }
+
+    public void CancelBuilding()
+    {
+        DeathEffect();
+        SoundFeedback.Instance.PlaySound(SoundType.Remove);
+        deselectBuilding();
+        BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
+        Destroy(this.gameObject);
     }
 
     public void removeBuilding()

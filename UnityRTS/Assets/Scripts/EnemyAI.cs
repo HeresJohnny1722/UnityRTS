@@ -279,7 +279,7 @@ public class EnemyAI : MonoBehaviour
             RaycastHit hit;
 
 
-            if (Physics.SphereCast(raycastPoint.position, sphereRadius, (targetTransform.position - raycastPoint.position).normalized, out hit, enemyAISO.attackRange + 1, playersLayerMask))
+            if (Physics.SphereCast(raycastPoint.position, sphereRadius, (targetTransform.position - raycastPoint.position).normalized, out hit, enemyAISO.attackRange + 2, playersLayerMask))
             {
                 if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
                 {
@@ -326,7 +326,7 @@ public class EnemyAI : MonoBehaviour
             RaycastHit hit;
 
             Debug.Log("Trying to shoot a building");
-            if (Physics.SphereCast(raycastPoint.position, sphereRadius, (targetTransform.GetChild(1).position - raycastPoint.position).normalized, out hit, enemyAISO.attackRange + 1, buildingsLayerMask))
+            if (Physics.SphereCast(raycastPoint.position, sphereRadius, (targetTransform.GetChild(1).position - raycastPoint.position).normalized, out hit, enemyAISO.attackRange + 2, buildingsLayerMask))
             {
                 if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
                 {
