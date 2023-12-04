@@ -250,14 +250,14 @@ public class Building : MonoBehaviour
             buildingHealthbar.gameObject.SetActive(true);
         }
 
-        if (!buildingConstruction.isUnderConstruction)
+        /*if (!buildingConstruction.isUnderConstruction)
         {
             buildingConstruction.constructionPanel.SetActive(false);
         }
         else
         {
             removeButton.SetActive(false);
-        }
+        }*/
 
     }
 

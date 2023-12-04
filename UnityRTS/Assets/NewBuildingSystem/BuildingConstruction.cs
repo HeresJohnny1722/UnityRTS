@@ -15,7 +15,7 @@ public class BuildingConstruction : MonoBehaviour
     public Material yellowConstructingMaterial;
     private Material[] originalMaterials;
 
-    
+    public SquashAndStretch squashAndStretch;
 
     private float constructionTimer = 0f;
     private float target = 1f;
@@ -28,6 +28,7 @@ public class BuildingConstruction : MonoBehaviour
     private void Awake()
     {
         building = this.GetComponent<Building>();
+        squashAndStretch = this.GetComponent<SquashAndStretch>();
     }
 
     public void UpdateConstruction()
@@ -127,10 +128,20 @@ public class BuildingConstruction : MonoBehaviour
         constructionTimer = 0f; // Reset the timer
         constructionPanel.SetActive(false);
         constructionProgressSprite.transform.parent.parent.gameObject.SetActive(false);
-
+        squashAndStretch.PlaySquashAndStretch();
+        BuildEffect();
+        //effect
         //Change the material of the building
 
         // Add any additional logic for a fully constructed building here
+    }
+
+    private void BuildEffect()
+    {
+        Vector3 effectPosition = new Vector3(building.transform.GetChild(1).position.x, building.transform.GetChild(1).localScale.y / 1.5f, building.transform.GetChild(1).position.z);
+        GameObject deathEffect = Instantiate(building.buildingDeathEffect, effectPosition, building.buildingDeathEffect.transform.rotation);
+        deathEffect.transform.localScale *= transform.GetComponent<BoxCollider>().size.x;
+        Destroy(deathEffect, 2f);
     }
 
 }
