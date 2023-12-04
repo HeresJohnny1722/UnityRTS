@@ -128,7 +128,7 @@ public class BuildingConstruction : MonoBehaviour
         constructionTimer = 0f; // Reset the timer
         constructionPanel.SetActive(false);
         constructionProgressSprite.transform.parent.parent.gameObject.SetActive(false);
-        squashAndStretch.maximumScale = 1.7f;
+        squashAndStretch.maximumScale = 1.5f;
         squashAndStretch.PlaySquashAndStretch();
         BuildEffect();
         //effect

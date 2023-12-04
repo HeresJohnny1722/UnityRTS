@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 6392109893767027596, guid: d5066b95e1e6546b9ab0562f912e01cf, type: 3}
   unitType: 2
   name: Worker
-  trainingTime: 5
+  trainingTime: 0.5
   startingHealth: 100
   attackRange: 0
   attackDamage: 0
