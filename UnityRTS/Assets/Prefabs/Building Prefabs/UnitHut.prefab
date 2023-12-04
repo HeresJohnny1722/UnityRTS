@@ -192,6 +192,8 @@ MonoBehaviour:
   buildingSO: {fileID: 11400000, guid: 83b453ecbb6054e5387fc73b965d70de, type: 2}
   buildingHealth: 200
   stage: 0
+  buildingDeathEffect: {fileID: 2739781832950810520, guid: d9d0561c674d04cfb8b1a8ba6dcbaedc,
+    type: 3}
   infoPanel: {fileID: 8316160886918510635}
   removeButton: {fileID: 2305233865030550208}
   buildingHealthbar: {fileID: 3021232541319925804}
@@ -765,6 +767,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BuildingCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8809062781159795514, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8515917037677903640}
+    - target: {fileID: 8809062781159795514, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: removeBuilding
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

@@ -15,6 +15,8 @@ public class BuildingConstruction : MonoBehaviour
     public Material yellowConstructingMaterial;
     private Material[] originalMaterials;
 
+    
+
     private float constructionTimer = 0f;
     private float target = 1f;
 

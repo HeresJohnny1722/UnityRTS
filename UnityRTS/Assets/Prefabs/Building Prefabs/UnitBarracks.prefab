@@ -537,6 +537,8 @@ MonoBehaviour:
   buildingSO: {fileID: 11400000, guid: 4977316ba35904bb5b35383b0f134d0f, type: 2}
   buildingHealth: 250
   stage: 0
+  buildingDeathEffect: {fileID: 2739781832950810520, guid: d9d0561c674d04cfb8b1a8ba6dcbaedc,
+    type: 3}
   infoPanel: {fileID: 2816086458150400594}
   removeButton: {fileID: 5440799210637691065}
   buildingHealthbar: {fileID: 3132801227203264435}

@@ -18,10 +18,13 @@ public class Building : MonoBehaviour
 
     [Header("General Building")]
 
+
     public BuildingSO buildingSO;
 
     public float buildingHealth;
     public float stage;
+
+    public GameObject buildingDeathEffect;
 
     public GameObject infoPanel;
     public GameObject removeButton;
@@ -186,13 +189,17 @@ public class Building : MonoBehaviour
 
         if (buildingSO.buildingType == BuildingSO.BuildingType.Production && buildingSO.resourceType == BuildingSO.ResourceType.Energy)
         {
+
+
+            DeathEffect();
             //Play like a destroying building sound effect
             buildingProduction.buildingToNode();
+
 
         }
         else
         {
-
+            DeathEffect();
             SoundFeedback.Instance.PlaySound(SoundType.Remove);
             deselectBuilding();
             BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
@@ -210,6 +217,14 @@ public class Building : MonoBehaviour
         
 
     }
+
+    private void DeathEffect()
+    {
+        Vector3 effectPosition = new Vector3(transform.GetChild(1).position.x, transform.GetChild(1).localScale.y/2, transform.GetChild(1).position.z);
+        GameObject deathEffect = Instantiate(buildingDeathEffect, effectPosition, buildingDeathEffect.transform.rotation);
+        deathEffect.transform.localScale *= transform.GetComponent<BoxCollider>().size.x;
+        Destroy(deathEffect, 2f);
+    } 
 
     public void BuildingSelected()
     {
