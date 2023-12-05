@@ -313,8 +313,8 @@ Transform:
   m_GameObject: {fileID: 1539467401818448511}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.496, y: 1.1251, z: 0.45}
-  m_LocalScale: {x: 2.468134, y: 1.30016, z: 2.4251802}
+  m_LocalPosition: {x: 1.524, y: 1.1251, z: 0.487}
+  m_LocalScale: {x: 2.830213, y: 1.30016, z: 2.6814408}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4883820705058911029}
@@ -904,6 +904,7 @@ MonoBehaviour:
     type: 2}
   yellowConstructingMaterial: {fileID: 2100000, guid: bf46d1512176e4050ba4381b9bddcae0,
     type: 2}
+  squashAndStretch: {fileID: 0}
   meshComponents:
   - {fileID: 9001048531470877189}
 --- !u!65 &7170078664535787920
@@ -1330,7 +1331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6525879428944242110
 Transform:
   m_ObjectHideFlags: 0

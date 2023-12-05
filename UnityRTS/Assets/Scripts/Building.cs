@@ -93,13 +93,13 @@ public class Building : MonoBehaviour
     {
         if (workersInside.Count > 0)
         {
-            float radius = 3f; // Set your desired radius here
+            float radius = GetComponent<BoxCollider>().size.x/1.9f; // Set your desired radius here
             int workerCounter = (int)workersInside.Count;
 
             for (int i = 0; i < workerCounter; i++)
             {
                 Vector2 randomPoint = Random.insideUnitCircle * radius;
-                Vector3 newPosition = transform.position + new Vector3(randomPoint.x, 0, randomPoint.y);
+                Vector3 newPosition = transform.GetChild(1).position + new Vector3(randomPoint.x, 0, randomPoint.y);
 
                 workersInside[i].transform.position = newPosition;
                 workersInside[i].SetActive(true);

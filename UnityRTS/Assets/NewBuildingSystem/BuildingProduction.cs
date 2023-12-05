@@ -181,6 +181,11 @@ public class BuildingProduction : MonoBehaviour
                 building.removeButton.SetActive(true);
             }
 
+            if (!BuildingSelection.Instance.buildingsList.Contains(building.gameObject))
+            {
+                BuildingSelection.Instance.buildingsList.Add(building.gameObject);
+            }
+
             InventoryManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.coalCost, (int)building.buildingSO.copperCost, 0);
 
             building.buildingHealthText.text = "Health: " + building.buildingHealth.ToString();
@@ -200,18 +205,21 @@ public class BuildingProduction : MonoBehaviour
 
 
         building.removeButton.SetActive(false);
+        building.buildingHealthbar.gameObject.SetActive(false);
         building.buildingHealth = building.buildingSO.startingHealth;
         building.buildingHealthbar.UpdateHealthBar(building.buildingSO.startingHealth, building.buildingHealth);
-        building.buildingHealthbar.gameObject.SetActive(false);
+        //building.buildingHealthbar.gameObject.SetActive(false);
         building.stage = 1;
         building.buildingHealthText.text = "";
         Node.SetActive(true);
         ProductionBuilding.SetActive(false);
         productionPanel.SetActive(false);
         nodePanel.SetActive(true);
-
+        BuildingSelection.Instance.buildingsList.Remove(building.gameObject);
         building.infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = building.buildingSO.nodeName;
         building.infoPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = building.buildingSO.nodeDescription;
+        building.buildingConstruction.isUnderConstruction = false;
+        building.buildingConstruction.constructionProgressSprite.transform.parent.parent.gameObject.SetActive(false);
 
 
     }

@@ -224,6 +224,7 @@ MonoBehaviour:
     type: 2}
   yellowConstructingMaterial: {fileID: 2100000, guid: bf46d1512176e4050ba4381b9bddcae0,
     type: 2}
+  squashAndStretch: {fileID: 0}
   meshComponents:
   - {fileID: 482916609366329069}
   - {fileID: 1661807263089920612}
@@ -596,7 +597,7 @@ PrefabInstance:
     - target: {fileID: 6518903963535337443, guid: 68361b3fb87f64eb9b88f97ecfbe4304,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.756
+      value: 2.9750001
       objectReference: {fileID: 0}
     - target: {fileID: 6518903963535337443, guid: 68361b3fb87f64eb9b88f97ecfbe4304,
         type: 3}
@@ -1118,7 +1119,7 @@ PrefabInstance:
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.497
+      value: 2.716
       objectReference: {fileID: 0}
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
