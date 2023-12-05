@@ -7,11 +7,11 @@ using UnityEngine.AI;
 
 public class Building : MonoBehaviour
 {
-    
+
     public BuildingTraining buildingTraining;
-    
+
     public BuildingProduction buildingProduction;
-   
+
     public BuildingConstruction buildingConstruction;
 
     public BuildingDefense buildingDefense;
@@ -38,7 +38,7 @@ public class Building : MonoBehaviour
 
     void Start()
     {
-        
+
         InitializeBuilding();
 
     }
@@ -49,7 +49,7 @@ public class Building : MonoBehaviour
         stage = buildingSO.stage;
         InitalizeHealth();
         BuildingUIVisibility(false);
-        
+
 
         BuildingSelection.Instance.buildingsList.Add(this.gameObject);
 
@@ -70,10 +70,10 @@ public class Building : MonoBehaviour
         buildingHealth = buildingSO.startingHealth;
         buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
 
-        
+
         buildingHealthText.text = "Health: " + buildingHealth.ToString();
 
-        
+
     }
 
 
@@ -85,7 +85,7 @@ public class Building : MonoBehaviour
         }
 
         buildingConstruction.UpdateConstruction();
-        
+
 
     }
 
@@ -93,7 +93,7 @@ public class Building : MonoBehaviour
     {
         if (workersInside.Count > 0)
         {
-            float radius = GetComponent<BoxCollider>().size.x/1.9f; // Set your desired radius here
+            float radius = GetComponent<BoxCollider>().size.x / 1.9f; // Set your desired radius here
             int workerCounter = (int)workersInside.Count;
 
             for (int i = 0; i < workerCounter; i++)
@@ -226,17 +226,17 @@ public class Building : MonoBehaviour
 
         }
 
-        
+
 
     }
 
     private void DeathEffect()
     {
-        Vector3 effectPosition = new Vector3(transform.GetChild(1).position.x, transform.GetChild(1).localScale.y/2, transform.GetChild(1).position.z);
+        Vector3 effectPosition = new Vector3(transform.GetChild(1).position.x, transform.GetChild(1).localScale.y / 2, transform.GetChild(1).position.z);
         GameObject deathEffect = Instantiate(buildingDeathEffect, effectPosition, buildingDeathEffect.transform.rotation);
         deathEffect.transform.localScale *= transform.GetComponent<BoxCollider>().size.x;
         Destroy(deathEffect, 2f);
-    } 
+    }
 
     public void BuildingSelected()
     {
@@ -257,7 +257,8 @@ public class Building : MonoBehaviour
         {
             buildingHealthbar.gameObject.SetActive(false);
 
-        } else
+        }
+        else
         {
             buildingHealthbar.gameObject.SetActive(true);
         }

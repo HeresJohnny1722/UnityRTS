@@ -51,7 +51,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
-        
+
         //enemyManager.enemyList.Add(gameObject);
         //muzzleFlash.SetActive(false);
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -65,7 +65,7 @@ public class EnemyAI : MonoBehaviour
 
 
 
-    
+
 
     private void Start()
     {
@@ -80,7 +80,7 @@ public class EnemyAI : MonoBehaviour
 
         if (enemyHealth <= 0)
         {
-            
+
             GameObject deathEfct = Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(deathEfct, 2f);
 
@@ -151,7 +151,7 @@ public class EnemyAI : MonoBehaviour
                             if (Time.time > nextShootTime)
                             {
                                 Debug.Log("Shooting a building");
-                                
+
                                 state = State.ShootingTarget;
                                 AttackUnit();
 
@@ -162,12 +162,12 @@ public class EnemyAI : MonoBehaviour
 
                     }
 
-                    }
-                    else
-                    {
-                        state = State.Roaming;
-                    }
-                    break;
+                }
+                else
+                {
+                    state = State.Roaming;
+                }
+                break;
             case State.ShootingTarget:
                 break;
             case State.GoingBackToStart:
@@ -300,7 +300,7 @@ public class EnemyAI : MonoBehaviour
                 if (health <= 0)
                 {
                     state = State.Roaming;
-                    
+
                 }
                 else
                 {
@@ -374,7 +374,7 @@ public class EnemyAI : MonoBehaviour
             }
 
         }
-        
+
 
         //no bullets
         //just a muzzle flash
@@ -395,7 +395,7 @@ public class EnemyAI : MonoBehaviour
         {
             if (targetType == "Building")
             {
-                
+
                 if (Vector3.Distance(transform.position, targetTransform.GetChild(1).position) < enemyAISO.searchRange)
                 {
                     // Player within target range
@@ -410,7 +410,7 @@ public class EnemyAI : MonoBehaviour
                     state = State.ChaseTarget;
                 }
             }
-            
+
         }
 
     }
