@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: SmallZombie
   m_EditorClassIdentifier: 
   enemyType: 0
-  speed: 2.5
-  startingHealth: 50
-  damageAmountPerAttack: 15
-  fireRate: 2
-  attackRange: 0.7
+  speed: 4
+  startingHealth: 30
+  damageAmountPerAttack: 4
+  fireRate: 1
+  attackRange: 0.35
   searchRange: 30
   romingRange: 5
   roamingReachedPositionDistance: 1
