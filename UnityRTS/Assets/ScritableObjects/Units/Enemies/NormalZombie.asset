@@ -17,10 +17,10 @@ MonoBehaviour:
   startingHealth: 50
   damageAmountPerAttack: 15
   fireRate: 2
-  attackRange: 0.7
+  attackRange: 0.35
   searchRange: 30
-  romingRange: 5
-  roamingReachedPositionDistance: 1
+  romingRange: 3
+  roamingReachedPositionDistance: 0.5
   roamingWaitTime: 0
   rotationSpeed: 5
   bulletSpeed: 5000

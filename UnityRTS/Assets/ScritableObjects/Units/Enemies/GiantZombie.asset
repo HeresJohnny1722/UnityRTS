@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 0
   speed: 2.5
-  startingHealth: 50
-  damageAmountPerAttack: 15
+  startingHealth: 400
+  damageAmountPerAttack: 200
   fireRate: 2
   attackRange: 0.7
   searchRange: 30
