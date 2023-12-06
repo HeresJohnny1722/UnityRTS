@@ -51,7 +51,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
-        
+
         //enemyManager.enemyList.Add(gameObject);
         //muzzleFlash.SetActive(false);
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -65,7 +65,7 @@ public class EnemyAI : MonoBehaviour
 
 
 
-    
+
 
     private void Start()
     {
@@ -80,7 +80,7 @@ public class EnemyAI : MonoBehaviour
 
         if (enemyHealth <= 0)
         {
-            
+
             GameObject deathEfct = Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(deathEfct, 2f);
 
@@ -121,10 +121,11 @@ public class EnemyAI : MonoBehaviour
                 if (targetTransform != null)
                 {
                     RotateTowardsPlayerOrBuilding();
-                    navMeshAgent.SetDestination(targetTransform.position);
+                    
 
                     if (targetType == "Unit")
                     {
+                        navMeshAgent.SetDestination(targetTransform.position);
                         if (Vector3.Distance(transform.position, targetTransform.position) < enemyAISO.attackRange)
                         {
                             navMeshAgent.SetDestination(transform.position);
@@ -142,6 +143,7 @@ public class EnemyAI : MonoBehaviour
                     }
                     else if (targetType == "Building")
                     {
+                        navMeshAgent.SetDestination(targetTransform.GetChild(1).position);
                         if (Vector3.Distance(transform.position, targetTransform.GetChild(1).position) < enemyAISO.attackRange + targetTransform.GetComponent<BoxCollider>().size.x / 1.25)
                         {
                             //Debug.Log(targetTransform.GetComponent<BoxCollider>().size.x);
@@ -151,7 +153,7 @@ public class EnemyAI : MonoBehaviour
                             if (Time.time > nextShootTime)
                             {
                                 Debug.Log("Shooting a building");
-                                
+
                                 state = State.ShootingTarget;
                                 AttackUnit();
 
@@ -162,12 +164,12 @@ public class EnemyAI : MonoBehaviour
 
                     }
 
-                    }
-                    else
-                    {
-                        state = State.Roaming;
-                    }
-                    break;
+                }
+                else
+                {
+                    state = State.Roaming;
+                }
+                break;
             case State.ShootingTarget:
                 break;
             case State.GoingBackToStart:
@@ -202,11 +204,22 @@ public class EnemyAI : MonoBehaviour
     {
         if (targetTransform != null)
         {
-            Vector3 directionToPlayer = (targetTransform.position - transform.position).normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToPlayer.x, 0f, directionToPlayer.z));
+            if (targetType == "Unit")
+            {
+                Vector3 directionToPlayer = (targetTransform.position - transform.position).normalized;
+                Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToPlayer.x, 0f, directionToPlayer.z));
 
-            // Use Lerp to smoothly rotate the enemy towards the player
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * enemyAISO.rotationSpeed);
+                // Use Lerp to smoothly rotate the enemy towards the player
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * enemyAISO.rotationSpeed);
+            } else if (targetType == "Building")
+            {
+                Vector3 directionToPlayer = (targetTransform.GetChild(1).position - transform.position).normalized;
+                Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToPlayer.x, 0f, directionToPlayer.z));
+
+                // Use Lerp to smoothly rotate the enemy towards the player
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * enemyAISO.rotationSpeed);
+            }
+             
         }
     }
 
@@ -274,12 +287,12 @@ public class EnemyAI : MonoBehaviour
         if (targetType == "Unit")
         {
 
-            float sphereRadius = .25f; // Adjust the sphere radius as needed
+            //float sphereRadius = .25f; // Adjust the sphere radius as needed
 
             RaycastHit hit;
 
 
-            if (Physics.SphereCast(raycastPoint.position, sphereRadius, (targetTransform.position - raycastPoint.position).normalized, out hit, enemyAISO.attackRange + 2, playersLayerMask))
+            if (Physics.Raycast(raycastPoint.position, (targetTransform.position - raycastPoint.position).normalized, out hit, playersLayerMask))
             {
                 if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
                 {
@@ -290,17 +303,17 @@ public class EnemyAI : MonoBehaviour
                 float health = 0;
                 float unitHealth;
                 //Debug.Log("SphereCast hit something on the player layer");
-                if (hit.transform.GetComponent<Unit>())
+                if (targetTransform.GetComponent<Unit>())
                 {
-                    unitHealth = (hit.transform.GetComponent<Unit>().unitHealth);
+                    unitHealth = (targetTransform.GetComponent<Unit>().unitHealth);
                     health = unitHealth - enemyAISO.damageAmountPerAttack;
-                    hit.transform.GetComponent<Unit>().takeDamage(enemyAISO.damageAmountPerAttack);
+                    targetTransform.GetComponent<Unit>().takeDamage(enemyAISO.damageAmountPerAttack);
                 }
 
                 if (health <= 0)
                 {
                     state = State.Roaming;
-                    
+
                 }
                 else
                 {
@@ -320,49 +333,61 @@ public class EnemyAI : MonoBehaviour
         }
         else if (targetType == "Building")
         {
-            //float sphereRadius = .5f; // Adjust the sphere radius as needed
-            float sphereRadius = targetTransform.GetComponent<BoxCollider>().size.x / 2f;
-
-            RaycastHit hit;
-
-            Debug.Log("Trying to shoot a building");
-            if (Physics.SphereCast(raycastPoint.position, sphereRadius, (targetTransform.GetChild(1).position - raycastPoint.position).normalized, out hit, enemyAISO.attackRange + 2, buildingsLayerMask))
+            if (targetTransform.GetComponent<Building>().stage != 1)
             {
-                if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
-                {
-                    GameObject mleSlash = Instantiate(meleeSlash, firePoint.position, firePoint.rotation);
-                    Destroy(mleSlash, .5f);
-                }
 
-                float health = 0;
-                float buildingHealth;
-                Debug.Log("SphereCast hit something on the player layer");
-                if (hit.transform.GetComponent<Building>())
-                {
-                    buildingHealth = (hit.transform.GetComponent<Building>().buildingHealth);
-                    health = buildingHealth - enemyAISO.damageAmountPerAttack;
-                    hit.transform.GetComponent<Building>().takeDamage(enemyAISO.damageAmountPerAttack);
-                }
 
-                if (health <= 0)
+                //float sphereRadius = .5f; // Adjust the sphere radius as needed
+                //float sphereRadius = targetTransform.GetComponent<BoxCollider>().size.x / 2f;
+
+                RaycastHit hit;
+
+                Debug.Log("Trying to shoot a building");
+                if (Physics.Raycast(raycastPoint.position, (targetTransform.GetChild(1).position - raycastPoint.position).normalized, out hit, buildingsLayerMask))
                 {
+                    if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
+                    {
+                        GameObject mleSlash = Instantiate(meleeSlash, firePoint.position, firePoint.rotation);
+                        Destroy(mleSlash, .5f);
+                    }
+
+                    float health = 0;
+                    float buildingHealth;
+                    Debug.Log("SphereCast hit something on the player layer");
+                    if (targetTransform.GetComponent<Building>())
+                    {
+                        buildingHealth = (targetTransform.GetComponent<Building>().buildingHealth);
+                        health = buildingHealth - enemyAISO.damageAmountPerAttack;
+                        targetTransform.GetComponent<Building>().takeDamage(enemyAISO.damageAmountPerAttack);
+                    }
+
+                    if (health <= 0)
+                    {
+                        state = State.Roaming;
+
+                    }
+                    else
+                    {
+                        state = State.ChaseTarget;
+                    }
+
+
+                    // Additional actions for hitting a player can be added here
+                }
+                else
+                {
+                    targetTransform = null;
                     state = State.Roaming;
-                    
-                } else
-                {
-                    state = State.ChaseTarget;
                 }
-                
-
-                // Additional actions for hitting a player can be added here
-            } else
+            }
+            else
             {
                 targetTransform = null;
                 state = State.Roaming;
             }
-            
+
         }
-        
+
 
         //no bullets
         //just a muzzle flash
@@ -383,7 +408,7 @@ public class EnemyAI : MonoBehaviour
         {
             if (targetType == "Building")
             {
-                
+
                 if (Vector3.Distance(transform.position, targetTransform.GetChild(1).position) < enemyAISO.searchRange)
                 {
                     // Player within target range
@@ -398,7 +423,7 @@ public class EnemyAI : MonoBehaviour
                     state = State.ChaseTarget;
                 }
             }
-            
+
         }
 
     }

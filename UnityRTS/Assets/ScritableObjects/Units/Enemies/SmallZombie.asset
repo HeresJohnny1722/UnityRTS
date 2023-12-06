@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a5218c7e841b4120a4ba6015230572d, type: 3}
-  m_Name: BasicMeleeEnemy
+  m_Name: SmallZombie
   m_EditorClassIdentifier: 
   enemyType: 0
-  speed: 2.5
-  startingHealth: 50
-  damageAmountPerAttack: 15
-  fireRate: 2
-  attackRange: 0.7
+  speed: 4
+  startingHealth: 30
+  damageAmountPerAttack: 4
+  fireRate: 1
+  attackRange: 0.35
   searchRange: 30
   romingRange: 5
   roamingReachedPositionDistance: 1
   roamingWaitTime: 0
-  rotationSpeed: 45
+  rotationSpeed: 5
   bulletSpeed: 5000
   stopChaseDistance: 15
   reachedStartPositionDistance: 10

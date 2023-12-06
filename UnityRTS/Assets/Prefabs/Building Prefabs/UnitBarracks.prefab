@@ -250,6 +250,7 @@ MonoBehaviour:
     type: 2}
   yellowConstructingMaterial: {fileID: 2100000, guid: bf46d1512176e4050ba4381b9bddcae0,
     type: 2}
+  squashAndStretch: {fileID: 0}
   meshComponents:
   - {fileID: 7895568652559848191}
 --- !u!114 &6712343966138974176
@@ -297,7 +298,7 @@ MonoBehaviour:
   barracksTrainingTimeLeftText: {fileID: 3031748581197004594}
   barracacksQueueSizeText: {fileID: 5526650171256587176}
   barracksUnitTrainingNameText: {fileID: 905681460775721516}
-  unitFlagOffset: 1
+  unitFlagOffset: 0.6
   unitSpawnPoint: {fileID: 0}
   unitMovePoint: {fileID: 0}
   isTraining: 0

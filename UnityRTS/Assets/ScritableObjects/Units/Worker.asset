@@ -21,7 +21,7 @@ MonoBehaviour:
   attackDamage: 0
   fireRate: 0
   speed: 4
-  rotationSpeed: 0
+  rotationSpeed: 5
   description: Worker does gathering
   goldCost: 2
   coalCost: 2

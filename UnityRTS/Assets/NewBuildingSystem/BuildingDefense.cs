@@ -86,12 +86,12 @@ public class BuildingDefense : MonoBehaviour
     private void ShootEnemy()
     {
 
-        float sphereRadius = .25f; // Adjust the sphere radius as needed
+        //float sphereRadius = .25f; // Adjust the sphere radius as needed
 
         RaycastHit hit;
 
 
-        if (Physics.SphereCast(raycastPoint.position, sphereRadius, (currentTarget.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, enemyLayerMask))
+        if (Physics.Raycast(raycastPoint.position, (currentTarget.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, enemyLayerMask))
         {
 
             

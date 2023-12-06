@@ -195,7 +195,7 @@ public class Unit : MonoBehaviour
             RaycastHit hit;
 
 
-            if (Physics.SphereCast(raycastPoint.position, sphereRadius, (currentTarget.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, enemyLayerMask))
+            if (Physics.Raycast(raycastPoint.position, (currentTarget.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, enemyLayerMask))
             {
 
                 //Debug.Log("SphereCast hit something on the enemy layer");
