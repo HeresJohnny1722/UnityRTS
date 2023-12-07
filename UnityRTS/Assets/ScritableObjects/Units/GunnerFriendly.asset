@@ -20,7 +20,7 @@ MonoBehaviour:
   attackRange: 10
   attackDamage: 20
   fireRate: 1
-  speed: 5
+  speed: 1
   rotationSpeed: 5
   description: Gunner  description
   goldCost: 5

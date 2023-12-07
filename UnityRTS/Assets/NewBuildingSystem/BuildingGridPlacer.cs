@@ -89,7 +89,7 @@ public class BuildingGridPlacer : BuildingPlacer
                             _buildingPrefab = null;
                             _toBuild = null;
                             _EnableGridVisual(false);
-                        NavmeshManager.Instance.UpdateNavmesh();
+                        NavmeshManage.Instance.UpdateNavmesh();
                         //}
                     } else
                     {
