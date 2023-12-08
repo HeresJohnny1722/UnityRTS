@@ -53,10 +53,22 @@ public class BuildingGridPlacer : BuildingPlacer
             }
 
             _ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(_ray, out _hit, 1000f, groundLayerMask))
+            if (Physics.Raycast(_ray, out _hit, Mathf.Infinity, groundLayerMask))
             {
                 if (!_toBuild.activeSelf) _toBuild.SetActive(true);
                 _toBuild.transform.position = _ClampToNearest(_hit.point, cellSize);
+                _toBuild.GetComponent<BuildingManager>().NumberWallsInsideRadius();
+                if (_toBuild.GetComponent<BuildingManager>().wallNumber > 2)
+                {
+                    _toBuild.GetComponent<BuildingManager>().SetPlacementMode(PlacementMode.Invalid);
+                } else
+                {
+                    if (_toBuild.GetComponent<BuildingManager>().hasValidPlacement)
+                    {
+                        _toBuild.GetComponent<BuildingManager>().SetPlacementMode(PlacementMode.Valid);
+                    }
+                }
+               
 
                 if (Input.GetMouseButtonDown(0))
                 { // if left-click
@@ -71,25 +83,24 @@ public class BuildingGridPlacer : BuildingPlacer
                         InventoryManager.instance.increaseBuildingCount(building.buildingSO);
                         
 
-
-                        //InventoryManager.instance.AddMaxPopulation((int)building.buildingSO.populationIncrease);
-                        //(int)building.buildingSO.populationIncrease
-                        //InventoryManager.instance.AddResources((int)building.buildingSO.populationIncrease, 0, 0, 0, 0);
-                        //Debug.Log("Testing Building Resources");
                         m.SetPlacementMode(PlacementMode.Fixed);
 
-                        /*// shift-key: chain builds
+                        // shift-key: chain builds
                         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                         {
                             _toBuild = null; // (to avoid destruction)
                             _PrepareBuilding();
-                        }*/
-                        // exit build mode
-                        //else {
+                            NavmeshManage.Instance.UpdateNavmesh();
+                        }
+                        else
+                        {
                             _buildingPrefab = null;
                             _toBuild = null;
                             _EnableGridVisual(false);
-                        NavmeshManage.Instance.UpdateNavmesh();
+                            NavmeshManage.Instance.UpdateNavmesh();
+
+                        }
+                        
                         //}
                     } else
                     {

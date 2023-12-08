@@ -22,6 +22,11 @@ public class BuildingManager : MonoBehaviour
 
     private int _nObstacles;
 
+    private int wallCounter = 0;
+    public int wallNumber = 0;
+
+    public bool isWallPlacementValid = true;
+
     private void Awake()
     {
         //meshComponents = this.GetComponent<BuildingConstruction>().meshComponents;
@@ -51,9 +56,84 @@ public class BuildingManager : MonoBehaviour
         if (_IsGround(other.gameObject)) return;
 
         _nObstacles--;
-        if (_nObstacles == 0)
+        NumberWallsInsideRadius();
+
+
+
+        if (_nObstacles == 0 && wallNumber <= 2)
             SetPlacementMode(PlacementMode.Valid);
     }
+
+    public void NumberWallsInsideRadius()
+    {
+        if (GetComponent<Building>().buildingSO.buildingType == BuildingSO.BuildingType.Wall)
+        {
+            wallCounter = 0;
+            Debug.Log("Trying to build a wall");
+
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1f);
+
+            foreach (var collider in hitColliders)
+            {
+                if (collider.gameObject != gameObject && !IsChildOf(transform, collider.transform))
+                {
+                    if (collider.GetComponent<Building>() != null)
+                    {
+                        if (collider.GetComponent<Building>().buildingSO.buildingType == BuildingSO.BuildingType.Wall)
+                        {
+                            Debug.Log("Is Next to a Wall");
+                            wallCounter++;
+                            Debug.Log(wallCounter);
+                            
+                        }
+                    }
+                }
+            }
+
+            // If no walls were found, set wallNumber to 0
+            wallNumber = wallCounter;
+
+            /*if (wallCounter > 2)
+            {
+                //Placement is invalid
+                SetPlacementMode(PlacementMode.Invalid);
+                wallCounter = 0;
+            }
+            else
+            {
+                if (hasValidPlacement)
+                {
+                    SetPlacementMode(PlacementMode.Valid);
+                }
+            }*/
+        }
+    }
+
+    private void Update()
+    {
+
+        if (!isFixed)
+        {
+            NumberWallsInsideRadius();
+            
+            
+        }
+    }
+
+    // Helper function to check if a transform is a child of another transform
+    bool IsChildOf(Transform parent, Transform potentialChild)
+    {
+        while (potentialChild != null)
+        {
+            if (potentialChild == parent)
+            {
+                return true;
+            }
+            potentialChild = potentialChild.parent;
+        }
+        return false;
+    }
+
 
 #if UNITY_EDITOR
     private void OnValidate()

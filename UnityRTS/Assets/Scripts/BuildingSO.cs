@@ -12,6 +12,7 @@ public class BuildingSO : ScriptableObject
         Barracks,
         Production,
         Defense,
+        Wall
     }
 
     public enum ResourceType

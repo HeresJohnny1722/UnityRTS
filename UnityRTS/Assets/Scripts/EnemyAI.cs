@@ -347,8 +347,8 @@ public class EnemyAI : MonoBehaviour
                 {
                     if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
                     {
-                        GameObject mleSlash = Instantiate(meleeSlash, firePoint.position, firePoint.rotation);
-                        Destroy(mleSlash, .5f);
+                        //GameObject mleSlash = Instantiate(meleeSlash, firePoint.position, firePoint.rotation);
+                        //Destroy(mleSlash, .5f);
                     }
 
                     float health = 0;
