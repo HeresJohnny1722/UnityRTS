@@ -69,7 +69,7 @@ public class BuildingManager : MonoBehaviour
         if (GetComponent<Building>().buildingSO.buildingType == BuildingSO.BuildingType.Wall)
         {
             wallCounter = 0;
-            Debug.Log("Trying to build a wall");
+            //Debug.Log("Trying to build a wall");
 
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1f);
 
@@ -81,9 +81,9 @@ public class BuildingManager : MonoBehaviour
                     {
                         if (collider.GetComponent<Building>().buildingSO.buildingType == BuildingSO.BuildingType.Wall)
                         {
-                            Debug.Log("Is Next to a Wall");
+                            //Debug.Log("Is Next to a Wall");
                             wallCounter++;
-                            Debug.Log(wallCounter);
+                            //Debug.Log(wallCounter);
                             
                         }
                     }
