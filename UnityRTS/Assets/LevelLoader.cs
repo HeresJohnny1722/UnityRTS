@@ -12,15 +12,21 @@ public class LevelLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             LoadNextLevel();
-        }
+        }*/
     }
 
     public void LoadNextLevel()
     {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+
+    public void LoadLevelByIndex(int index)
+    {
+        Debug.Log("Load Level " + index);
+        StartCoroutine(LoadLevel(index));
     }
 
     IEnumerator LoadLevel(int levelIndex)
