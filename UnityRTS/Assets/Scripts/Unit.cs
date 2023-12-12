@@ -35,10 +35,12 @@ public class Unit : MonoBehaviour
     public UnitState currentState;
 
     public Transform currentTarget;
+    public Transform targetBuilding;
 
     public bool isMoving;
 
     public LayerMask enemyLayerMask;
+    public LayerMask buildingLayerMask;
 
     public Vector3 moveToPosition;
 
@@ -88,7 +90,17 @@ public class Unit : MonoBehaviour
         {
             case UnitState.Idle:
                 muzzleFlash.SetActive(false);
-                CheckForEnemies();
+                //if gunner
+                if (unitSO.unitType == UnitSO.UnitType.Gunner)
+                {
+                    CheckForEnemies();
+                } else if (unitSO.unitType == UnitSO.UnitType.Worker)
+                {
+                    //else if worker
+                    CheckForBuildings();
+                }
+                
+                
                 break;
 
             case UnitState.Shooting:
@@ -117,6 +129,8 @@ public class Unit : MonoBehaviour
                 muzzleFlash.SetActive(false);
                 currentTarget = null;
 
+                //If a worker
+                //Check if there are any buildings to go to
                 
                 break;
 
@@ -125,6 +139,38 @@ public class Unit : MonoBehaviour
         }
     }
 
+    private void CheckForBuildings()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, unitSO.buildRange, buildingLayerMask);
+
+        if (colliders.Length > 0)
+        {
+            Debug.Log("There are " + colliders.Length + " buildings in the units range" + colliders[0].name);
+
+            //if is under construction0.
+
+            Transform closestBuilding = colliders[0].transform;
+            
+            if (closestBuilding != null)
+            {
+                //Debug.Log("trying to enter building");
+                Building buildingBuilding = closestBuilding.GetComponent<Building>();
+                if (buildingBuilding.buildingConstruction.isUnderConstruction)
+                {
+                    targetBuilding = closestBuilding;
+                    Debug.Log("Need to enter " + targetBuilding.name);
+                }
+                
+
+            } else
+            {
+                targetBuilding = null;
+                Debug.Log("target building is null");
+            }
+
+        }
+
+    }
 
 
 

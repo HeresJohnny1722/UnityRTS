@@ -19,6 +19,7 @@ public class UnitSO : ScriptableObject
     public new string name;
     public float trainingTime;
     public float startingHealth;
+    public float buildRange;
     public float attackRange;
     public float attackDamage;
     public float fireRate;

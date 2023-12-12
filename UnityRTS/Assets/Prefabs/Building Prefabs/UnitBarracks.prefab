@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7895568652559848191}
   - component: {fileID: 8758659990708129339}
   - component: {fileID: 3840150990283995935}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,6 +323,8 @@ MonoBehaviour:
   - {fileID: 7895568652559848191}
   hasValidPlacement: 0
   isFixed: 0
+  wallNumber: 0
+  isWallPlacementValid: 1
 --- !u!54 &2254554157729864186
 Rigidbody:
   m_ObjectHideFlags: 0

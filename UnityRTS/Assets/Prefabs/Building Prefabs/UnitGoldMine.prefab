@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 461478429041229211}
   - component: {fileID: 7948959440814645429}
   - component: {fileID: 4711364538097361287}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3189026832827444462}
   - component: {fileID: 1163911416810924750}
   - component: {fileID: 8426545852447109538}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 6276873337805867574}
   - component: {fileID: 5495864434683835626}
   - component: {fileID: 5432388126113284311}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 7976729562601903221}
   - component: {fileID: 4022362276238497397}
   - component: {fileID: 4552944809917032770}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 3902521453762673520}
   - component: {fileID: 6015515968651195042}
   - component: {fileID: 1597283157058805727}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,6 +538,7 @@ MonoBehaviour:
     type: 2}
   yellowConstructingMaterial: {fileID: 2100000, guid: bf46d1512176e4050ba4381b9bddcae0,
     type: 2}
+  squashAndStretch: {fileID: 0}
   meshComponents:
   - {fileID: 3741923077160609152}
 --- !u!114 &1152830689585302334
@@ -584,6 +585,8 @@ MonoBehaviour:
   - {fileID: 3741923077160609152}
   hasValidPlacement: 0
   isFixed: 0
+  wallNumber: 0
+  isWallPlacementValid: 1
 --- !u!65 &22257681220232010
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -702,7 +705,7 @@ GameObject:
   - component: {fileID: 6774346628933904039}
   - component: {fileID: 3678586188956817891}
   - component: {fileID: 6352577464469056375}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -785,7 +788,7 @@ GameObject:
   - component: {fileID: 5125586478384048250}
   - component: {fileID: 6569666233424490613}
   - component: {fileID: 8260629219552191252}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -868,7 +871,7 @@ GameObject:
   - component: {fileID: 3169775859252465654}
   - component: {fileID: 6844889122073761681}
   - component: {fileID: 5326174281113259070}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1035,7 +1038,7 @@ GameObject:
   - component: {fileID: 1118064794477598628}
   - component: {fileID: 8771926847271289043}
   - component: {fileID: 4696035166084504748}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1118,7 +1121,7 @@ GameObject:
   - component: {fileID: 1176102986120641166}
   - component: {fileID: 729010224353455407}
   - component: {fileID: 5061095891409893094}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1203,7 +1206,7 @@ GameObject:
   - component: {fileID: 3741923077160609152}
   - component: {fileID: 6777149458869397858}
   - component: {fileID: 4030479076591485616}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldMine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1329,7 +1332,7 @@ GameObject:
   - component: {fileID: 5794442917081612079}
   - component: {fileID: 5951238042267460617}
   - component: {fileID: 8407058025770898182}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1412,7 +1415,7 @@ GameObject:
   - component: {fileID: 3477756488427310186}
   - component: {fileID: 7017123781213811574}
   - component: {fileID: 4544654673150469772}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1526,7 +1529,7 @@ GameObject:
   - component: {fileID: 8404201499354244531}
   - component: {fileID: 6823752446898980298}
   - component: {fileID: 2414195747726898819}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1609,7 +1612,7 @@ GameObject:
   - component: {fileID: 2548466936042443565}
   - component: {fileID: 3992912591673444442}
   - component: {fileID: 664656267718247787}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1692,7 +1695,7 @@ GameObject:
   - component: {fileID: 1367369172627867772}
   - component: {fileID: 6359127107196805668}
   - component: {fileID: 3375468396218622224}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1775,7 +1778,7 @@ GameObject:
   - component: {fileID: 4646652353701147776}
   - component: {fileID: 1136153052572202103}
   - component: {fileID: 2637628121687715370}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1858,7 +1861,7 @@ GameObject:
   - component: {fileID: 6489326917783238741}
   - component: {fileID: 6489074005815729165}
   - component: {fileID: 5925891472347889639}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1941,7 +1944,7 @@ GameObject:
   - component: {fileID: 5154795513197596472}
   - component: {fileID: 3572977005144055935}
   - component: {fileID: 6150651180325820277}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2024,7 +2027,7 @@ GameObject:
   - component: {fileID: 5130514961364767070}
   - component: {fileID: 7374895214429757256}
   - component: {fileID: 8844886868085216278}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2107,7 +2110,7 @@ GameObject:
   - component: {fileID: 7925828080312477147}
   - component: {fileID: 6093610231557782485}
   - component: {fileID: 9212260508340047234}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2188,7 +2191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4041562055953385064}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2244,7 +2247,7 @@ GameObject:
   - component: {fileID: 2248914990714859980}
   - component: {fileID: 4991422429865337147}
   - component: {fileID: 2957938745605681954}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2327,7 +2330,7 @@ GameObject:
   - component: {fileID: 6654689625389820192}
   - component: {fileID: 1509123379253288275}
   - component: {fileID: 3697846616254219204}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2410,7 +2413,7 @@ GameObject:
   - component: {fileID: 3294706571974653853}
   - component: {fileID: 9151626062393736925}
   - component: {fileID: 8269622999281227479}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

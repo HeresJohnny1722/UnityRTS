@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9024592604132314404}
   - component: {fileID: 8847356860538537608}
   - component: {fileID: 7706826762791814092}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 765822100169977824}
   - component: {fileID: 4081132745267842460}
   - component: {fileID: 7291704361581448274}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4965784616765509498}
   - component: {fileID: 7169174367810010199}
   - component: {fileID: 1355075776550972545}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GoldNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 6077213054835936403}
   - component: {fileID: 3427776897270181392}
   - component: {fileID: 6865765668467565148}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: CoalMine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,6 +529,7 @@ MonoBehaviour:
     type: 2}
   yellowConstructingMaterial: {fileID: 2100000, guid: bf46d1512176e4050ba4381b9bddcae0,
     type: 2}
+  squashAndStretch: {fileID: 0}
   meshComponents:
   - {fileID: 3427776897270181392}
 --- !u!114 &5619884489375765989
@@ -577,6 +578,8 @@ MonoBehaviour:
   - {fileID: 3427776897270181392}
   hasValidPlacement: 0
   isFixed: 0
+  wallNumber: 0
+  isWallPlacementValid: 1
 --- !u!114 &6528371850163622390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,7 +720,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4679526469800765970}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: CoalNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}

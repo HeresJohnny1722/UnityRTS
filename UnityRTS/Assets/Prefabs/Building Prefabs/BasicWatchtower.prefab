@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6332059919555016425}
   - component: {fileID: 482916609366329069}
   - component: {fileID: 6191006775537372278}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,6 +249,8 @@ MonoBehaviour:
   - {fileID: 1661807263089920612}
   hasValidPlacement: 0
   isFixed: 0
+  wallNumber: 0
+  isWallPlacementValid: 1
 --- !u!114 &2173348100035529839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +420,7 @@ GameObject:
   - component: {fileID: 2009976563433223461}
   - component: {fileID: 1661807263089920612}
   - component: {fileID: 865289020441683583}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
