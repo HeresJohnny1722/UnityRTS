@@ -66,19 +66,7 @@ public class Unit : MonoBehaviour
 
     private void Update()
     {
-        /*if (transform.position == moveToPosition)
-        {
-            //Means the unit is not moving
-            if (currentState == UnitState.Moving)
-            {
-                currentState = UnitState.Idle;
-            }
-            
-        } else
-        {
-            //is moving
-            currentState = UnitState.Moving;
-        }*/
+        
 
         if (transform.position.x == moveToPosition.x && transform.position.z == moveToPosition.z)
         {

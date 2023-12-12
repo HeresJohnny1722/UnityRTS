@@ -788,7 +788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notes: 
-  transformToAffect: {fileID: 5290414806508935177}
+  transformToAffect: {fileID: 2732356258340933423}
   axisToAffect: 2
   animationDuration: 0.5
   canBeOverwritten: 0
