@@ -18,6 +18,7 @@ public class WaveSpawner : MonoBehaviour
 {
     public Wave[] waves;
     public float timeBetweenWaves = 5f;
+    public float timeBetweenSpawns = .25f;
     public Transform[] spawnPoints;
 
     private int waveIndex = 0;
@@ -51,7 +52,7 @@ public class WaveSpawner : MonoBehaviour
         {
             Transform spawnPoint = GetRandomSpawnPoint();
             Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }
 
