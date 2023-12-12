@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
+  m_Name: LevelTwoWatchtower
+  m_EditorClassIdentifier: 
+  buildingType: 3
+  unitsToTrain: []
+  spawnFlagMoveToTroopOffset: 1
+  resourceType: 0
+  outputPerSecond: 0
+  nodeName: 
+  nodeDescription: 
+  stage: 2
+  fireRate: 0.35
+  attackDamage: 50
+  attackRange: 8
+  populationIncrease: 0
+  name: Watchtower
+  description: Shoot enemies
+  startingHealth: 300
+  timeToBuild: 1
+  goldCost: 25
+  woodCost: 25
+  foodCost: 25

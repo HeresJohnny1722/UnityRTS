@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
-  m_Name: Spike Trap
+  m_Name: LevelOneWatchtower
   m_EditorClassIdentifier: 
-  buildingType: 5
+  buildingType: 3
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
@@ -20,14 +20,14 @@ MonoBehaviour:
   nodeName: 
   nodeDescription: 
   stage: 2
-  fireRate: 0
-  attackDamage: 0
-  attackRange: 0
+  fireRate: 0.7
+  attackDamage: 25
+  attackRange: 8
   populationIncrease: 0
-  name: Spike Trap
-  description: spikes enemies
-  startingHealth: 50
-  timeToBuild: 3
-  goldCost: 5
-  woodCost: 5
-  foodCost: 5
+  name: Watchtower
+  description: Shoot enemies
+  startingHealth: 300
+  timeToBuild: 1
+  goldCost: 25
+  woodCost: 25
+  foodCost: 25

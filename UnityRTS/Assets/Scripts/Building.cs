@@ -175,6 +175,7 @@ public class Building : MonoBehaviour
             if (buildingHealth <= 0)
             {
                 removeBuilding();
+                InventoryManager.instance.RemoveResources(0, (int)buildingSO.goldCost, (int)buildingSO.woodCost, (int)buildingSO.foodCost, 0);
             }
 
             buildingHealthText.text = "Health: " + buildingHealth.ToString();
@@ -217,7 +218,7 @@ public class Building : MonoBehaviour
             BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
             Destroy(this.gameObject);
             InventoryManager.instance.decreaseBuildingCount(buildingSO);
-            InventoryManager.instance.AddResources(0, (int)buildingSO.goldCost, (int)buildingSO.woodCost, (int)buildingSO.foodCost, 0);
+            
 
             if (!buildingConstruction.isUnderConstruction)
             {

@@ -21,10 +21,12 @@ public class InventoryManager : MonoBehaviour
     public int maxBarracks;
     public int maxGoldFactory;
     public int maxLumberMill;
+    public int maxGreenhouse;
     public int houseCount;
     public int barracksCount;
     public int goldFactoryCount;
     public int lumberMillCount;
+    public int greenhouseCount;
 
     // TextMeshPro fields for displaying resource quantities
     public TextMeshProUGUI populationText;
@@ -58,12 +60,12 @@ public class InventoryManager : MonoBehaviour
     }
 
     // Add resources to the inventory
-    public void AddResources(int addedPopulation, int addedGold, int addedCoal, int addedCopper, int addedEnergy)
+    public void AddResources(int addedPopulation, int addedGold, int addedWood, int addedFood, int addedEnergy)
     {
         
         gold += addedGold;
-        wood += addedCoal;
-        food += addedCopper;
+        wood += addedWood;
+        food += addedFood;
         energy += addedEnergy;
 
         // Update TextMeshPro fields
@@ -96,15 +98,15 @@ public class InventoryManager : MonoBehaviour
     }
 
     // Remove resources from the inventory
-    public void RemoveResources(int removedPopulation, int removedGold, int removedCoal, int removedCopper, int removedEnergy)
+    public void RemoveResources(int removedPopulation, int removedGold, int removedWood, int removedFood, int removedEnergy)
     {
         // Check if there are enough resources to remove
-        if (gold >= removedGold && wood >= removedCoal && food >= removedCopper && energy >= removedEnergy)
+        if (gold >= removedGold && wood >= removedWood && food >= removedFood && energy >= removedEnergy)
         {
             
             gold -= removedGold;
-            wood -= removedCoal;
-            food -= removedCopper;
+            wood -= removedWood;
+            food -= removedFood;
             energy -= removedEnergy;
 
             // Update TextMeshPro fields
@@ -119,12 +121,12 @@ public class InventoryManager : MonoBehaviour
 
     }
 
-    public bool AreResourcesAvailable(int requiredPopulation, int requiredGold, int requiredCoal, int requiredCopper, int requiredEnergy)
+    public bool AreResourcesAvailable(int requiredPopulation, int requiredGold, int requiredWood, int requiredFood, int requiredEnergy)
     {
         return maxedPopulation >= (currentPopulation + requiredPopulation) &&
                gold >= requiredGold &&
-               wood >= requiredCoal &&
-               food >= requiredCopper &&
+               wood >= requiredWood &&
+               food >= requiredFood &&
                energy >= requiredEnergy;
     }
 
@@ -184,6 +186,20 @@ public class InventoryManager : MonoBehaviour
                 }
 
             }
+            else if (buildingSO.resourceType == BuildingSO.ResourceType.Food)
+            {
+
+                if (InventoryManager.instance.maxGreenhouse > InventoryManager.instance.greenhouseCount)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
             else
             {
                 return false;
@@ -226,7 +242,13 @@ public class InventoryManager : MonoBehaviour
                 InventoryManager.instance.lumberMillCount++;
 
             }
-            
+            else if (buildingSO.resourceType == BuildingSO.ResourceType.Food)
+            {
+
+                InventoryManager.instance.greenhouseCount++;
+
+            }
+
 
         }
 
@@ -266,6 +288,12 @@ public class InventoryManager : MonoBehaviour
             {
 
                 InventoryManager.instance.lumberMillCount--;
+
+            }
+            else if (buildingSO.resourceType == BuildingSO.ResourceType.Food)
+            {
+
+                InventoryManager.instance.greenhouseCount--;
 
             }
 

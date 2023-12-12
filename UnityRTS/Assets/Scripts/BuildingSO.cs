@@ -42,6 +42,7 @@ public class BuildingSO : ScriptableObject
     public float fireRate;
     public float attackDamage;
     public float attackRange;
+    public float turretRotationSpeed;
 
 
     [Header("Only Buildings that increase population")]

@@ -6,6 +6,7 @@ public class EnemyWave
 {
     public GameObject enemyPrefab;
     public int count;
+    public Transform[] spawnPoints;
 }
 
 [System.Serializable]
@@ -19,11 +20,10 @@ public class WaveSpawner : MonoBehaviour
     public Wave[] waves;
     public float timeBetweenWaves = 5f;
     public float timeBetweenSpawns = .25f;
-    public Transform[] spawnPoints;
 
     private int waveIndex = 0;
 
-    void Start()
+    public void StartWaves()
     {
         StartCoroutine(SpawnWave());
     }
@@ -37,7 +37,7 @@ public class WaveSpawner : MonoBehaviour
             for (int i = 0; i < currentWave.enemies.Length; i++)
             {
                 EnemyWave enemyWave = currentWave.enemies[i];
-                StartCoroutine(SpawnEnemies(enemyWave.enemyPrefab, enemyWave.count));
+                StartCoroutine(SpawnEnemies(enemyWave.enemyPrefab, enemyWave.count, enemyWave.spawnPoints));
                 yield return new WaitForSeconds(1f);
             }
 
@@ -46,17 +46,17 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnEnemies(GameObject enemyPrefab, int count)
+    IEnumerator SpawnEnemies(GameObject enemyPrefab, int count, Transform[] spawnPoints)
     {
         for (int i = 0; i < count; i++)
         {
-            Transform spawnPoint = GetRandomSpawnPoint();
+            Transform spawnPoint = GetRandomSpawnPoint(spawnPoints);
             Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }
 
-    Transform GetRandomSpawnPoint()
+    Transform GetRandomSpawnPoint(Transform[] spawnPoints)
     {
         int randomIndex = Random.Range(0, spawnPoints.Length);
         return spawnPoints[randomIndex];

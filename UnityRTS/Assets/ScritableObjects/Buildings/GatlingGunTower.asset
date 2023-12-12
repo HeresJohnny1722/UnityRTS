@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
-  m_Name: Basic Watchtower
+  m_Name: GatlingGunTower
   m_EditorClassIdentifier: 
   buildingType: 3
   unitsToTrain: []
@@ -20,14 +20,15 @@ MonoBehaviour:
   nodeName: 
   nodeDescription: 
   stage: 2
-  fireRate: 0.7
-  attackDamage: 25
+  fireRate: 0.1
+  attackDamage: 1
   attackRange: 8
+  turretRotationSpeed: 30
   populationIncrease: 0
   name: Watchtower
   description: Shoot enemies
-  startingHealth: 300
-  timeToBuild: 10
+  startingHealth: 5999
+  timeToBuild: 1
   goldCost: 25
   woodCost: 25
   foodCost: 25

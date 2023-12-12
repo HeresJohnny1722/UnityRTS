@@ -6,11 +6,15 @@ public class BuildingDefense : MonoBehaviour
 {
     private Building building;
 
+    public bool hasTurretMount;
+    public GameObject turretObject;
+
     public Transform currentTarget;
     public Transform raycastPoint;
 
     public LayerMask enemyLayerMask;
 
+    [SerializeField] private Transform flashTransform;
     [SerializeField] private GameObject attackFlash;
     [SerializeField] private float flashDistance = 1.0f;
 
@@ -19,6 +23,18 @@ public class BuildingDefense : MonoBehaviour
     private void Awake()
     {
         building = this.GetComponent<Building>();
+    }
+
+    private void RotateToTarget()
+    {
+        Vector3 directionToTarget = currentTarget.position - turretObject.transform.position;
+        directionToTarget.y = 0f; // Ensure rotation only happens in the horizontal plane
+
+        // Calculate the target rotation with a -90 degree offset
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget) * Quaternion.Euler(0f, 90f, 0f);
+
+        // Smoothly interpolate between the current rotation and the target rotation
+        turretObject.transform.rotation = Quaternion.Slerp(turretObject.transform.rotation, targetRotation, Time.deltaTime * building.buildingSO.turretRotationSpeed);
     }
 
     private void Update()
@@ -30,6 +46,11 @@ public class BuildingDefense : MonoBehaviour
             if (currentTarget != null)
             {
                 //RotateToTarget();
+                //Rotate turret
+                if (hasTurretMount)
+                {
+                    RotateToTarget();
+                }
 
                 if (Time.time > nextShootTime)
                 {
@@ -105,7 +126,14 @@ public class BuildingDefense : MonoBehaviour
                 Vector3 flashPosition = raycastPoint.position + flashDistance * direction;
 
                 // Set the attack flash's position
-                attackFlash.transform.position = new Vector3(flashPosition.x, raycastPoint.position.y, flashPosition.z);
+                if (hasTurretMount)
+                {
+                    attackFlash.transform.position = flashTransform.transform.position;
+                } else
+                {
+                    attackFlash.transform.position = new Vector3(flashPosition.x, raycastPoint.position.y, flashPosition.z);
+                }
+                
 
                 
                 attackFlash.SetActive(true);
