@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
-  m_Name: CoalMine
+  m_Name: LumberMill
   m_EditorClassIdentifier: 
   buildingType: 2
   unitsToTrain: []
-  spawnFlagMoveToTroopOffset: 1
-  resourceType: 2
-  outputWorkerMultiplyer: 2
-  workerCapacity: 5
+  spawnFlagMoveToTroopOffset: 0
+  resourceType: 1
+  outputPerSecond: 3
   nodeName: Coal Node
   nodeDescription: This is a coal node
   stage: 2
+  fireRate: 0
+  attackDamage: 0
+  attackRange: 0
   populationIncrease: 0
-  name: Coal Mine
-  description: Place this on a coal node and put workers in it to start mining
-  constructionCapacity: 4
-  workerEnterRadius: 3
+  name: Lumber Mill
+  description: Makes Wood
   startingHealth: 400
-  timeToBuild: 15
-  goldCost: 55
-  coalCost: 55
-  copperCost: 55
+  timeToBuild: 10
+  goldCost: 35
+  woodCost: 35
+  foodCost: 35

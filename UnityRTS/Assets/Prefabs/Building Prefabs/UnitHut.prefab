@@ -329,6 +329,7 @@ MonoBehaviour:
   - {fileID: 1406770146377205733}
   - {fileID: 1321702061018143104}
   - {fileID: 9212822331307498115}
+  useWorkers: 0
 --- !u!114 &1818601057024692378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +354,8 @@ MonoBehaviour:
   - {fileID: 9212822331307498115}
   hasValidPlacement: 0
   isFixed: 0
+  wallNumber: 0
+  isWallPlacementValid: 1
 --- !u!65 &8891788161909323775
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -526,7 +529,7 @@ PrefabInstance:
     - target: {fileID: 3229293742691266216, guid: f0e3d7d8144604374ae31f559f9ce5b4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

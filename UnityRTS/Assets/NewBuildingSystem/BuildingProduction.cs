@@ -35,7 +35,7 @@ public class BuildingProduction : MonoBehaviour
 
     public void UpdateProductionUI()
     {
-        workersCurrentlyWorkingText.text = building.workersInside.Count + "/" + building.buildingSO.workerCapacity.ToString() + " Workers";
+        //workersCurrentlyWorkingText.text = building.workersInside.Count + "/" + building.buildingSO.workerCapacity.ToString() + " Workers";
         outputRateText.text = "Output rate: " + outputRate + " " + building.buildingSO.resourceType.ToString() + "/second";
         resourceTypeText.text = building.buildingSO.resourceType.ToString();
     }
@@ -69,8 +69,9 @@ public class BuildingProduction : MonoBehaviour
 
     public void UpdateProduction()
     {
-        if (building.buildingSO.buildingType == BuildingSO.BuildingType.Production)
+        if (building.buildingSO.buildingType == BuildingSO.BuildingType.Production && !building.buildingConstruction.isUnderConstruction && building.stage == 2)
         {
+            Debug.Log("Producing: " + building.buildingSO.resourceType);
             productionTimer += Time.deltaTime;
 
             if (productionTimer >= productionInterval)
@@ -93,8 +94,8 @@ public class BuildingProduction : MonoBehaviour
             if (building.buildingSO.buildingType == BuildingSO.BuildingType.Production)
             {
                 nodeGoldCostText.text = "Gold: " + building.buildingSO.goldCost.ToString();
-                nodeCoalCostText.text = "Coal: " + building.buildingSO.coalCost.ToString();
-                nodeCopperCostText.text = "Copper: " + building.buildingSO.copperCost.ToString();
+                nodeCoalCostText.text = "Wood: " + building.buildingSO.woodCost.ToString();
+                nodeCopperCostText.text = "Food: " + building.buildingSO.foodCost.ToString();
                 nodePanel.SetActive(true);
             }
             building.buildingHealthText.text = "";
@@ -127,13 +128,13 @@ public class BuildingProduction : MonoBehaviour
 
     public void ProduceResource()
     {
-        if (building.buildingSO.buildingType == BuildingSO.BuildingType.Production && building.workersInside.Count > 0)
+        if (building.buildingSO.buildingType == BuildingSO.BuildingType.Production)// && building.workersInside.Count > 0)
         {
-            float outputRate = building.workersInside.Count * building.buildingSO.outputWorkerMultiplyer;
+            float outputRate = building.buildingSO.outputPerSecond;//building.workersInside.Count * building.buildingSO.outputWorkerMultiplyer;
             //Debug.Log(outputRate);
             //buildingSO.resourceOutputRate *
 
-            workersCurrentlyWorkingText.text = building.workersInside.Count + "/" + building.buildingSO.workerCapacity.ToString() + " Workers";
+            //workersCurrentlyWorkingText.text = building.workersInside.Count + "/" + building.buildingSO.workerCapacity.ToString() + " Workers";
             outputRateText.text = "Output rate: " + outputRate + " " + building.buildingSO.resourceType.ToString() + "/second";
             resourceTypeText.text = building.buildingSO.resourceType.ToString();
 
@@ -144,12 +145,12 @@ public class BuildingProduction : MonoBehaviour
                 InventoryManager.instance.AddResources(0, (int)outputRate, 0, 0, 0);
 
             }
-            else if (building.buildingSO.resourceType == BuildingSO.ResourceType.Coal)
+            else if (building.buildingSO.resourceType == BuildingSO.ResourceType.Wood)
             {
                 InventoryManager.instance.AddResources(0, 0, (int)outputRate, 0, 0);
 
             }
-            else if (building.buildingSO.resourceType == BuildingSO.ResourceType.Copper)
+            else if (building.buildingSO.resourceType == BuildingSO.ResourceType.Food)
             {
                 InventoryManager.instance.AddResources(0, 0, 0, (int)outputRate, 0);
 
@@ -168,7 +169,7 @@ public class BuildingProduction : MonoBehaviour
 
     public void nodeToBuilding()
     {
-        if (InventoryManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.coalCost, (int)building.buildingSO.copperCost, 0))
+        if (InventoryManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0))
         {
             building.stage = 2;
             building.buildingConstruction.isUnderConstruction = true;
@@ -186,7 +187,7 @@ public class BuildingProduction : MonoBehaviour
                 BuildingSelection.Instance.buildingsList.Add(building.gameObject);
             }
 
-            InventoryManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.coalCost, (int)building.buildingSO.copperCost, 0);
+            InventoryManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0);
 
             building.buildingHealthText.text = "Health: " + building.buildingHealth.ToString();
             Node.SetActive(false);

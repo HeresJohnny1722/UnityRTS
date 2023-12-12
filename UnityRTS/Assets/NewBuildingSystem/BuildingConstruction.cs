@@ -24,6 +24,8 @@ public class BuildingConstruction : MonoBehaviour
 
     public MeshRenderer[] meshComponents;
 
+    public bool useWorkers = false;
+
 
     private void Awake()
     {
@@ -44,19 +46,36 @@ public class BuildingConstruction : MonoBehaviour
         constructionProgressSprite.transform.parent.parent.gameObject.SetActive(true);
         SetMaterial();
 
-        if (building.workersInside.Count > 0)
+
+        if (useWorkers)
         {
-            //Debug.Log("is constructing");
+            if (building.workersInside.Count > 0)
+            {
 
+                constructionTimer += Time.deltaTime * building.workersInside.Count;
+                //constructionText.text = "Workers currently constructing: " + building.workersInside.Count.ToString() + "/" + building.buildingSO.constructionCapacity;
 
+                target = constructionTimer / building.buildingSO.timeToBuild;
 
-            constructionTimer += Time.deltaTime * building.workersInside.Count;
-            constructionText.text = "Workers currently constructing: " + building.workersInside.Count.ToString() + "/" + building.buildingSO.constructionCapacity;
+                constructionProgressSprite.fillAmount = target;
+
+                if (constructionTimer >= building.buildingSO.timeToBuild)
+                {
+                    CompleteConstruction();
+                }
+
+                SetMaterial();
+            }
+        } else
+        {
+
+            constructionTimer += Time.deltaTime * 1;
+            //constructionText.text = "Workers currently constructing: " + building.workersInside.Count.ToString() + "/" + building.buildingSO.constructionCapacity;
 
             target = constructionTimer / building.buildingSO.timeToBuild;
 
 
-            float speed = 0.001f;
+            
             constructionProgressSprite.fillAmount = target;
 
             if (constructionTimer >= building.buildingSO.timeToBuild)
@@ -65,7 +84,9 @@ public class BuildingConstruction : MonoBehaviour
             }
 
             SetMaterial();
+
         }
+        
 
     }
 

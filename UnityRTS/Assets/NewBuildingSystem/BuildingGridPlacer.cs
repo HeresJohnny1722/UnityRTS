@@ -79,7 +79,7 @@ public class BuildingGridPlacer : BuildingPlacer
                         Building building = _toBuild.GetComponent<Building>();
                         building.buildingConstruction.isUnderConstruction = true;
                         
-                        InventoryManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.coalCost, (int)building.buildingSO.copperCost, 0);
+                        InventoryManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0);
                         InventoryManager.instance.increaseBuildingCount(building.buildingSO);
                         
 
@@ -88,9 +88,34 @@ public class BuildingGridPlacer : BuildingPlacer
                         // shift-key: chain builds
                         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                         {
-                            _toBuild = null; // (to avoid destruction)
-                            _PrepareBuilding();
-                            NavmeshManage.Instance.UpdateNavmesh();
+
+                            if (InventoryManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0))
+                            {
+                                if (InventoryManager.instance.CheckBuildingCountAvailable(building.buildingSO))
+                                {
+                                    _toBuild = null; // (to avoid destruction)
+                                    _PrepareBuilding();
+                                    NavmeshManage.Instance.UpdateNavmesh();
+                                }
+                                else
+                                {
+                                    _buildingPrefab = null;
+                                    _toBuild = null;
+                                    _EnableGridVisual(false);
+                                    NavmeshManage.Instance.UpdateNavmesh();
+
+                                }
+
+                            }
+                            else
+                            {
+                                _buildingPrefab = null;
+                                _toBuild = null;
+                                _EnableGridVisual(false);
+                                NavmeshManage.Instance.UpdateNavmesh();
+
+                            }
+
                         }
                         else
                         {

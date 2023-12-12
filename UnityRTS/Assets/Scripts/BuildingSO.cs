@@ -12,14 +12,15 @@ public class BuildingSO : ScriptableObject
         Barracks,
         Production,
         Defense,
-        Wall
+        Wall,
+        Trap
     }
 
     public enum ResourceType
     {
         Gold,
-        Copper,
-        Coal,
+        Wood,
+        Food,
         Energy,
     }
 
@@ -31,9 +32,8 @@ public class BuildingSO : ScriptableObject
 
     [Header("Only for Production Type")]
     public ResourceType resourceType;
-    public float outputWorkerMultiplyer;
-    public float workerCapacity;
-    public new string nodeName;
+    public float outputPerSecond;
+    public string nodeName;
     public string nodeDescription;
     public float stage = 1;
 
@@ -50,12 +50,10 @@ public class BuildingSO : ScriptableObject
     [Header("Needed for all Types")]
     public new string name;
     public string description;
-    public float constructionCapacity;
-    public float workerEnterRadius;
     public float startingHealth;
     public float timeToBuild;
     public float goldCost;
-    public float coalCost;
-    public float copperCost;
+    public float woodCost;
+    public float foodCost;
     
 }

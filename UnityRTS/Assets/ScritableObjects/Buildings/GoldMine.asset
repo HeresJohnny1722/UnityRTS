@@ -16,18 +16,18 @@ MonoBehaviour:
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
-  outputWorkerMultiplyer: 2
-  workerCapacity: 5
+  outputPerSecond: 3
   nodeName: 
   nodeDescription: 
   stage: 2
+  fireRate: 0
+  attackDamage: 0
+  attackRange: 0
   populationIncrease: 0
   name: Gold Mine
   description: Put workers inside of the building to start producing gold
-  constructionCapacity: 4
-  workerEnterRadius: 3
   startingHealth: 400
-  timeToBuild: 15
-  goldCost: 23
-  coalCost: 23
-  copperCost: 23
+  timeToBuild: 10
+  goldCost: 25
+  woodCost: 25
+  foodCost: 25

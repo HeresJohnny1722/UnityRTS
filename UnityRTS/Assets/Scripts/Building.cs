@@ -217,7 +217,7 @@ public class Building : MonoBehaviour
             BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
             Destroy(this.gameObject);
             InventoryManager.instance.decreaseBuildingCount(buildingSO);
-            InventoryManager.instance.AddResources(0, (int)buildingSO.goldCost, (int)buildingSO.coalCost, (int)buildingSO.copperCost, 0);
+            InventoryManager.instance.AddResources(0, (int)buildingSO.goldCost, (int)buildingSO.woodCost, (int)buildingSO.foodCost, 0);
 
             if (!buildingConstruction.isUnderConstruction)
             {

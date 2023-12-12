@@ -16,8 +16,7 @@ MonoBehaviour:
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
-  outputWorkerMultiplyer: 0
-  workerCapacity: 3
+  outputPerSecond: 0
   nodeName: 
   nodeDescription: 
   stage: 2
@@ -27,10 +26,8 @@ MonoBehaviour:
   populationIncrease: 0
   name: Wood Wall
   description: Used to protect your town
-  constructionCapacity: 2
-  workerEnterRadius: 1
-  startingHealth: 400
+  startingHealth: 200
   timeToBuild: 3
   goldCost: 5
-  coalCost: 5
-  copperCost: 5
+  woodCost: 5
+  foodCost: 5

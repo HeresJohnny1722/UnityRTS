@@ -145,32 +145,41 @@ public class Unit : MonoBehaviour
 
         if (colliders.Length > 0)
         {
-            Debug.Log("There are " + colliders.Length + " buildings in the units range" + colliders[0].name);
+            Debug.Log("There are " + colliders.Length + " buildings in the unit's range");
 
-            //if is under construction0.
+            // Initialize closestBuilding and closestDistance
+            Transform closestBuilding = null;
+            float closestDistance = float.MaxValue;
 
-            Transform closestBuilding = colliders[0].transform;
-            
+            foreach (Collider collider in colliders)
+            {
+                float distance = Vector3.Distance(transform.position, collider.transform.GetChild(1).position);
+
+                // Check if the current building is closer than the previous closestBuilding
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestBuilding = collider.transform;
+                }
+            }
+
             if (closestBuilding != null)
             {
-                //Debug.Log("trying to enter building");
                 Building buildingBuilding = closestBuilding.GetComponent<Building>();
                 if (buildingBuilding.buildingConstruction.isUnderConstruction)
                 {
                     targetBuilding = closestBuilding;
                     Debug.Log("Need to enter " + targetBuilding.name);
                 }
-                
-
-            } else
+            }
+            else
             {
                 targetBuilding = null;
-                Debug.Log("target building is null");
+                Debug.Log("No valid target building found");
             }
-
         }
-
     }
+
 
 
 

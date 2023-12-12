@@ -311,7 +311,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24026264eb7c5482faf91367842a4da4, type: 2}
+  - {fileID: 2100000, guid: 39f68ccff87384beab6a7df279e47b23, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -481,7 +481,7 @@ GameObject:
   - component: {fileID: 8416031273258201355}
   - component: {fileID: 7864878378617593064}
   m_Layer: 9
-  m_Name: CoalMine
+  m_Name: LumberMill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,6 +532,7 @@ MonoBehaviour:
   squashAndStretch: {fileID: 0}
   meshComponents:
   - {fileID: 3427776897270181392}
+  useWorkers: 0
 --- !u!114 &5619884489375765989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,7 +761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5876201555781375623
 Transform:
   m_ObjectHideFlags: 0
@@ -770,7 +771,7 @@ Transform:
   m_GameObject: {fileID: 9176936117237951438}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.012, z: 0}
+  m_LocalPosition: {x: 0.019, y: 0.012, z: -0.028}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

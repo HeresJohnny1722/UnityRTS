@@ -23,7 +23,7 @@ public class BuildingDefense : MonoBehaviour
 
     private void Update()
     {
-        if (!building.buildingConstruction.isUnderConstruction)
+        if (!building.buildingConstruction.isUnderConstruction && GetComponent<BuildingManager>().isFixed)
         {
             CheckForEnemies();
 

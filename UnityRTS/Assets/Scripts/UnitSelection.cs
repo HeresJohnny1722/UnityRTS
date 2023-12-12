@@ -76,63 +76,8 @@ public class UnitSelection : MonoBehaviour
         }
     }
 
-    public void moveWorkersIntoBuilding(Transform buildingToEnter)
-    {
-        Building building = buildingToEnter.GetComponent<Building>();
 
-        if (unitsSelected.Count > 0 && building.stage == 2)
-        {
-            // Highlight the resource node
-
-            // If the building is a production building
-            //Check if the building is being constructed
-            
-
-            if (building.buildingConstruction.isUnderConstruction)
-            {
-
-                foreach (var unitSelected in unitsSelected)
-                {
-                    Unit unit = unitSelected.GetComponent<Unit>();
-
-                    if (unit.unitSO.unitType == UnitSO.UnitType.Worker)
-                    {
-
-                        //Start coroutine
-                        if (building.buildingSO.constructionCapacity > building.workersInside.Count)
-                        {
-                            //building.buildingProduction.workersCurrentlyInTheBuilding++;
-                            StartCoroutine(MoveWorkerToBuilding(unitSelected, buildingToEnter));
-                        }
-
-                    }
-                }
-
-            } else if (building.buildingSO.buildingType == BuildingSO.BuildingType.Production)
-            {
-                
-                foreach (var unitSelected in unitsSelected)
-                {
-                    Unit unit = unitSelected.GetComponent<Unit>();
-
-                    if (unit.unitSO.unitType == UnitSO.UnitType.Worker)
-                    {
-
-                        // Start coroutine to check for collision with the buildingworkersCurrentlyInTheBuildingc
-                        if (buildingToEnter.GetComponent<Building>().buildingSO.workerCapacity > buildingToEnter.GetComponent<Building>().workersInside.Count) {
-                            //buildingToEnter.GetComponent<Building>().buildingProduction.workersCurrentlyInTheBuilding++;
-                            StartCoroutine(MoveWorkerToBuilding(unitSelected, buildingToEnter));
-                        }
-                        
-                            
-                            
-                        
-                        
-                    }
-                }
-            }
-        }
-    }
+    
 
     private void Update()
     {
@@ -142,90 +87,6 @@ public class UnitSelection : MonoBehaviour
         }
     }
 
-    private IEnumerator MoveWorkerToBuilding(GameObject worker, Transform buildingToEnter)
-    {
-        myAgent = worker.GetComponent<NavMeshAgent>();
-        float radius = 1f;
-
-        //NavMesh.SamplePosition(buildingToEnter.position, out NavMeshHit hit, radius, NavMesh.AllAreas);
-
-        // Set destination for the agent to the closest point on the nav mesh
-        //myAgent.SetDestination(hit.position);
-        myAgent.SetDestination(buildingToEnter.position);
-
-        // Wait for the worker to collide with the building
-        yield return StartCoroutine(WaitForProximityToBuilding(worker, buildingToEnter));
-
-        
-            // Additional logic after reaching the destination (if needed)
-            // ...
-
-            // Worker has collided with the building, do something
-            Debug.Log("Worker has collided with the production building!");
-            //Do all the add the unit to the building list stuff
-            //play a glowing unit animation
-            //update the progress bar on the building
-            if (worker.GetComponent<Unit>().unitSO.unitType == UnitSO.UnitType.Worker)
-            {
-                // Start coroutine to check for collision with the building
-                
-                    
-                    buildingToEnter.GetComponent<Building>().addWorker(worker);
-                    worker.SetActive(false);
-                    unitScript = worker.GetComponent<Unit>();
-                    unitScript.deselectUnit();
-                    UnitSelection.Instance.unitsSelected.Remove(worker);
-                    UnitSelection.Instance.unitList.Remove(worker);
-                    updateInfoPanelForUnits();
-                    //Destroy(worker);
-                        
-                
-                
-
-                
-            }
-         /*else
-        {
-            float spawnRadius = 1.5f; // Set your desired radius here
-
-            Vector2 randomPoint = UnityEngine.Random.insideUnitCircle * spawnRadius;
-            Vector3 newPosition = transform.position + new Vector3(randomPoint.x, 0, randomPoint.y);
-
-            myAgent.SetDestination(newPosition);
-
-            // Additional logic or messages if needed
-            Debug.Log("Worker capacity reached. Moving to a random spot around the building.");
-        }*/
-        
-    }
-
-    private IEnumerator WaitForProximityToBuilding(GameObject worker, Transform buildingToEnter)
-    {
-        Building building = buildingToEnter.GetComponent<Building>();
-        float proximityRadius = building.buildingSO.workerEnterRadius;
-
-        while (true)
-        {
-            float distance = Vector3.Distance(worker.transform.position, buildingToEnter.GetChild(1).position);
-
-            if (distance <= proximityRadius)
-            {
-                // Worker is within the specified radius of the building
-                yield break;
-            }
-
-            yield return null;
-        }
-    }
-
-
-
-
-
-    public void UnitEnterBuilding(GameObject unitAddingIntoBuilding)
-    {
-        unitAddingIntoBuilding.SetActive(false);
-    }
 
     public void takeDamageUnitTest(float damage)
     {

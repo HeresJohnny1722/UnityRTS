@@ -93,7 +93,7 @@ public class BuildingPlacer : MonoBehaviour
     {
         UnitSelection.Instance.DeselectAll();
         Building building = prefab.GetComponent<Building>();
-        if (InventoryManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.coalCost, (int)building.buildingSO.copperCost, 0))
+        if (InventoryManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0))
         {
             if (InventoryManager.instance.CheckBuildingCountAvailable(building.buildingSO))
             {

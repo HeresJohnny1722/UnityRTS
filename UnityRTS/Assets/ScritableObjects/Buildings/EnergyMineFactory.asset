@@ -16,18 +16,18 @@ MonoBehaviour:
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
   resourceType: 3
-  outputWorkerMultiplyer: 2
-  workerCapacity: 5
+  outputPerSecond: 3
   nodeName: Energy Node
   nodeDescription: This is an energy node, create a factory on it to start production
   stage: 1
+  fireRate: 0
+  attackDamage: 0
+  attackRange: 0
   populationIncrease: 0
   name: Energy Mine
-  description: Add workers to start production
-  constructionCapacity: 4
-  workerEnterRadius: 2
+  description: Makes energy
   startingHealth: 100
   timeToBuild: 8
   goldCost: 100
-  coalCost: 100
-  copperCost: 100
+  woodCost: 100
+  foodCost: 100

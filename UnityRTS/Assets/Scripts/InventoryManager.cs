@@ -13,24 +13,24 @@ public class InventoryManager : MonoBehaviour
     public int currentPopulation = 0;
     public int maxedPopulation = 10;
     public int gold = 0;
-    public int coal = 0;
-    public int copper = 0;
+    public int wood = 0;
+    public int food = 0;
     public int energy = 0;
 
     public int maxHouses;
     public int maxBarracks;
     public int maxGoldFactory;
-    public int maxCoalFactory;
+    public int maxLumberMill;
     public int houseCount;
     public int barracksCount;
     public int goldFactoryCount;
-    public int coalFactoryCount;
+    public int lumberMillCount;
 
     // TextMeshPro fields for displaying resource quantities
     public TextMeshProUGUI populationText;
     public TextMeshProUGUI goldText;
-    public TextMeshProUGUI coalText;
-    public TextMeshProUGUI copperText;
+    public TextMeshProUGUI woodText;
+    public TextMeshProUGUI foodText;
     public TextMeshProUGUI energyText;
 
     // Events to update UI or trigger other actions when inventory changes
@@ -62,8 +62,8 @@ public class InventoryManager : MonoBehaviour
     {
         
         gold += addedGold;
-        coal += addedCoal;
-        copper += addedCopper;
+        wood += addedCoal;
+        food += addedCopper;
         energy += addedEnergy;
 
         // Update TextMeshPro fields
@@ -99,12 +99,12 @@ public class InventoryManager : MonoBehaviour
     public void RemoveResources(int removedPopulation, int removedGold, int removedCoal, int removedCopper, int removedEnergy)
     {
         // Check if there are enough resources to remove
-        if (gold >= removedGold && coal >= removedCoal && copper >= removedCopper && energy >= removedEnergy)
+        if (gold >= removedGold && wood >= removedCoal && food >= removedCopper && energy >= removedEnergy)
         {
             
             gold -= removedGold;
-            coal -= removedCoal;
-            copper -= removedCopper;
+            wood -= removedCoal;
+            food -= removedCopper;
             energy -= removedEnergy;
 
             // Update TextMeshPro fields
@@ -123,8 +123,8 @@ public class InventoryManager : MonoBehaviour
     {
         return maxedPopulation >= (currentPopulation + requiredPopulation) &&
                gold >= requiredGold &&
-               coal >= requiredCoal &&
-               copper >= requiredCopper &&
+               wood >= requiredCoal &&
+               food >= requiredCopper &&
                energy >= requiredEnergy;
     }
 
@@ -170,10 +170,10 @@ public class InventoryManager : MonoBehaviour
                     return false;
                 }
 
-            } else if (buildingSO.resourceType == BuildingSO.ResourceType.Coal)
+            } else if (buildingSO.resourceType == BuildingSO.ResourceType.Wood)
             {
 
-                if (InventoryManager.instance.maxCoalFactory > InventoryManager.instance.coalFactoryCount)
+                if (InventoryManager.instance.maxLumberMill > InventoryManager.instance.lumberMillCount)
                 {
                     
                     return true;
@@ -220,10 +220,10 @@ public class InventoryManager : MonoBehaviour
                 InventoryManager.instance.goldFactoryCount++;
 
             }
-            else if (buildingSO.resourceType == BuildingSO.ResourceType.Coal)
+            else if (buildingSO.resourceType == BuildingSO.ResourceType.Wood)
             {
 
-                InventoryManager.instance.coalFactoryCount++;
+                InventoryManager.instance.lumberMillCount++;
 
             }
             
@@ -262,10 +262,10 @@ public class InventoryManager : MonoBehaviour
                 InventoryManager.instance.goldFactoryCount--;
 
             }
-            else if (buildingSO.resourceType == BuildingSO.ResourceType.Coal)
+            else if (buildingSO.resourceType == BuildingSO.ResourceType.Wood)
             {
 
-                InventoryManager.instance.coalFactoryCount--;
+                InventoryManager.instance.lumberMillCount--;
 
             }
 
@@ -289,11 +289,11 @@ public class InventoryManager : MonoBehaviour
         if (goldText != null)
             goldText.text = "Gold: " + gold.ToString();
 
-        if (coalText != null)
-            coalText.text = "Coal: " + coal.ToString();
+        if (woodText != null)
+            woodText.text = "Wood: " + wood.ToString();
 
-        if (copperText != null)
-            copperText.text = "Copper: " + copper.ToString();
+        if (foodText != null)
+            foodText.text = "Food: " + food.ToString();
 
         if (energyText != null)
             energyText.text = "Energy: " + energy.ToString();

@@ -70,13 +70,7 @@ public class Click : MonoBehaviour
             RaycastHit hit;
             Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, building))
-            {
-                //Debug.Log("Trying to move to a building");
-                UnitSelection.Instance.moveWorkersIntoBuilding(hit.transform);
-
-            }
-            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
                 if (BuildingSelection.Instance.selectedBuilding != null)
                 {
