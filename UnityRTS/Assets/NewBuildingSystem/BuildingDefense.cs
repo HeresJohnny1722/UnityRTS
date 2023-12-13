@@ -127,9 +127,9 @@ public class BuildingDefense : MonoBehaviour
                     GameObject explosionParticle = Instantiate(building.buildingSO.explodeParticleSystem, hit.transform.position, Quaternion.identity);
                     Destroy(explosionParticle, 5f);
 
-                    animator.Play("CannonShoot");
+                    //animator.Play("CannonShoot");
                     
-                    animator.Play("IdleCannon");
+                   // animator.Play("IdleCannon");
                     Debug.Log("Shooting cannon");
 
                     Collider[] hitColliders = Physics.OverlapSphere(hit.transform.position, building.buildingSO.explodeRadius, enemyLayerMask);
