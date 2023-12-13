@@ -152,7 +152,7 @@ public class EnemyAI : MonoBehaviour
                             // Target within attack range
                             if (Time.time > nextShootTime)
                             {
-                                Debug.Log("Shooting a building");
+//                                Debug.Log("Shooting a building");
 
                                 state = State.ShootingTarget;
                                 AttackUnit();
@@ -342,7 +342,7 @@ public class EnemyAI : MonoBehaviour
 
                 RaycastHit hit;
 
-                Debug.Log("Trying to shoot a building");
+//                Debug.Log("Trying to shoot a building");
                 if (Physics.Raycast(raycastPoint.position, (targetTransform.GetChild(1).position - raycastPoint.position).normalized, out hit, buildingsLayerMask))
                 {
                     if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
@@ -353,7 +353,7 @@ public class EnemyAI : MonoBehaviour
 
                     float health = 0;
                     float buildingHealth;
-                    Debug.Log("SphereCast hit something on the player layer");
+//                    Debug.Log("SphereCast hit something on the player layer");
                     if (targetTransform.GetComponent<Building>())
                     {
                         buildingHealth = (targetTransform.GetComponent<Building>().buildingHealth);

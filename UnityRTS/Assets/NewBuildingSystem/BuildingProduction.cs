@@ -54,7 +54,7 @@ public class BuildingProduction : MonoBehaviour
 
     private void SetStageOneProperties()
     {
-        building.removeButton.SetActive(false);
+       // building.removeButton.SetActive(false);
         building.buildingHealthText.text = "";
         Node.SetActive(true);
         ProductionBuilding.SetActive(false);
@@ -62,7 +62,7 @@ public class BuildingProduction : MonoBehaviour
 
     private void SetStageTwoProperties()
     {
-        building.removeButton.SetActive(true);
+       // building.removeButton.SetActive(true);
         Node.SetActive(false);
         ProductionBuilding.SetActive(true);
     }
@@ -175,11 +175,11 @@ public class BuildingProduction : MonoBehaviour
             building.buildingConstruction.isUnderConstruction = true;
             if (building.buildingSO.resourceType == BuildingSO.ResourceType.Energy)
             {
-                building.removeButton.SetActive(false);
+               // building.removeButton.SetActive(false);
             }
             else
             {
-                building.removeButton.SetActive(true);
+             //   building.removeButton.SetActive(true);
             }
 
             if (!BuildingSelection.Instance.buildingsList.Contains(building.gameObject))
@@ -205,7 +205,7 @@ public class BuildingProduction : MonoBehaviour
     {
 
 
-        building.removeButton.SetActive(false);
+//        building.removeButton.SetActive(false);
         building.buildingHealthbar.gameObject.SetActive(false);
         building.buildingHealth = building.buildingSO.startingHealth;
         building.buildingHealthbar.UpdateHealthBar(building.buildingSO.startingHealth, building.buildingHealth);

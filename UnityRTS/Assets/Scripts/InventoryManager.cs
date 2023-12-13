@@ -22,11 +22,17 @@ public class InventoryManager : MonoBehaviour
     public int maxGoldFactory;
     public int maxLumberMill;
     public int maxGreenhouse;
+    public int maxWatchtower;
+    public int maxWall;
+    public int maxGate;
     public int houseCount;
     public int barracksCount;
     public int goldFactoryCount;
     public int lumberMillCount;
     public int greenhouseCount;
+    public int watchtowerCount;
+    public int wallCount;
+    public int gateCount;
 
     // TextMeshPro fields for displaying resource quantities
     public TextMeshProUGUI populationText;
@@ -137,7 +143,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (InventoryManager.instance.maxHouses > InventoryManager.instance.houseCount)
             {
-                
+
                 return true;
             }
             else
@@ -149,14 +155,55 @@ public class InventoryManager : MonoBehaviour
         {
             if (InventoryManager.instance.maxBarracks > InventoryManager.instance.barracksCount)
             {
-                
+
                 return true;
             }
             else
             {
                 return false;
             }
-        } else if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
+        }
+        else if (buildingSO.buildingType == BuildingSO.BuildingType.Defense)
+        {
+            if (InventoryManager.instance.maxWatchtower > InventoryManager.instance.watchtowerCount)
+            {
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        else if (buildingSO.buildingType == BuildingSO.BuildingType.Wall)
+        {
+            if (buildingSO.name == "Wood Gate")
+            {
+                if (InventoryManager.instance.maxGate > InventoryManager.instance.gateCount)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            } else
+            {
+                if (InventoryManager.instance.maxWall > InventoryManager.instance.wallCount)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            
+        }
+        else if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
         {
 
             if (buildingSO.resourceType == BuildingSO.ResourceType.Gold)
@@ -164,7 +211,7 @@ public class InventoryManager : MonoBehaviour
 
                 if (InventoryManager.instance.maxGoldFactory > InventoryManager.instance.goldFactoryCount)
                 {
-                    
+
                     return true;
                 }
                 else
@@ -172,12 +219,13 @@ public class InventoryManager : MonoBehaviour
                     return false;
                 }
 
-            } else if (buildingSO.resourceType == BuildingSO.ResourceType.Wood)
+            }
+            else if (buildingSO.resourceType == BuildingSO.ResourceType.Wood)
             {
 
                 if (InventoryManager.instance.maxLumberMill > InventoryManager.instance.lumberMillCount)
                 {
-                    
+
                     return true;
                 }
                 else

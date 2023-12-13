@@ -39,8 +39,9 @@ public class BuildingSelection : MonoBehaviour
 
     public void SelectBuilding(Transform buildingToSelect)
     {
-        //Debug.Log("selecting building");
+//        Debug.Log("selecting building");
 
+        
         DeselectBuilding();
         selectedBuilding = null;
 
@@ -48,11 +49,7 @@ public class BuildingSelection : MonoBehaviour
         if (buildingGridPlacer._buildingPrefab != null)
         {
             Debug.Log("sorry youre in building mode");
-        } /*else if (buildingToSelect.GetComponent<Building>().isUnderConstruction) {
-           
-            DeselectBuilding();
-            Debug.Log("sorry that building is in construction");
-        } */else
+        } else
         {
             building = buildingToSelect.GetComponent<Building>();
 

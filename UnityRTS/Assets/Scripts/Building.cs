@@ -27,7 +27,8 @@ public class Building : MonoBehaviour
     public GameObject buildingDeathEffect;
 
     public GameObject infoPanel;
-    public GameObject removeButton;
+    public TextMeshProUGUI buildingNameText;
+    public TextMeshProUGUI productionOutputRateText;
 
     public Healthbar buildingHealthbar;
     public TextMeshProUGUI buildingHealthText;
@@ -71,7 +72,7 @@ public class Building : MonoBehaviour
         buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
 
 
-        buildingHealthText.text = "Health: " + buildingHealth.ToString();
+        //buildingHealthText.text = "Health: " + buildingHealth.ToString();
 
 
     }
@@ -178,7 +179,7 @@ public class Building : MonoBehaviour
                 InventoryManager.instance.RemoveResources(0, (int)buildingSO.goldCost, (int)buildingSO.woodCost, (int)buildingSO.foodCost, 0);
             }
 
-            buildingHealthText.text = "Health: " + buildingHealth.ToString();
+            //buildingHealthText.text = "Health: " + buildingHealth.ToString();
             //BuildingUIVisibility(true);
             buildingHealthbar.gameObject.SetActive(true);
             buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);
@@ -250,6 +251,9 @@ public class Building : MonoBehaviour
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
         {
             buildingTraining.BarracksSelected();
+        } else
+        {
+            productionOutputRateText.text = "";
         }
 
         BuildingUIVisibility(true);
@@ -264,14 +268,7 @@ public class Building : MonoBehaviour
             buildingHealthbar.gameObject.SetActive(true);
         }
 
-        /*if (!buildingConstruction.isUnderConstruction)
-        {
-            buildingConstruction.constructionPanel.SetActive(false);
-        }
-        else
-        {
-            removeButton.SetActive(false);
-        }*/
+        buildingNameText.text = buildingSO.name;
 
     }
 

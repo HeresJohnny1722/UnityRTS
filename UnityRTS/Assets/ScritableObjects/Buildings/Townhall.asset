@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
   m_Name: Townhall
   m_EditorClassIdentifier: 
-  buildingType: 5
+  buildingType: 0
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0

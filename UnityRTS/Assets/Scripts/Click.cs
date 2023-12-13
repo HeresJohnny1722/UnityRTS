@@ -49,6 +49,7 @@ public class Click : MonoBehaviour
             }
             else if (Physics.Raycast(ray, out hit, Mathf.Infinity, building))
             {
+//                Debug.Log(hit.transform.name);
                 BuildingSelection.Instance.SelectBuilding(hit.transform);
 
             }
@@ -74,7 +75,11 @@ public class Click : MonoBehaviour
             {
                 if (BuildingSelection.Instance.selectedBuilding != null)
                 {
-                    BuildingSelection.Instance.MoveFlag(hit.point);
+                    if (BuildingSelection.Instance.selectedBuilding.GetComponent<Building>().buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
+                    {
+                        BuildingSelection.Instance.MoveFlag(hit.point);
+                    }
+                    
 
                 }
                 else
