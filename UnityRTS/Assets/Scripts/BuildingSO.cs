@@ -44,6 +44,10 @@ public class BuildingSO : ScriptableObject
     public float attackRange;
     public float turretRotationSpeed;
 
+    public bool bulletsExplode;
+    public float explodeRadius;
+    public GameObject explodeParticleSystem;
+
 
     [Header("Only Buildings that increase population")]
     public int populationIncrease;

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
-  m_Name: GatlingGunTower
+  m_Name: CannonTower
   m_EditorClassIdentifier: 
   buildingType: 3
   unitsToTrain: []
@@ -20,13 +20,14 @@ MonoBehaviour:
   nodeName: 
   nodeDescription: 
   stage: 2
-  fireRate: 0.1
-  attackDamage: 40
+  fireRate: 3
+  attackDamage: 50
   attackRange: 15
   turretRotationSpeed: 30
-  bulletsExplode: 0
-  explodeRadius: 0
-  explodeParticleSystem: {fileID: 0}
+  bulletsExplode: 1
+  explodeRadius: 3
+  explodeParticleSystem: {fileID: 2739781832950810520, guid: 8803398d4f9bd47bd8232fa74d8171a6,
+    type: 3}
   populationIncrease: 0
   name: Watchtower
   description: Shoot enemies

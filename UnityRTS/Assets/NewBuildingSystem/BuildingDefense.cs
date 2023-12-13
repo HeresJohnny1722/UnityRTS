@@ -9,6 +9,8 @@ public class BuildingDefense : MonoBehaviour
     public bool hasTurretMount;
     public GameObject turretObject;
 
+    public Animator animator;
+
     public Transform currentTarget;
     public Transform raycastPoint;
 
@@ -115,45 +117,82 @@ public class BuildingDefense : MonoBehaviour
         if (Physics.Raycast(raycastPoint.position, (currentTarget.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, enemyLayerMask))
         {
 
-            
+
             if (currentTarget.GetComponent<EnemyAI>() != null)
             {
-                Debug.Log("SphereCast hit something WITH A ENEMYAI");
-
-                Vector3 direction = (currentTarget.position - raycastPoint.position).normalized;
-
-                // Calculate the position for attackFlash
-                Vector3 flashPosition = raycastPoint.position + flashDistance * direction;
-
-                // Set the attack flash's position
-                if (hasTurretMount)
+                if (building.buildingSO.bulletsExplode)
                 {
-                    attackFlash.transform.position = flashTransform.transform.position;
-                } else
-                {
-                    attackFlash.transform.position = new Vector3(flashPosition.x, raycastPoint.position.y, flashPosition.z);
+                    
+
+                    GameObject explosionParticle = Instantiate(building.buildingSO.explodeParticleSystem, hit.transform.position, Quaternion.identity);
+                    Destroy(explosionParticle, 5f);
+
+                    animator.Play("CannonShoot");
+                    
+                    animator.Play("IdleCannon");
+                    Debug.Log("Shooting cannon");
+
+                    Collider[] hitColliders = Physics.OverlapSphere(hit.transform.position, building.buildingSO.explodeRadius, enemyLayerMask);
+
+                    foreach (var collider in hitColliders)
+                    {
+                        if (collider.GetComponent<EnemyAI>() != null)
+                        {
+                            collider.GetComponent<EnemyAI>().takeDamage(building.buildingSO.attackDamage);
+
+                            if (collider.GetComponent<EnemyAI>().enemyHealth <= 0)
+                            {
+                                InventoryManager.instance.enemiesKilledCount++;
+                                currentTarget = null;
+                            }
+
+                        }
+                    }
+
+                    
                 }
-                
+                else
+                {
+
+
+                    //Debug.Log("SphereCast hit something WITH A ENEMYAI");
+
+                    Vector3 direction = (currentTarget.position - raycastPoint.position).normalized;
+
+                    // Calculate the position for attackFlash
+                    Vector3 flashPosition = raycastPoint.position + flashDistance * direction;
+
+                    // Set the attack flash's position
+                    if (hasTurretMount)
+                    {
+                        attackFlash.transform.position = flashTransform.transform.position;
+                    }
+                    else
+                    {
+                        attackFlash.transform.position = new Vector3(flashPosition.x, raycastPoint.position.y, flashPosition.z);
+                    }
+
+
+
+                    attackFlash.SetActive(true);
+
+                    currentTarget.GetComponent<EnemyAI>().takeDamage(building.buildingSO.attackDamage);
+
+                    if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)
+                    {
+                        InventoryManager.instance.enemiesKilledCount++;
+                        currentTarget = null;
+                    }
+                }
 
                 
-                attackFlash.SetActive(true);
 
-                currentTarget.GetComponent<EnemyAI>().takeDamage(building.buildingSO.attackDamage);
-            }
-
-            if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)
-            {
-                InventoryManager.instance.enemiesKilledCount++;
-                currentTarget = null;
             }
 
 
             // Additional actions for hitting a player can be added here
         }
-        else
-        {
-            //Probably switch the target because the target is blocked probably
-        }
+        
 
 
         // Check if the enemy is still in attack range
