@@ -83,7 +83,7 @@ public class UnitSelection : MonoBehaviour
     {
         if (unitsSelected.Count == 0)
         {
-            unitInfoPanel.SetActive(false);
+            //unitInfoPanel.SetActive(false);
         }
     }
 
@@ -120,7 +120,7 @@ public class UnitSelection : MonoBehaviour
             updateInfoPanelForUnits();
             if (unitsSelected.Count <= 0)
             {
-                unitInfoPanel.SetActive(false);
+                //unitInfoPanel.SetActive(false);
             }
         }
     }
@@ -142,7 +142,7 @@ public class UnitSelection : MonoBehaviour
             unitScript = unit.GetComponent<Unit>();
             unitScript.deselectUnit();
             updateInfoPanelForUnits();
-            unitInfoPanel.SetActive(false);
+            //unitInfoPanel.SetActive(false);
         }
         unitsSelected.Clear();
 
@@ -158,7 +158,7 @@ public class UnitSelection : MonoBehaviour
             unitScript.selectUnit();
             BuildingSelection.Instance.DeselectBuilding();
             updateInfoPanelForUnits();
-            unitInfoPanel.SetActive(true);
+            //unitInfoPanel.SetActive(true);
         }
 
 
@@ -174,6 +174,7 @@ public class UnitSelection : MonoBehaviour
 
     public void updateInfoPanelForUnits()
     {
+        /*
         selectedUnitsTitle.text = "Unit(s) Selected";
 
         Dictionary<UnitSO.UnitType, int> unitTypeCounts = new Dictionary<UnitSO.UnitType, int>();
@@ -203,5 +204,6 @@ public class UnitSelection : MonoBehaviour
         {
             selectedUnitsListText.text += $"{kvp.Key}s: {kvp.Value}\n";
         }
+        */
     }
 }

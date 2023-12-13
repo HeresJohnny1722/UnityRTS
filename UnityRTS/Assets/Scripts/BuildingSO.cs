@@ -13,7 +13,7 @@ public class BuildingSO : ScriptableObject
         Production,
         Defense,
         Wall,
-        Trap
+        Townhall
     }
 
     public enum ResourceType

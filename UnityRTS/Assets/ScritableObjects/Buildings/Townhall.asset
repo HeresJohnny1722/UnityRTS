@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
+  m_Name: Townhall
+  m_EditorClassIdentifier: 
+  buildingType: 5
+  unitsToTrain: []
+  spawnFlagMoveToTroopOffset: 1
+  resourceType: 0
+  outputPerSecond: 0
+  nodeName: 
+  nodeDescription: 
+  stage: 2
+  fireRate: 0
+  attackDamage: 0
+  attackRange: 0
+  turretRotationSpeed: 0
+  bulletsExplode: 0
+  explodeRadius: 0
+  explodeParticleSystem: {fileID: 0}
+  populationIncrease: 5
+  name: Townhall
+  description: Protect it, if you lose it you lose the gamw
+  startingHealth: 1000
+  timeToBuild: 0
+  goldCost: 0
+  woodCost: 0
+  foodCost: 0
