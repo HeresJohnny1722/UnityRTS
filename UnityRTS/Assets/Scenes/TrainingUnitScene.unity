@@ -4783,6 +4783,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 552357638497370363, guid: 5c7f0ec08345d424aa3b238eda5f796f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -27.530579
+      objectReference: {fileID: 0}
     - target: {fileID: 4451647139569319356, guid: 5c7f0ec08345d424aa3b238eda5f796f,
         type: 3}
       propertyPath: m_Name
@@ -8117,7 +8122,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 8ac0c0d8f4f454afbb4b8bde2f0cb1a8, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: d59c9ba13659244489858bb3f32a3cf2, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &1632331667
 MonoBehaviour:
@@ -8210,7 +8215,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: d59c9ba13659244489858bb3f32a3cf2, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 8ac0c0d8f4f454afbb4b8bde2f0cb1a8, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1645979311 stripped
 Transform:
@@ -9605,6 +9610,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Townhall
       objectReference: {fileID: 0}
+    - target: {fileID: 5956206774473496012, guid: 24ef802037da34d248827a89de90bd0a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8551121447801436049, guid: 24ef802037da34d248827a89de90bd0a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10667,7 +10677,7 @@ MonoBehaviour:
   - enemies:
     - enemyPrefab: {fileID: 1898230509516970111, guid: 060e82ed7b603423cb05f78353514752,
         type: 3}
-      count: 200
+      count: 30
       spawnPoints:
       - {fileID: 1403665167}
       - {fileID: 1848732545}
