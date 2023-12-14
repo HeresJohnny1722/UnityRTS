@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 8891788161909323775}
   - component: {fileID: 9004424208418372396}
   - component: {fileID: 1921279827401832815}
+  - component: {fileID: 1505508484700099279}
   m_Layer: 9
   m_Name: UnitHut
   m_TagString: Untagged
@@ -262,6 +263,27 @@ MonoBehaviour:
     m_RotationOrder: 4
   looping: 0
   loopingDelay: 0.5
+--- !u!65 &1505508484700099279
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4451647139569319356}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8914558, y: 1.9177356, z: 1.8451514}
+  m_Center: {x: 0.5457279, y: 1.4279735, z: 0.52257574}
 --- !u!1001 &1652922495148914923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -328,7 +350,7 @@ PrefabInstance:
     - target: {fileID: 3229293742691266216, guid: f0e3d7d8144604374ae31f559f9ce5b4,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5924947549173382743, guid: f0e3d7d8144604374ae31f559f9ce5b4,
         type: 3}

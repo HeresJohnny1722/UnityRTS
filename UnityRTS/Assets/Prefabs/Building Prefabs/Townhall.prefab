@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 3962172614010969742}
   - component: {fileID: 9010137462973694339}
   - component: {fileID: 4351138931235988257}
+  - component: {fileID: 8869971165927690995}
   - component: {fileID: 5951230721298950023}
   - component: {fileID: 8208075947433393185}
   m_Layer: 9
@@ -171,6 +172,27 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.6631064, y: 5.983264, z: 5.239637}
+  m_Center: {x: 0.44515014, y: 3.4607377, z: 0.5351479}
+--- !u!65 &8869971165927690995
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5956206774473496012}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -389,6 +411,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5755796915027344544, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -27.530579
       objectReference: {fileID: 0}
     - target: {fileID: 7107961100742686627, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}

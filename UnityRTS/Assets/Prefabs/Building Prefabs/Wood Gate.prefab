@@ -604,6 +604,7 @@ GameObject:
   - component: {fileID: 5749664215658570353}
   - component: {fileID: 5185448149908495622}
   - component: {fileID: 8654752982386603939}
+  - component: {fileID: 4264558602929965989}
   m_Layer: 9
   m_Name: Wood Gate
   m_TagString: Untagged
@@ -654,9 +655,10 @@ MonoBehaviour:
   buildingDeathEffect: {fileID: 2739781832950810520, guid: d9d0561c674d04cfb8b1a8ba6dcbaedc,
     type: 3}
   infoPanel: {fileID: 4006949359932422722}
-  removeButton: {fileID: 6561373632459604137}
+  buildingNameText: {fileID: 0}
+  productionOutputRateText: {fileID: 0}
   buildingHealthbar: {fileID: 6372168330526255309}
-  buildingHealthText: {fileID: 2020855331351526564}
+  buildingHealthText: {fileID: 0}
   workersInside: []
 --- !u!114 &6325320338654983505
 MonoBehaviour:
@@ -835,6 +837,27 @@ MonoBehaviour:
     m_RotationOrder: 4
   looping: 0
   loopingDelay: 0.5
+--- !u!65 &4264558602929965989
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8262314475405559837}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.87351704, y: 1.7030678, z: 2.8829896}
+  m_Center: {x: 0.012252808, y: 1.3206394, z: -0.00000011920929}
 --- !u!1 &8880460277856696005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,18 +1344,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 916931015407320626}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2020855331351526564 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1203044739441312406, guid: d8f43148855d24b7aa08f4876f186f35,
-    type: 3}
-  m_PrefabInstance: {fileID: 916931015407320626}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3109407604440324031 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2855073649205209485, guid: d8f43148855d24b7aa08f4876f186f35,
@@ -1342,12 +1353,6 @@ GameObject:
 --- !u!1 &4006949359932422722 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4260999877378704496, guid: d8f43148855d24b7aa08f4876f186f35,
-    type: 3}
-  m_PrefabInstance: {fileID: 916931015407320626}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6561373632459604137 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6320583723456315035, guid: d8f43148855d24b7aa08f4876f186f35,
     type: 3}
   m_PrefabInstance: {fileID: 916931015407320626}
   m_PrefabAsset: {fileID: 0}

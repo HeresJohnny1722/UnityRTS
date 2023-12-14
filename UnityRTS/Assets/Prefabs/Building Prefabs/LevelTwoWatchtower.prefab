@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 6436881362662773346}
   - component: {fileID: 6778673923246378633}
   - component: {fileID: 7676983006749183889}
+  - component: {fileID: 4049237825327099075}
   m_Layer: 9
   m_Name: LevelTwoWatchtower
   m_TagString: Untagged
@@ -199,9 +200,10 @@ MonoBehaviour:
   buildingDeathEffect: {fileID: 2739781832950810520, guid: d9d0561c674d04cfb8b1a8ba6dcbaedc,
     type: 3}
   infoPanel: {fileID: 1245195648654108068}
-  removeButton: {fileID: 9066580995020250959}
+  buildingNameText: {fileID: 0}
+  productionOutputRateText: {fileID: 0}
   buildingHealthbar: {fileID: 3192987372054347442}
-  buildingHealthText: {fileID: 4240100400126665538}
+  buildingHealthText: {fileID: 0}
   workersInside: []
 --- !u!114 &8955511327124818837
 MonoBehaviour:
@@ -261,11 +263,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfd9eb52e5f44e81a321a583dcd60b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasTurretMount: 0
+  turretObject: {fileID: 0}
+  animator: {fileID: 0}
   currentTarget: {fileID: 0}
   raycastPoint: {fileID: 3904180062900219366}
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 4096
+  flashTransform: {fileID: 0}
   attackFlash: {fileID: 1632907034255504682}
   flashDistance: 0.5
 --- !u!65 &6436881362662773346
@@ -375,6 +381,27 @@ MonoBehaviour:
     m_RotationOrder: 4
   looping: 0
   loopingDelay: 0.5
+--- !u!65 &4049237825327099075
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2985626473903513160}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8, y: 1.7030678, z: 0.8}
+  m_Center: {x: 0, y: 1.3206394, z: 0}
 --- !u!1 &3952388955206910699
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,18 +925,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3055074457451749844}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4240100400126665538 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1203044739441312406, guid: d8f43148855d24b7aa08f4876f186f35,
-    type: 3}
-  m_PrefabInstance: {fileID: 3055074457451749844}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6691115474650375175 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8556364418665956819, guid: d8f43148855d24b7aa08f4876f186f35,
@@ -922,12 +937,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &9066580995020250959 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6320583723456315035, guid: d8f43148855d24b7aa08f4876f186f35,
-    type: 3}
-  m_PrefabInstance: {fileID: 3055074457451749844}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3474727024859560189
 PrefabInstance:
   m_ObjectHideFlags: 0

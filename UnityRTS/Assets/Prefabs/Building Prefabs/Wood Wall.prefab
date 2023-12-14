@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 8267708612298645102}
   - component: {fileID: 4678324568768107760}
   - component: {fileID: 407213291562648672}
+  - component: {fileID: 1198442923829651747}
   m_Layer: 9
   m_Name: Wood Wall
   m_TagString: Untagged
@@ -98,9 +99,10 @@ MonoBehaviour:
   buildingDeathEffect: {fileID: 2739781832950810520, guid: d9d0561c674d04cfb8b1a8ba6dcbaedc,
     type: 3}
   infoPanel: {fileID: 5400843398123959602}
-  removeButton: {fileID: 2767043934305619929}
+  buildingNameText: {fileID: 0}
+  productionOutputRateText: {fileID: 0}
   buildingHealthbar: {fileID: 838549187815160341}
-  buildingHealthText: {fileID: 7017637867536544724}
+  buildingHealthText: {fileID: 0}
   workersInside: []
 --- !u!114 &4047045916754300301
 MonoBehaviour:
@@ -255,6 +257,27 @@ MonoBehaviour:
     m_RotationOrder: 4
   looping: 0
   loopingDelay: 0.5
+--- !u!65 &1198442923829651747
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4751973605663406655}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8, y: 1.7030678, z: 0.8}
+  m_Center: {x: 0, y: 1.3206394, z: 0}
 --- !u!1 &5625750544057294613
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,12 +1216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2767043934305619929 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6320583723456315035, guid: d8f43148855d24b7aa08f4876f186f35,
-    type: 3}
-  m_PrefabInstance: {fileID: 8201541612767359298}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5400843398123959602 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4260999877378704496, guid: d8f43148855d24b7aa08f4876f186f35,
@@ -1211,18 +1228,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8201541612767359298}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7017637867536544724 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1203044739441312406, guid: d8f43148855d24b7aa08f4876f186f35,
-    type: 3}
-  m_PrefabInstance: {fileID: 8201541612767359298}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &7663321666647083081 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1983884910063581451, guid: d8f43148855d24b7aa08f4876f186f35,

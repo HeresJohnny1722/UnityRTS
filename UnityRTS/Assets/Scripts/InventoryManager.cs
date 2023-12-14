@@ -22,7 +22,7 @@ public class InventoryManager : MonoBehaviour
     public int maxGoldFactory;
     public int maxLumberMill;
     public int maxGreenhouse;
-    public int maxWatchtower;
+    public int maxDefenseBuildingCount;
     public int maxWall;
     public int maxGate;
     public int houseCount;
@@ -30,7 +30,7 @@ public class InventoryManager : MonoBehaviour
     public int goldFactoryCount;
     public int lumberMillCount;
     public int greenhouseCount;
-    public int watchtowerCount;
+    public int defenseBuildingCount;
     public int wallCount;
     public int gateCount;
 
@@ -165,7 +165,7 @@ public class InventoryManager : MonoBehaviour
         }
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Defense)
         {
-            if (InventoryManager.instance.maxWatchtower > InventoryManager.instance.watchtowerCount)
+            if (InventoryManager.instance.maxDefenseBuildingCount > InventoryManager.instance.defenseBuildingCount)
             {
 
                 return true;
@@ -275,6 +275,26 @@ public class InventoryManager : MonoBehaviour
             InventoryManager.instance.barracksCount++;
 
         }
+        else if (buildingSO.buildingType == BuildingSO.BuildingType.Defense)
+        {
+
+            InventoryManager.instance.defenseBuildingCount++;
+
+        }
+
+        else if (buildingSO.buildingType == BuildingSO.BuildingType.Wall)
+        {
+
+            if (buildingSO.name == "Wood Gate")
+            {
+                InventoryManager.instance.gateCount++;
+            } else
+            {
+                InventoryManager.instance.wallCount++;
+            }
+            
+
+        }
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
         {
 
@@ -321,6 +341,26 @@ public class InventoryManager : MonoBehaviour
         {
 
             InventoryManager.instance.barracksCount--;
+
+        }
+        else if (buildingSO.buildingType == BuildingSO.BuildingType.Defense)
+        {
+
+            InventoryManager.instance.defenseBuildingCount--;
+
+        }
+        else if (buildingSO.buildingType == BuildingSO.BuildingType.Wall)
+        {
+
+            if (buildingSO.name == "Wood Gate")
+            {
+                InventoryManager.instance.gateCount--;
+            }
+            else
+            {
+                InventoryManager.instance.wallCount--;
+            }
+
 
         }
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
