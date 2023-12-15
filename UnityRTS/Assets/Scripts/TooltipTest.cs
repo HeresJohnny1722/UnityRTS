@@ -12,7 +12,7 @@ public class TooltipTest : MonoBehaviour
         {
             return "This is my tooltip!\nThere are many like it but this one is mine!\n" + timer;
         };
-        TooltipCanvas.ShowTooltip_Static("This is my tooltip!\nThere are many like it but this one is mine!");
+        TooltipCanvas.ShowTooltip_Static("Damage: 5\n Health: 100");
     }
 
     private void Update()
