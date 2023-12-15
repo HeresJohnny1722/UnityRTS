@@ -160,7 +160,6 @@ GameObject:
   - component: {fileID: 8433340988126413272}
   - component: {fileID: 2958555681735352451}
   - component: {fileID: 6277138043053486435}
-  - component: {fileID: 1229156576376061525}
   m_Layer: 8
   m_Name: BasicGunnerFriendly
   m_TagString: Untagged
@@ -330,27 +329,6 @@ MonoBehaviour:
   - {fileID: 7309633358022064761}
   - {fileID: 6708440103928250828}
   - {fileID: 7245229841294619}
---- !u!95 &1229156576376061525
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7462998351962582450}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cc79097f48c864f3dbee065e74dcec72, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8945384816857529301
 GameObject:
   m_ObjectHideFlags: 0
