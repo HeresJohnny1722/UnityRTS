@@ -46,7 +46,13 @@ public class Unit : MonoBehaviour
 
     public TroopHit troopHit;
 
+    public float movingAnimationTimeWaitTime;
 
+    public float bobbingHeight = 0.2f; // Adjust this value to control how much the unit bobs up and down
+    public float bobbingSpeed = 1.0f; // Adjust this value to control how fast the unit bobs
+
+    private bool isBobbingUp = false;
+    private Vector3 originalPosition;
 
     void Start()
     {
@@ -61,7 +67,7 @@ public class Unit : MonoBehaviour
         //moveToPosition = transform.position;
         currentState = UnitState.Idle;
 
-
+        originalPosition = transform.position;
         //previousPosition = transform.position;
 
     }
@@ -128,15 +134,25 @@ public class Unit : MonoBehaviour
                 // Handle moving state logic here if needed
                 muzzleFlash.SetActive(false);
                 currentTarget = null;
+                originalPosition = transform.position;
+                BobbingAnimation();
+                //move animation
 
-                //If a worker
-                //Check if there are any buildings to go to
-                
+
+
                 break;
 
             default:
                 break;
         }
+    }
+
+    private void BobbingAnimation()
+    {
+        float yOffset = Mathf.Sin(Time.time * bobbingSpeed) * bobbingHeight;
+
+        // Update the unit's position with the continuous bobbing effect
+        transform.position = new Vector3(transform.position.x, originalPosition.y + yOffset, transform.position.z);
     }
 
     private void CheckForBuildings()

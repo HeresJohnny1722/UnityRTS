@@ -15,7 +15,6 @@ MonoBehaviour:
   buildingType: 1
   unitsToTrain:
   - {fileID: 11400000, guid: f8589073340ec4464a11392c28e3c57f, type: 2}
-  - {fileID: 11400000, guid: 45fcc9f8b4f034a10b4c33f24519e6e1, type: 2}
   spawnFlagMoveToTroopOffset: 1.5
   resourceType: 0
   outputPerSecond: 0
