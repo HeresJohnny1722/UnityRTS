@@ -31,7 +31,7 @@ public class Building : MonoBehaviour
     public TextMeshProUGUI productionOutputRateText;
 
     public Healthbar buildingHealthbar;
-    public TextMeshProUGUI buildingHealthText;
+    //public TextMeshProUGUI buildingHealthText;
 
     public List<GameObject> workersInside = new List<GameObject>();
 

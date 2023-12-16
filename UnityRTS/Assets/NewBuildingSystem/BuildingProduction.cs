@@ -9,10 +9,10 @@ public class BuildingProduction : MonoBehaviour
     private Building building;
 
     
-    public GameObject productionPanel;
-    public TextMeshProUGUI workersCurrentlyWorkingText;
-    public TextMeshProUGUI outputRateText;
-    public TextMeshProUGUI resourceTypeText;
+    //public GameObject productionPanel;
+    //public TextMeshProUGUI workersCurrentlyWorkingText;
+    //public TextMeshProUGUI outputRateText;
+    //public TextMeshProUGUI resourceTypeText;
 
     public GameObject nodePanel;
     public TextMeshProUGUI nodeGoldCostText;
@@ -22,9 +22,7 @@ public class BuildingProduction : MonoBehaviour
     public GameObject Node;
     public GameObject ProductionBuilding;
 
-    public float outputRate;
-    [HideInInspector]
-    public float workersCurrentlyInTheBuilding = 0;
+    private float outputRate;
 
 
 
@@ -36,8 +34,8 @@ public class BuildingProduction : MonoBehaviour
     public void UpdateProductionUI()
     {
         //workersCurrentlyWorkingText.text = building.workersInside.Count + "/" + building.buildingSO.workerCapacity.ToString() + " Workers";
-        outputRateText.text = "Output rate: " + outputRate + " " + building.buildingSO.resourceType.ToString() + "/second";
-        resourceTypeText.text = building.buildingSO.resourceType.ToString();
+       // outputRateText.text = "Output rate: " + outputRate + " " + building.buildingSO.resourceType.ToString() + "/second";
+       // resourceTypeText.text = building.buildingSO.resourceType.ToString();
     }
 
     public void SetUpProduction()
@@ -55,7 +53,7 @@ public class BuildingProduction : MonoBehaviour
     private void SetStageOneProperties()
     {
        // building.removeButton.SetActive(false);
-        building.buildingHealthText.text = "";
+//        building.buildingHealthText.text = "";
         Node.SetActive(true);
         ProductionBuilding.SetActive(false);
     }
@@ -89,8 +87,8 @@ public class BuildingProduction : MonoBehaviour
 
         if (building.stage == 1)
         {
-            building.infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = building.buildingSO.nodeName;
-            building.infoPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = building.buildingSO.nodeDescription;
+            building.buildingNameText.text = building.buildingSO.nodeName;
+            //building.infoPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = building.buildingSO.nodeDescription;
             if (building.buildingSO.buildingType == BuildingSO.BuildingType.Production)
             {
                 nodeGoldCostText.text = "Gold: " + building.buildingSO.goldCost.ToString();
@@ -98,17 +96,15 @@ public class BuildingProduction : MonoBehaviour
                 nodeCopperCostText.text = "Food: " + building.buildingSO.foodCost.ToString();
                 nodePanel.SetActive(true);
             }
-            building.buildingHealthText.text = "";
+            //building.buildingHealthText.text = "";
 
         }
         else if (building.stage == 2)
         {
-            building.infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = building.buildingSO.name;
-            building.infoPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = building.buildingSO.description;
-            if (building.buildingSO.buildingType == BuildingSO.BuildingType.Production)
-            {
-                nodePanel.SetActive(false);
-            }
+            building.buildingNameText.text = building.buildingSO.name;
+            building.productionOutputRateText.text = "Output: " + building.buildingSO.outputPerSecond.ToString() + " " + building.buildingSO.resourceType + "/second";
+            nodePanel.SetActive(false);
+            
 
         }
 
@@ -122,7 +118,7 @@ public class BuildingProduction : MonoBehaviour
 
     public void HideShowProduction(bool visible)
     {
-        productionPanel.SetActive(visible);
+        //productionPanel.SetActive(visible);
         nodePanel.SetActive(visible);
     }
 
@@ -135,8 +131,8 @@ public class BuildingProduction : MonoBehaviour
             //buildingSO.resourceOutputRate *
 
             //workersCurrentlyWorkingText.text = building.workersInside.Count + "/" + building.buildingSO.workerCapacity.ToString() + " Workers";
-            outputRateText.text = "Output rate: " + outputRate + " " + building.buildingSO.resourceType.ToString() + "/second";
-            resourceTypeText.text = building.buildingSO.resourceType.ToString();
+            //outputRateText.text = "Output rate: " + outputRate + " " + building.buildingSO.resourceType.ToString() + "/second";
+            //resourceTypeText.text = building.buildingSO.resourceType.ToString();
 
             // Update your resource quantity here (assuming you have an InventoryManager)
             // You can replace "InventoryManager.instance" with your actual reference to the InventoryManager
@@ -189,7 +185,7 @@ public class BuildingProduction : MonoBehaviour
 
             InventoryManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0);
 
-            building.buildingHealthText.text = "Health: " + building.buildingHealth.ToString();
+            //building.buildingHealthText.text = "Health: " + building.buildingHealth.ToString();
             Node.SetActive(false);
             ProductionBuilding.SetActive(true);
             //building.productionPanel.SetActive(true);
@@ -211,10 +207,10 @@ public class BuildingProduction : MonoBehaviour
         building.buildingHealthbar.UpdateHealthBar(building.buildingSO.startingHealth, building.buildingHealth);
         //building.buildingHealthbar.gameObject.SetActive(false);
         building.stage = 1;
-        building.buildingHealthText.text = "";
+        //building.buildingHealthText.text = "";
         Node.SetActive(true);
         ProductionBuilding.SetActive(false);
-        productionPanel.SetActive(false);
+        //productionPanel.SetActive(false);
         nodePanel.SetActive(true);
         BuildingSelection.Instance.buildingsList.Remove(building.gameObject);
         building.infoPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = building.buildingSO.nodeName;

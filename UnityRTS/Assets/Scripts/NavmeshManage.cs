@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
@@ -21,6 +22,8 @@ public class NavmeshManage : MonoBehaviour
         {
             _instance = this;
         }
+
+        UpdateNavmesh();
     }
 
     public void UpdateNavmesh()
@@ -33,7 +36,14 @@ public class NavmeshManage : MonoBehaviour
         // Build nav mesh for each NavMeshSurface
         foreach (NavMeshSurface navMeshSurface in navMeshSurfaces)
         {
-            navMeshSurface.BuildNavMesh();
+            try
+            {
+                navMeshSurface.BuildNavMesh();
+            } catch (Exception e)
+            {
+
+            }
+            
         }
     }
 }
