@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f2eddf285c1a34fa2b018094aa828501
+guid: d78d19947a9184ba2b41a348aa127c07
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,23 +7,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Blades
-    second: {fileID: 2100000, guid: c760f15b2e0524e3d94b8b7bad95ed24, type: 2}
+      name: Copper
+    second: {fileID: 2100000, guid: bd79e82b6e17f40e28d4222aa3236b95, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pipe
+    second: {fileID: 2100000, guid: bd79e82b6e17f40e28d4222aa3236b95, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Roof
-    second: {fileID: 2100000, guid: 603a2e8f465e6474fb847341083db171, type: 2}
+    second: {fileID: 2100000, guid: a2445b588c6fb49f6add310a0a6353cc, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Wall
-    second: {fileID: 2100000, guid: c7132db7ab28d4ef49012b1dbe05a538, type: 2}
+      name: Window
+    second: {fileID: 2100000, guid: eeda13555551f45f5ba782ce12cf63b8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: WallHouse
-    second: {fileID: 2100000, guid: 8654ae6a5412b4abdb9583f334008fb1, type: 2}
+      name: wall
+    second: {fileID: 2100000, guid: 9c6dd7d163dc04a5d84db7e5e02a678e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

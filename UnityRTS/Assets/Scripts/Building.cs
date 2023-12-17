@@ -251,6 +251,7 @@ public class Building : MonoBehaviour
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
         {
             buildingTraining.BarracksSelected();
+            productionOutputRateText.text = "";
         } else
         {
             productionOutputRateText.text = "";

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ortho
+  m_Name: OrthFOg
   m_Shader: {fileID: -6465566751694194690, guid: 7c096722d4077694882b4bae06e4e084,
     type: 3}
   m_Parent: {fileID: 0}
@@ -43,7 +43,7 @@ Material:
     m_Colors:
     - _FogColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &4871879539228444088
+--- !u!114 &1840781430896543025
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
