@@ -219,7 +219,9 @@ public class Building : MonoBehaviour
             BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
             Destroy(this.gameObject);
             InventoryManager.instance.decreaseBuildingCount(buildingSO);
-            NavmeshManage.Instance.UpdateNavmesh();
+            //NavmeshManage.Instance.UpdateNavmesh();
+            AstarPath.active.UpdateGraphs(this.GetComponent<BoxCollider>().bounds);
+
 
             if (!buildingConstruction.isUnderConstruction)
             {

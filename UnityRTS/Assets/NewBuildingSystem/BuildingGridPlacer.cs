@@ -93,16 +93,17 @@ public class BuildingGridPlacer : BuildingPlacer
                             {
                                 if (InventoryManager.instance.CheckBuildingCountAvailable(building.buildingSO))
                                 {
-                                    _toBuild = null; // (to avoid destruction)
-                                    _PrepareBuilding();
-                                    NavmeshManage.Instance.UpdateNavmesh();
+                                    _buildingPrefab = null;
+                                    AstarPath.active.UpdateGraphs(_toBuild.GetComponent<BoxCollider>().bounds);
+                                    _toBuild = null;
+                                    
                                 }
                                 else
                                 {
                                     _buildingPrefab = null;
+                                    AstarPath.active.UpdateGraphs(_toBuild.GetComponent<BoxCollider>().bounds);
                                     _toBuild = null;
                                     _EnableGridVisual(false);
-                                    NavmeshManage.Instance.UpdateNavmesh();
 
                                 }
 
@@ -110,9 +111,9 @@ public class BuildingGridPlacer : BuildingPlacer
                             else
                             {
                                 _buildingPrefab = null;
+                                AstarPath.active.UpdateGraphs(_toBuild.GetComponent<BoxCollider>().bounds);
                                 _toBuild = null;
                                 _EnableGridVisual(false);
-                                NavmeshManage.Instance.UpdateNavmesh();
 
                             }
 
@@ -120,9 +121,10 @@ public class BuildingGridPlacer : BuildingPlacer
                         else
                         {
                             _buildingPrefab = null;
+                            AstarPath.active.UpdateGraphs(_toBuild.GetComponent<BoxCollider>().bounds);
                             _toBuild = null;
                             _EnableGridVisual(false);
-                            NavmeshManage.Instance.UpdateNavmesh();
+                            
 
                         }
                         

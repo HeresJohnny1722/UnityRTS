@@ -203,7 +203,6 @@ MonoBehaviour:
   buildingNameText: {fileID: 0}
   productionOutputRateText: {fileID: 0}
   buildingHealthbar: {fileID: 3192987372054347442}
-  buildingHealthText: {fileID: 0}
   workersInside: []
 --- !u!114 &8955511327124818837
 MonoBehaviour:
@@ -427,7 +426,7 @@ Transform:
   m_GameObject: {fileID: 3952388955206910699}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.575, y: 0.875, z: 0.544}
+  m_LocalPosition: {x: 0.556, y: 0.875, z: 0.493}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -44,6 +44,8 @@ public class EnemyAI : MonoBehaviour
 
     private bool isWaiting;
 
+    private AstarAI myAstarAI;
+
 
 
     ///public EnemyManager enemyManager;
@@ -54,11 +56,13 @@ public class EnemyAI : MonoBehaviour
 
         //enemyManager.enemyList.Add(gameObject);
         //muzzleFlash.SetActive(false);
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.speed = enemyAISO.speed;
+      //  navMeshAgent = GetComponent<NavMeshAgent>();
+//        navMeshAgent.speed = enemyAISO.speed;
         //aimShootAnims = GetComponent<IAimShootAnims>();
         state = State.Roaming;
         enemyHealth = enemyAISO.startingHealth;
+        myAstarAI = GetComponent<AstarAI>();
+        
 
 
     }
@@ -104,7 +108,9 @@ public class EnemyAI : MonoBehaviour
         {
             default:
             case State.Roaming:
-                navMeshAgent.SetDestination(roamPosition);
+                //AstarAI myAstarAI = GetComponent<AstarAI>();
+                myAstarAI.targetPosition = roamPosition;
+                myAstarAI.StartPath();
 
                 if (!isWaiting && Vector3.Distance(transform.position, roamPosition) < enemyAISO.roamingReachedPositionDistance)
                 {
@@ -125,10 +131,14 @@ public class EnemyAI : MonoBehaviour
 
                     if (targetType == "Unit")
                     {
-                        navMeshAgent.SetDestination(targetTransform.position);
+                        
+                        myAstarAI.targetPosition = targetTransform.position;
+                        myAstarAI.StartPath();
+                        
                         if (Vector3.Distance(transform.position, targetTransform.position) < enemyAISO.attackRange)
                         {
-                            navMeshAgent.SetDestination(transform.position);
+                            myAstarAI.targetPosition = transform.position;
+                            myAstarAI.StartPath();
 
                             // Target within attack range
                             if (Time.time > nextShootTime)
@@ -143,11 +153,14 @@ public class EnemyAI : MonoBehaviour
                     }
                     else if (targetType == "Building")
                     {
-                        navMeshAgent.SetDestination(targetTransform.GetChild(1).position);
+                        
+                        myAstarAI.targetPosition = targetTransform.GetChild(1).position;
+                        myAstarAI.StartPath();
                         if (Vector3.Distance(transform.position, targetTransform.GetChild(1).position) < enemyAISO.attackRange + targetTransform.GetComponent<BoxCollider>().size.x / 1.25)
                         {
                             //Debug.Log(targetTransform.GetComponent<BoxCollider>().size.x);
-                            navMeshAgent.SetDestination(transform.position);
+                            myAstarAI.targetPosition = transform.position;
+                            myAstarAI.StartPath();
 
                             // Target within attack range
                             if (Time.time > nextShootTime)
@@ -173,7 +186,10 @@ public class EnemyAI : MonoBehaviour
             case State.ShootingTarget:
                 break;
             case State.GoingBackToStart:
-                navMeshAgent.SetDestination(startingPosition);
+                
+                myAstarAI.targetPosition = startingPosition;
+                myAstarAI.StartPath();
+
 
                 //reachedStartPositionDistance = 10f;
                 if (Vector3.Distance(transform.position, startingPosition) < enemyAISO.reachedStartPositionDistance)

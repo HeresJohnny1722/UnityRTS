@@ -188,9 +188,12 @@ public class BuildingTraining : MonoBehaviour
             barracksUnitTrainingNameText.text = "No unit training";
 
             UpdateQueueSizeText(); // Update the queue size text when a troop is done training
-            NavMeshAgent unitAgent = troop.GetComponent<NavMeshAgent>();
+            //NavMeshAgent unitAgent = troop.GetComponent<NavMeshAgent>();
             troop.GetComponent<Unit>().moveToPosition = movePosition;
-            unitAgent.SetDestination(movePosition);
+            AstarAI myAstarAI = troop.GetComponent<AstarAI>();
+            myAstarAI.targetPosition = movePosition;
+            myAstarAI.StartPath();
+            myAstarAI.isMoving = true;
 
 
 

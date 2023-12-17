@@ -22,7 +22,8 @@ public class UnitSelection : MonoBehaviour
     [SerializeField] private TextMeshProUGUI selectedUnitsTitle;
     [SerializeField] private TextMeshProUGUI selectedUnitsListText;
 
-    private NavMeshAgent myAgent;
+    //private NavMeshAgent myAgent;
+    private AstarAI myAstarAI;
 
     private Unit unitScript;
 
@@ -64,14 +65,13 @@ public class UnitSelection : MonoBehaviour
 
             for (int i = 0; i < unitsSelected.Count; i++)
             {
-                myAgent = unitsSelected[i].GetComponent<NavMeshAgent>();
-                myAgent.SetDestination(_points[i] + moveToPosition);
                 
-                Unit unit = unitsSelected[i].GetComponent<Unit>();
-                unit.moveToPosition = _points[i] + moveToPosition;
-                //unit.currentState = Unit.UnitState.Moving;
-                //Debug.Log(unit.currentState);
-                //unit.muzzleFlash.SetActive(false);
+                myAstarAI = unitsSelected[i].GetComponent<AstarAI>();
+                myAstarAI.targetPosition = _points[i] + moveToPosition;
+                myAstarAI.StartPath();
+
+
+                
             }
         }
     }

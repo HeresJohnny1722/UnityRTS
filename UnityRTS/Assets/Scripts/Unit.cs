@@ -56,8 +56,8 @@ public class Unit : MonoBehaviour
 
     void Start()
     {
-        myAgent = GetComponent<NavMeshAgent>();
-        myAgent.speed = unitSO.speed;
+      //  myAgent = GetComponent<NavMeshAgent>();
+//        myAgent.speed = unitSO.speed;
         unitHealth = unitSO.startingHealth;
         unitHealthbar.UpdateHealthBar(unitSO.startingHealth, unitHealth);
         unitHealthbar.gameObject.SetActive(false);
@@ -74,23 +74,24 @@ public class Unit : MonoBehaviour
 
     private void Update()
     {
+
+
         
 
-        if (transform.position.x == moveToPosition.x && transform.position.z == moveToPosition.z)
+        AstarAI myAstarAI = GetComponent<AstarAI>();
+        if (myAstarAI.isMoving)
         {
-            Debug.Log("at destination");
-            isMoving = false;
-
-            if (currentState == UnitState.Moving)
+            currentState = UnitState.Moving;
+        } else
+        {
+            if (currentState != UnitState.Shooting)
             {
                 currentState = UnitState.Idle;
             }
-        } else
-        {
-            //Debug.Log("moving");
             
-            currentState = UnitState.Moving;
         }
+
+
 
         switch (currentState)
         {
