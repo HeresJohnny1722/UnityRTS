@@ -155,7 +155,7 @@ public class EnemyAI : MonoBehaviour
             {
 
                 RaycastHit hit;
-                if (Physics.Raycast(raycastPoint.position, (targetTransform.GetChild(1).position - raycastPoint.position).normalized, out hit, buildingsLayerMask))
+                if (Physics.Raycast(transform.position, (targetTransform.GetChild(1).position - raycastPoint.position).normalized, out hit, buildingsLayerMask))
                 {
                     if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
                     {

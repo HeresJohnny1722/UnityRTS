@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3848712291153175685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.547, y: 0.875, z: 0.474}
+  m_LocalPosition: {x: 0.547, y: 1.078, z: 0.474}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -175,8 +175,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8914558, y: 1.9177356, z: 1.8451514}
-  m_Center: {x: 0.5457279, y: 1.4279735, z: 0.52257574}
+  m_Size: {x: 1.8071257, y: 1.9177356, z: 1.8282855}
+  m_Center: {x: 0.54151136, y: 1.4279735, z: 0.51414275}
 --- !u!54 &9004424208418372396
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -282,8 +282,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8914558, y: 1.9177356, z: 1.8451514}
-  m_Center: {x: 0.5457279, y: 1.4279735, z: 0.52257574}
+  m_Size: {x: 1.7986927, y: 1.9177356, z: 1.8240689}
+  m_Center: {x: 0.54572785, y: 1.4279735, z: 0.5120345}
 --- !u!1001 &1652922495148914923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -474,7 +474,7 @@ PrefabInstance:
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.942
+      value: 3.188
       objectReference: {fileID: 0}
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
@@ -499,12 +499,12 @@ PrefabInstance:
     - target: {fileID: 1660429363526082665, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1130338.9
+      value: 2080646.4
       objectReference: {fileID: 0}
     - target: {fileID: 1660429363526082665, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 212.8
+      value: 379.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -620,7 +620,7 @@ PrefabInstance:
     - target: {fileID: 6518903963535337443, guid: 68361b3fb87f64eb9b88f97ecfbe4304,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.7719998
+      value: 3.018
       objectReference: {fileID: 0}
     - target: {fileID: 6518903963535337443, guid: 68361b3fb87f64eb9b88f97ecfbe4304,
         type: 3}
@@ -641,6 +641,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ConstructionProgress Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847313438067606820, guid: 68361b3fb87f64eb9b88f97ecfbe4304,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1971096.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847313438067606820, guid: 68361b3fb87f64eb9b88f97ecfbe4304,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 378.1
       objectReference: {fileID: 0}
     - target: {fileID: 7362315453088433146, guid: 68361b3fb87f64eb9b88f97ecfbe4304,
         type: 3}

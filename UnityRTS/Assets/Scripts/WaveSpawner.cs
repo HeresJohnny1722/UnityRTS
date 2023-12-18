@@ -33,6 +33,7 @@ public class WaveSpawner : MonoBehaviour
             foreach (EnemyWave enemyWave in wave.enemies)
             {
                 expectedTotalTroops += enemyWave.count;
+
             }
         }
 
@@ -57,11 +58,11 @@ public class WaveSpawner : MonoBehaviour
         }
 
         // Check if all troops are spawned
-        if (totalTroopsSpawned >= expectedTotalTroops)
-        {
-            Debug.Log("Game is over, you win!");
+        //if (totalTroopsSpawned >= expectedTotalTroops)
+        //{
+            Debug.Log("Waves are done spawning");
             GameManager.instance.areWavesDone = true;
-        }
+        //}
     }
 
     IEnumerator SpawnEnemies(GameObject enemyPrefab, int count, Transform[] spawnPoints)
@@ -71,6 +72,7 @@ public class WaveSpawner : MonoBehaviour
             Transform spawnPoint = GetRandomSpawnPoint(spawnPoints);
             Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
             totalTroopsSpawned++; // Increment the counter when a troop is spawned
+            Debug.Log("Troop spawned! Total: " + totalTroopsSpawned);
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }

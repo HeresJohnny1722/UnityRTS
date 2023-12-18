@@ -32,6 +32,9 @@ public class CameraController : MonoBehaviour
     public Vector3 rotateStartPosition;
     public Vector3 rotateCurrentPosition;
 
+    public Vector2 boundaryX = new Vector2(-100f, 100f); // Adjust these values to set the boundary in the X-axis
+    public Vector2 boundaryZ = new Vector2(-100f, 100f); // Adjust these values to set the boundary in the Z-axis
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,11 +94,13 @@ public class CameraController : MonoBehaviour
             moveDirection += transform.forward;
         }
 
-        newPosition += moveDirection.normalized * movementMouseSpeed * Time.deltaTime;
+        newPosition.x = Mathf.Clamp(newPosition.x, boundaryX.x, boundaryX.y);
+        newPosition.z = Mathf.Clamp(newPosition.z, boundaryZ.x, boundaryZ.y);
 
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
         cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * movementTime);
+
     }
 
     void HandleMovementInput()
@@ -136,6 +141,9 @@ public class CameraController : MonoBehaviour
         {
             newRotation *= Quaternion.Euler(Vector3.up * -rotationAmount);
         }
+
+        newPosition.x = Mathf.Clamp(newPosition.x, boundaryX.x, boundaryX.y);
+        newPosition.z = Mathf.Clamp(newPosition.z, boundaryZ.x, boundaryZ.y);
 
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
