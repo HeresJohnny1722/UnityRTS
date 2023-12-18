@@ -17,7 +17,7 @@ MonoBehaviour:
   startingHealth: 50
   damageAmountPerAttack: 15
   fireRate: 1
-  attackRange: 1
+  attackRange: 5
   searchRange: 70
   romingRange: 3
   roamingReachedPositionDistance: 0.5

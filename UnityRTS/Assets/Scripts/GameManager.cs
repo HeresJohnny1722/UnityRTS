@@ -2,10 +2,10 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
-public class InventoryManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     // Singleton instance
-    public static InventoryManager instance;
+    public static GameManager instance;
 
     public GameObject VictoryScreen;
     public GameObject GameOverScreen;
@@ -170,7 +170,7 @@ public class InventoryManager : MonoBehaviour
 
         if (buildingSO.buildingType == BuildingSO.BuildingType.House)
         {
-            if (InventoryManager.instance.maxHouses > InventoryManager.instance.houseCount)
+            if (GameManager.instance.maxHouses > GameManager.instance.houseCount)
             {
 
                 return true;
@@ -182,7 +182,7 @@ public class InventoryManager : MonoBehaviour
         }
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
         {
-            if (InventoryManager.instance.maxBarracks > InventoryManager.instance.barracksCount)
+            if (GameManager.instance.maxBarracks > GameManager.instance.barracksCount)
             {
 
                 return true;
@@ -194,7 +194,7 @@ public class InventoryManager : MonoBehaviour
         }
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Defense)
         {
-            if (InventoryManager.instance.maxDefenseBuildingCount > InventoryManager.instance.defenseBuildingCount)
+            if (GameManager.instance.maxDefenseBuildingCount > GameManager.instance.defenseBuildingCount)
             {
 
                 return true;
@@ -209,7 +209,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (buildingSO.name == "Wood Gate")
             {
-                if (InventoryManager.instance.maxGate > InventoryManager.instance.gateCount)
+                if (GameManager.instance.maxGate > GameManager.instance.gateCount)
                 {
 
                     return true;
@@ -220,7 +220,7 @@ public class InventoryManager : MonoBehaviour
                 }
             } else
             {
-                if (InventoryManager.instance.maxWall > InventoryManager.instance.wallCount)
+                if (GameManager.instance.maxWall > GameManager.instance.wallCount)
                 {
 
                     return true;
@@ -238,7 +238,7 @@ public class InventoryManager : MonoBehaviour
             if (buildingSO.resourceType == BuildingSO.ResourceType.Gold)
             {
 
-                if (InventoryManager.instance.maxGoldFactory > InventoryManager.instance.goldFactoryCount)
+                if (GameManager.instance.maxGoldFactory > GameManager.instance.goldFactoryCount)
                 {
 
                     return true;
@@ -252,7 +252,7 @@ public class InventoryManager : MonoBehaviour
             else if (buildingSO.resourceType == BuildingSO.ResourceType.Wood)
             {
 
-                if (InventoryManager.instance.maxLumberMill > InventoryManager.instance.lumberMillCount)
+                if (GameManager.instance.maxLumberMill > GameManager.instance.lumberMillCount)
                 {
 
                     return true;
@@ -266,7 +266,7 @@ public class InventoryManager : MonoBehaviour
             else if (buildingSO.resourceType == BuildingSO.ResourceType.Food)
             {
 
-                if (InventoryManager.instance.maxGreenhouse > InventoryManager.instance.greenhouseCount)
+                if (GameManager.instance.maxGreenhouse > GameManager.instance.greenhouseCount)
                 {
 
                     return true;
@@ -295,19 +295,19 @@ public class InventoryManager : MonoBehaviour
         if (buildingSO.buildingType == BuildingSO.BuildingType.House)
         {
 
-            InventoryManager.instance.houseCount++;
+            GameManager.instance.houseCount++;
 
         }
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
         {
 
-            InventoryManager.instance.barracksCount++;
+            GameManager.instance.barracksCount++;
 
         }
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Defense)
         {
 
-            InventoryManager.instance.defenseBuildingCount++;
+            GameManager.instance.defenseBuildingCount++;
 
         }
 
@@ -316,10 +316,10 @@ public class InventoryManager : MonoBehaviour
 
             if (buildingSO.name == "Wood Gate")
             {
-                InventoryManager.instance.gateCount++;
+                GameManager.instance.gateCount++;
             } else
             {
-                InventoryManager.instance.wallCount++;
+                GameManager.instance.wallCount++;
             }
             
 
@@ -330,19 +330,19 @@ public class InventoryManager : MonoBehaviour
             if (buildingSO.resourceType == BuildingSO.ResourceType.Gold)
             {
 
-                InventoryManager.instance.goldFactoryCount++;
+                GameManager.instance.goldFactoryCount++;
 
             }
             else if (buildingSO.resourceType == BuildingSO.ResourceType.Wood)
             {
 
-                InventoryManager.instance.lumberMillCount++;
+                GameManager.instance.lumberMillCount++;
 
             }
             else if (buildingSO.resourceType == BuildingSO.ResourceType.Food)
             {
 
-                InventoryManager.instance.greenhouseCount++;
+                GameManager.instance.greenhouseCount++;
 
             }
 
@@ -363,19 +363,19 @@ public class InventoryManager : MonoBehaviour
         if (buildingSO.buildingType == BuildingSO.BuildingType.House)
         {
 
-            InventoryManager.instance.houseCount--;
+            GameManager.instance.houseCount--;
 
         }
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
         {
 
-            InventoryManager.instance.barracksCount--;
+            GameManager.instance.barracksCount--;
 
         }
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Defense)
         {
 
-            InventoryManager.instance.defenseBuildingCount--;
+            GameManager.instance.defenseBuildingCount--;
 
         }
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Wall)
@@ -383,11 +383,11 @@ public class InventoryManager : MonoBehaviour
 
             if (buildingSO.name == "Wood Gate")
             {
-                InventoryManager.instance.gateCount--;
+                GameManager.instance.gateCount--;
             }
             else
             {
-                InventoryManager.instance.wallCount--;
+                GameManager.instance.wallCount--;
             }
 
 
@@ -398,19 +398,19 @@ public class InventoryManager : MonoBehaviour
             if (buildingSO.resourceType == BuildingSO.ResourceType.Gold)
             {
 
-                InventoryManager.instance.goldFactoryCount--;
+                GameManager.instance.goldFactoryCount--;
 
             }
             else if (buildingSO.resourceType == BuildingSO.ResourceType.Wood)
             {
 
-                InventoryManager.instance.lumberMillCount--;
+                GameManager.instance.lumberMillCount--;
 
             }
             else if (buildingSO.resourceType == BuildingSO.ResourceType.Food)
             {
 
-                InventoryManager.instance.greenhouseCount--;
+                GameManager.instance.greenhouseCount--;
 
             }
 

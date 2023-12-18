@@ -67,6 +67,21 @@ public class Unit : MonoBehaviour
     private void Update()
     {
 
+        if (myAstarAI.isAtDestination)
+        {
+            if (currentState != UnitState.Shooting)
+            {
+                currentState = UnitState.Idle;
+            } else
+            {
+                currentState = UnitState.Shooting;
+            }
+
+        } else
+        {
+            currentState = UnitState.Moving;
+        }
+
         switch (currentState)
         {
             case UnitState.Idle:
@@ -162,7 +177,7 @@ public class Unit : MonoBehaviour
     private void ShootEnemy()
     {
         
-            float sphereRadius = .25f; // Adjust the sphere radius as needed
+            //float sphereRadius = .25f; // Adjust the sphere radius as needed
 
             RaycastHit hit;
 
