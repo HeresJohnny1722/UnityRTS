@@ -22,9 +22,20 @@ public class WaveSpawner : MonoBehaviour
     public float timeBetweenSpawns = .25f;
 
     private int waveIndex = 0;
+    private int totalTroopsSpawned = 0; // New counter variable
+    private int expectedTotalTroops; // New variable to store the expected total troops
 
     public void StartWaves()
     {
+        // Calculate the expected total troops
+        foreach (Wave wave in waves)
+        {
+            foreach (EnemyWave enemyWave in wave.enemies)
+            {
+                expectedTotalTroops += enemyWave.count;
+            }
+        }
+
         StartCoroutine(SpawnWave());
     }
 
@@ -44,6 +55,13 @@ public class WaveSpawner : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenWaves);
             waveIndex++;
         }
+
+        // Check if all troops are spawned
+        if (totalTroopsSpawned >= expectedTotalTroops)
+        {
+            Debug.Log("Game is over, you win!");
+            InventoryManager.instance.areWavesDone = true;
+        }
     }
 
     IEnumerator SpawnEnemies(GameObject enemyPrefab, int count, Transform[] spawnPoints)
@@ -52,6 +70,7 @@ public class WaveSpawner : MonoBehaviour
         {
             Transform spawnPoint = GetRandomSpawnPoint(spawnPoints);
             Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+            totalTroopsSpawned++; // Increment the counter when a troop is spawned
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }

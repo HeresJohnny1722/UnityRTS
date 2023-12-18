@@ -8,7 +8,6 @@ public class EnemyAI : MonoBehaviour
 {
     public enum State
     {
-        Roaming,
         ChaseTarget,
         ShootingTarget,
         GoingBackToStart,
@@ -54,12 +53,8 @@ public class EnemyAI : MonoBehaviour
     private void Awake()
     {
 
-        //enemyManager.enemyList.Add(gameObject);
-        //muzzleFlash.SetActive(false);
-      //  navMeshAgent = GetComponent<NavMeshAgent>();
-//        navMeshAgent.speed = enemyAISO.speed;
-        //aimShootAnims = GetComponent<IAimShootAnims>();
-        state = State.Roaming;
+        
+        //state = State.Roaming;
         enemyHealth = enemyAISO.startingHealth;
         myAstarAI = GetComponent<AstarAI>();
         
@@ -75,6 +70,7 @@ public class EnemyAI : MonoBehaviour
     {
         startingPosition = transform.position;
         roamPosition = GetRoamingPosition();
+        InventoryManager.instance.enemies.Add(gameObject);
         //navMeshAgent.SetDestination(playerTransform.position);
     }
 
@@ -89,7 +85,7 @@ public class EnemyAI : MonoBehaviour
             Destroy(deathEfct, 2f);
 
             Destroy(this.gameObject);
-
+            InventoryManager.instance.enemies.Remove(gameObject);
 
 
         }
@@ -107,7 +103,7 @@ public class EnemyAI : MonoBehaviour
         switch (state)
         {
             default:
-            case State.Roaming:
+            /*case State.Roaming:
                 //AstarAI myAstarAI = GetComponent<AstarAI>();
                 myAstarAI.targetPosition = roamPosition;
                 myAstarAI.StartPath();
@@ -120,9 +116,11 @@ public class EnemyAI : MonoBehaviour
                 CheckForUnitsAndBuildingsInRange();
                 FindTarget();
                 break;
-
+            */
             case State.ChaseTarget:
 
+                CheckForUnitsAndBuildingsInRange();
+                FindTarget();
 
                 if (targetTransform != null)
                 {
@@ -178,10 +176,10 @@ public class EnemyAI : MonoBehaviour
                     }
 
                 }
-                else
-                {
-                    state = State.Roaming;
-                }
+                //else
+                //{
+                   // state = State.Roaming;
+                //}
                 break;
             case State.ShootingTarget:
                 break;
@@ -195,7 +193,7 @@ public class EnemyAI : MonoBehaviour
                 if (Vector3.Distance(transform.position, startingPosition) < enemyAISO.reachedStartPositionDistance)
                 {
                     // Reached Start Position
-                    state = State.Roaming;
+                    //state = State.Roaming;
                 }
                 break;
         }
@@ -326,15 +324,15 @@ public class EnemyAI : MonoBehaviour
                     targetTransform.GetComponent<Unit>().takeDamage(enemyAISO.damageAmountPerAttack);
                 }
 
-                if (health <= 0)
-                {
-                    state = State.Roaming;
+                //if (health <= 0)
+                //{
+                    //state = State.Roaming;
 
-                }
-                else
-                {
+                //}
+                //else
+                //{
                     state = State.ChaseTarget;
-                }
+                //}
 
 
                 // Additional actions for hitting a player can be added here
@@ -343,7 +341,7 @@ public class EnemyAI : MonoBehaviour
             else
             {
                 targetTransform = null;
-                state = State.Roaming;
+                //state = State.Roaming;
             }
 
         }
@@ -377,15 +375,15 @@ public class EnemyAI : MonoBehaviour
                         targetTransform.GetComponent<Building>().takeDamage(enemyAISO.damageAmountPerAttack);
                     }
 
-                    if (health <= 0)
-                    {
-                        state = State.Roaming;
+                    //if (health <= 0)
+                    //{
+                        //state = State.Roaming;
 
-                    }
-                    else
-                    {
+                    //}
+                    //else
+                    //{
                         state = State.ChaseTarget;
-                    }
+                   // }
 
 
                     // Additional actions for hitting a player can be added here
@@ -393,13 +391,13 @@ public class EnemyAI : MonoBehaviour
                 else
                 {
                     targetTransform = null;
-                    state = State.Roaming;
+                    //state = State.Roaming;
                 }
             }
             else
             {
                 targetTransform = null;
-                state = State.Roaming;
+                //state = State.Roaming;
             }
 
         }

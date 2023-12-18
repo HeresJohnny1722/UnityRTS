@@ -165,11 +165,19 @@ public class Building : MonoBehaviour
                 
             }
 
+            if (buildingSO.buildingType == BuildingSO.BuildingType.Townhall)
+            {
+                //Game Over
+                InventoryManager.instance.GameOver();
+            }
+
         }
 
 
 
     }
+
+    
 
     private void DeathEffect()
     {

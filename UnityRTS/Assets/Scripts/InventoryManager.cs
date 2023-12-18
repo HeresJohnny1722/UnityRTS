@@ -1,13 +1,21 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class InventoryManager : MonoBehaviour
 {
     // Singleton instance
     public static InventoryManager instance;
 
+    public GameObject VictoryScreen;
+    public GameObject GameOverScreen;
+    public bool isGameOver = false;
+
     public int enemiesKilledCount;
     public TextMeshProUGUI enemiesKilledCountText;
+    public List<GameObject> enemies = new List<GameObject>();
+    public bool areWavesDone;
+
 
     // Inventory variables
     public int currentPopulation = 0;
@@ -60,9 +68,30 @@ public class InventoryManager : MonoBehaviour
         UpdateTextFields();
     }
 
+    public void GameOver()
+    {
+        isGameOver = true;
+        GameOverScreen.SetActive(true);
+    }
+
+    public void Victory()
+    {
+        //isGameOver = false;
+        VictoryScreen.SetActive(true);
+    }
+
     private void Update()
     {
         enemiesKilledCountText.text = "Enemies killed: " + enemiesKilledCount.ToString();
+
+        if (areWavesDone)
+        {
+            if (enemies.Count == 0)
+            {
+                //Win
+                Victory();
+            }
+        }
     }
 
     // Add resources to the inventory
