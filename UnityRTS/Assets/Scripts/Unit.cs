@@ -46,66 +46,33 @@ public class Unit : MonoBehaviour
 
     public TroopHit troopHit;
 
-    public float movingAnimationTimeWaitTime;
 
-    public float bobbingHeight = 0.2f; // Adjust this value to control how much the unit bobs up and down
-    public float bobbingSpeed = 1.0f; // Adjust this value to control how fast the unit bobs
-
-    private bool isBobbingUp = false;
-    private Vector3 originalPosition;
+    public AstarAI myAstarAI;
 
     void Start()
     {
-      //  myAgent = GetComponent<NavMeshAgent>();
-//        myAgent.speed = unitSO.speed;
+
         unitHealth = unitSO.startingHealth;
         unitHealthbar.UpdateHealthBar(unitSO.startingHealth, unitHealth);
         unitHealthbar.gameObject.SetActive(false);
 
         UnitSelection.Instance.unitList.Add(this.gameObject);
 
-        //moveToPosition = transform.position;
         currentState = UnitState.Idle;
 
-        originalPosition = transform.position;
-        //previousPosition = transform.position;
+        myAstarAI = GetComponent<AstarAI>();
 
     }
 
     private void Update()
     {
 
-
-        
-
-        AstarAI myAstarAI = GetComponent<AstarAI>();
-        if (myAstarAI.isMoving)
-        {
-            currentState = UnitState.Moving;
-        } else
-        {
-            if (currentState != UnitState.Shooting)
-            {
-                currentState = UnitState.Idle;
-            }
-            
-        }
-
-
-
         switch (currentState)
         {
             case UnitState.Idle:
                 muzzleFlash.SetActive(false);
-                //if gunner
-                if (unitSO.unitType == UnitSO.UnitType.Gunner)
-                {
-                    CheckForEnemies();
-                } else if (unitSO.unitType == UnitSO.UnitType.Worker)
-                {
-                    //else if worker
-                    CheckForBuildings();
-                }
+                CheckForEnemies();
+                
                 
                 
                 break;
@@ -132,13 +99,11 @@ public class Unit : MonoBehaviour
                 break;
 
             case UnitState.Moving:
-                // Handle moving state logic here if needed
+
                 muzzleFlash.SetActive(false);
                 currentTarget = null;
-                originalPosition = transform.position;
-                BobbingAnimation();
-                //move animation
 
+                //playing moving animation
 
 
                 break;
@@ -147,58 +112,6 @@ public class Unit : MonoBehaviour
                 break;
         }
     }
-
-    private void BobbingAnimation()
-    {
-        float yOffset = Mathf.Sin(Time.time * bobbingSpeed) * bobbingHeight;
-
-        // Update the unit's position with the continuous bobbing effect
-        transform.position = new Vector3(transform.position.x, originalPosition.y + yOffset, transform.position.z);
-    }
-
-    private void CheckForBuildings()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, unitSO.buildRange, buildingLayerMask);
-
-        if (colliders.Length > 0)
-        {
-            Debug.Log("There are " + colliders.Length + " buildings in the unit's range");
-
-            // Initialize closestBuilding and closestDistance
-            Transform closestBuilding = null;
-            float closestDistance = float.MaxValue;
-
-            foreach (Collider collider in colliders)
-            {
-                float distance = Vector3.Distance(transform.position, collider.transform.GetChild(1).position);
-
-                // Check if the current building is closer than the previous closestBuilding
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    closestBuilding = collider.transform;
-                }
-            }
-
-            if (closestBuilding != null)
-            {
-                Building buildingBuilding = closestBuilding.GetComponent<Building>();
-                if (buildingBuilding.buildingConstruction.isUnderConstruction)
-                {
-                    targetBuilding = closestBuilding;
-                    Debug.Log("Need to enter " + targetBuilding.name);
-                }
-            }
-            else
-            {
-                targetBuilding = null;
-                Debug.Log("No valid target building found");
-            }
-        }
-    }
-
-
-
 
     private void CheckForEnemies()
     {
@@ -246,7 +159,6 @@ public class Unit : MonoBehaviour
         }
     }
 
-
     private void ShootEnemy()
     {
         
@@ -281,7 +193,7 @@ public class Unit : MonoBehaviour
                 //state = State.Roaming;
                 //FindTarget();
                 //return 0;
-                InventoryManager.instance.enemiesKilledCount++;
+                GameManager.instance.enemiesKilledCount++;
                     currentTarget = null;
                 }
 
@@ -305,7 +217,6 @@ public class Unit : MonoBehaviour
         
     }
 
-
     public void takeDamage(float damageAmount)
     {
         troopHit.HitAnimation();
@@ -315,7 +226,7 @@ public class Unit : MonoBehaviour
         {
             
             deselectUnit();
-            InventoryManager.instance.changeCurrentPopulation(-(int)unitSO.populationCost);
+            GameManager.instance.changeCurrentPopulation(-(int)unitSO.populationCost);
 
             if (UnitSelection.Instance.unitsSelected.Contains(this.gameObject))
             {
@@ -358,24 +269,5 @@ public class Unit : MonoBehaviour
         unitFloorHighlight.SetActive(false);
         unitHealthbar.gameObject.SetActive(false);
     }
-
-    public bool isEnteringProduction = false;
-    private Transform buildingTransform = null;
-
-    public void productionBuildingStuff(Transform buildingToEnter)
-    {
-        myAgent = GetComponent<NavMeshAgent>();
-        float radius = 1f;
-
-        NavMesh.SamplePosition(buildingTransform.position, out NavMeshHit hit, radius, NavMesh.AllAreas);
-
-        // Set destination for the agent to the closest point on the nav mesh
-        myAgent.SetDestination(hit.position);
-
-        //myAgent.SetDestination(buildingToEnter.position);
-        buildingTransform = buildingToEnter;
-    }
-
-
 
 }

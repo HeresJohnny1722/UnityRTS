@@ -22,7 +22,7 @@ MonoBehaviour:
   romingRange: 3
   roamingReachedPositionDistance: 0.5
   roamingWaitTime: 0
-  rotationSpeed: 5
+  rotationSpeed: 30
   bulletSpeed: 5000
   stopChaseDistance: 15
   reachedStartPositionDistance: 10

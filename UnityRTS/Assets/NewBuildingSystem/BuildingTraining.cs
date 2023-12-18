@@ -110,10 +110,10 @@ public class BuildingTraining : MonoBehaviour
 
     public void spawnTroop(int index)
     {
-        if (InventoryManager.instance.AreResourcesAvailable((int)building.buildingSO.unitsToTrain[index].populationCost, (int)building.buildingSO.unitsToTrain[index].goldCost, (int)building.buildingSO.unitsToTrain[index].coalCost, (int)building.buildingSO.unitsToTrain[index].copperCost, 0))
+        if (GameManager.instance.AreResourcesAvailable((int)building.buildingSO.unitsToTrain[index].populationCost, (int)building.buildingSO.unitsToTrain[index].goldCost, (int)building.buildingSO.unitsToTrain[index].coalCost, (int)building.buildingSO.unitsToTrain[index].copperCost, 0))
         {
-            InventoryManager.instance.RemoveResources(0, (int)building.buildingSO.unitsToTrain[index].goldCost, (int)building.buildingSO.unitsToTrain[index].coalCost, (int)building.buildingSO.unitsToTrain[index].copperCost, 0);
-            InventoryManager.instance.changeCurrentPopulation((int)building.buildingSO.unitsToTrain[index].populationCost);
+            GameManager.instance.RemoveResources(0, (int)building.buildingSO.unitsToTrain[index].goldCost, (int)building.buildingSO.unitsToTrain[index].coalCost, (int)building.buildingSO.unitsToTrain[index].copperCost, 0);
+            GameManager.instance.changeCurrentPopulation((int)building.buildingSO.unitsToTrain[index].populationCost);
             unitSpawnPoint = this.transform.GetChild(2).transform;
             unitMovePoint = barracksSpawnFlag.transform;
 
@@ -191,9 +191,8 @@ public class BuildingTraining : MonoBehaviour
             //NavMeshAgent unitAgent = troop.GetComponent<NavMeshAgent>();
             troop.GetComponent<Unit>().moveToPosition = movePosition;
             AstarAI myAstarAI = troop.GetComponent<AstarAI>();
-            myAstarAI.targetPosition = movePosition;
-            myAstarAI.StartPath();
-            myAstarAI.isMoving = true;
+            myAstarAI.ai.destination = movePosition;
+
 
 
 

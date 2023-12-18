@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 5178437057265014818}
   - component: {fileID: 8491684042673026859}
   - component: {fileID: 8619362743112558438}
+  - component: {fileID: 2689430242793609131}
   m_Layer: 12
   m_Name: NormalZombie
   m_TagString: Untagged
@@ -238,13 +239,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  targetTransform: {fileID: 0}
   enemyHealthbar: {fileID: 2404870477147865178}
   muzzleFlash: {fileID: 6068820184069754668, guid: db6cf5c32568840339a33bf5a3ca42fb,
     type: 3}
   meleeSlash: {fileID: 2449490594737823650}
   deathEffect: {fileID: 5306868671923941460, guid: e63b6bfa5e8b0497681f3a318b0dceee,
     type: 3}
-  targetTransform: {fileID: 0}
   targetType: 
   playersLayerMask:
     serializedVersion: 2
@@ -252,8 +253,6 @@ MonoBehaviour:
   buildingsLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  bulletPrefab: {fileID: 6975662680761005466, guid: 494acd871c54444898e7fbb7d4105fa4,
-    type: 3}
   firePoint: {fileID: 6469995454794809514}
   raycastPoint: {fileID: 2261789503022339143}
   enemyAISO: {fileID: 11400000, guid: 65aedfb1b988e4e42bf0708e2da94b97, type: 2}
@@ -336,11 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fae2ebbfd86c46eca048d6410892cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPosition: {x: 0, y: 0, z: 0}
-  speed: 0
-  rotationSpeed: 0
-  nextWaypointDistance: 0
-  isMoving: 0
+  isAtDestination: 0
 --- !u!143 &8491684042673026859
 CharacterController:
   m_ObjectHideFlags: 0
@@ -404,11 +399,25 @@ MonoBehaviour:
   rotationSpeed: 360
   slowdownDistance: 0.6
   pickNextWaypointDist: 2
-  endReachedDistance: 0.2
+  endReachedDistance: 1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
+--- !u!114 &2689430242793609131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898230509516970111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  target: {fileID: 0}
 --- !u!1 &3223013556819706532
 GameObject:
   m_ObjectHideFlags: 0

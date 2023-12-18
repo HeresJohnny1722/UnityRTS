@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
-  m_Name: GoldMine
+  m_Name: Bank
   m_EditorClassIdentifier: 
   buildingType: 2
   unitsToTrain: []
@@ -23,9 +23,13 @@ MonoBehaviour:
   fireRate: 0
   attackDamage: 0
   attackRange: 0
+  turretRotationSpeed: 0
+  bulletsExplode: 0
+  explodeRadius: 0
+  explodeParticleSystem: {fileID: 0}
   populationIncrease: 0
-  name: Gold Mine
-  description: Put workers inside of the building to start producing gold
+  name: Bank
+  description: Makes Gold
   startingHealth: 400
   timeToBuild: 10
   goldCost: 25

@@ -79,8 +79,8 @@ public class BuildingGridPlacer : BuildingPlacer
                         Building building = _toBuild.GetComponent<Building>();
                         building.buildingConstruction.isUnderConstruction = true;
                         
-                        InventoryManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0);
-                        InventoryManager.instance.increaseBuildingCount(building.buildingSO);
+                        GameManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0);
+                        GameManager.instance.increaseBuildingCount(building.buildingSO);
                         
 
                         m.SetPlacementMode(PlacementMode.Fixed);
@@ -89,9 +89,9 @@ public class BuildingGridPlacer : BuildingPlacer
                         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                         {
 
-                            if (InventoryManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0))
+                            if (GameManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0))
                             {
-                                if (InventoryManager.instance.CheckBuildingCountAvailable(building.buildingSO))
+                                if (GameManager.instance.CheckBuildingCountAvailable(building.buildingSO))
                                 {
                                     //_buildingPrefab = null;
                                     AstarPath.active.UpdateGraphs(_toBuild.GetComponent<BoxCollider>().bounds);

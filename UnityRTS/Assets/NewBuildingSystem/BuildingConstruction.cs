@@ -141,7 +141,7 @@ public class BuildingConstruction : MonoBehaviour
 
     private void CompleteConstruction()
     {
-        InventoryManager.instance.changeMaxPopulation(building.buildingSO.populationIncrease);
+        GameManager.instance.changeMaxPopulation(building.buildingSO.populationIncrease);
         Debug.Log("completed constructing");
 //        building.removeAllWorkers();
         isUnderConstruction = false;

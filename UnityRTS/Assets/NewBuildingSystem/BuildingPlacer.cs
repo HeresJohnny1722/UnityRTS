@@ -93,9 +93,9 @@ public class BuildingPlacer : MonoBehaviour
     {
         UnitSelection.Instance.DeselectAll();
         Building building = prefab.GetComponent<Building>();
-        if (InventoryManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0))
+        if (GameManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0))
         {
-            if (InventoryManager.instance.CheckBuildingCountAvailable(building.buildingSO))
+            if (GameManager.instance.CheckBuildingCountAvailable(building.buildingSO))
             {
                 //building.setMaterials();
                 SoundFeedback.Instance.PlaySound(SoundType.Click);

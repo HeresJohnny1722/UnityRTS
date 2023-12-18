@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class AIEnemy : MonoBehaviour
 {
 
     public enum State
@@ -49,66 +49,42 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
 
-        CheckForUnitsAndBuildingsInRange();
-        if (targetTransform != null)
-        {
-            if (targetType == "Unit")
+            CheckForUnitsAndBuildingsInRange();
+            if (targetTransform != null)
+            {
+                if (targetType == "Unit")
             {
                 myAstarAI.ai.destination = targetTransform.position;
-            }
-            else if (targetType == "Building")
+            } else if (targetType == "Building")
             {
                 myAstarAI.ai.destination = targetTransform.GetChild(1).position;
             }
+                
 
-            RotateToTarget();
-            if (myAstarAI.isAtDestination)
+                if (myAstarAI.isAtDestination)
             {
+                
+
+                    // Target within attack range
+                    if (Time.time > nextShootTime)
+                    {
 
 
-                // Target within attack range
-                if (Time.time > nextShootTime)
-                {
+                        state = State.ShootingTarget;
+                        AttackUnit();
 
+                        nextShootTime = Time.time + enemyAISO.fireRate;
 
-                    state = State.ShootingTarget;
-                    AttackUnit();
-
-                    nextShootTime = Time.time + enemyAISO.fireRate;
-
-                }
+                    }
+                
+            }
 
             }
 
-        }
+        
 
 
 
-
-
-    }
-
-    private void RotateToTarget()
-    {
-        if (targetTransform != null)
-        {
-            if (targetType == "Building")
-            {
-                Vector3 directionToTarget = (targetTransform.GetChild(1).position - transform.position).normalized;
-                Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0f, directionToTarget.z));
-
-                // Use Slerp instead of Lerp to smoothly rotate towards the target continuously
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * enemyAISO.rotationSpeed);
-            } else
-            {
-                Vector3 directionToTarget = (targetTransform.position - transform.position).normalized;
-                Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0f, directionToTarget.z));
-
-                // Use Slerp instead of Lerp to smoothly rotate towards the target continuously
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * enemyAISO.rotationSpeed);
-            }
-            
-        }
     }
 
     private void AttackUnit()

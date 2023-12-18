@@ -139,22 +139,22 @@ public class BuildingProduction : MonoBehaviour
             // You can replace "InventoryManager.instance" with your actual reference to the InventoryManager
             if (building.buildingSO.resourceType == BuildingSO.ResourceType.Gold)
             {
-                InventoryManager.instance.AddResources(0, (int)outputRate, 0, 0, 0);
+                GameManager.instance.AddResources(0, (int)outputRate, 0, 0, 0);
 
             }
             else if (building.buildingSO.resourceType == BuildingSO.ResourceType.Wood)
             {
-                InventoryManager.instance.AddResources(0, 0, (int)outputRate, 0, 0);
+                GameManager.instance.AddResources(0, 0, (int)outputRate, 0, 0);
 
             }
             else if (building.buildingSO.resourceType == BuildingSO.ResourceType.Food)
             {
-                InventoryManager.instance.AddResources(0, 0, 0, (int)outputRate, 0);
+                GameManager.instance.AddResources(0, 0, 0, (int)outputRate, 0);
 
             }
             else if (building.buildingSO.resourceType == BuildingSO.ResourceType.Energy)
             {
-                InventoryManager.instance.AddResources(0, 0, 0, 0, (int)outputRate);
+                GameManager.instance.AddResources(0, 0, 0, 0, (int)outputRate);
             }
 
 
@@ -166,7 +166,7 @@ public class BuildingProduction : MonoBehaviour
 
     public void nodeToBuilding()
     {
-        if (InventoryManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0))
+        if (GameManager.instance.AreResourcesAvailable(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0))
         {
             building.stage = 2;
             building.buildingConstruction.isUnderConstruction = true;
@@ -184,7 +184,7 @@ public class BuildingProduction : MonoBehaviour
                 BuildingSelection.Instance.buildingsList.Add(building.gameObject);
             }
 
-            InventoryManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0);
+            GameManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0);
 
             //building.buildingHealthText.text = "Health: " + building.buildingHealth.ToString();
             Node.SetActive(false);

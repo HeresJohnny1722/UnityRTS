@@ -147,20 +147,20 @@ public class Building : MonoBehaviour
             
             BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
             Destroy(this.gameObject);
-            InventoryManager.instance.decreaseBuildingCount(buildingSO);
+            GameManager.instance.decreaseBuildingCount(buildingSO);
             AstarPath.active.UpdateGraphs(this.GetComponent<BoxCollider>().bounds);
 
 
             if (!buildingConstruction.isUnderConstruction)
             {
-                InventoryManager.instance.changeMaxPopulation(-buildingSO.populationIncrease);
-                InventoryManager.instance.AddResources(0, Mathf.RoundToInt(buildingSO.goldCost * (buildingHealth/buildingSO.startingHealth)), Mathf.RoundToInt(buildingSO.woodCost * (buildingHealth / buildingSO.startingHealth)), Mathf.RoundToInt(buildingSO.foodCost * (buildingHealth / buildingSO.startingHealth)), 0);
+                GameManager.instance.changeMaxPopulation(-buildingSO.populationIncrease);
+                GameManager.instance.AddResources(0, Mathf.RoundToInt(buildingSO.goldCost * (buildingHealth/buildingSO.startingHealth)), Mathf.RoundToInt(buildingSO.woodCost * (buildingHealth / buildingSO.startingHealth)), Mathf.RoundToInt(buildingSO.foodCost * (buildingHealth / buildingSO.startingHealth)), 0);
                 
             } else
             {
                 if (buildingSO.startingHealth  * 0.75 < buildingHealth )
                 {
-                    InventoryManager.instance.AddResources(0, buildingSO.goldCost, buildingSO.woodCost, buildingSO.foodCost, 0);
+                    GameManager.instance.AddResources(0, buildingSO.goldCost, buildingSO.woodCost, buildingSO.foodCost, 0);
                 }
                 
             }
@@ -168,7 +168,7 @@ public class Building : MonoBehaviour
             if (buildingSO.buildingType == BuildingSO.BuildingType.Townhall)
             {
                 //Game Over
-                InventoryManager.instance.GameOver();
+                GameManager.instance.GameOver();
             }
 
         }

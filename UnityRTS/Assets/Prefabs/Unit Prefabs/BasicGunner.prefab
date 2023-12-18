@@ -164,8 +164,9 @@ GameObject:
   - component: {fileID: 7683572567980644680}
   - component: {fileID: 1670683807650861922}
   - component: {fileID: 8116743238528393498}
+  - component: {fileID: 1049317973764405957}
   m_Layer: 8
-  m_Name: BasicGunnerFriendly
+  m_Name: BasicGunner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -293,10 +294,7 @@ MonoBehaviour:
     m_Bits: 0
   moveToPosition: {x: 0, y: 0, z: 0}
   troopHit: {fileID: 6277138043053486435}
-  movingAnimationTimeWaitTime: 0
-  bobbingHeight: 0.1
-  bobbingSpeed: 30
-  isEnteringProduction: 0
+  myAstarAI: {fileID: 0}
 --- !u!114 &6277138043053486435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,11 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fae2ebbfd86c46eca048d6410892cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPosition: {x: -11.54, y: 0, z: 0}
-  speed: 0
-  rotationSpeed: 0
-  nextWaypointDistance: 1
-  isMoving: 0
+  isAtDestination: 0
 --- !u!114 &7683572567980644680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,6 +442,20 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
+--- !u!114 &1049317973764405957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7462998351962582450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  target: {fileID: 0}
 --- !u!1 &8945384816857529301
 GameObject:
   m_ObjectHideFlags: 0

@@ -60,7 +60,7 @@ public class WaveSpawner : MonoBehaviour
         if (totalTroopsSpawned >= expectedTotalTroops)
         {
             Debug.Log("Game is over, you win!");
-            InventoryManager.instance.areWavesDone = true;
+            GameManager.instance.areWavesDone = true;
         }
     }
 

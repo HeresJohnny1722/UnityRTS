@@ -142,7 +142,7 @@ public class BuildingDefense : MonoBehaviour
 
                             if (collider.GetComponent<EnemyAI>().enemyHealth <= 0)
                             {
-                                InventoryManager.instance.enemiesKilledCount++;
+                                GameManager.instance.enemiesKilledCount++;
                                 currentTarget = null;
                             }
 
@@ -180,7 +180,7 @@ public class BuildingDefense : MonoBehaviour
 
                     if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)
                     {
-                        InventoryManager.instance.enemiesKilledCount++;
+                        GameManager.instance.enemiesKilledCount++;
                         currentTarget = null;
                     }
                 }

@@ -67,26 +67,11 @@ public class UnitSelection : MonoBehaviour
             {
                 
                 myAstarAI = unitsSelected[i].GetComponent<AstarAI>();
-                myAstarAI.targetPosition = _points[i] + moveToPosition;
-                myAstarAI.StartPath();
+                myAstarAI.ai.destination = _points[i] + moveToPosition;
 
-
-                
             }
         }
     }
-
-
-    
-
-    private void Update()
-    {
-        if (unitsSelected.Count == 0)
-        {
-            //unitInfoPanel.SetActive(false);
-        }
-    }
-
 
     public void takeDamageUnitTest(float damage)
     {
@@ -118,10 +103,6 @@ public class UnitSelection : MonoBehaviour
             unitScript.deselectUnit();
 
             updateInfoPanelForUnits();
-            if (unitsSelected.Count <= 0)
-            {
-                //unitInfoPanel.SetActive(false);
-            }
         }
     }
 
