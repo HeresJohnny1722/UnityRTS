@@ -143,7 +143,7 @@ public class BuildingConstruction : MonoBehaviour
     {
         InventoryManager.instance.changeMaxPopulation(building.buildingSO.populationIncrease);
         Debug.Log("completed constructing");
-        building.removeAllWorkers();
+//        building.removeAllWorkers();
         isUnderConstruction = false;
         SetMaterial();
         constructionTimer = 0f; // Reset the timer

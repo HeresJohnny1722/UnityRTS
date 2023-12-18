@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60bc8c01ca8524999b246a7b8f5091c7, type: 3}
   m_Name: Townhall
   m_EditorClassIdentifier: 
-  buildingType: 0
+  buildingType: 5
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
   populationIncrease: 5
   name: Townhall
   description: Protect it, if you lose it you lose the gamw
-  startingHealth: 1000
+  startingHealth: 100
   timeToBuild: 0
   goldCost: 0
   woodCost: 0

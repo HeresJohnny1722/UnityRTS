@@ -69,7 +69,7 @@ public class BuildingGridPlacer : BuildingPlacer
                     }
                 }
                
-
+                
                 if (Input.GetMouseButtonDown(0))
                 { // if left-click
                     BuildingManager m = _toBuild.GetComponent<BuildingManager>();
@@ -93,10 +93,12 @@ public class BuildingGridPlacer : BuildingPlacer
                             {
                                 if (InventoryManager.instance.CheckBuildingCountAvailable(building.buildingSO))
                                 {
-                                    _buildingPrefab = null;
+                                    //_buildingPrefab = null;
                                     AstarPath.active.UpdateGraphs(_toBuild.GetComponent<BoxCollider>().bounds);
-                                    _toBuild = null;
                                     
+                                    _toBuild = null; // (to avoid destruction)
+                                    _PrepareBuilding();
+                                    //NavmeshManage.Instance.UpdateNavmesh();
                                 }
                                 else
                                 {

@@ -458,6 +458,7 @@ MonoBehaviour:
   infoPanel: {fileID: 4890204237372676351}
   buildingNameText: {fileID: 1644350109529740485}
   productionOutputRateText: {fileID: 160023646740659858}
+  removeButton: {fileID: 884186383178584740}
   buildingHealthbar: {fileID: 3813582179310941946}
   workersInside: []
 --- !u!114 &5226236407002545820
@@ -1171,6 +1172,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5086063548188783910, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5619884489375765989}
+    - target: {fileID: 5086063548188783910, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: removeBuilding
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086063548188783910, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Building, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086063548188783910, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8809062781159795514, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1210,6 +1231,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &884186383178584740 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8411071385816370731, guid: d8f43148855d24b7aa08f4876f186f35,
+    type: 3}
+  m_PrefabInstance: {fileID: 8718795190658227343}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1027157246396668252 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8556364418665956819, guid: d8f43148855d24b7aa08f4876f186f35,

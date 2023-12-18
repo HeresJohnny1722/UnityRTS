@@ -18,7 +18,7 @@ MonoBehaviour:
   damageAmountPerAttack: 15
   fireRate: 1
   attackRange: 1
-  searchRange: 30
+  searchRange: 70
   romingRange: 3
   roamingReachedPositionDistance: 0.5
   roamingWaitTime: 0

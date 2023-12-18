@@ -881,10 +881,10 @@ MonoBehaviour:
   buildingDeathEffect: {fileID: 2739781832950810520, guid: d9d0561c674d04cfb8b1a8ba6dcbaedc,
     type: 3}
   infoPanel: {fileID: 3528046090311910409}
-  buildingNameText: {fileID: 0}
-  productionOutputRateText: {fileID: 0}
+  buildingNameText: {fileID: 7348390613146863667}
+  productionOutputRateText: {fileID: 8148095064978596452}
+  removeButton: {fileID: 9182311009578307154}
   buildingHealthbar: {fileID: 2365169039995206963}
-  buildingHealthText: {fileID: 0}
   workersInside: []
 --- !u!114 &8787980718354081235
 MonoBehaviour:
@@ -992,18 +992,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a18bdb4ea21f48b3b72855577295e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productionPanel: {fileID: 0}
-  workersCurrentlyWorkingText: {fileID: 0}
-  outputRateText: {fileID: 8148095064978596452}
-  resourceTypeText: {fileID: 0}
   nodePanel: {fileID: 2986473017472263296}
   nodeGoldCostText: {fileID: 8845882526368166439}
   nodeCoalCostText: {fileID: 7818165453039409170}
   nodeCopperCostText: {fileID: 1932073092135649206}
   Node: {fileID: 3325026407519526923}
   ProductionBuilding: {fileID: 3493595052512707780}
-  outputRate: 0
-  workersCurrentlyInTheBuilding: 0
 --- !u!114 &6900146313595582180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3157,6 +3151,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5086063548188783910, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2147218371865395686}
+    - target: {fileID: 5086063548188783910, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: removeBuilding
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086063548188783910, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Building, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086063548188783910, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5481455258347327589, guid: d8f43148855d24b7aa08f4876f186f35, type: 3}
@@ -3199,6 +3213,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 852376503786881145}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7348390613146863667 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7939430245339514954, guid: d8f43148855d24b7aa08f4876f186f35,
+    type: 3}
+  m_PrefabInstance: {fileID: 852376503786881145}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7818165453039409170 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7470218220922624107, guid: d8f43148855d24b7aa08f4876f186f35,
@@ -3247,6 +3273,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &9182311009578307154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8411071385816370731, guid: d8f43148855d24b7aa08f4876f186f35,
+    type: 3}
+  m_PrefabInstance: {fileID: 852376503786881145}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3417740347866102379
 PrefabInstance:
   m_ObjectHideFlags: 0

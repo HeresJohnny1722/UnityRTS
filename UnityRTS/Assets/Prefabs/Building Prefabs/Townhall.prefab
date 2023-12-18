@@ -99,6 +99,7 @@ MonoBehaviour:
   infoPanel: {fileID: 3126755705761598205}
   buildingNameText: {fileID: 9108792831229085383}
   productionOutputRateText: {fileID: 7674571160235699344}
+  removeButton: {fileID: 7276774330606092454}
   buildingHealthbar: {fileID: 3999863171772460693}
   workersInside: []
 --- !u!114 &3962172614010969742
@@ -503,6 +504,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5086063548188783910, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086063548188783910, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5956206774473496012}
     - target: {fileID: 5755796915027344544, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -579,6 +590,12 @@ GameObject:
 --- !u!1 &4024293049206630144 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2855073649205209485, guid: d8f43148855d24b7aa08f4876f186f35,
+    type: 3}
+  m_PrefabInstance: {fileID: 1172742879785553549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7276774330606092454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8411071385816370731, guid: d8f43148855d24b7aa08f4876f186f35,
     type: 3}
   m_PrefabInstance: {fileID: 1172742879785553549}
   m_PrefabAsset: {fileID: 0}

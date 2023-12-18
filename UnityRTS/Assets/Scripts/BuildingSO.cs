@@ -55,10 +55,10 @@ public class BuildingSO : ScriptableObject
     [Header("Needed for all Types")]
     public new string name;
     public string description;
-    public float startingHealth;
-    public float timeToBuild;
-    public float goldCost;
-    public float woodCost;
-    public float foodCost;
+    public int startingHealth;
+    public int timeToBuild;
+    public int goldCost;
+    public int woodCost;
+    public int foodCost;
     
 }

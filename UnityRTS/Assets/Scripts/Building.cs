@@ -29,6 +29,7 @@ public class Building : MonoBehaviour
     public GameObject infoPanel;
     public TextMeshProUGUI buildingNameText;
     public TextMeshProUGUI productionOutputRateText;
+    public GameObject removeButton;
 
     public Healthbar buildingHealthbar;
     //public TextMeshProUGUI buildingHealthText;
@@ -90,79 +91,6 @@ public class Building : MonoBehaviour
 
     }
 
-    public void removeAllWorkers()
-    {
-        if (workersInside.Count > 0)
-        {
-            float radius = GetComponent<BoxCollider>().size.x / 1.9f; // Set your desired radius here
-            int workerCounter = (int)workersInside.Count;
-
-            for (int i = 0; i < workerCounter; i++)
-            {
-                Vector2 randomPoint = Random.insideUnitCircle * radius;
-                Vector3 newPosition = transform.GetChild(1).position + new Vector3(randomPoint.x, 0, randomPoint.y);
-
-                workersInside[i].transform.position = newPosition;
-                workersInside[i].SetActive(true);
-
-                UnitSelection.Instance.unitList.Add(workersInside[i]);
-
-            }
-            workersInside.Clear();
-
-
-            //buildingProduction.workersCurrentlyInTheBuilding = 0;
-
-            //Update the production stuff, capacity and output
-        }
-
-        //Production
-        if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
-        {
-            buildingProduction.UpdateProductionUI();
-        }
-
-    }
-
-    public void removeOneWorker()
-    {
-        if (workersInside.Count > 0)
-        {
-            float radius = 3f; // Set your desired radius here
-
-            Vector2 randomPoint = Random.insideUnitCircle * radius;
-            Vector3 newPosition = transform.position + new Vector3(randomPoint.x, 0, randomPoint.y);
-
-            workersInside[0].transform.position = newPosition;
-            workersInside[0].SetActive(true);
-
-            UnitSelection.Instance.unitList.Add(workersInside[0]);
-            workersInside.Remove(workersInside[0]);
-
-            //buildingProduction.workersCurrentlyInTheBuilding--;
-
-            //Update the production stuff, capacity and output
-        }
-
-        //Production
-        if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
-        {
-            buildingProduction.UpdateProductionUI();
-        }
-    }
-
-    public void addWorker(GameObject worker)
-    {
-        workersInside.Add(worker);
-
-
-        //Production
-        if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
-        {
-            buildingProduction.UpdateProductionUI();
-        }
-
-    }
 
     public void takeDamage(float damageAmount)
     {
@@ -176,7 +104,7 @@ public class Building : MonoBehaviour
             if (buildingHealth <= 0)
             {
                 removeBuilding();
-                InventoryManager.instance.RemoveResources(0, (int)buildingSO.goldCost, (int)buildingSO.woodCost, (int)buildingSO.foodCost, 0);
+                //InventoryManager.instance.RemoveResources(0, (int)buildingSO.goldCost, (int)buildingSO.woodCost, (int)buildingSO.foodCost, 0);
             }
 
             //buildingHealthText.text = "Health: " + buildingHealth.ToString();
@@ -199,7 +127,7 @@ public class Building : MonoBehaviour
     public void removeBuilding()
     {
 
-        removeAllWorkers();
+        //removeAllWorkers();
 
         if (buildingSO.buildingType == BuildingSO.BuildingType.Production && buildingSO.resourceType == BuildingSO.ResourceType.Energy)
         {
@@ -213,19 +141,28 @@ public class Building : MonoBehaviour
         }
         else
         {
+            //deselectBuilding();
             DeathEffect();
             SoundFeedback.Instance.PlaySound(SoundType.Remove);
-            deselectBuilding();
+            
             BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
             Destroy(this.gameObject);
             InventoryManager.instance.decreaseBuildingCount(buildingSO);
-            //NavmeshManage.Instance.UpdateNavmesh();
             AstarPath.active.UpdateGraphs(this.GetComponent<BoxCollider>().bounds);
 
 
             if (!buildingConstruction.isUnderConstruction)
             {
                 InventoryManager.instance.changeMaxPopulation(-buildingSO.populationIncrease);
+                InventoryManager.instance.AddResources(0, Mathf.RoundToInt(buildingSO.goldCost * (buildingHealth/buildingSO.startingHealth)), Mathf.RoundToInt(buildingSO.woodCost * (buildingHealth / buildingSO.startingHealth)), Mathf.RoundToInt(buildingSO.foodCost * (buildingHealth / buildingSO.startingHealth)), 0);
+                
+            } else
+            {
+                if (buildingSO.startingHealth  * 0.75 < buildingHealth )
+                {
+                    InventoryManager.instance.AddResources(0, buildingSO.goldCost, buildingSO.woodCost, buildingSO.foodCost, 0);
+                }
+                
             }
 
         }
@@ -244,7 +181,8 @@ public class Building : MonoBehaviour
 
     public void BuildingSelected()
     {
-        //Production
+        removeButton.SetActive(true);
+
         if (buildingSO.buildingType == BuildingSO.BuildingType.Production)
         {
             buildingProduction.UpdateProductionUI();
@@ -254,7 +192,12 @@ public class Building : MonoBehaviour
         {
             buildingTraining.BarracksSelected();
             productionOutputRateText.text = "";
-        } else
+        }
+        else if (buildingSO.buildingType == BuildingSO.BuildingType.Townhall)
+        {
+            removeButton.SetActive(false);
+        }
+        else
         {
             productionOutputRateText.text = "";
         }

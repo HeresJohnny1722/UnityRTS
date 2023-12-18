@@ -97,6 +97,7 @@ public class BuildingProduction : MonoBehaviour
                 nodePanel.SetActive(true);
             }
             //building.buildingHealthText.text = "";
+            building.removeButton.SetActive(false);
 
         }
         else if (building.stage == 2)
