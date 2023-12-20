@@ -96,7 +96,7 @@ public class Building : MonoBehaviour
     {
         if (stage != 1)
         {
-            buildingConstruction.squashAndStretch.maximumScale = 1.15f;
+            buildingConstruction.squashAndStretch.maximumScale = .85f;
             buildingConstruction.squashAndStretch.PlaySquashAndStretch();
 
             buildingHealth -= damageAmount;

@@ -30,7 +30,7 @@ MonoBehaviour:
   populationIncrease: 5
   name: Townhall
   description: Protect it, if you lose it you lose the gamw
-  startingHealth: 100
+  startingHealth: 1000
   timeToBuild: 0
   goldCost: 0
   woodCost: 0

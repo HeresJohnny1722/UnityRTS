@@ -7,6 +7,7 @@ public class AstarAI : MonoBehaviour
     public bool isAtDestination;
 
     public IAstarAI ai;
+    public AIPath aiPath;
     
     //Transform tr;
 
@@ -14,6 +15,7 @@ public class AstarAI : MonoBehaviour
     {
         //base.Awake();
         ai = GetComponent<IAstarAI>();
+        aiPath = GetComponent<AIPath>();
         //tr = GetComponent<Transform>();
     }
     void Update()
@@ -21,8 +23,11 @@ public class AstarAI : MonoBehaviour
         if (ai.reachedEndOfPath)
         {
             if (!isAtDestination) //OnTargetReached();
-            isAtDestination = true;
+                isAtDestination = true;
         }
-        else isAtDestination = false;
+        else
+        {
+            isAtDestination = false;
+        }
     }
 }

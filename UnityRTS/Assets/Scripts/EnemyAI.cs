@@ -41,6 +41,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         myAstarAI = GetComponent<AstarAI>();
+        myAstarAI.aiPath.maxSpeed = enemyAISO.speed;
         enemyHealth = enemyAISO.startingHealth;
         GameManager.instance.enemies.Add(gameObject);
     }
@@ -48,44 +49,52 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         CheckForUnitsAndBuildingsInRange();
+
         if (targetTransform != null)
         {
             if (targetType == "Unit")
             {
                 myAstarAI.ai.destination = targetTransform.position;
+
+                RotateToTarget();
+
+                // Check if the enemy is within a certain range of the target transform
+                float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
+                if (distanceToTarget <= enemyAISO.attackRange)
+                {
+                    // Target within attack range
+                    if (Time.time > nextShootTime)
+                    {
+                        state = State.ShootingTarget;
+                        AttackUnit();
+                        nextShootTime = Time.time + enemyAISO.fireRate;
+                    }
+                }
             }
             else if (targetType == "Building")
             {
                 myAstarAI.ai.destination = targetTransform.GetChild(1).position;
-            }
 
-            RotateToTarget();
-            if (myAstarAI.isAtDestination)
-            {
+                RotateToTarget();
 
-
-                // Target within attack range
-                if (Time.time > nextShootTime)
+                // Check if the enemy is within a certain range of the target transform
+                float distanceToTarget = Vector3.Distance(transform.position, targetTransform.GetChild(1).position);
+                if (distanceToTarget <= enemyAISO.attackRange)
                 {
-
-
-                    state = State.ShootingTarget;
-                    AttackUnit();
-
-                    nextShootTime = Time.time + enemyAISO.fireRate;
-
+                    // Target within attack range
+                    if (Time.time > nextShootTime)
+                    {
+                        state = State.ShootingTarget;
+                        AttackUnit();
+                        nextShootTime = Time.time + enemyAISO.fireRate;
+                    }
                 }
-
             }
 
+            //Transform is different b
+            
         }
-
-
-
-
-
     }
 
     private void RotateToTarget()

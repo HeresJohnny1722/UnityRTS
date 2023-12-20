@@ -70,14 +70,21 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        isGameOver = true;
-        GameOverScreen.SetActive(true);
+        if (VictoryScreen.activeSelf == false)
+        {
+            isGameOver = true;
+            GameOverScreen.SetActive(true);
+            Time.timeScale = .25f;
+        }
+        
     }
 
     public void Victory()
     {
         //isGameOver = false;
+        
         VictoryScreen.SetActive(true);
+        Time.timeScale = .25f;
     }
 
     private void Update()
@@ -89,7 +96,11 @@ public class GameManager : MonoBehaviour
             if (enemies.Count == 0)
             {
                 //Win
-                Victory();
+                if (!isGameOver)
+                {
+                    Victory();
+                }
+                
             }
         }
     }

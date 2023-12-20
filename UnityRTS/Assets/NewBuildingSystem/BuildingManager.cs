@@ -60,7 +60,7 @@ public class BuildingManager : MonoBehaviour
 
 
 
-        if (_nObstacles == 0 && wallNumber <= 2)
+        if (_nObstacles == 0 && wallNumber <= 1)
             SetPlacementMode(PlacementMode.Valid);
     }
 
