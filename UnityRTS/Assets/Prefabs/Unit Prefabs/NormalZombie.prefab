@@ -247,6 +247,8 @@ MonoBehaviour:
   meleeSlash: {fileID: 2449490594737823650}
   deathEffect: {fileID: 5306868671923941460, guid: e63b6bfa5e8b0497681f3a318b0dceee,
     type: 3}
+  spawnEffect: {fileID: 5306868671923941460, guid: c29cc432593a04fc68989f051648883b,
+    type: 3}
   targetType: 
   playersLayerMask:
     serializedVersion: 2
@@ -259,6 +261,7 @@ MonoBehaviour:
   enemyAISO: {fileID: 11400000, guid: 65aedfb1b988e4e42bf0708e2da94b97, type: 2}
   enemyHealth: 0
   troopHit: {fileID: 625811777211579521}
+  unitAnimator: {fileID: 5456179784884349036}
 --- !u!114 &625811777211579521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,6 +531,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3685794393024668440}
+  - component: {fileID: 5456179784884349036}
   m_Layer: 0
   m_Name: UnitObject
   m_TagString: Untagged
@@ -551,6 +555,27 @@ Transform:
   - {fileID: 5390473432757956801}
   m_Father: {fileID: 5330796934995906348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &5456179784884349036
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548111256944892051}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 644b6b22d300c47f4aa24abe78f08ba0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3688122575326829427
 GameObject:
   m_ObjectHideFlags: 0

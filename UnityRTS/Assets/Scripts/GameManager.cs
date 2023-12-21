@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         {
             isGameOver = true;
             GameOverScreen.SetActive(true);
-            Time.timeScale = .25f;
+          //  Time.timeScale = .25f;
         }
         
     }
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         //isGameOver = false;
         
         VictoryScreen.SetActive(true);
-        Time.timeScale = .25f;
+       // Time.timeScale = .25f;
     }
 
     private void Update()

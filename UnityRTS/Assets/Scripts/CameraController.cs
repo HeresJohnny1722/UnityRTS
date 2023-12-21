@@ -94,14 +94,16 @@ public class CameraController : MonoBehaviour
             moveDirection += transform.forward;
         }
 
+        newPosition += moveDirection.normalized * movementMouseSpeed * Time.deltaTime;
+
         newPosition.x = Mathf.Clamp(newPosition.x, boundaryX.x, boundaryX.y);
         newPosition.z = Mathf.Clamp(newPosition.z, boundaryZ.x, boundaryZ.y);
 
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
         cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * movementTime);
-
     }
+
 
     void HandleMovementInput()
     {

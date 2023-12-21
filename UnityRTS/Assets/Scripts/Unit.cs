@@ -46,8 +46,9 @@ public class Unit : MonoBehaviour
 
     public TroopHit troopHit;
 
-
     public AstarAI myAstarAI;
+
+    [SerializeField] private Animator unitAnimator;
 
     void Start()
     {
@@ -86,6 +87,7 @@ public class Unit : MonoBehaviour
         {
             case UnitState.Idle:
                 muzzleFlash.SetActive(false);
+                unitAnimator.Play("Idle");
                 CheckForEnemies();
                 
                 
@@ -117,9 +119,7 @@ public class Unit : MonoBehaviour
 
                 muzzleFlash.SetActive(false);
                 currentTarget = null;
-
-                //playing moving animation
-
+                unitAnimator.Play("UnitBob");
 
                 break;
 
@@ -127,6 +127,7 @@ public class Unit : MonoBehaviour
                 break;
         }
     }
+
 
     private void CheckForEnemies()
     {

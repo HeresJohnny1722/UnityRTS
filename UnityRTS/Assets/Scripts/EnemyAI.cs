@@ -23,6 +23,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] GameObject meleeSlash;
     [SerializeField] GameObject deathEffect;
 
+
     public string targetType = "Building";
 
     public LayerMask playersLayerMask;
@@ -38,12 +39,16 @@ public class EnemyAI : MonoBehaviour
 
     private AstarAI myAstarAI;
 
+    [SerializeField] private Animator unitAnimator;
+
     void Start()
     {
         myAstarAI = GetComponent<AstarAI>();
         myAstarAI.aiPath.maxSpeed = enemyAISO.speed;
         enemyHealth = enemyAISO.startingHealth;
         GameManager.instance.enemies.Add(gameObject);
+
+
     }
 
     // Update is called once per frame
@@ -53,16 +58,22 @@ public class EnemyAI : MonoBehaviour
 
         if (targetTransform != null)
         {
+            //Bobbing Animation
+            unitAnimator.Play("UnitBob");
+
             if (targetType == "Unit")
             {
-                myAstarAI.ai.destination = targetTransform.position;
+                myAstarAI.ai.destination = new Vector3(targetTransform.position.x + Random.Range(-2, 2), targetTransform.position.y, targetTransform.position.z + Random.Range(-2, 2));
 
                 RotateToTarget();
 
                 // Check if the enemy is within a certain range of the target transform
                 float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
+                //enemyAISO.attackRange
                 if (distanceToTarget <= enemyAISO.attackRange)
                 {
+
+                    //unitAnimator.Play("Idle");
                     // Target within attack range
                     if (Time.time > nextShootTime)
                     {
@@ -74,14 +85,16 @@ public class EnemyAI : MonoBehaviour
             }
             else if (targetType == "Building")
             {
-                myAstarAI.ai.destination = targetTransform.GetChild(1).position;
+                myAstarAI.ai.destination = myAstarAI.ai.destination = new Vector3(targetTransform.GetChild(1).position.x + Random.Range(-2, 2), targetTransform.GetChild(1).position.y, targetTransform.GetChild(1).position.z + Random.Range(-2, 2));
 
                 RotateToTarget();
 
                 // Check if the enemy is within a certain range of the target transform
                 float distanceToTarget = Vector3.Distance(transform.position, targetTransform.GetChild(1).position);
+                Debug.Log(targetTransform.GetComponent<BoxCollider>().size.x);
                 if (distanceToTarget <= enemyAISO.attackRange)
                 {
+                    //unitAnimator.Play("Idle");
                     // Target within attack range
                     if (Time.time > nextShootTime)
                     {
@@ -94,7 +107,7 @@ public class EnemyAI : MonoBehaviour
 
             //Transform is different b
             
-        }
+        } 
     }
 
     private void RotateToTarget()

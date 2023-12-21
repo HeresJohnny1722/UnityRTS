@@ -296,6 +296,7 @@ MonoBehaviour:
   moveToPosition: {x: 0, y: 0, z: 0}
   troopHit: {fileID: 6277138043053486435}
   myAstarAI: {fileID: 0}
+  unitAnimator: {fileID: 8047838942793874908}
 --- !u!114 &6277138043053486435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,6 +468,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2617948425019371997}
+  - component: {fileID: 8047838942793874908}
   m_Layer: 0
   m_Name: UnitObject
   m_TagString: Untagged
@@ -494,6 +496,27 @@ Transform:
   - {fileID: 1176162582686228084}
   m_Father: {fileID: 5207650859288137085}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &8047838942793874908
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8945384816857529301}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 644b6b22d300c47f4aa24abe78f08ba0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &167280376353305518
 PrefabInstance:
   m_ObjectHideFlags: 0
