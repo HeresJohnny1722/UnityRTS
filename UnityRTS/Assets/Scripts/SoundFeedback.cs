@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundFeedback : MonoBehaviour
 {
     [SerializeField]
-    private AudioClip clickSound, placeSound, removeSound, wrongPlacementSound;
+    private AudioClip clickSound, placeSound, removeSound, wrongPlacementSound, mainMenuSoundtrack;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -22,6 +23,14 @@ public class SoundFeedback : MonoBehaviour
         else
         {
             _instance = this;
+        }
+    }
+
+    public void Start()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            audioSource.PlayOneShot(mainMenuSoundtrack);
         }
     }
 
