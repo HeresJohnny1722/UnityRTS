@@ -43,50 +43,25 @@ public class BuildingConstruction : MonoBehaviour
 
     public void ConstructBuilding()
     {
+        //Sets the construction progress bar canvas to true
         constructionProgressSprite.transform.parent.parent.gameObject.SetActive(true);
+
+        //Gets set to construction material
         SetMaterial();
 
 
-        if (useWorkers)
+        constructionTimer += Time.deltaTime * 1;
+
+        target = constructionTimer / building.buildingSO.timeToBuild;
+
+
+
+        constructionProgressSprite.fillAmount = target;
+
+        if (constructionTimer >= building.buildingSO.timeToBuild)
         {
-            if (building.workersInside.Count > 0)
-            {
-
-                constructionTimer += Time.deltaTime * building.workersInside.Count;
-                //constructionText.text = "Workers currently constructing: " + building.workersInside.Count.ToString() + "/" + building.buildingSO.constructionCapacity;
-
-                target = constructionTimer / building.buildingSO.timeToBuild;
-
-                constructionProgressSprite.fillAmount = target;
-
-                if (constructionTimer >= building.buildingSO.timeToBuild)
-                {
-                    CompleteConstruction();
-                }
-
-                SetMaterial();
-            }
-        } else
-        {
-
-            constructionTimer += Time.deltaTime * 1;
-            //constructionText.text = "Workers currently constructing: " + building.workersInside.Count.ToString() + "/" + building.buildingSO.constructionCapacity;
-
-            target = constructionTimer / building.buildingSO.timeToBuild;
-
-
-            
-            constructionProgressSprite.fillAmount = target;
-
-            if (constructionTimer >= building.buildingSO.timeToBuild)
-            {
-                CompleteConstruction();
-            }
-
-            SetMaterial();
-
+            CompleteConstruction();
         }
-        
 
     }
 
@@ -136,26 +111,26 @@ public class BuildingConstruction : MonoBehaviour
     public void showConstructionPanel()
     {
         constructionPanel.SetActive(true);
+
+        //Sets the construction progress bar canvas to true
         constructionProgressSprite.transform.parent.parent.gameObject.SetActive(true);
     }
 
     private void CompleteConstruction()
     {
         GameManager.instance.changeMaxPopulation(building.buildingSO.populationIncrease);
-        Debug.Log("completed constructing");
-//        building.removeAllWorkers();
+
         isUnderConstruction = false;
         SetMaterial();
         constructionTimer = 0f; // Reset the timer
         constructionPanel.SetActive(false);
+
+        //Sets the construction progress bar canvas to false
         constructionProgressSprite.transform.parent.parent.gameObject.SetActive(false);
         squashAndStretch.maximumScale = 1.5f;
         squashAndStretch.PlaySquashAndStretch();
         BuildEffect();
-        //effect
-        //Change the material of the building
 
-        // Add any additional logic for a fully constructed building here
     }
 
     private void BuildEffect()

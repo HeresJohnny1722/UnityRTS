@@ -594,6 +594,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3255677061070991677}
+    - target: {fileID: 4023736885632235162, guid: d8f43148855d24b7aa08f4876f186f35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SpawnTroop
+      objectReference: {fileID: 0}
     - target: {fileID: 4274729731681897862, guid: d8f43148855d24b7aa08f4876f186f35,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

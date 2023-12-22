@@ -72,7 +72,7 @@ public class Selections : MonoBehaviour
     {
         if (selectedBuilding != null && selectedBuilding.parent != null)
         {
-            selectedBuilding.parent.GetComponent<Building>().takeDamage(damage);
+            selectedBuilding.parent.GetComponent<Building>().TakeDamage(damage);
         }
     }
 

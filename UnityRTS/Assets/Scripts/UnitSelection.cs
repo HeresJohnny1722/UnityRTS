@@ -11,8 +11,8 @@ public class UnitSelection : MonoBehaviour
     public List<GameObject> unitList = new List<GameObject>();
     public List<GameObject> unitsSelected = new List<GameObject>();
 
-    private static UnitSelection _instance;
-    public static UnitSelection Instance { get { return _instance; } }
+    private static UnitSelection instance;
+    public static UnitSelection Instance { get { return instance; } }
 
     [SerializeField] private float maxGroupSize = 8;
 
@@ -22,12 +22,9 @@ public class UnitSelection : MonoBehaviour
     [SerializeField] private TextMeshProUGUI selectedUnitsTitle;
     [SerializeField] private TextMeshProUGUI selectedUnitsListText;
 
-    //private NavMeshAgent myAgent;
     private AstarAI myAstarAI;
 
     private Unit unitScript;
-
-    private float proximityRadius;
 
     private FormationBase _formationBase;
 
@@ -38,48 +35,51 @@ public class UnitSelection : MonoBehaviour
             if (_formationBase == null) _formationBase = GetComponent<FormationBase>();
             return _formationBase;
         }
-        set => _formationBase = value;
+        private set => _formationBase = value;
     }
 
     void Awake()
     {
-        if (_instance != null && _instance != this)
+        if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
         }
         else
         {
-            _instance = this;
+            instance = this;
         }
     }
 
     private List<Vector3> _points = new List<Vector3>();
 
-    public void moveUnits(Vector3 moveToPosition)
+    public void MoveUnits(Vector3 moveToPosition)
     {
         if (unitsSelected.Count > 0 && Formation != null)
         {
-            setGroundMarker(groundMarker, moveToPosition);
+            SetGroundMarker(groundMarker, moveToPosition);
 
             _points = Formation.EvaluatePoints().ToList();
 
             for (int i = 0; i < unitsSelected.Count; i++)
             {
-                
-                myAstarAI = unitsSelected[i].GetComponent<AstarAI>();
-                myAstarAI.ai.destination = _points[i] + moveToPosition;
-
+                myAstarAI = unitsSelected[i]?.GetComponent<AstarAI>();
+                if (myAstarAI != null)
+                {
+                    myAstarAI.ai.destination = _points[i] + moveToPosition;
+                }
             }
         }
     }
 
-    public void takeDamageUnitTest(float damage)
+    public void TakeDamageUnitTest(float damage)
     {
-
-
         for (int i = 0; i < unitsSelected.Count; i++)
         {
-            unitsSelected[i].GetComponent<Unit>().takeDamage(damage);
+            var unit = unitsSelected[i]?.GetComponent<Unit>();
+            if (unit != null)
+            {
+                unit.takeDamage(damage);
+            }
         }
     }
 
@@ -87,7 +87,6 @@ public class UnitSelection : MonoBehaviour
     {
         DeselectAll();
         SelectUnit(unitToAdd);
-
     }
 
     public void ShiftClickSelect(GameObject unitToAdd)
@@ -99,10 +98,11 @@ public class UnitSelection : MonoBehaviour
         else
         {
             unitsSelected.Remove(unitToAdd);
-            unitScript = unitToAdd.GetComponent<Unit>();
-            unitScript.deselectUnit();
-
-            updateInfoPanelForUnits();
+            unitScript = unitToAdd?.GetComponent<Unit>();
+            if (unitScript != null)
+            {
+                unitScript.deselectUnit();
+            }
         }
     }
 
@@ -116,75 +116,35 @@ public class UnitSelection : MonoBehaviour
 
     public void DeselectAll()
     {
-
         foreach (var unit in unitsSelected)
         {
-
-            unitScript = unit.GetComponent<Unit>();
-            unitScript.deselectUnit();
-            updateInfoPanelForUnits();
-            //unitInfoPanel.SetActive(false);
+            unitScript = unit?.GetComponent<Unit>();
+            if (unitScript != null)
+            {
+                unitScript.deselectUnit();
+            }
         }
         unitsSelected.Clear();
-
-
     }
 
     public void SelectUnit(GameObject unitToSelect)
     {
-        if (unitToSelect.activeSelf == true)
+        if (unitToSelect?.activeSelf == true)
         {
             unitsSelected.Add(unitToSelect);
             unitScript = unitToSelect.GetComponent<Unit>();
-            unitScript.selectUnit();
-            BuildingSelection.Instance.DeselectBuilding();
-            updateInfoPanelForUnits();
-            //unitInfoPanel.SetActive(true);
+            if (unitScript != null)
+            {
+                unitScript.selectUnit();
+                BuildingSelection.Instance.DeselectBuilding();
+            }
         }
-
-
     }
 
-
-    public void setGroundMarker(GameObject groundMarkerObject, Vector3 groundMarkerPosition)
+    public void SetGroundMarker(GameObject groundMarkerObject, Vector3 groundMarkerPosition)
     {
         groundMarkerObject.transform.position = groundMarkerPosition;
         groundMarkerObject.SetActive(false);
         groundMarkerObject.SetActive(true);
-    }
-
-    public void updateInfoPanelForUnits()
-    {
-        /*
-        selectedUnitsTitle.text = "Unit(s) Selected";
-
-        Dictionary<UnitSO.UnitType, int> unitTypeCounts = new Dictionary<UnitSO.UnitType, int>();
-
-        foreach (var unit in unitsSelected)
-        {
-            UnitSO.UnitType unitType = unit.GetComponent<Unit>().unitSO.unitType;
-
-            if (unitTypeCounts.ContainsKey(unitType))
-            {
-                unitTypeCounts[unitType]++;
-            }
-            else
-            {
-                unitTypeCounts[unitType] = 1;
-            }
-        }
-
-        selectedUnitsListText.text = "";
-
-        if (unitTypeCounts.Count > 1)
-        {
-            selectedUnitsListText.text += "Total #Units: " + unitsSelected.Count + "\n";
-        }
-
-        foreach (var kvp in unitTypeCounts)
-        {
-            selectedUnitsListText.text += $"{kvp.Key}s: {kvp.Value}\n";
-        }
-        */
     }
 }

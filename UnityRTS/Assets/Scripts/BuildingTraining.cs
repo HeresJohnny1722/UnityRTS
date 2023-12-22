@@ -98,7 +98,7 @@ public class BuildingTraining : MonoBehaviour
 
     }
 
-    public void moveFlag(Vector3 point)
+    public void MoveFlag(Vector3 point)
     {
         if (building.buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
         {
@@ -108,7 +108,7 @@ public class BuildingTraining : MonoBehaviour
         }
     }
 
-    public void spawnTroop(int index)
+    public void SpawnTroop(int index)
     {
         if (GameManager.instance.AreResourcesAvailable((int)building.buildingSO.unitsToTrain[index].populationCost, (int)building.buildingSO.unitsToTrain[index].goldCost, (int)building.buildingSO.unitsToTrain[index].coalCost, (int)building.buildingSO.unitsToTrain[index].copperCost, 0))
         {

@@ -191,7 +191,7 @@ public class EnemyAI : MonoBehaviour
                     {
                         buildingHealth = (targetTransform.GetComponent<Building>().buildingHealth);
                         health = buildingHealth - enemyAISO.damageAmountPerAttack;
-                        targetTransform.GetComponent<Building>().takeDamage(enemyAISO.damageAmountPerAttack);
+                        targetTransform.GetComponent<Building>().TakeDamage(enemyAISO.damageAmountPerAttack);
                     }
 
 

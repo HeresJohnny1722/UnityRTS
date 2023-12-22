@@ -85,17 +85,8 @@ public class Click : MonoBehaviour
                 else
                 {
 
-                    UnitSelection.Instance.moveUnits(hit.point);
+                    UnitSelection.Instance.MoveUnits(hit.point);
                 }
-
-
-
-
-                /*if (hit.transform.GetComponent < buildingSO.buildingType == BuildingSO.BuildingType.Production)
-                {
-
-                }*/
-
 
             }
         }
