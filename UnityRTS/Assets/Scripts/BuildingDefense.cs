@@ -138,7 +138,7 @@ public class BuildingDefense : MonoBehaviour
                     {
                         if (collider.GetComponent<EnemyAI>() != null)
                         {
-                            collider.GetComponent<EnemyAI>().takeDamage(building.buildingSO.attackDamage);
+                            collider.GetComponent<EnemyAI>().TakeDamage(building.buildingSO.attackDamage);
 
                             if (collider.GetComponent<EnemyAI>().enemyHealth <= 0)
                             {
@@ -176,7 +176,7 @@ public class BuildingDefense : MonoBehaviour
 
                     attackFlash.SetActive(true);
 
-                    currentTarget.GetComponent<EnemyAI>().takeDamage(building.buildingSO.attackDamage);
+                    currentTarget.GetComponent<EnemyAI>().TakeDamage(building.buildingSO.attackDamage);
 
                     if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)
                     {

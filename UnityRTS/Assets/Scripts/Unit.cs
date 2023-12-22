@@ -196,7 +196,7 @@ public class Unit : MonoBehaviour
                     //muzzleFlash.SetActive(false);
                     muzzleFlash.SetActive(true);
 
-                    currentTarget.GetComponent<EnemyAI>().takeDamage(unitSO.attackDamage);
+                    currentTarget.GetComponent<EnemyAI>().TakeDamage(unitSO.attackDamage);
                     //Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
 
 
