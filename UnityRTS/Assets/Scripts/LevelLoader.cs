@@ -9,6 +9,9 @@ public class LevelLoader : MonoBehaviour
 
     public float transitionTime = 1f;
 
+    public GameObject levelSelect;
+    public GameObject mainMenu;
+
     // Update is called once per frame
     void Update()
     {
@@ -42,5 +45,22 @@ public class LevelLoader : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
 
         SceneManager.LoadScene(levelIndex);
+    }
+
+    public void PlayLoadLevelSelect()
+    {
+        StartCoroutine(LoadLevelSelect());
+    }
+
+    IEnumerator LoadLevelSelect()
+    {
+        transition.SetTrigger("Menu");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        levelSelect.SetActive(true);
+        mainMenu.SetActive(false);
+
+        //SceneManager.LoadScene(levelIndex);
     }
 }

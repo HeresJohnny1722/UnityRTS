@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config xmlns="https://maroontress.com/StyleChecker/config.v1"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://maroontress.com/StyleChecker/config.v1 config.v1.xsd">
+
+  <ByteOrderMark maxDepth="8">
+    <files glob="nuget/**/StyleChecker.xml"/>
+  </ByteOrderMark>
+
+  <DiscardingReturnValue>
+    <method id="int.Parse(string)"/>
+  </DiscardingReturnValue>
+
+  <LongLine maxLineLength="100"/>
+
+  <NoDocumentation>
+    <ignore with="Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute" inclusive="true"/>
+    <ignore with="System.CodeDom.Compiler.GeneratedCodeAttribute" />
+  </NoDocumentation>
+
+  <ThoughtlessName>
+    <disallow id="flag"/>
+    <disallow id="flags"/>
+  </ThoughtlessName>
+</config>

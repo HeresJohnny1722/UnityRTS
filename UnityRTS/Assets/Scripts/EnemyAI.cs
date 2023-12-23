@@ -75,14 +75,14 @@ public class EnemyAI : MonoBehaviour
                     //Heal all enemies in a certain range
                     foreach (var enemy in GameManager.instance.enemies)
                     {
-                        if (Vector3.Distance(transform.position, enemy.transform.position) < enemyAISO.healRange)
+                        if ((Vector3.Distance(transform.position, enemy.transform.position) < enemyAISO.healRange) && enemy != gameObject)
                         {
                             enemy.GetComponent<EnemyAI>().HealEnemyUnit(enemyAISO.healAmount);
                         }
                     }
 
 
-                    nextShootTime = Time.time + enemyAISO.healCooldown;
+                    nextHealTime = Time.time + enemyAISO.healCooldown;
                 }
             }
 
@@ -220,7 +220,8 @@ public class EnemyAI : MonoBehaviour
                 {
                     meleeSlash.SetActive(false);
                     meleeSlash.SetActive(true);
-                } else if (enemyAISO.enemyType == EnemyAISO.EnemyType.Ranged)
+                }
+                else if (enemyAISO.enemyType == EnemyAISO.EnemyType.Ranged)
                 {
                     muzzleFlash.SetActive(false);
                     muzzleFlash.SetActive(true);
@@ -390,13 +391,6 @@ public class EnemyAI : MonoBehaviour
             // Also, checks if is not a support enemy type
             if (distance < enemyAISO.searchRange && distance < closestDistance && enemy.transform != transform && !IsChildOf(transform, enemy.transform))
             {
-
-                //if (enemy.GetComponent<EnemyAI>() == null)
-                    //return;
-
-                //if (enemy.GetComponent<EnemyAI>().enemyAISO.enemyType == EnemyAISO.EnemyType.Support)
-                    //return;
-
                 closestDistance = distance;
                 closestTarget = enemy.transform;
             }
