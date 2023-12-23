@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
-public class BuildingPlacer : MonoBehaviour
+public interface IBuilderPlacer
+{
+    public void SetBuildingPrefab(GameObject prefab);
+}
+public class BuildingPlacer : MonoBehaviour, IBuilderPlacer
 {
     public static BuildingPlacer instance; // (Singleton pattern)
 
@@ -29,14 +32,23 @@ public class BuildingPlacer : MonoBehaviour
         if (_buildingPrefab != null)
         { // if in build mode
 
-            // right-click: cancel build mode
-            if (Input.GetMouseButtonDown(1))
+            try
             {
-                Destroy(_toBuild);
-                _toBuild = null;
-                _buildingPrefab = null;
-                return;
+                // right-click: cancel build mode
+                if (Input.GetMouseButtonDown(1))
+                {
+                    Destroy(_toBuild);
+                    _toBuild = null;
+                    _buildingPrefab = null;
+                    return;
+                }
             }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+
+            
 
             // hide preview when hovering UI
             if (EventSystem.current.IsPointerOverGameObject())

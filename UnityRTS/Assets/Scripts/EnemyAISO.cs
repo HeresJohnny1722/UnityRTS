@@ -8,7 +8,9 @@ public class EnemyAISO : ScriptableObject
 {
     public enum EnemyType
     {
-        Melee
+        Melee,
+        Ranged,
+        Support
     }
 
     public EnemyType enemyType;
@@ -22,7 +24,11 @@ public class EnemyAISO : ScriptableObject
     public float roamingReachedPositionDistance;
     public float roamingWaitTime;
     public float rotationSpeed;
-    public float bulletSpeed;
     public float stopChaseDistance;
     public float reachedStartPositionDistance;
+
+    public float healDuration;
+    public float healRange;
+    public float healAmount;
+    public float healCooldown;
 }

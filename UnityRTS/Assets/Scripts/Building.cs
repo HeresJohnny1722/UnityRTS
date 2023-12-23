@@ -122,8 +122,9 @@ public class Building : MonoBehaviour
         deselectBuilding();
         BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
         Destroy(this.gameObject);
+        Debug.Log("Hello");
     }
-
+    
     public void removeBuilding()
     {
 
