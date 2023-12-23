@@ -1,67 +1,86 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class BuildingSelection : MonoBehaviour
 {
     public List<GameObject> buildingsList = new List<GameObject>();
     public Transform selectedBuilding = null;
 
-    private static BuildingSelection instance;
-    public static BuildingSelection Instance { get { return instance; } }
+    private static BuildingSelection _instance;
+    public static BuildingSelection Instance { get { return _instance; } }
 
     private Building building;
 
     [SerializeField] BuildingGridPlacer buildingGridPlacer;
 
+
     void Awake()
     {
-        if (instance != null && instance != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
         }
         else
         {
-            instance = this;
+            _instance = this;
         }
     }
 
-    public void TakeDamageBuildingTest(float damage)
+    public void takeDamageBuildingTest(float damage)
     {
-        if (selectedBuilding != null)
+        if (selectedBuilding != null && selectedBuilding != null)
         {
-            selectedBuilding.GetComponent<Building>()?.TakeDamage(damage);
+            selectedBuilding.GetComponent<Building>().takeDamage(damage);
         }
     }
 
     public void SelectBuilding(Transform buildingToSelect)
     {
+//        Debug.Log("selecting building");
+
+        
         DeselectBuilding();
+        selectedBuilding = null;
+
 
         if (buildingGridPlacer._buildingPrefab != null)
         {
-            Debug.Log("Sorry, you're in building mode");
-        }
-        else
+            Debug.Log("sorry youre in building mode");
+        } else
         {
             building = buildingToSelect.GetComponent<Building>();
 
+            
             UnitSelection.Instance.DeselectAll();
             DeselectBuilding();
             selectedBuilding = buildingToSelect;
-
-            building?.BuildingSelected();
+            
+            building.BuildingSelected();
         }
+                
+            
+            
+        
+
     }
+
 
     public void DeselectBuilding()
     {
-        building?.DeselectBuilding();
+        if (building != null)
+        {
+            building.deselectBuilding();
+        }
         selectedBuilding = null;
+        
     }
 
+    
     public void MoveFlag(Vector3 point)
     {
-        building?.buildingTraining?.MoveFlag(point);
+        building.buildingTraining.moveFlag(point);
     }
 }

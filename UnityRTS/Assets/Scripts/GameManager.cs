@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     public int food = 0;
     public int energy = 0;
 
-
     public int maxHouses;
     public int maxBarracks;
     public int maxGoldFactory;
