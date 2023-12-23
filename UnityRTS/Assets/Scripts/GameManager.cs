@@ -455,21 +455,4 @@ public class GameManager : MonoBehaviour
         if (energyText != null)
             energyText.text = "Energy: " + energy.ToString();
     }
-
-    public void HealAllEnemies(float healAmount)
-    {
-        foreach (var enemyUnit in enemies)
-        {
-            EnemyAI enemy = enemyUnit.GetComponent<EnemyAI>();
-
-            try
-            {
-                enemy.HealEnemyUnit(healAmount);
-            }
-            catch (System.Exception ex)
-            {
-                Debug.Log(ex);
-            }
-        }
-    }
 }

@@ -89,9 +89,8 @@ public class Building : MonoBehaviour
         DeselectBuilding();
         BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
         Destroy(this.gameObject);
-        Debug.Log("Hello");
     }
-    
+
     public void removeBuilding()
     {
         if (buildingSO.buildingType == BuildingSO.BuildingType.Production && buildingSO.resourceType == BuildingSO.ResourceType.Energy)
