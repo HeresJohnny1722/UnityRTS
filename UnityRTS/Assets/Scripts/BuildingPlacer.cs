@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
-public class BuildingPlacer : MonoBehaviour
+public interface IBuilderPlacer
+{
+    public void SetBuildingPrefab(GameObject prefab);
+}
+public class BuildingPlacer : MonoBehaviour, IBuilderPlacer
 {
     public static BuildingPlacer instance; // (Singleton pattern)
 
@@ -42,7 +45,7 @@ public class BuildingPlacer : MonoBehaviour
             }
             catch (System.Exception ex)
             {
-
+                throw ex;
             }
 
             

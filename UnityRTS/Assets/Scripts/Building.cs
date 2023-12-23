@@ -104,7 +104,7 @@ public class Building : MonoBehaviour
             DeathEffect();
             SoundFeedback.Instance.PlaySound(SoundType.Remove);
             BuildingSelection.Instance.buildingsList.Remove(this.gameObject);
-
+            Destroy(this.gameObject);
             GameManager.instance.decreaseBuildingCount(buildingSO);
             AstarPath.active.UpdateGraphs(this.GetComponent<BoxCollider>().bounds);
 
@@ -127,9 +127,6 @@ public class Building : MonoBehaviour
             {
                 GameManager.instance.GameOver();
             }
-
-            Destroy(this.gameObject);
-            
         }
     }
 
@@ -202,7 +199,7 @@ public class Building : MonoBehaviour
             buildingConstruction.showConstructionPanel();
         }
 
-//        infoPanel.SetActive(visible);
+        infoPanel.SetActive(visible);
         if (buildingSO.startingHealth == buildingHealth)
         {
             buildingHealthbar.gameObject.SetActive(false);
