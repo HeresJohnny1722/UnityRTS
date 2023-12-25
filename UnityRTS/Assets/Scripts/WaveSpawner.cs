@@ -27,7 +27,8 @@ public class WaveSpawner : MonoBehaviour
     private int waveIndex = 0;
     private int totalTroopsSpawned = 0; // Counter variable
     private int expectedTotalTroops;
-    private bool waitingForNextWave = false;
+
+
 
     public void StartWaves()
     {
@@ -58,14 +59,6 @@ public class WaveSpawner : MonoBehaviour
     {
         while (waveIndex < waves.Length)
         {
-            // Check if there are no enemies left and waiting for the next wave
-            if (GameManager.instance.enemies.Count == 0 && waitingForNextWave)
-            {
-                waveIndex++;
-                waitingForNextWave = false;
-                continue;
-            }
-
             Wave currentWave = waves[waveIndex];
 
             for (int i = 0; i < currentWave.enemies.Length; i++)
@@ -76,23 +69,18 @@ public class WaveSpawner : MonoBehaviour
 
             if (waves.Length != 1)
             {
-                waitingForNextWave = true;
                 yield return new WaitForSeconds(timeBetweenWaves);
-            }
-            else
-            {
-                waitingForNextWave = false;
             }
 
             waveIndex++;
         }
 
         // Check if all troops are spawned
-       // if (totalTroopsSpawned >= expectedTotalTroops)
-       // {
+        if (totalTroopsSpawned >= expectedTotalTroops)
+        {
             Debug.Log("Waves are done spawning");
             GameManager.instance.areWavesDone = true;
-       // }
+        }
     }
 
     IEnumerator SpawnEnemies(GameObject enemyPrefab, int count, Transform[] spawnPoints)

@@ -313,7 +313,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898230509516970111}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
   m_Name: 
@@ -321,10 +321,10 @@ MonoBehaviour:
   version: 1
   smoothType: 0
   subdivisions: 2
-  iterations: 2
+  iterations: 1
   strength: 0.5
   uniformLength: 1
-  maxSegmentLength: 2
+  maxSegmentLength: 1
   bezierTangentLength: 0.4
   offset: 0.2
   factor: 0.1
@@ -407,7 +407,7 @@ MonoBehaviour:
   pickNextWaypointDist: 2
   endReachedDistance: 3
   alwaysDrawGizmos: 0
-  slowWhenNotFacingTarget: 1
+  slowWhenNotFacingTarget: 0
   whenCloseToDestination: 0
   constrainInsideGraph: 0
 --- !u!114 &2689430242793609131

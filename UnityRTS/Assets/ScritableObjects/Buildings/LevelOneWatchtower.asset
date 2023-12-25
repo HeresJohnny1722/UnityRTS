@@ -22,7 +22,7 @@ MonoBehaviour:
   stage: 2
   fireRate: 1.75
   attackDamage: 25
-  attackRange: 8
+  attackRange: 15
   turretRotationSpeed: 0
   bulletsExplode: 0
   explodeRadius: 0
