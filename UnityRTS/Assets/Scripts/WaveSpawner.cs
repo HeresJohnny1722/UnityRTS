@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public class EnemyWave
@@ -20,18 +21,23 @@ public class WaveSpawner : MonoBehaviour
     public Wave[] waves;
     public float timeBetweenWaves = 5f;
     public float timeBetweenSpawns = 0.25f;
-    [SerializeField] GameObject spawnEffect;
+    [SerializeField] private GameObject spawnEffect;
+    [SerializeField] private TextMeshProUGUI waveCounterText;
 
     private int waveIndex = 0;
     private int totalTroopsSpawned = 0; // Counter variable
     private int expectedTotalTroops;
-
-
+    private bool waitingForNextWave = false;
 
     public void StartWaves()
     {
         expectedTotalTroops = CalculateExpectedTotalTroops();
         StartCoroutine(SpawnWaves());
+    }
+
+    private void Update()
+    {
+        waveCounterText.text = "Wave: " + waveIndex.ToString() + 1;
     }
 
     int CalculateExpectedTotalTroops()
@@ -51,6 +57,14 @@ public class WaveSpawner : MonoBehaviour
     {
         while (waveIndex < waves.Length)
         {
+            // Check if there are no enemies left and waiting for the next wave
+            if (GameManager.instance.enemies.Count == 0 && waitingForNextWave)
+            {
+                waveIndex++;
+                waitingForNextWave = false;
+                continue;
+            }
+
             Wave currentWave = waves[waveIndex];
 
             for (int i = 0; i < currentWave.enemies.Length; i++)
@@ -61,9 +75,14 @@ public class WaveSpawner : MonoBehaviour
 
             if (waves.Length != 1)
             {
+                waitingForNextWave = true;
                 yield return new WaitForSeconds(timeBetweenWaves);
             }
-            
+            else
+            {
+                waitingForNextWave = false;
+            }
+
             waveIndex++;
         }
 

@@ -890,7 +890,7 @@ PrefabInstance:
     - target: {fileID: 692835140751934564, guid: b7dbcf62bc162477f876c8867eecbb31,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1648907764512076185, guid: b7dbcf62bc162477f876c8867eecbb31,
         type: 3}
@@ -1141,6 +1141,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyHealingCircle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7547674303998779837, guid: b7dbcf62bc162477f876c8867eecbb31,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8212428070361240697, guid: b7dbcf62bc162477f876c8867eecbb31,
         type: 3}

@@ -75,14 +75,14 @@ public class EnemyAI : MonoBehaviour
                     //Heal all enemies in a certain range
                     foreach (var enemy in GameManager.instance.enemies)
                     {
-                        if (Vector3.Distance(transform.position, enemy.transform.position) < enemyAISO.healRange)
+                        if ((Vector3.Distance(transform.position, enemy.transform.position) < enemyAISO.healRange) && enemy != gameObject)
                         {
                             enemy.GetComponent<EnemyAI>().HealEnemyUnit(enemyAISO.healAmount);
                         }
                     }
 
 
-                    nextShootTime = Time.time + enemyAISO.healCooldown;
+                    nextHealTime = Time.time + enemyAISO.healCooldown;
                 }
             }
 
