@@ -21,7 +21,7 @@ MonoBehaviour:
   nodeDescription: 
   stage: 2
   fireRate: 0.7
-  attackDamage: 5
+  attackDamage: 25
   attackRange: 8
   turretRotationSpeed: 0
   bulletsExplode: 0

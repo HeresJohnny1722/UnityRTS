@@ -48,6 +48,7 @@ public class EnemyAI : MonoBehaviour
         myAstarAI.aiPath.maxSpeed = enemyAISO.speed;
         enemyHealth = enemyAISO.startingHealth;
         GameManager.instance.enemies.Add(gameObject);
+        enemyHealthbar.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -55,6 +56,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (enemyAISO.enemyType == EnemyAISO.EnemyType.Support)
         {
+            if (targetTransform == null)
             CheckForEnemyUnitsInRangeToSupport();
 
             if (targetTransform == null)

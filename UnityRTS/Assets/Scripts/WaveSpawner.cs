@@ -87,11 +87,11 @@ public class WaveSpawner : MonoBehaviour
         }
 
         // Check if all troops are spawned
-        if (totalTroopsSpawned >= expectedTotalTroops)
-        {
+       // if (totalTroopsSpawned >= expectedTotalTroops)
+       // {
             Debug.Log("Waves are done spawning");
             GameManager.instance.areWavesDone = true;
-        }
+       // }
     }
 
     IEnumerator SpawnEnemies(GameObject enemyPrefab, int count, Transform[] spawnPoints)
