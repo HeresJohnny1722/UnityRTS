@@ -20,9 +20,13 @@ MonoBehaviour:
   nodeName: 
   nodeDescription: 
   stage: 2
-  fireRate: 0.35
-  attackDamage: 50
+  fireRate: 1.25
+  attackDamage: 35
   attackRange: 8
+  turretRotationSpeed: 0
+  bulletsExplode: 0
+  explodeRadius: 0
+  explodeParticleSystem: {fileID: 0}
   populationIncrease: 0
   name: Watchtower
   description: Shoot enemies

@@ -37,7 +37,8 @@ public class WaveSpawner : MonoBehaviour
 
     private void Update()
     {
-        waveCounterText.text = "Wave: " + waveIndex.ToString() + 1;
+        int waveCount = waveIndex + 1;
+        waveCounterText.text = "Wave: " + waveCount;
     }
 
     int CalculateExpectedTotalTroops()

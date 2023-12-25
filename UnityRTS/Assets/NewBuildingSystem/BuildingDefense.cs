@@ -7,6 +7,7 @@ public class BuildingDefense : MonoBehaviour
     private Building building;
 
     public bool hasTurretMount;
+    public bool turretIsUnit;
     public GameObject turretObject;
 
     public Animator animator;
@@ -32,8 +33,17 @@ public class BuildingDefense : MonoBehaviour
         Vector3 directionToTarget = currentTarget.position - turretObject.transform.position;
         directionToTarget.y = 0f; // Ensure rotation only happens in the horizontal plane
 
-        // Calculate the target rotation with a -90 degree offset
-        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget) * Quaternion.Euler(0f, 90f, 0f);
+
+        Quaternion targetRotation;
+        if (turretIsUnit)
+        {
+            targetRotation = Quaternion.LookRotation(directionToTarget) * Quaternion.Euler(0f, 0f, 0f);
+        }
+        else
+        {
+            targetRotation = Quaternion.LookRotation(directionToTarget) * Quaternion.Euler(0f, 90f, 0f);
+        }
+        
 
         // Smoothly interpolate between the current rotation and the target rotation
         turretObject.transform.rotation = Quaternion.Slerp(turretObject.transform.rotation, targetRotation, Time.deltaTime * building.buildingSO.turretRotationSpeed);
@@ -157,7 +167,7 @@ public class BuildingDefense : MonoBehaviour
 
                     //Debug.Log("SphereCast hit something WITH A ENEMYAI");
 
-                    Vector3 direction = (currentTarget.position - raycastPoint.position).normalized;
+                    /*Vector3 direction = (currentTarget.position - raycastPoint.position).normalized;
 
                     // Calculate the position for attackFlash
                     Vector3 flashPosition = raycastPoint.position + flashDistance * direction;
@@ -171,9 +181,9 @@ public class BuildingDefense : MonoBehaviour
                     {
                         attackFlash.transform.position = new Vector3(flashPosition.x, raycastPoint.position.y, flashPosition.z);
                     }
+                    */
 
-
-
+                    attackFlash.SetActive(false);
                     attackFlash.SetActive(true);
 
                     currentTarget.GetComponent<EnemyAI>().TakeDamage(building.buildingSO.attackDamage);
