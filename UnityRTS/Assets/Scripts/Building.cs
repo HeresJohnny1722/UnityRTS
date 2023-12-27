@@ -96,7 +96,7 @@ public class Building : MonoBehaviour
     {
         if (stage != 1)
         {
-            buildingConstruction.squashAndStretch.maximumScale = .85f;
+            buildingConstruction.squashAndStretch.maximumScale = .95f;
             buildingConstruction.squashAndStretch.PlaySquashAndStretch();
 
             buildingHealth -= damageAmount;
@@ -205,6 +205,7 @@ public class Building : MonoBehaviour
         else if (buildingSO.buildingType == BuildingSO.BuildingType.Townhall)
         {
             removeButton.SetActive(false);
+            productionOutputRateText.text = "";
         }
         else
         {
@@ -241,7 +242,7 @@ public class Building : MonoBehaviour
         }
 
         BuildingUIVisibility(false);
-        buildingConstruction.constructionPanel.SetActive(false);
+//        buildingConstruction.constructionPanel.SetActive(false);
 
     }
 

@@ -9,6 +9,9 @@ public class LevelLoader : MonoBehaviour
 
     public float transitionTime = 1f;
 
+    [SerializeField] private GameObject mainMenuCanvas;
+    [SerializeField] private GameObject levelSelectCanvas;
+
     // Update is called once per frame
     void Update()
     {
@@ -33,6 +36,25 @@ public class LevelLoader : MonoBehaviour
     {
         //Debug.Log("Load Level " + index);
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
+    }
+
+    public void MainToLevelSelect()
+    {
+        StartCoroutine(LoadLevelSelect());
+
+        
+
+    }
+
+    IEnumerator LoadLevelSelect()
+    {
+        transition.SetTrigger("Menu");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        Debug.Log("Loading to Level Select");
+        mainMenuCanvas.SetActive(false);
+        levelSelectCanvas.SetActive(true);
     }
 
     IEnumerator LoadLevel(int levelIndex)

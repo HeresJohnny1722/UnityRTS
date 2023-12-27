@@ -22,7 +22,7 @@ public class WaveSpawner : MonoBehaviour
     public float timeBetweenWaves = 5f;
     public float timeBetweenSpawns = 0.25f;
     [SerializeField] private GameObject spawnEffect;
-    [SerializeField] private TextMeshProUGUI waveCounterText;
+    //[SerializeField] private TextMeshProUGUI waveCounterText;
 
     private int waveIndex = 0;
     private int totalTroopsSpawned = 0; // Counter variable
@@ -36,11 +36,6 @@ public class WaveSpawner : MonoBehaviour
         StartCoroutine(SpawnWaves());
     }
 
-    private void Update()
-    {
-        int waveCount = waveIndex + 1;
-        waveCounterText.text = "Wave: " + waveCount;
-    }
 
     int CalculateExpectedTotalTroops()
     {

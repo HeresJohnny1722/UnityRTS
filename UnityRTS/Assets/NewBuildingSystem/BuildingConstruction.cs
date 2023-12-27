@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class BuildingConstruction : MonoBehaviour
 {
     public bool isUnderConstruction = false;
-    public GameObject constructionPanel;
+    //public GameObject constructionPanel;
     public TextMeshProUGUI constructionText;
     public Image constructionProgressSprite;
 
@@ -135,7 +135,7 @@ public class BuildingConstruction : MonoBehaviour
     }
     public void showConstructionPanel()
     {
-        constructionPanel.SetActive(true);
+        //constructionPanel.SetActive(true);
         constructionProgressSprite.transform.parent.parent.gameObject.SetActive(true);
     }
 
@@ -147,7 +147,7 @@ public class BuildingConstruction : MonoBehaviour
         isUnderConstruction = false;
         SetMaterial();
         constructionTimer = 0f; // Reset the timer
-        constructionPanel.SetActive(false);
+        //constructionPanel.SetActive(false);
         constructionProgressSprite.transform.parent.parent.gameObject.SetActive(false);
         squashAndStretch.maximumScale = 1.5f;
         squashAndStretch.PlaySquashAndStretch();
