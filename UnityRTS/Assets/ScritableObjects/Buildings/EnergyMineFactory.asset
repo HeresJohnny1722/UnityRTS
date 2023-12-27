@@ -16,13 +16,18 @@ MonoBehaviour:
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
   resourceType: 3
-  outputPerSecond: 3
+  outputPerInterval: 3
+  outputTime: 3
   nodeName: Energy Node
   nodeDescription: This is an energy node, create a factory on it to start production
   stage: 1
   fireRate: 0
   attackDamage: 0
   attackRange: 0
+  turretRotationSpeed: 0
+  bulletsExplode: 0
+  explodeRadius: 0
+  explodeParticleSystem: {fileID: 0}
   populationIncrease: 0
   name: Energy Mine
   description: Makes energy

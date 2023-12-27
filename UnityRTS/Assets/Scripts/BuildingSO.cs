@@ -32,7 +32,8 @@ public class BuildingSO : ScriptableObject
 
     [Header("Only for Production Type")]
     public ResourceType resourceType;
-    public float outputPerSecond;
+    public float outputPerInterval;
+    public float outputTime;
     public string nodeName;
     public string nodeDescription;
     public float stage = 1;

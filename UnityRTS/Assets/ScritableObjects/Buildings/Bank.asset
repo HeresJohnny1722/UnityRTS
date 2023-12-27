@@ -16,7 +16,8 @@ MonoBehaviour:
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
-  outputPerSecond: 3
+  outputPerInterval: 3
+  outputTime: 3
   nodeName: 
   nodeDescription: 
   stage: 2

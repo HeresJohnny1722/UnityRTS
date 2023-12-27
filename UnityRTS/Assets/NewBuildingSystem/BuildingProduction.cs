@@ -24,11 +24,13 @@ public class BuildingProduction : MonoBehaviour
 
     private float outputRate;
 
-
+    private float productionTimer = 0f;
+    private float productionInterval = 1f; // Set the production interval to 1 second
 
     private void Awake()
     {
         building = this.GetComponent<Building>();
+        productionInterval = building.buildingSO.outputTime;
     }
 
     public void UpdateProductionUI()
@@ -103,7 +105,7 @@ public class BuildingProduction : MonoBehaviour
         else if (building.stage == 2)
         {
             building.buildingNameText.text = building.buildingSO.name;
-            building.productionOutputRateText.text = "Output: " + building.buildingSO.outputPerSecond.ToString() + " " + building.buildingSO.resourceType + "/second";
+            building.productionOutputRateText.text = "Output: " + building.buildingSO.outputPerInterval.ToString() + " " + building.buildingSO.resourceType + "/" + productionInterval + " second(s)";
             nodePanel.SetActive(false);
             
 
@@ -127,7 +129,7 @@ public class BuildingProduction : MonoBehaviour
     {
         if (building.buildingSO.buildingType == BuildingSO.BuildingType.Production)// && building.workersInside.Count > 0)
         {
-            float outputRate = building.buildingSO.outputPerSecond;//building.workersInside.Count * building.buildingSO.outputWorkerMultiplyer;
+            float outputRate = building.buildingSO.outputPerInterval;//building.workersInside.Count * building.buildingSO.outputWorkerMultiplyer;
             //Debug.Log(outputRate);
             //buildingSO.resourceOutputRate *
 
@@ -161,8 +163,7 @@ public class BuildingProduction : MonoBehaviour
         }
     }
 
-    private float productionTimer = 0f;
-    private float productionInterval = 1f; // Set the production interval to 1 second
+
 
     public void nodeToBuilding()
     {

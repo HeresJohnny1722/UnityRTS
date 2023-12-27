@@ -37,6 +37,14 @@ public class BuildingTraining : MonoBehaviour
         building = this.GetComponent<Building>();
     }
 
+    private void Update()
+    {
+        if (!building.buildingConstruction.isUnderConstruction)
+            return;
+
+        HideShowBarracks(false);
+    }
+
     public void BarracksSelected()
     {
         //Barracks

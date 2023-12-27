@@ -16,13 +16,18 @@ MonoBehaviour:
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 0
   resourceType: 1
-  outputPerSecond: 3
+  outputPerInterval: 3
+  outputTime: 3
   nodeName: Coal Node
   nodeDescription: This is a coal node
   stage: 2
   fireRate: 0
   attackDamage: 0
   attackRange: 0
+  turretRotationSpeed: 0
+  bulletsExplode: 0
+  explodeRadius: 0
+  explodeParticleSystem: {fileID: 0}
   populationIncrease: 0
   name: Lumber Mill
   description: Makes Wood

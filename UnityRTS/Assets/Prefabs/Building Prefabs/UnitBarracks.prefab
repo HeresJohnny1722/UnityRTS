@@ -124,7 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnderConstruction: 0
-  constructionPanel: {fileID: 4299214974658011055}
   constructionText: {fileID: 7676653279871497201}
   constructionProgressSprite: {fileID: 510060042317040541}
   blueConstructionMaterial: {fileID: 2100000, guid: 747eefa0b470d47a0b18c2a7a9e3c1d7,
@@ -181,7 +180,7 @@ MonoBehaviour:
   barracksTrainingTimeLeftText: {fileID: 3031748581197004594}
   barracacksQueueSizeText: {fileID: 5526650171256587176}
   barracksUnitTrainingNameText: {fileID: 905681460775721516}
-  unitFlagOffset: 0.6
+  unitFlagOffset: 1
   unitSpawnPoint: {fileID: 0}
   unitMovePoint: {fileID: 0}
   isTraining: 0
@@ -790,12 +789,6 @@ MonoBehaviour:
 --- !u!1 &3148074238489852892 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4001052108019027454, guid: d8f43148855d24b7aa08f4876f186f35,
-    type: 3}
-  m_PrefabInstance: {fileID: 2032991943204779554}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4299214974658011055 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2855073649205209485, guid: d8f43148855d24b7aa08f4876f186f35,
     type: 3}
   m_PrefabInstance: {fileID: 2032991943204779554}
   m_PrefabAsset: {fileID: 0}

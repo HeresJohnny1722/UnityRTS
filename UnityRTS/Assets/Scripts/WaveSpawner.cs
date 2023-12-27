@@ -14,12 +14,12 @@ public class EnemyWave
 public class Wave
 {
     public EnemyWave[] enemies;
+    public float timeBetweenWave; // Add this property
 }
 
 public class WaveSpawner : MonoBehaviour
 {
     public Wave[] waves;
-    public float timeBetweenWaves = 5f;
     public float timeBetweenSpawns = 0.25f;
     [SerializeField] private GameObject spawnEffect;
     //[SerializeField] private TextMeshProUGUI waveCounterText;
@@ -28,14 +28,11 @@ public class WaveSpawner : MonoBehaviour
     private int totalTroopsSpawned = 0; // Counter variable
     private int expectedTotalTroops;
 
-
-
     public void StartWaves()
     {
         expectedTotalTroops = CalculateExpectedTotalTroops();
         StartCoroutine(SpawnWaves());
     }
-
 
     int CalculateExpectedTotalTroops()
     {
@@ -64,7 +61,7 @@ public class WaveSpawner : MonoBehaviour
 
             if (waves.Length != 1)
             {
-                yield return new WaitForSeconds(timeBetweenWaves);
+                yield return new WaitForSeconds(currentWave.timeBetweenWave); // Use the time between waves for the current wave
             }
 
             waveIndex++;
@@ -74,6 +71,7 @@ public class WaveSpawner : MonoBehaviour
         if (totalTroopsSpawned >= expectedTotalTroops)
         {
             Debug.Log("Waves are done spawning");
+            // Assuming GameManager is a singleton or has a static instance property
             GameManager.instance.areWavesDone = true;
         }
     }
