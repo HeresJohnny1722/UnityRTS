@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class BuildingTraining : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class BuildingTraining : MonoBehaviour
     public float baracksStartFlagRadius = 5f;
     public GameObject barracksPanel;
     public GameObject barracksButtonLayout;
+
+    public Image trainingProgressSprite;
 
 
     public TextMeshProUGUI barracksTrainingTimeLeftText;
@@ -30,6 +33,9 @@ public class BuildingTraining : MonoBehaviour
     [HideInInspector]
     public Vector3 movePosition;
 
+
+    private float trainingTimer = 0f;
+    private float target = 1f;
 
 
     private void Awake()
@@ -118,10 +124,10 @@ public class BuildingTraining : MonoBehaviour
 
     public void spawnTroop(int index)
     {
-        if (GameManager.instance.AreResourcesAvailable((int)building.buildingSO.unitsToTrain[index].populationCost, (int)building.buildingSO.unitsToTrain[index].goldCost, (int)building.buildingSO.unitsToTrain[index].coalCost, (int)building.buildingSO.unitsToTrain[index].copperCost, 0))
+        if (GameManager.instance.AreResourcesAvailable((int)building.buildingSO.unitsToTrain[index].populationCost * 3, (int)building.buildingSO.unitsToTrain[index].goldCost * 3, (int)building.buildingSO.unitsToTrain[index].coalCost * 3, (int)building.buildingSO.unitsToTrain[index].copperCost * 3, 0))
         {
-            GameManager.instance.RemoveResources(0, (int)building.buildingSO.unitsToTrain[index].goldCost, (int)building.buildingSO.unitsToTrain[index].coalCost, (int)building.buildingSO.unitsToTrain[index].copperCost, 0);
-            GameManager.instance.changeCurrentPopulation((int)building.buildingSO.unitsToTrain[index].populationCost);
+            GameManager.instance.RemoveResources(0, (int)building.buildingSO.unitsToTrain[index].goldCost * 3, (int)building.buildingSO.unitsToTrain[index].coalCost * 3, (int)building.buildingSO.unitsToTrain[index].copperCost * 3, 0);
+            GameManager.instance.changeCurrentPopulation((int)building.buildingSO.unitsToTrain[index].populationCost * 3);
             unitSpawnPoint = this.transform.GetChild(2).transform;
             unitMovePoint = barracksSpawnFlag.transform;
 
@@ -167,39 +173,50 @@ public class BuildingTraining : MonoBehaviour
             {
 
                 barracksTrainingTimeLeftText.text = "Training Time: " + trainingTime.ToString("0") + "s";
+
                 yield return new WaitForSeconds(1);
+
                 trainingTime -= 1;
                 UpdateQueueSizeText();
+
             }
 
 
-            
-            bool isOccupied;
 
-            do
-            {
-                // Generate a new random position
-                movePosition = new Vector3(unitMovePoint.position.x + Random.Range(-unitFlagOffset, unitFlagOffset), 0, unitMovePoint.position.z + Random.Range(-unitFlagOffset, unitFlagOffset));
 
-                // Check if there's already a troop within the specified radius
-                isOccupied = IsPositionOccupied(movePosition, unit.prefab.gameObject.transform.localScale.x / 2 + 1 / 16);
-            } while (isOccupied);
 
             // Use the new movePosition for your logic
 
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject troop = Instantiate(unit.prefab, unitSpawnPoint.position, Quaternion.identity);
 
-            GameObject troop = Instantiate(unit.prefab, unitSpawnPoint.position, Quaternion.identity);
-            UpdateQueueSizeText();
+                bool isOccupied;
 
-            // Reset time left text and unit name
-            barracksTrainingTimeLeftText.text = "Training Time: 0s";
-            barracksUnitTrainingNameText.text = "No unit training";
+                do
+                {
+                    // Generate a new random position
+                    movePosition = new Vector3(unitMovePoint.position.x + Random.Range(-unitFlagOffset, unitFlagOffset), 0, unitMovePoint.position.z + Random.Range(-unitFlagOffset, unitFlagOffset));
 
-            UpdateQueueSizeText(); // Update the queue size text when a troop is done training
-            //NavMeshAgent unitAgent = troop.GetComponent<NavMeshAgent>();
-            troop.GetComponent<Unit>().moveToPosition = movePosition;
-            AstarAI myAstarAI = troop.GetComponent<AstarAI>();
-            myAstarAI.ai.destination = movePosition;
+                    // Check if there's already a troop within the specified radius
+                    isOccupied = IsPositionOccupied(movePosition, troop.transform.localScale.x);
+                } while (isOccupied);
+
+
+                UpdateQueueSizeText();
+
+                // Reset time left text and unit name
+                barracksTrainingTimeLeftText.text = "Training Time: 0s";
+                barracksUnitTrainingNameText.text = "No unit training";
+
+                UpdateQueueSizeText(); // Update the queue size text when a troop is done training
+                                       //NavMeshAgent unitAgent = troop.GetComponent<NavMeshAgent>();
+                troop.GetComponent<Unit>().moveToPosition = movePosition;
+                AstarAI myAstarAI = troop.GetComponent<AstarAI>();
+                myAstarAI.ai.destination = movePosition;
+            }
+
+            
 
 
 

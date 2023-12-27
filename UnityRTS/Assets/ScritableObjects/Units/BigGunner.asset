@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1d7d0a741b2b468782fb164ab03b0b2, type: 3}
-  m_Name: Worker
+  m_Name: BigGunner
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6392109893767027596, guid: d5066b95e1e6546b9ab0562f912e01cf, type: 3}
-  unitType: 2
-  name: Worker
+  prefab: {fileID: 7462998351962582450, guid: 6c1c5d464420745d881a378fd43c0215, type: 3}
+  unitType: 0
+  name: Big Gunner
   trainingTime: 0.5
-  startingHealth: 100
-  buildRange: 5
-  attackRange: 5
-  attackDamage: 5
-  fireRate: 1
-  speed: 4
+  startingHealth: 200
+  buildRange: 0
+  attackRange: 10
+  attackDamage: 10
+  fireRate: 0.3
+  speed: 1.5
   rotationSpeed: 5
-  description: Worker does gathering
-  goldCost: 2
-  coalCost: 2
-  copperCost: 2
+  description: Big Gunner  description
+  goldCost: 5
+  coalCost: 5
+  copperCost: 5
   populationCost: 1
-  gatheringSpeed: 5
+  gatheringSpeed: 0

@@ -16,11 +16,12 @@ MonoBehaviour:
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
-  outputPerSecond: 0
+  outputPerInterval: 0
+  outputTime: 0
   nodeName: 
   nodeDescription: 
   stage: 2
-  fireRate: 1.25
+  fireRate: 1
   attackDamage: 50
   attackRange: 15
   turretRotationSpeed: 30
