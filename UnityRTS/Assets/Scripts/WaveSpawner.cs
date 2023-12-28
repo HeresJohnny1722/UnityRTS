@@ -21,12 +21,19 @@ public class WaveSpawner : MonoBehaviour
 {
     public Wave[] waves;
     public float timeBetweenSpawns = 0.25f;
+    [SerializeField] private float timeBeforeWavesStart = 5f;
     [SerializeField] private GameObject spawnEffect;
-    //[SerializeField] private TextMeshProUGUI waveCounterText;
+    [SerializeField] private Animator enemiesIncomingPopupAnimator;
 
     private int waveIndex = 0;
     private int totalTroopsSpawned = 0; // Counter variable
     private int expectedTotalTroops;
+
+    public void Start()
+    {
+        StartCoroutine(WaitAndStartWaves(timeBeforeWavesStart));
+        
+    }
 
     public void StartWaves()
     {
@@ -47,11 +54,23 @@ public class WaveSpawner : MonoBehaviour
         return total;
     }
 
+    IEnumerator WaitAndStartWaves(float timeToWait)
+    {
+        yield return new WaitForSeconds(timeToWait);
+        StartWaves();
+    }
+
     IEnumerator SpawnWaves()
     {
         while (waveIndex < waves.Length)
         {
             Wave currentWave = waves[waveIndex];
+
+            // Play "EnemiesIncomingPopup" 2 seconds before the wave
+            //yield return new WaitForSeconds(currentWave.timeBetweenWave - 2f);
+            EnemiesIncomingPopup();
+            yield return new WaitForSeconds(3f);
+            enemiesIncomingPopupAnimator.Play("Default");
 
             for (int i = 0; i < currentWave.enemies.Length; i++)
             {
@@ -61,7 +80,8 @@ public class WaveSpawner : MonoBehaviour
 
             if (waves.Length != 1)
             {
-                yield return new WaitForSeconds(currentWave.timeBetweenWave); // Use the time between waves for the current wave
+                yield return new WaitForSeconds(2f); // Wait for 2 seconds after the popup before starting the next wave
+                yield return new WaitForSeconds(currentWave.timeBetweenWave - 2f);
             }
 
             waveIndex++;
@@ -94,5 +114,11 @@ public class WaveSpawner : MonoBehaviour
     {
         int randomIndex = Random.Range(0, spawnPoints.Length);
         return spawnPoints[randomIndex];
+    }
+
+    private void EnemiesIncomingPopup()
+    {
+        enemiesIncomingPopupAnimator.Play("EnemiesIncomingPopup");
+        Debug.Log("Enemies incoming");
     }
 }

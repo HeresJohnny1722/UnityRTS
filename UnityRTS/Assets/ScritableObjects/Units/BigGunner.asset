@@ -18,9 +18,9 @@ MonoBehaviour:
   trainingTime: 0.5
   startingHealth: 200
   buildRange: 0
-  attackRange: 10
-  attackDamage: 10
-  fireRate: 0.3
+  attackRange: 15
+  attackDamage: 15
+  fireRate: 0.15
   speed: 1.5
   rotationSpeed: 5
   description: Big Gunner  description
