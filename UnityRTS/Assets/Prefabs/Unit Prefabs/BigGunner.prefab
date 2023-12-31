@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6545b4b4e35c4b89897541b3fb307b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitSO: {fileID: 11400000, guid: f8589073340ec4464a11392c28e3c57f, type: 2}
+  unitSO: {fileID: 11400000, guid: f2bc5e0c0d97841b6b388c2f3b013890, type: 2}
   unitFloorHighlight: {fileID: 5002796200387514402}
   unitHealthbar: {fileID: 1125452986729795654}
   muzzleFlash: {fileID: 7293193654654651766}
