@@ -20,7 +20,7 @@ MonoBehaviour:
   buildRange: 0
   attackRange: 6
   attackDamage: 50
-  fireRate: 3
+  fireRate: 2
   speed: 3
   rotationSpeed: 5
   description: Swordsman Description

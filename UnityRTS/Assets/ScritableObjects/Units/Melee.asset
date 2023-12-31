@@ -19,7 +19,7 @@ MonoBehaviour:
   startingHealth: 100
   buildRange: 0
   attackRange: 6
-  attackDamage: 20
+  attackDamage: 16
   fireRate: 1
   speed: 5
   rotationSpeed: 5

@@ -66,7 +66,7 @@ public class BuildingDefense : MonoBehaviour
 
                 if (Time.time > nextShootTime)
                 {
-                    attackFlash.SetActive(false);
+                    //attackFlash.SetActive(false);
                     ShootEnemy();
 
                     nextShootTime = Time.time + building.buildingSO.fireRate;
@@ -76,7 +76,7 @@ public class BuildingDefense : MonoBehaviour
             }
             else
             {
-                attackFlash.SetActive(false);
+                //attackFlash.SetActive(false);
             }
         }
 
@@ -141,6 +141,9 @@ public class BuildingDefense : MonoBehaviour
                     
                    // animator.Play("IdleCannon");
                     Debug.Log("Shooting cannon");
+
+                    attackFlash.SetActive(false);
+                    attackFlash.SetActive(true);
 
                     Collider[] hitColliders = Physics.OverlapSphere(hit.transform.position, building.buildingSO.explodeRadius, enemyLayerMask);
 
