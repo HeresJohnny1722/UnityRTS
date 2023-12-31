@@ -5374,7 +5374,7 @@ GameObject:
   - component: {fileID: 8742071660452545431}
   - component: {fileID: 2501832631216337118}
   - component: {fileID: 4504845556178621782}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: BasicGunner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10535,7 +10535,7 @@ GameObject:
   - component: {fileID: 5501673823057941681}
   - component: {fileID: 3460156285453885820}
   - component: {fileID: 1725605024469733491}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: unit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
