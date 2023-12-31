@@ -15660,7 +15660,7 @@ PrefabInstance:
     - target: {fileID: 6518903963535337443, guid: 68361b3fb87f64eb9b88f97ecfbe4304,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 4.923
+      value: 5.47
       objectReference: {fileID: 0}
     - target: {fileID: 6518903963535337443, guid: 68361b3fb87f64eb9b88f97ecfbe4304,
         type: 3}
@@ -15685,17 +15685,17 @@ PrefabInstance:
     - target: {fileID: 6782552570497335208, guid: 68361b3fb87f64eb9b88f97ecfbe4304,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6847313438067606820, guid: 68361b3fb87f64eb9b88f97ecfbe4304,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1071274
+      value: 2264418.2
       objectReference: {fileID: 0}
     - target: {fileID: 6847313438067606820, guid: 68361b3fb87f64eb9b88f97ecfbe4304,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 211.8
+      value: 463.2
       objectReference: {fileID: 0}
     - target: {fileID: 7362315453088433146, guid: 68361b3fb87f64eb9b88f97ecfbe4304,
         type: 3}
@@ -16213,7 +16213,7 @@ PrefabInstance:
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 4.664
+      value: 5.211
       objectReference: {fileID: 0}
     - target: {fileID: 1331447437431538350, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
@@ -16239,6 +16239,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660429363526082665, guid: 40a912277b5d341eab3146133c11d5ac,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2263468.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660429363526082665, guid: 40a912277b5d341eab3146133c11d5ac,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 463.6
       objectReference: {fileID: 0}
     - target: {fileID: 2051232162735146575, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}

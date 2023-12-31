@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d7d0a741b2b468782fb164ab03b0b2, type: 3}
+  m_Name: Melee
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7462998351962582450, guid: 15ed2edc2028342009cb1631a04aacb8, type: 3}
+  unitType: 0
+  name: Swordsman
+  trainingTime: 0.5
+  startingHealth: 100
+  buildRange: 0
+  attackRange: 6
+  attackDamage: 20
+  fireRate: 1
+  speed: 5
+  rotationSpeed: 5
+  description: Swordsman Description
+  goldCost: 5
+  coalCost: 5
+  copperCost: 5
+  populationCost: 1
+  gatheringSpeed: 0

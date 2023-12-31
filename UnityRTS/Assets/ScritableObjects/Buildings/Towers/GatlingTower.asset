@@ -21,10 +21,10 @@ MonoBehaviour:
   nodeName: 
   nodeDescription: 
   stage: 2
-  fireRate: 0.17
-  attackDamage: 18
+  fireRate: 0.2
+  attackDamage: 15
   attackRange: 15
-  turretRotationSpeed: 30
+  turretRotationSpeed: 120
   bulletsExplode: 0
   explodeRadius: 0
   explodeParticleSystem: {fileID: 0}

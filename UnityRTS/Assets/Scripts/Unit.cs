@@ -86,7 +86,7 @@ public class Unit : MonoBehaviour
         switch (currentState)
         {
             case UnitState.Idle:
-                muzzleFlash.SetActive(false);
+                //muzzleFlash.SetActive(false);
                 unitAnimator.Play("Idle");
                 CheckForEnemies();
                 
@@ -117,7 +117,7 @@ public class Unit : MonoBehaviour
 
             case UnitState.Moving:
 
-                muzzleFlash.SetActive(false);
+                //muzzleFlash.SetActive(false);
                 currentTarget = null;
                 unitAnimator.Play("UnitBob");
 
@@ -189,11 +189,12 @@ public class Unit : MonoBehaviour
                 //Debug.Log("SphereCast hit something on the enemy layer");
                 if (currentTarget.GetComponent<EnemyAI>() != null)
                 {
-                    //Debug.Log("SphereCast hit something WITH A ENEMYAI");
+                //Debug.Log("SphereCast hit something WITH A ENEMYAI");
 
-                    //GameObject mzlLFlash = Instantiate(muzzleFlash, muzzlePoint.position, muzzlePoint.rotation);
-                    //Destroy(mzlLFlash, unitSO.fireRate);
-                    //muzzleFlash.SetActive(false);
+                //GameObject mzlLFlash = Instantiate(muzzleFlash, muzzlePoint.position, muzzlePoint.rotation);
+                //Destroy(mzlLFlash, unitSO.fireRate);
+                //muzzleFlash.SetActive(false);
+                muzzleFlash.SetActive(false);
                     muzzleFlash.SetActive(true);
 
                     currentTarget.GetComponent<EnemyAI>().TakeDamage(unitSO.attackDamage);
