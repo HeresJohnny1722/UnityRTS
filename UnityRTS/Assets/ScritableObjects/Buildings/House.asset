@@ -16,14 +16,19 @@ MonoBehaviour:
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
-  outputPerSecond: 0
+  outputPerInterval: 0
+  outputTime: 0
   nodeName: 
   nodeDescription: 
   stage: 2
   fireRate: 0
   attackDamage: 0
   attackRange: 0
-  populationIncrease: 5
+  turretRotationSpeed: 0
+  bulletsExplode: 0
+  explodeRadius: 0
+  explodeParticleSystem: {fileID: 0}
+  populationIncrease: 3
   name: House
   description: Increases the population of your town
   startingHealth: 100

@@ -18,7 +18,7 @@ MonoBehaviour:
   trainingTime: 0.5
   startingHealth: 75
   buildRange: 0
-  attackRange: 17
+  attackRange: 12
   attackDamage: 10
   fireRate: 1
   speed: 3
