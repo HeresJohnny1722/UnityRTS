@@ -16,8 +16,8 @@ MonoBehaviour:
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 0
   resourceType: 2
-  outputPerInterval: 3
-  outputTime: 3
+  outputPerInterval: 25
+  outputTime: 4
   nodeName: 
   nodeDescription: 
   stage: 2
@@ -32,7 +32,7 @@ MonoBehaviour:
   name: Greenhouse
   description: Makes food for troops
   startingHealth: 400
-  timeToBuild: 10
-  goldCost: 35
-  woodCost: 35
-  foodCost: 35
+  timeToBuild: 15
+  goldCost: 130
+  woodCost: 100
+  foodCost: 80

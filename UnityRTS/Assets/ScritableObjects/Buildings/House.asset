@@ -33,6 +33,6 @@ MonoBehaviour:
   description: Increases the population of your town
   startingHealth: 100
   timeToBuild: 10
-  goldCost: 25
-  woodCost: 25
-  foodCost: 25
+  goldCost: 50
+  woodCost: 60
+  foodCost: 20

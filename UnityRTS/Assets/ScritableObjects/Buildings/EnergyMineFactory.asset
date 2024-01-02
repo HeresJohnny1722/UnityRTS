@@ -32,7 +32,7 @@ MonoBehaviour:
   name: Energy Mine
   description: Makes energy
   startingHealth: 100
-  timeToBuild: 8
-  goldCost: 100
+  timeToBuild: 15
+  goldCost: 130
   woodCost: 100
-  foodCost: 100
+  foodCost: 80

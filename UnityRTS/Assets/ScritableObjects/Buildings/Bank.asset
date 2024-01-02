@@ -16,8 +16,8 @@ MonoBehaviour:
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
-  outputPerInterval: 3
-  outputTime: 3
+  outputPerInterval: 25
+  outputTime: 4
   nodeName: 
   nodeDescription: 
   stage: 2
@@ -32,7 +32,7 @@ MonoBehaviour:
   name: Bank
   description: Makes Gold
   startingHealth: 400
-  timeToBuild: 10
-  goldCost: 25
-  woodCost: 25
-  foodCost: 25
+  timeToBuild: 15
+  goldCost: 130
+  woodCost: 110
+  foodCost: 90

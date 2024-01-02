@@ -19,13 +19,10 @@ MonoBehaviour:
   fireRate: 1
   attackRange: 5
   searchRange: 70
-  romingRange: 3
-  roamingReachedPositionDistance: 0.5
-  roamingWaitTime: 0
   rotationSpeed: 30
   stopChaseDistance: 15
   reachedStartPositionDistance: 10
   healDuration: 0
   healRange: 3
-  healAmount: 25
+  healAmount: 50
   healCooldown: 4

@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 7462998351962582450, guid: dbb2d89fa05564e53a721066dfe8f072, type: 3}
   unitType: 0
   name: Gunner
-  trainingTime: 0.5
+  trainingTime: 5
   startingHealth: 75
   buildRange: 0
   attackRange: 12
@@ -24,8 +24,8 @@ MonoBehaviour:
   speed: 3
   rotationSpeed: 5
   description: Gunner  description
-  goldCost: 5
-  coalCost: 5
-  copperCost: 5
+  goldCost: 75
+  coalCost: 75
+  copperCost: 75
   populationCost: 1
   gatheringSpeed: 0

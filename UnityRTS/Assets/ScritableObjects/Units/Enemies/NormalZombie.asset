@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyType: 0
   speed: 2
   startingHealth: 50
-  damageAmountPerAttack: 5
+  damageAmountPerAttack: 20
   fireRate: 1
   attackRange: 5
   searchRange: 70

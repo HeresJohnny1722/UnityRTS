@@ -15,8 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 7462998351962582450, guid: bfa3f21132567405d8de34303072eaa9, type: 3}
   unitType: 0
   name: Big Swordsman
-  trainingTime: 0.5
-  startingHealth: 200
+  trainingTime: 9
+  startingHealth: 150
   buildRange: 0
   attackRange: 6
   attackDamage: 45
@@ -24,8 +24,8 @@ MonoBehaviour:
   speed: 3
   rotationSpeed: 5
   description: Swordsman Description
-  goldCost: 20
-  coalCost: 20
-  copperCost: 20
+  goldCost: 150
+  coalCost: 150
+  copperCost: 150
   populationCost: 1
   gatheringSpeed: 0

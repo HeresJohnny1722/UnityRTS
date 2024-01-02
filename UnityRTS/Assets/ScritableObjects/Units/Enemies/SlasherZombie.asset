@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 0
   speed: 4
-  startingHealth: 25
+  startingHealth: 75
   damageAmountPerAttack: 25
   fireRate: 0.75
   attackRange: 5
   searchRange: 70
-  romingRange: 3
-  roamingReachedPositionDistance: 0.5
-  roamingWaitTime: 0
   rotationSpeed: 30
-  bulletSpeed: 5000
   stopChaseDistance: 15
   reachedStartPositionDistance: 10
+  healDuration: 0
+  healRange: 0
+  healAmount: 0
+  healCooldown: 0

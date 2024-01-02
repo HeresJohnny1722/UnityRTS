@@ -37,6 +37,6 @@ MonoBehaviour:
   description: This building spawns troops
   startingHealth: 300
   timeToBuild: 3
-  goldCost: 50
-  woodCost: 50
-  foodCost: 50
+  goldCost: 150
+  woodCost: 150
+  foodCost: 150

@@ -32,7 +32,7 @@ MonoBehaviour:
   name: Gatling
   description: Shoot enemies
   startingHealth: 300
-  timeToBuild: 1
-  goldCost: 25
-  woodCost: 25
-  foodCost: 25
+  timeToBuild: 10
+  goldCost: 150
+  woodCost: 170
+  foodCost: 100

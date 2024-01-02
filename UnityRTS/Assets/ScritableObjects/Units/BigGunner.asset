@@ -15,8 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 7462998351962582450, guid: 6c1c5d464420745d881a378fd43c0215, type: 3}
   unitType: 0
   name: Big Gunner
-  trainingTime: 0.5
-  startingHealth: 200
+  trainingTime: 9
+  startingHealth: 150
   buildRange: 0
   attackRange: 12
   attackDamage: 3
@@ -24,8 +24,8 @@ MonoBehaviour:
   speed: 1.5
   rotationSpeed: 5
   description: Big Gunner  description
-  goldCost: 5
-  coalCost: 5
-  copperCost: 5
+  goldCost: 150
+  coalCost: 150
+  copperCost: 150
   populationCost: 1
   gatheringSpeed: 0

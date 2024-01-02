@@ -21,7 +21,7 @@ MonoBehaviour:
   nodeName: 
   nodeDescription: 
   stage: 2
-  fireRate: 1.25
+  fireRate: 1.5
   attackDamage: 50
   attackRange: 15
   turretRotationSpeed: 120
@@ -31,8 +31,8 @@ MonoBehaviour:
   populationIncrease: 0
   name: Watchtower
   description: Shoot enemies
-  startingHealth: 300
-  timeToBuild: 1
-  goldCost: 25
-  woodCost: 25
-  foodCost: 25
+  startingHealth: 200
+  timeToBuild: 10
+  goldCost: 75
+  woodCost: 75
+  foodCost: 75

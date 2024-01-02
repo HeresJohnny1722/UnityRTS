@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BigZombie
   m_EditorClassIdentifier: 
   enemyType: 0
-  speed: 1.25
+  speed: 2
   startingHealth: 600
   damageAmountPerAttack: 85
   fireRate: 2

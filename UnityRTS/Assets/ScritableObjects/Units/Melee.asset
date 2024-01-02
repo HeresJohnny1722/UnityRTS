@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 7462998351962582450, guid: 15ed2edc2028342009cb1631a04aacb8, type: 3}
   unitType: 0
   name: Swordsman
-  trainingTime: 0.5
+  trainingTime: 5
   startingHealth: 100
   buildRange: 0
   attackRange: 6
@@ -24,8 +24,8 @@ MonoBehaviour:
   speed: 5
   rotationSpeed: 5
   description: Swordsman Description
-  goldCost: 5
-  coalCost: 5
-  copperCost: 5
+  goldCost: 75
+  coalCost: 75
+  copperCost: 75
   populationCost: 1
   gatheringSpeed: 0
