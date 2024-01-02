@@ -1,7 +1,3 @@
-// Script for having a typewriter effect for UI - Version 2
-// Prepared by Nick Hwang (https://www.youtube.com/nickhwang)
-// Want to get creative? Try a Unicode leading character(https://unicode-table.com/en/blocks/block-elements/)
-// Copy Paste from page into Inspector
 
 using System;
 using System.Collections;
@@ -58,13 +54,13 @@ public class Typewriter : MonoBehaviour
 
 	private void OnEnable()
 	{
-		print("On Enable!");
+//		print("On Enable!");
 		if (startOnEnable) StartTypewriter();
 	}
 
 	private void OnCollisionEnter2D(Collision2D col)
 	{
-		print("Collision!");
+//print("Collision!");
 		if (startOnCollision)
 		{
 			StartTypewriter();

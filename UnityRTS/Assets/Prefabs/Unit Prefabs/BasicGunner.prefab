@@ -1125,6 +1125,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: machinegun
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b0f60360ce6a6432eb995d406e1d0454,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4652633138477275370, guid: b0f60360ce6a6432eb995d406e1d0454,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

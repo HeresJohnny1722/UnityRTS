@@ -141,7 +141,7 @@ public class EnemyAI : MonoBehaviour
 
                 // Check if the good unit is within a certain range of the target transform
                 float distanceToTarget = Vector3.Distance(transform.position, targetTransform.GetChild(1).position);
-                Debug.Log(targetTransform.GetComponent<BoxCollider>().size.x);
+//                Debug.Log(targetTransform.GetComponent<BoxCollider>().size.x);
                 if (distanceToTarget <= enemyAISO.attackRange)
                 {
                     //If the enemy is a range enemy, stop it from moving any closer with a little offset in case there are troops behind it

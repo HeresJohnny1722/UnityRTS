@@ -1600,8 +1600,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.23, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7962441796390815575}
   - {fileID: 2318436032727002565}
@@ -1653,7 +1653,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnderConstruction: 0
-  constructionPanel: {fileID: 1486541852989902347}
   constructionText: {fileID: 5008094809339126357}
   constructionProgressSprite: {fileID: 3589784163260051712}
   blueConstructionMaterial: {fileID: 2100000, guid: 747eefa0b470d47a0b18c2a7a9e3c1d7,
@@ -3138,12 +3137,6 @@ GameObject:
 --- !u!1 &1267808529530536831 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2496729810963948793, guid: d8f43148855d24b7aa08f4876f186f35,
-    type: 3}
-  m_PrefabInstance: {fileID: 3692392777989138310}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1486541852989902347 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2855073649205209485, guid: d8f43148855d24b7aa08f4876f186f35,
     type: 3}
   m_PrefabInstance: {fileID: 3692392777989138310}
   m_PrefabAsset: {fileID: 0}

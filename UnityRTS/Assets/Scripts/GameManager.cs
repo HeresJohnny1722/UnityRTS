@@ -47,7 +47,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI woodText;
     public TextMeshProUGUI foodText;
-    public TextMeshProUGUI energyText;
+    public TextMeshProUGUI towerText;
+
+    public GameObject[] buildingButtons;
 
     // Events to update UI or trigger other actions when inventory changes
     public delegate void OnInventoryChanged();
@@ -90,6 +92,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         enemiesKilledCountText.text = "Enemies killed: " + enemiesKilledCount.ToString();
+        towerText.text = "Towers: " + defenseBuildingCount + "/" + maxDefenseBuildingCount;
 
         if (areWavesDone)
         {
@@ -451,8 +454,8 @@ public class GameManager : MonoBehaviour
         if (foodText != null)
             foodText.text = "Food: " + food.ToString();
 
-        if (energyText != null)
-            energyText.text = "Energy: " + energy.ToString();
+        //if (energyText != null)
+            //energyText.text = "Energy: " + energy.ToString();
     }
 
     public void HealAllEnemies(float healAmount)

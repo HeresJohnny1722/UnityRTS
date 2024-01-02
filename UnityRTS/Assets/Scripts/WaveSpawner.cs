@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using TMPro;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class EnemyWave
@@ -31,7 +31,8 @@ public class WaveSpawner : MonoBehaviour
 
     public void Start()
     {
-        StartCoroutine(WaitAndStartWaves(timeBeforeWavesStart));
+        if (SceneManager.GetActiveScene().buildIndex != 1)
+       StartCoroutine(WaitAndStartWaves(timeBeforeWavesStart));
         
     }
 
@@ -54,7 +55,7 @@ public class WaveSpawner : MonoBehaviour
         return total;
     }
 
-    IEnumerator WaitAndStartWaves(float timeToWait)
+    public IEnumerator WaitAndStartWaves(float timeToWait)
     {
         yield return new WaitForSeconds(timeToWait);
         StartWaves();
@@ -90,7 +91,7 @@ public class WaveSpawner : MonoBehaviour
         // Check if all troops are spawned
         if (totalTroopsSpawned >= expectedTotalTroops)
         {
-            Debug.Log("Waves are done spawning");
+//            Debug.Log("Waves are done spawning");
             // Assuming GameManager is a singleton or has a static instance property
             GameManager.instance.areWavesDone = true;
         }
@@ -105,7 +106,7 @@ public class WaveSpawner : MonoBehaviour
             GameObject spawnObject = Instantiate(spawnEffect, spawnPoint.position, Quaternion.identity);
             Destroy(spawnObject, 5f);
             totalTroopsSpawned++; // Increment the counter when a troop is spawned
-            Debug.Log("Troop spawned! Total: " + totalTroopsSpawned);
+//            Debug.Log("Troop spawned! Total: " + totalTroopsSpawned);
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }
@@ -119,6 +120,6 @@ public class WaveSpawner : MonoBehaviour
     private void EnemiesIncomingPopup()
     {
         enemiesIncomingPopupAnimator.Play("EnemiesIncomingPopup");
-        Debug.Log("Enemies incoming");
+      //  Debug.Log("Enemies incoming");
     }
 }
