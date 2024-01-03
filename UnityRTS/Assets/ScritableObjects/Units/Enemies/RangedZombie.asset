@@ -15,13 +15,11 @@ MonoBehaviour:
   enemyType: 1
   speed: 2
   startingHealth: 100
-  damageAmountPerAttack: 30
+  damageAmountPerAttack: 9
   fireRate: 2
   attackRange: 12
   searchRange: 70
   rotationSpeed: 30
-  stopChaseDistance: 15
-  reachedStartPositionDistance: 10
   healDuration: 0
   healRange: 0
   healAmount: 0

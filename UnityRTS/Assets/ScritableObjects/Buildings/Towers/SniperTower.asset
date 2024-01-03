@@ -31,7 +31,7 @@ MonoBehaviour:
   populationIncrease: 0
   name: Watchtower
   description: Shoot enemies
-  startingHealth: 300
+  startingHealth: 400
   timeToBuild: 10
   goldCost: 120
   woodCost: 135

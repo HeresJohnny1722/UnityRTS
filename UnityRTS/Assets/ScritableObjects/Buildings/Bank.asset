@@ -17,7 +17,7 @@ MonoBehaviour:
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
   outputPerInterval: 25
-  outputTime: 4
+  outputTime: 2
   nodeName: 
   nodeDescription: 
   stage: 2

@@ -21,9 +21,8 @@ public class EnemyAISO : ScriptableObject
     public float attackRange;
     public float searchRange;
     public float rotationSpeed;
-    public float stopChaseDistance;
-    public float reachedStartPositionDistance;
-
+    
+    [Header("Wizard")]
     public float healDuration;
     public float healRange;
     public float healAmount;

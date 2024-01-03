@@ -31,7 +31,7 @@ MonoBehaviour:
   populationIncrease: 0
   name: Gatling
   description: Shoot enemies
-  startingHealth: 300
+  startingHealth: 400
   timeToBuild: 10
   goldCost: 150
   woodCost: 170
