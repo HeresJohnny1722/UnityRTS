@@ -29,8 +29,6 @@ public class UnitDrag : MonoBehaviour
     void Update()
     {
 
-
-
         if (Input.GetMouseButtonDown(0))
         {
 

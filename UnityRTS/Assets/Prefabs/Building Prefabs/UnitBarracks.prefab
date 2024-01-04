@@ -553,7 +553,6 @@ MonoBehaviour:
   squashAndStretch: {fileID: 0}
   meshComponents:
   - {fileID: 6195809259948514314}
-  useWorkers: 0
 --- !u!114 &6712343966138974176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,9 +575,9 @@ MonoBehaviour:
   buildingDeathEffect: {fileID: 2739781832950810520, guid: d9d0561c674d04cfb8b1a8ba6dcbaedc,
     type: 3}
   infoPanel: {fileID: 2816086458150400594}
+  removeButton: {fileID: 7533541112543852553}
   buildingNameText: {fileID: 8221363832837635688}
   productionOutputRateText: {fileID: 7417786778611962943}
-  removeButton: {fileID: 7533541112543852553}
   buildingHealthbar: {fileID: 3132801227203264435}
   workersInside: []
 --- !u!114 &3255677061070991677
@@ -594,7 +593,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barracksSpawnFlag: {fileID: 2230354879099446245}
-  baracksStartFlagRadius: 5
   barracksPanel: {fileID: 1646429084274468258}
   barracksButtonLayout: {fileID: 3148074238489852892}
   trainingProgressSprite: {fileID: 0}
@@ -602,6 +600,7 @@ MonoBehaviour:
   barracacksQueueSizeText: {fileID: 5526650171256587176}
   barracksUnitTrainingNameText: {fileID: 905681460775721516}
   unitFlagOffset: 1
+  baracksStartFlagRadius: 5
   unitSpawnPoint: {fileID: 0}
   unitMovePoint: {fileID: 0}
   isTraining: 0
@@ -626,7 +625,6 @@ MonoBehaviour:
   - {fileID: 6195809259948514314}
   hasValidPlacement: 0
   isFixed: 0
-  wallNumber: 0
   isWallPlacementValid: 1
 --- !u!54 &2254554157729864186
 Rigidbody:
@@ -2486,6 +2484,31 @@ PrefabInstance:
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.7254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7331294405518132941, guid: 9a61b91f06f2b4747ae652e35645ab83,
         type: 3}

@@ -8,18 +8,16 @@ public class BuildingDefense : MonoBehaviour
 
     public bool hasTurretMount;
     public bool turretIsUnit;
-    public GameObject turretObject;
 
-    public Animator animator;
+
+    public GameObject turretObject;
+    [SerializeField] private GameObject attackFlash;
 
     public Transform currentTarget;
     public Transform raycastPoint;
+    [SerializeField] private Transform flashTransform;
 
     public LayerMask enemyLayerMask;
-
-    [SerializeField] private Transform flashTransform;
-    [SerializeField] private GameObject attackFlash;
-//    [SerializeField] private float flashDistance = 1.0f;
 
     private float nextShootTime;
 
@@ -43,7 +41,7 @@ public class BuildingDefense : MonoBehaviour
         {
             targetRotation = Quaternion.LookRotation(directionToTarget) * Quaternion.Euler(0f, 90f, 0f);
         }
-        
+
 
         // Smoothly interpolate between the current rotation and the target rotation
         turretObject.transform.rotation = Quaternion.Slerp(turretObject.transform.rotation, targetRotation, Time.deltaTime * building.buildingSO.turretRotationSpeed);
@@ -55,31 +53,24 @@ public class BuildingDefense : MonoBehaviour
         {
             CheckForEnemies();
 
-            if (currentTarget != null)
+            if (currentTarget == null)
+                return;
+
+            if (hasTurretMount)
             {
-                //RotateToTarget();
-                //Rotate turret
-                if (hasTurretMount)
-                {
-                    RotateToTarget();
-                }
+                RotateToTarget();
+            }
 
-                if (Time.time > nextShootTime)
-                {
-                    //attackFlash.SetActive(false);
-                    ShootEnemy();
+            if (Time.time > nextShootTime)
+            {
 
-                    nextShootTime = Time.time + building.buildingSO.fireRate;
+                ShootEnemy();
 
-                }
+                nextShootTime = Time.time + building.buildingSO.fireRate;
 
             }
-            else
-            {
-                //attackFlash.SetActive(false);
-            }
+
         }
-
     }
 
     private void CheckForEnemies()
@@ -93,7 +84,7 @@ public class BuildingDefense : MonoBehaviour
             if (closestEnemy != null)
             {
                 currentTarget = closestEnemy;
-                
+
             }
         }
     }
@@ -118,105 +109,63 @@ public class BuildingDefense : MonoBehaviour
 
     private void ShootEnemy()
     {
-
-        //float sphereRadius = .25f; // Adjust the sphere radius as needed
-
         RaycastHit hit;
-
 
         if (Physics.Raycast(raycastPoint.position, (currentTarget.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, enemyLayerMask))
         {
+            if (currentTarget.GetComponent<EnemyAI>() == null)
+                return;
 
 
-            if (currentTarget.GetComponent<EnemyAI>() != null)
+            if (building.buildingSO.bulletsExplode)
             {
-                if (building.buildingSO.bulletsExplode)
+
+
+                GameObject explosionParticle = Instantiate(building.buildingSO.explodeParticleSystem, hit.transform.position, Quaternion.identity);
+                Destroy(explosionParticle, 5f);
+
+                attackFlash.SetActive(false);
+                attackFlash.SetActive(true);
+
+                Collider[] hitColliders = Physics.OverlapSphere(hit.transform.position, building.buildingSO.explodeRadius, enemyLayerMask);
+
+                foreach (var collider in hitColliders)
                 {
-                    
-
-                    GameObject explosionParticle = Instantiate(building.buildingSO.explodeParticleSystem, hit.transform.position, Quaternion.identity);
-                    Destroy(explosionParticle, 5f);
-
-                    //animator.Play("CannonShoot");
-                    
-                   // animator.Play("IdleCannon");
-                    Debug.Log("Shooting cannon");
-
-                    attackFlash.SetActive(false);
-                    attackFlash.SetActive(true);
-
-                    Collider[] hitColliders = Physics.OverlapSphere(hit.transform.position, building.buildingSO.explodeRadius, enemyLayerMask);
-
-                    foreach (var collider in hitColliders)
+                    if (collider.GetComponent<EnemyAI>() != null)
                     {
-                        if (collider.GetComponent<EnemyAI>() != null)
+                        collider.GetComponent<EnemyAI>().TakeDamage(building.buildingSO.attackDamage);
+
+                        if (collider.GetComponent<EnemyAI>().enemyHealth <= 0)
                         {
-                            collider.GetComponent<EnemyAI>().TakeDamage(building.buildingSO.attackDamage);
-
-                            if (collider.GetComponent<EnemyAI>().enemyHealth <= 0)
-                            {
-                                GameManager.instance.enemiesKilledCount++;
-                                currentTarget = null;
-                            }
-
+                            GameManager.instance.enemiesKilledCount++;
+                            currentTarget = null;
                         }
-                    }
 
-                    
-                }
-                else
-                {
-
-
-                    //Debug.Log("SphereCast hit something WITH A ENEMYAI");
-
-                    /*Vector3 direction = (currentTarget.position - raycastPoint.position).normalized;
-
-                    // Calculate the position for attackFlash
-                    Vector3 flashPosition = raycastPoint.position + flashDistance * direction;
-
-                    // Set the attack flash's position
-                    if (hasTurretMount)
-                    {
-                        attackFlash.transform.position = flashTransform.transform.position;
-                    }
-                    else
-                    {
-                        attackFlash.transform.position = new Vector3(flashPosition.x, raycastPoint.position.y, flashPosition.z);
-                    }
-                    */
-
-                    attackFlash.SetActive(false);
-                    attackFlash.SetActive(true);
-
-                    currentTarget.GetComponent<EnemyAI>().TakeDamage(building.buildingSO.attackDamage);
-
-                    if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)
-                    {
-                        GameManager.instance.enemiesKilledCount++;
-                        currentTarget = null;
                     }
                 }
-
-                
 
             }
+            else
+            {
+                attackFlash.SetActive(false);
+                attackFlash.SetActive(true);
 
+                currentTarget.GetComponent<EnemyAI>().TakeDamage(building.buildingSO.attackDamage);
 
-            // Additional actions for hitting a player can be added here
+                if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)
+                {
+                    GameManager.instance.enemiesKilledCount++;
+                    currentTarget = null;
+                }
+            }
         }
-        
-
 
         // Check if the enemy is still in attack range
         if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.position) > building.buildingSO.attackRange)
         {
             // Enemy left the attack radius or is dead, find a new enemy
-            //currentState = UnitState.Idle;
             currentTarget = null;
         }
-
-
     }
 
 }

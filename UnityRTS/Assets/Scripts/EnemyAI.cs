@@ -2,13 +2,6 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public enum State
-    {
-        ChaseTarget,
-        ShootingTarget,
-    }
-
-    public State state;
 
     [SerializeField] private EnemyAISO enemyAISO;
 
@@ -60,25 +53,9 @@ public class EnemyAI : MonoBehaviour
             if (targetTransform == null)
                 return;
 
-            SetDestinationToTargetTransform(targetTransform);
-            RotateToTarget();
+            MoveAndHealTarget();
 
-            float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
-            if (distanceToTarget <= enemyAISO.healRange)
-            {
-                if (Time.time > nextHealTime)
-                {
-                    foreach (var enemy in GameManager.instance.enemies)
-                    {
-                        if ((Vector3.Distance(transform.position, enemy.transform.position) < enemyAISO.healRange) && enemy != gameObject)
-                        {
-                            enemy.GetComponent<EnemyAI>().HealEnemyUnit(enemyAISO.healAmount);
-                        }
-                    }
-
-                    nextHealTime = Time.time + enemyAISO.healCooldown;
-                }
-            }
+            
         }
         else
         {
@@ -100,6 +77,29 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private void MoveAndHealTarget()
+    {
+        SetDestinationToTargetTransform(targetTransform);
+        RotateToTarget();
+
+        float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
+        if (distanceToTarget <= enemyAISO.healRange)
+        {
+            if (Time.time > nextHealTime)
+            {
+                foreach (var enemy in GameManager.instance.enemies)
+                {
+                    if ((Vector3.Distance(transform.position, enemy.transform.position) < enemyAISO.healRange) && enemy != gameObject)
+                    {
+                        enemy.GetComponent<EnemyAI>().HealEnemyUnit(enemyAISO.healAmount);
+                    }
+                }
+
+                nextHealTime = Time.time + enemyAISO.healCooldown;
+            }
+        }
+    }
+
     private void MoveAndAttackTarget(Transform transformTarget)
     {
         
@@ -116,7 +116,7 @@ public class EnemyAI : MonoBehaviour
 
                 if (Time.time > nextShootTime)
                 {
-                    state = State.ShootingTarget;
+                    
                     AttackUnit();
                     nextShootTime = Time.time + enemyAISO.fireRate;
                 }
@@ -125,7 +125,7 @@ public class EnemyAI : MonoBehaviour
 
     private void SetDestinationToTargetTransform(Transform transformTarget)
     {
-        myAstarAI.ai.destination = new Vector3(transformTarget.position.x + Random.Range(-2, 2), transformTarget.position.y, transformTarget.position.z + Random.Range(-2, 2));
+        myAstarAI.ai.destination = new Vector3(transformTarget.position.x + Random.Range(-4, 4), transformTarget.position.y, transformTarget.position.z + Random.Range(-4, 4));
     }
 
     private void RotateToTarget()
@@ -133,18 +133,24 @@ public class EnemyAI : MonoBehaviour
         if (targetTransform == null)
             return;
 
+        Rotate(targetTransform);
+
         if (targetType == "Building")
         {
-            Vector3 directionToTarget = (targetTransform.GetChild(1).position - transform.position).normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0f, directionToTarget.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * enemyAISO.rotationSpeed);
+            Rotate(targetTransform.GetChild(1));
         }
         else
         {
-            Vector3 directionToTarget = (targetTransform.position - transform.position).normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0f, directionToTarget.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * enemyAISO.rotationSpeed);
+            Rotate(targetTransform);
+            
         }
+    }
+
+    private void Rotate(Transform transformTarget)
+    {
+        Vector3 directionToTarget = (transformTarget.position - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0f, directionToTarget.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * enemyAISO.rotationSpeed);
     }
 
     private void AttackUnit()
@@ -154,28 +160,13 @@ public class EnemyAI : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(raycastPoint.position, (targetTransform.position - raycastPoint.position).normalized, out hit, playersLayerMask))
             {
-                if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
-                {
-                    meleeSlash.SetActive(false);
-                    meleeSlash.SetActive(true);
-                }
-                else if (enemyAISO.enemyType == EnemyAISO.EnemyType.Ranged)
-                {
-                    muzzleFlash.SetActive(false);
-                    muzzleFlash.SetActive(true);
-                }
-
-                float health = 0;
-                float unitHealth;
+                MuzzleFlash();
 
                 if (targetTransform.GetComponent<Unit>())
                 {
-                    unitHealth = (targetTransform.GetComponent<Unit>().unitHealth);
-                    health = unitHealth - enemyAISO.damageAmountPerAttack;
                     targetTransform.GetComponent<Unit>().takeDamage(enemyAISO.damageAmountPerAttack);
                 }
 
-                state = State.ChaseTarget;
             }
             else
             {
@@ -189,37 +180,34 @@ public class EnemyAI : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, (targetTransform.GetChild(1).position - raycastPoint.position).normalized, out hit, buildingsLayerMask))
                 {
-                    if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
-                    {
-                        meleeSlash.SetActive(false);
-                        meleeSlash.SetActive(true);
-                    }
-                    else if (enemyAISO.enemyType == EnemyAISO.EnemyType.Ranged)
-                    {
-                        muzzleFlash.SetActive(false);
-                        muzzleFlash.SetActive(true);
-                    }
+                    MuzzleFlash();
 
-                    float health = 0;
-                    float buildingHealth;
                     if (targetTransform.GetComponent<Building>())
                     {
-                        buildingHealth = (targetTransform.GetComponent<Building>().buildingHealth);
-                        health = buildingHealth - enemyAISO.damageAmountPerAttack;
                         targetTransform.GetComponent<Building>().takeDamage(enemyAISO.damageAmountPerAttack);
                     }
 
-                    state = State.ChaseTarget;
                 }
                 else
                 {
                     targetTransform = null;
                 }
             }
-            else
-            {
-                targetTransform = null;
-            }
+            
+        }
+    }
+
+    private void MuzzleFlash()
+    {
+        if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
+        {
+            meleeSlash.SetActive(false);
+            meleeSlash.SetActive(true);
+        }
+        else if (enemyAISO.enemyType == EnemyAISO.EnemyType.Ranged)
+        {
+            muzzleFlash.SetActive(false);
+            muzzleFlash.SetActive(true);
         }
     }
 

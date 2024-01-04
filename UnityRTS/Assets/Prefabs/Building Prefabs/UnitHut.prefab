@@ -99,9 +99,9 @@ MonoBehaviour:
   buildingDeathEffect: {fileID: 2739781832950810520, guid: d9d0561c674d04cfb8b1a8ba6dcbaedc,
     type: 3}
   infoPanel: {fileID: 8316160886918510635}
+  removeButton: {fileID: 4391234248928653936}
   buildingNameText: {fileID: 2766451701506782225}
   productionOutputRateText: {fileID: 3642578894278663750}
-  removeButton: {fileID: 4391234248928653936}
   buildingHealthbar: {fileID: 3021232541319925804}
   workersInside: []
 --- !u!114 &4678815330164516996
@@ -117,7 +117,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnderConstruction: 0
-  constructionPanel: {fileID: 8058539314018391510}
   constructionText: {fileID: 4536458046624381320}
   constructionProgressSprite: {fileID: 2623656884113478986}
   blueConstructionMaterial: {fileID: 2100000, guid: 747eefa0b470d47a0b18c2a7a9e3c1d7,
@@ -131,7 +130,6 @@ MonoBehaviour:
   - {fileID: 1406770146377205733}
   - {fileID: 1321702061018143104}
   - {fileID: 9212822331307498115}
-  useWorkers: 0
 --- !u!114 &1818601057024692378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +154,6 @@ MonoBehaviour:
   - {fileID: 9212822331307498115}
   hasValidPlacement: 0
   isFixed: 0
-  wallNumber: 0
   isWallPlacementValid: 1
 --- !u!65 &8891788161909323775
 BoxCollider:
@@ -878,12 +875,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5209236039555775579}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8058539314018391510 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2855073649205209485, guid: d8f43148855d24b7aa08f4876f186f35,
-    type: 3}
-  m_PrefabInstance: {fileID: 5209236039555775579}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8316160886918510635 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4260999877378704496, guid: d8f43148855d24b7aa08f4876f186f35,
@@ -922,6 +913,31 @@ PrefabInstance:
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.7254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7331294405518132941, guid: 9a61b91f06f2b4747ae652e35645ab83,
         type: 3}

@@ -22,7 +22,6 @@ public class UnitSelection : MonoBehaviour
     [SerializeField] private TextMeshProUGUI selectedUnitsTitle;
     [SerializeField] private TextMeshProUGUI selectedUnitsListText;
 
-    //private NavMeshAgent myAgent;
     private AstarAI myAstarAI;
 
     private Unit unitScript;
@@ -75,8 +74,6 @@ public class UnitSelection : MonoBehaviour
 
     public void takeDamageUnitTest(float damage)
     {
-
-
         for (int i = 0; i < unitsSelected.Count; i++)
         {
             unitsSelected[i].GetComponent<Unit>().takeDamage(damage);
@@ -87,7 +84,6 @@ public class UnitSelection : MonoBehaviour
     {
         DeselectAll();
         SelectUnit(unitToAdd);
-
     }
 
     public void ShiftClickSelect(GameObject unitToAdd)
@@ -101,8 +97,6 @@ public class UnitSelection : MonoBehaviour
             unitsSelected.Remove(unitToAdd);
             unitScript = unitToAdd.GetComponent<Unit>();
             unitScript.deselectUnit();
-
-            updateInfoPanelForUnits();
         }
     }
 
@@ -116,17 +110,12 @@ public class UnitSelection : MonoBehaviour
 
     public void DeselectAll()
     {
-
         foreach (var unit in unitsSelected)
         {
-
             unitScript = unit.GetComponent<Unit>();
             unitScript.deselectUnit();
-            updateInfoPanelForUnits();
-            //unitInfoPanel.SetActive(false);
         }
         unitsSelected.Clear();
-
 
     }
 
@@ -138,13 +127,9 @@ public class UnitSelection : MonoBehaviour
             unitScript = unitToSelect.GetComponent<Unit>();
             unitScript.selectUnit();
             BuildingSelection.Instance.DeselectBuilding();
-            updateInfoPanelForUnits();
-            //unitInfoPanel.SetActive(true);
         }
 
-
     }
-
 
     public void setGroundMarker(GameObject groundMarkerObject, Vector3 groundMarkerPosition)
     {
@@ -153,38 +138,4 @@ public class UnitSelection : MonoBehaviour
         groundMarkerObject.SetActive(true);
     }
 
-    public void updateInfoPanelForUnits()
-    {
-        /*
-        selectedUnitsTitle.text = "Unit(s) Selected";
-
-        Dictionary<UnitSO.UnitType, int> unitTypeCounts = new Dictionary<UnitSO.UnitType, int>();
-
-        foreach (var unit in unitsSelected)
-        {
-            UnitSO.UnitType unitType = unit.GetComponent<Unit>().unitSO.unitType;
-
-            if (unitTypeCounts.ContainsKey(unitType))
-            {
-                unitTypeCounts[unitType]++;
-            }
-            else
-            {
-                unitTypeCounts[unitType] = 1;
-            }
-        }
-
-        selectedUnitsListText.text = "";
-
-        if (unitTypeCounts.Count > 1)
-        {
-            selectedUnitsListText.text += "Total #Units: " + unitsSelected.Count + "\n";
-        }
-
-        foreach (var kvp in unitTypeCounts)
-        {
-            selectedUnitsListText.text += $"{kvp.Key}s: {kvp.Value}\n";
-        }
-        */
-    }
 }

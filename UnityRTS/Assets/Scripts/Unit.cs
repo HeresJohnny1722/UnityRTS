@@ -6,25 +6,6 @@ using UnityEngine.AI;
 
 public class Unit : MonoBehaviour
 {
-    public UnitSO unitSO;
-
-    [SerializeField] private GameObject unitFloorHighlight;
-    [SerializeField] private Healthbar unitHealthbar;
-
-    public GameObject muzzleFlash;
-
-    [SerializeField] GameObject deathEffect;
-
-    public float unitHealth;
-    private float nextShootTime;
-
-    [SerializeField] Transform muzzlePoint;
-    [SerializeField] Transform raycastPoint;
-
-    private NavMeshAgent myAgent;
-
-    
-
     public enum UnitState
     {
         Idle,
@@ -34,10 +15,7 @@ public class Unit : MonoBehaviour
 
     public UnitState currentState;
 
-    public Transform currentTarget;
-    public Transform targetBuilding;
-
-    public bool isMoving;
+    public UnitSO unitSO;
 
     public LayerMask enemyLayerMask;
     public LayerMask buildingLayerMask;
@@ -50,9 +28,28 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private Animator unitAnimator;
 
+    [SerializeField] private Healthbar unitHealthbar;
+    [SerializeField] private GameObject unitFloorHighlight;
+    [SerializeField] private GameObject muzzleFlash;
+    [SerializeField] private GameObject deathEffect;
+
+    [SerializeField] Transform muzzlePoint;
+    [SerializeField] Transform raycastPoint;
+    public Transform currentTarget;
+    public Transform targetBuilding;
+
+    public float unitHealth;
+    private float nextShootTime;
+
+    public bool isMoving;
+
     void Start()
     {
+        SetupUnit();
+    }
 
+    private void SetupUnit()
+    {
         unitHealth = unitSO.startingHealth;
         unitHealthbar.UpdateHealthBar(unitSO.startingHealth, unitHealth);
         unitHealthbar.gameObject.SetActive(false);
@@ -62,7 +59,6 @@ public class Unit : MonoBehaviour
         currentState = UnitState.Idle;
 
         myAstarAI = GetComponent<AstarAI>();
-
     }
 
     private void Update()
@@ -73,12 +69,14 @@ public class Unit : MonoBehaviour
             if (currentState != UnitState.Shooting)
             {
                 currentState = UnitState.Idle;
-            } else
+            }
+            else
             {
                 currentState = UnitState.Shooting;
             }
 
-        } else
+        }
+        else
         {
             currentState = UnitState.Moving;
         }
@@ -86,38 +84,33 @@ public class Unit : MonoBehaviour
         switch (currentState)
         {
             case UnitState.Idle:
-                //muzzleFlash.SetActive(false);
+
                 unitAnimator.Play("Idle");
                 CheckForEnemies();
-                
-                
-                
+
                 break;
 
             case UnitState.Shooting:
-                if (currentTarget != null)
-                {
-                    RotateToTarget();
-
-                    if (Time.time > nextShootTime)
-                    {
-                        
-                        ShootEnemy();
-
-                        nextShootTime = Time.time + unitSO.fireRate;
-
-                    }
-                    
-                } else
+                if (currentTarget == null)
                 {
                     currentState = UnitState.Idle;
+                    break;
                 }
-                
+                    
+                RotateToTarget();
+
+                if (Time.time > nextShootTime)
+                {
+
+                    ShootEnemy();
+                    nextShootTime = Time.time + unitSO.fireRate;
+
+                }
+
                 break;
 
             case UnitState.Moving:
 
-                //muzzleFlash.SetActive(false);
                 currentTarget = null;
                 unitAnimator.Play("UnitBob");
 
@@ -127,7 +120,6 @@ public class Unit : MonoBehaviour
                 break;
         }
     }
-
 
     private void CheckForEnemies()
     {
@@ -177,61 +169,38 @@ public class Unit : MonoBehaviour
 
     private void ShootEnemy()
     {
-        
-            //float sphereRadius = .25f; // Adjust the sphere radius as needed
 
-            RaycastHit hit;
+        RaycastHit hit;
 
 
-            if (Physics.Raycast(raycastPoint.position, (currentTarget.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, enemyLayerMask))
+        if (Physics.Raycast(raycastPoint.position, (currentTarget.position - raycastPoint.position).normalized, out hit, Mathf.Infinity, enemyLayerMask))
+        {
+            if (currentTarget.GetComponent<EnemyAI>() != null)
             {
-
-                //Debug.Log("SphereCast hit something on the enemy layer");
-                if (currentTarget.GetComponent<EnemyAI>() != null)
-                {
-                //Debug.Log("SphereCast hit something WITH A ENEMYAI");
-
-                //GameObject mzlLFlash = Instantiate(muzzleFlash, muzzlePoint.position, muzzlePoint.rotation);
-                //Destroy(mzlLFlash, unitSO.fireRate);
-                //muzzleFlash.SetActive(false);
+                //Muzzle Flash
                 muzzleFlash.SetActive(false);
-                    muzzleFlash.SetActive(true);
+                muzzleFlash.SetActive(true);
 
-                    currentTarget.GetComponent<EnemyAI>().TakeDamage(unitSO.attackDamage);
-                    //Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
+                currentTarget.GetComponent<EnemyAI>().TakeDamage(unitSO.attackDamage);
 
+            }
 
-
-                    //Debug.Log(currentTarget.GetComponent<EnemyAI>().enemyHealth);
-                }
-
-                if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)
-                {
-                //state = State.Roaming;
-                //FindTarget();
-                //return 0;
+            if (currentTarget.GetComponent<EnemyAI>().enemyHealth <= 0)
+            {
                 GameManager.instance.enemiesKilledCount++;
-                    currentTarget = null;
-                }
-
-
-                // Additional actions for hitting a player can be added here
-            }
-            else
-            {
-                //Probably switch the target because the target is blocked probably
-            }
-
-
-            // Check if the enemy is still in attack range
-            if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.position) > unitSO.attackRange)
-            {
-                // Enemy left the attack radius or is dead, find a new enemy
-                currentState = UnitState.Idle;
                 currentTarget = null;
             }
-        
-        
+
+        }
+
+        // Check if the enemy is still in attack range
+        if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.position) > unitSO.attackRange)
+        {
+            // Enemy left the attack radius or is dead, find a new enemy
+            currentState = UnitState.Idle;
+            currentTarget = null;
+        }
+
     }
 
     public void takeDamage(float damageAmount)
@@ -241,7 +210,7 @@ public class Unit : MonoBehaviour
 
         if (unitHealth <= 0)
         {
-            
+
             deselectUnit();
             GameManager.instance.changeCurrentPopulation(-(int)unitSO.populationCost);
 
@@ -249,7 +218,7 @@ public class Unit : MonoBehaviour
             {
                 UnitSelection.Instance.unitsSelected.Remove(this.gameObject);
             }
-            
+
             UnitSelection.Instance.unitList.Remove(this.gameObject);
 
 
@@ -258,7 +227,7 @@ public class Unit : MonoBehaviour
 
             Destroy(this.gameObject);
 
-            
+
 
         }
         unitHealthbar.gameObject.SetActive(true);
@@ -268,17 +237,17 @@ public class Unit : MonoBehaviour
     public void selectUnit()
     {
         unitFloorHighlight.SetActive(true);
-        //only if health stuff
 
         if (unitSO.startingHealth == unitHealth)
         {
             unitHealthbar.gameObject.SetActive(false);
 
-        } else
+        }
+        else
         {
             unitHealthbar.gameObject.SetActive(true);
         }
-        
+
     }
 
     public void deselectUnit()

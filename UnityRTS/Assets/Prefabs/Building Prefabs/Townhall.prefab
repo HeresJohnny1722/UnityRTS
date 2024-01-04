@@ -99,9 +99,9 @@ MonoBehaviour:
   buildingDeathEffect: {fileID: 2739781832950810520, guid: d9d0561c674d04cfb8b1a8ba6dcbaedc,
     type: 3}
   infoPanel: {fileID: 3126755705761598205}
+  removeButton: {fileID: 7276774330606092454}
   buildingNameText: {fileID: 9108792831229085383}
   productionOutputRateText: {fileID: 7674571160235699344}
-  removeButton: {fileID: 7276774330606092454}
   buildingHealthbar: {fileID: 3999863171772460693}
   workersInside: []
 --- !u!114 &3962172614010969742
@@ -126,7 +126,6 @@ MonoBehaviour:
   squashAndStretch: {fileID: 0}
   meshComponents:
   - {fileID: 1880450506357093114}
-  useWorkers: 0
 --- !u!114 &9010137462973694339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,7 +146,6 @@ MonoBehaviour:
   - {fileID: 1880450506357093114}
   hasValidPlacement: 0
   isFixed: 0
-  wallNumber: 0
   isWallPlacementValid: 1
 --- !u!65 &4351138931235988257
 BoxCollider:
@@ -727,6 +725,51 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.72718346
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime1
+      value: 1157
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120406126771744940, guid: 9a61b91f06f2b4747ae652e35645ab83,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_NumColorKeys
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7331294405518132941, guid: 9a61b91f06f2b4747ae652e35645ab83,
         type: 3}

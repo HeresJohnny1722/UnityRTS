@@ -43,12 +43,9 @@ public class TroopHit : MonoBehaviour
         Invoke("SetMaterialInitial", 0.15f);
     }
 
-
-
     public void SetMaterialInitial()
     {
 
-        //Debug.Log("Initial material");
         foreach (MeshRenderer r in meshComponents)
             r.sharedMaterials = initialMaterials[r].ToArray();
 
@@ -57,7 +54,6 @@ public class TroopHit : MonoBehaviour
     public void SetMaterialWhite()
     {
         
-            //Debug.Log("white material");
             Material matToApply = hitMaterial;
 
             Material[] m; int nMaterials;

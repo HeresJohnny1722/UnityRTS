@@ -11,32 +11,27 @@ public class BuildingTraining : MonoBehaviour
     private Building building;
 
     public GameObject barracksSpawnFlag;
-    public float baracksStartFlagRadius = 5f;
     public GameObject barracksPanel;
     public GameObject barracksButtonLayout;
 
     public Image trainingProgressSprite;
-
 
     public TextMeshProUGUI barracksTrainingTimeLeftText;
     public TextMeshProUGUI barracacksQueueSizeText;
     public TextMeshProUGUI barracksUnitTrainingNameText;
 
     public float unitFlagOffset;
+    public float baracksStartFlagRadius = 5f;
 
     public Transform unitSpawnPoint;
     public Transform unitMovePoint;
 
     public Queue<UnitSO> troopQueue = new Queue<UnitSO>();
+
     public bool isTraining = false;
 
     [HideInInspector]
     public Vector3 movePosition;
-
-
-//    private float trainingTimer = 0f;
- //   private float target = 1f;
-
 
     private void Awake()
     {
@@ -53,11 +48,9 @@ public class BuildingTraining : MonoBehaviour
 
     public void BarracksSelected()
     {
-        //Barracks
-
+        //Sets the text of each button in the training menu to the correct name of the corresponding unit
         for (int i = 0; i < building.buildingSO.unitsToTrain.Count; i++)
         {
-            //setting tool tips also
             barracksButtonLayout.transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = building.buildingSO.unitsToTrain[i].name;
         }
 
@@ -83,43 +76,40 @@ public class BuildingTraining : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Sets the flag position to a certain position within 2 meters from the center of the building, purpose is for the flag to not overlap the barracks
+    /// </summary>
     public void SetFlagStartPosition()
     {
 
         unitFlagOffset = building.buildingSO.spawnFlagMoveToTroopOffset;
 
         // Adjust the distance value to set the minimum distance between the barracks and the spawn flag
-        float minDistance = 1.0f;
+        float minDistance = 2.0f;
         LayerMask buildingLayerMask = LayerMask.GetMask("Building"); // Assuming "Building" is the layer name
 
         Vector3 randomOffset = new Vector3(Random.Range(-baracksStartFlagRadius, baracksStartFlagRadius), 0, Random.Range(-baracksStartFlagRadius, baracksStartFlagRadius));
 
         // Calculate the new position with a minimum distance from the barracks
-        Vector3 newPosition = transform.position + Vector3.one + randomOffset;
-        float distance = Vector3.Distance(newPosition, transform.position);
+        Vector3 newPosition = transform.GetChild(1).position + Vector3.one + randomOffset;
+        float distance = Vector3.Distance(newPosition, transform.GetChild(1).position);
 
         while (distance < minDistance || Physics.Raycast(newPosition, Vector3.down, 1.0f, buildingLayerMask))
         {
             randomOffset = new Vector3(Random.Range(-baracksStartFlagRadius, baracksStartFlagRadius), 0, Random.Range(-baracksStartFlagRadius, baracksStartFlagRadius));
-            newPosition = transform.position + Vector3.one + randomOffset;
-            distance = Vector3.Distance(newPosition, transform.position);
+            newPosition = transform.GetChild(1).position + Vector3.one + randomOffset;
+            distance = Vector3.Distance(newPosition, transform.GetChild(1).position);
         }
 
         barracksSpawnFlag.transform.position = new Vector3(newPosition.x, barracksSpawnFlag.transform.position.y, newPosition.z);
-
-
-        //barracksSpawnFlag.transform.position = new Vector3((transform.position.x + 1) + Random.Range(-baracksStartRadius, baracksStartRadius), barracksSpawnFlag.transform.position.y, (transform.position.z + 1) + Random.Range(-baracksStartRadius, baracksStartRadius));
 
     }
 
     public void moveFlag(Vector3 point)
     {
-        if (building.buildingSO.buildingType == BuildingSO.BuildingType.Barracks)
-        {
-
+        
             barracksSpawnFlag.transform.position = point;
-
-        }
+        
     }
 
     public void spawnTroop(int index)
@@ -131,7 +121,7 @@ public class BuildingTraining : MonoBehaviour
             unitSpawnPoint = this.transform.GetChild(2).transform;
             unitMovePoint = barracksSpawnFlag.transform;
 
-            //if (checkIfEnoughResources(resources that are being taken, would be in the buildingSO, cost
+
             UpdateQueueSizeText();
             troopQueue.Enqueue(building.buildingSO.unitsToTrain[index]);
             UpdateQueueSizeText();
@@ -147,11 +137,7 @@ public class BuildingTraining : MonoBehaviour
             Debug.Log("Not enough resources");
         }
 
-
-
     }
-
-
 
     private IEnumerator TrainTroops()
     {
@@ -164,8 +150,6 @@ public class BuildingTraining : MonoBehaviour
             UnitSO unit = troopQueue.Dequeue();
             UpdateQueueSizeText();
             barracksUnitTrainingNameText.text = unit.name;
-
-
 
             float trainingTime = unit.trainingTime;
 
@@ -180,12 +164,6 @@ public class BuildingTraining : MonoBehaviour
                 UpdateQueueSizeText();
 
             }
-
-
-
-
-
-            // Use the new movePosition for your logic
 
             for (int i = 0; i < 3; i++)
             {
@@ -210,19 +188,11 @@ public class BuildingTraining : MonoBehaviour
                 barracksUnitTrainingNameText.text = "No unit training";
 
                 UpdateQueueSizeText(); // Update the queue size text when a troop is done training
-                                       //NavMeshAgent unitAgent = troop.GetComponent<NavMeshAgent>();
                 troop.GetComponent<Unit>().moveToPosition = movePosition;
                 AstarAI myAstarAI = troop.GetComponent<AstarAI>();
                 myAstarAI.ai.destination = movePosition;
             }
-
-            
-
-
-
-
         }
-
 
         isTraining = false;
         UpdateQueueSizeText(); // Update the queue size text when all troops are done training
@@ -246,11 +216,8 @@ public class BuildingTraining : MonoBehaviour
         return false;
     }
 
-    //public void (Start)
-
     private void UpdateQueueSizeText()
     {
-        
         float queueCount = troopQueue.Count + 1;
         barracacksQueueSizeText.text = "Queue Size: " + queueCount;
     }

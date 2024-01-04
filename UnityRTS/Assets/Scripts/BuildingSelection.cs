@@ -29,27 +29,13 @@ public class BuildingSelection : MonoBehaviour
         }
     }
 
-    public void takeDamageBuildingTest(float damage)
-    {
-        if (selectedBuilding != null && selectedBuilding != null)
-        {
-            selectedBuilding.GetComponent<Building>().takeDamage(damage);
-        }
-    }
-
     public void SelectBuilding(Transform buildingToSelect)
     {
-//        Debug.Log("selecting building");
 
-        
         DeselectBuilding();
         selectedBuilding = null;
 
-
-        if (buildingGridPlacer._buildingPrefab != null)
-        {
-            Debug.Log("sorry youre in building mode");
-        } else
+        if (buildingGridPlacer._buildingPrefab == null)
         {
             building = buildingToSelect.GetComponent<Building>();
 
@@ -60,13 +46,8 @@ public class BuildingSelection : MonoBehaviour
             
             building.BuildingSelected();
         }
-                
             
-            
-        
-
     }
-
 
     public void DeselectBuilding()
     {
@@ -78,7 +59,6 @@ public class BuildingSelection : MonoBehaviour
         
     }
 
-    
     public void MoveFlag(Vector3 point)
     {
         building.buildingTraining.moveFlag(point);

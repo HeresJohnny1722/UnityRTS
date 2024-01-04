@@ -48,15 +48,12 @@ public class ButtonTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     // Implement the OnPointerEnter method
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //Debug.Log("Button Highlighted: " + gameObject.name);
-        //costText.text = "Cost in gold of " + gameObject.name;
         tooltip.SetActive(true);
     }
 
     // Implement the OnPointerExit method
     public void OnPointerExit(PointerEventData eventData)
     {
-        //Debug.Log("Button Unhighlighted: " + gameObject.name);
         tooltip.SetActive(false);
     }
 

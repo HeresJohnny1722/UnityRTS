@@ -8,21 +8,17 @@ public class AstarAI : MonoBehaviour
 
     public IAstarAI ai;
     public AIPath aiPath;
-    
-    //Transform tr;
 
     private void Awake()
     {
-        //base.Awake();
         ai = GetComponent<IAstarAI>();
         aiPath = GetComponent<AIPath>();
-        //tr = GetComponent<Transform>();
     }
     void Update()
     {
         if (ai.reachedEndOfPath)
         {
-            if (!isAtDestination) //OnTargetReached();
+            if (!isAtDestination)
                 isAtDestination = true;
         }
         else
