@@ -169,6 +169,8 @@ public class BuildingTraining : MonoBehaviour
             {
                 GameObject troop = Instantiate(unit.prefab, unitSpawnPoint.position, Quaternion.identity);
 
+                troop.GetComponent<Unit>().SetupHealth();
+
                 bool isOccupied;
 
                 do

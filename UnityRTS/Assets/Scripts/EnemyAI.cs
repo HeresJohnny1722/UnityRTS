@@ -3,9 +3,9 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
 
-    [SerializeField] private EnemyAISO enemyAISO;
+    public  EnemyAISO enemyAISO;
 
-    [SerializeField] private Healthbar enemyHealthbar;
+    public Healthbar enemyHealthbar;
     [SerializeField] private GameObject muzzleFlash;
     [SerializeField] private GameObject meleeSlash;
     [SerializeField] private GameObject deathEffect;
@@ -157,6 +157,10 @@ public class EnemyAI : MonoBehaviour
     {
         if (targetType == "Unit")
         {
+
+            if (targetTransform == null)
+                return;
+
             RaycastHit hit;
             if (Physics.Raycast(raycastPoint.position, (targetTransform.position - raycastPoint.position).normalized, out hit, playersLayerMask))
             {
@@ -175,6 +179,10 @@ public class EnemyAI : MonoBehaviour
         }
         else if (targetType == "Building")
         {
+
+            if (targetTransform == null)
+                return;
+
             if (targetTransform.GetComponent<Building>().stage != 1)
             {
                 RaycastHit hit;
@@ -193,7 +201,11 @@ public class EnemyAI : MonoBehaviour
                     targetTransform = null;
                 }
             }
-            
+            else
+            {
+                targetTransform = null;
+            }
+
         }
     }
 
@@ -245,11 +257,9 @@ public class EnemyAI : MonoBehaviour
     {
         float closestDistance = float.MaxValue;
         Transform closestTarget = null;
-
         foreach (var unit in UnitSelection.Instance.unitList)
         {
             float distance = Vector3.Distance(transform.position, unit.transform.position);
-
             if (distance < enemyAISO.searchRange && distance < closestDistance)
             {
                 closestDistance = distance;
@@ -257,13 +267,11 @@ public class EnemyAI : MonoBehaviour
                 targetType = "Unit";
             }
         }
-
         foreach (var building in BuildingSelection.Instance.buildingsList)
         {
             if (building.GetComponent<Building>().stage != 1 && building.GetComponent<BuildingManager>().isFixed)
             {
                 float distance = Vector3.Distance(transform.position, building.transform.GetChild(1).position);
-
                 if (distance < enemyAISO.searchRange && distance < closestDistance)
                 {
                     closestDistance = distance;
@@ -272,10 +280,12 @@ public class EnemyAI : MonoBehaviour
                 }
             }
         }
-
         if (closestTarget != null)
         {
             targetTransform = closestTarget;
+        } else
+        {
+            targetTransform = null;
         }
     }
 

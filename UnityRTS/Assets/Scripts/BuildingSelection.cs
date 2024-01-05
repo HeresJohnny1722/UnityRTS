@@ -68,32 +68,79 @@ public class BuildingSelection : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        //this.buildingCount = data.buildingCount;
-        //        this.buildingsList = data.listBuilding;
 
-        foreach (var building in data.buildingsList)
+        for (int i = 1; i < buildingsList.Count; i++)
         {
-            Debug.Log(building);
-
-
+            buildingsList.RemoveAt(i);
         }
 
-        foreach (var buildingPos in data.buildingsListPositions)
+        for (int i = 0; i < data.buildingsListName.Count; i++)
         {
-            Debug.Log(buildingPos);
-        }
+            string buildingName = data.buildingsListName[i];
+            Vector3 buildingPosition = data.buildingsListPositions[i];
 
+            // Find the corresponding prefab in GameManager.instance.buildingPrefabs
+            GameObject prefab = FindBuildingPrefab(buildingName);
+
+            if (prefab != null)
+            {
+                // Instantiate the prefab and add it to the buildingsList and set its health to the saved health
+                GameObject buildingObject = Instantiate(prefab, buildingPosition, Quaternion.identity);
+                Building building = buildingObject.GetComponent<Building>();
+
+                building.buildingHealth = data.buildingListHealth[i];
+                Debug.Log(data.buildingListHealth[i]);
+
+                //If the building has taken damage, we should see the healthbar
+                if (building.buildingHealth != building.buildingSO.startingHealth)
+                {
+                    building.buildingHealthbar.gameObject.SetActive(true);
+                    building.buildingHealthbar.UpdateHealthBar(building.buildingSO.startingHealth, building.buildingHealth);
+                } else
+                {
+                    building.buildingHealthbar.gameObject.SetActive(false);
+                    building.buildingHealthbar.UpdateHealthBar(building.buildingSO.startingHealth, building.buildingHealth);
+                }
+
+                //buildingsList.Add(buildingObject);
+            }
+            else
+            {
+                Debug.LogWarning("Prefab not found for building: " + buildingName);
+            }
+        }
     }
+
+    private GameObject FindBuildingPrefab(string buildingName)
+    {
+        // Find the prefab in GameManager.instance.buildingPrefabs
+        foreach (var prefab in GameManager.instance.buildingPrefabs)
+        {
+            // Compare the first 5 characters of the prefab name with the provided buildingName
+            if (prefab.name.Length >= 5 && prefab.name.Substring(0, 5) == buildingName.Substring(0, 5))
+            {
+                return prefab;
+            }
+        }
+
+        return null; // If no matching prefab is found
+    }
+
 
     public void SaveData(GameData data)
     {
-        //data.buildingCount = this.buildingsList.Count;
+        data.buildingsListName.Clear();
+        data.buildingsListPositions.Clear();
+        data.buildingListHealth.Clear();
 
-        for (int i = 0; i < this.buildingsList.Count; i++)
+        for (int i = 1; i < this.buildingsList.Count; i++)
         {
-            data.buildingsList.Add(this.buildingsList[i].name);
+            data.buildingsListName.Add(this.buildingsList[i].name);
             data.buildingsListPositions.Add(this.buildingsList[i].transform.position);
+            data.buildingListHealth.Add((int)this.buildingsList[i].GetComponent<Building>().buildingHealth);
         }
+
+      //  Debug.Log(data.buildingsListName.Count);
 
         
       //  data.listBuilding = this.buildingsList;

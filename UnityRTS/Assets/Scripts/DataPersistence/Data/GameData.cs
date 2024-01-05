@@ -12,8 +12,17 @@ public class GameData
     public int wood;
     public int food;
 
-    public List<string> buildingsList;
+    public List<string> buildingsListName;
     public List<Vector3> buildingsListPositions;
+    public List<int> buildingListHealth;
+
+    public List<string> unitListName;
+    public List<Vector3> unitListPositions;
+    public List<int> unitListHealth;
+
+    public List<string> enemyListName;
+    public List<Vector3> enemyListPositions;
+    public List<int> enemyListHealth;
 
 
     //public Vector3 playerPosition;
@@ -29,8 +38,19 @@ public class GameData
         this.wood = 1000;
         this.food = 1000;
 
-        buildingsList = new List<string>();
+        buildingsListName = new List<string>();
         buildingsListPositions = new List<Vector3>();
+        buildingListHealth = new List<int>();
+
+        unitListName = new List<string>();
+        unitListPositions = new List<Vector3>();
+        unitListHealth = new List<int>();
+
+        enemyListName = new List<string>();
+        enemyListPositions = new List<Vector3>();
+        enemyListHealth = new List<int>();
+
+
         //buildings = new ArrayList();
 
         //playerPosition = Vector3.zero;

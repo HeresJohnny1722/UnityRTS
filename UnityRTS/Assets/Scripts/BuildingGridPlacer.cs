@@ -73,6 +73,7 @@ public class BuildingGridPlacer : BuildingPlacer
 
                     SoundFeedback.Instance.PlaySound(SoundType.Place);
                     Building building = _toBuild.GetComponent<Building>();
+                    building.InitalizeHealth();
                     building.buildingConstruction.isUnderConstruction = true;
 
                     GameManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0);

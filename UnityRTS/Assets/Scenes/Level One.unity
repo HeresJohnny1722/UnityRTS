@@ -3535,7 +3535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 107345434d82d46c0a347f087eab2bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: 13
+  fileName: 27
   useEncryption: 0
 --- !u!4 &627530864
 Transform:
@@ -3934,7 +3934,7 @@ MonoBehaviour:
       - {fileID: 170372276}
     timeBetweenWave: 25
   timeBetweenSpawns: 0.125
-  timeBeforeWavesStart: 30
+  timeBeforeWavesStart: 5
   spawnEffect: {fileID: 5306868671923941460, guid: c29cc432593a04fc68989f051648883b,
     type: 3}
   enemiesIncomingPopupAnimator: {fileID: 782426539}
@@ -11785,6 +11785,25 @@ MonoBehaviour:
   buildingPrefabs:
   - {fileID: 4451647139569319356, guid: 5c7f0ec08345d424aa3b238eda5f796f, type: 3}
   - {fileID: 5389587925157907964, guid: 7bd8cc6efb7cd45f0a20e167cb9d8b58, type: 3}
+  - {fileID: 1538966112045155619, guid: 1f03ab1eedba4457ca3db502276698ac, type: 3}
+  - {fileID: 2985626473903513160, guid: 2a92fab8f0d014156928314f21b4df52, type: 3}
+  - {fileID: 2985626473903513160, guid: a73a7e38627ad4a99a60623369a7ff9d, type: 3}
+  - {fileID: 2985626473903513160, guid: 7a067a522fcb3455c9921aa568a718c0, type: 3}
+  - {fileID: 6120278908670442010, guid: 81c89455c9109441ead49f4e9a949fb7, type: 3}
+  - {fileID: 2985626473903513160, guid: 1dc7904cc8efe4fa6bae4e28a5bb10b2, type: 3}
+  - {fileID: 7401168792134477912, guid: d6846223392bc4bc4ac19312839e0123, type: 3}
+  - {fileID: 2985626473903513160, guid: 74d03bfcc022c4ea9bb7aa5f6b77db3e, type: 3}
+  unitPrefabs:
+  - {fileID: 7462998351962582450, guid: 15ed2edc2028342009cb1631a04aacb8, type: 3}
+  - {fileID: 7462998351962582450, guid: bfa3f21132567405d8de34303072eaa9, type: 3}
+  - {fileID: 7462998351962582450, guid: 6c1c5d464420745d881a378fd43c0215, type: 3}
+  - {fileID: 7462998351962582450, guid: dbb2d89fa05564e53a721066dfe8f072, type: 3}
+  enemyPrefabs:
+  - {fileID: 1898230509516970111, guid: 0219893f925ad4bb28ef3a216b4d1999, type: 3}
+  - {fileID: 1898230509516970111, guid: 060e82ed7b603423cb05f78353514752, type: 3}
+  - {fileID: 1898230509516970111, guid: dceaaf2ee979344618001fde6e1e98b3, type: 3}
+  - {fileID: 1898230509516970111, guid: 40b9de4ed97254383a8772ca7d249962, type: 3}
+  - {fileID: 1898230509516970111, guid: 108af14a4876a4036a0ebe8528872f53, type: 3}
   currentPopulation: 0
   maxedPopulation: 9
   gold: 1000

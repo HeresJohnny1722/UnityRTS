@@ -40,7 +40,7 @@ public class Building : MonoBehaviour
     {
 
         stage = buildingSO.stage;
-        InitalizeHealth();
+        //InitalizeHealth();
         BuildingUIVisibility(false);
 
         BuildingSelection.Instance.buildingsList.Add(this.gameObject);
@@ -57,7 +57,7 @@ public class Building : MonoBehaviour
 
     }
 
-    private void InitalizeHealth()
+    public void InitalizeHealth()
     {
         buildingHealth = buildingSO.startingHealth;
         buildingHealthbar.UpdateHealthBar(buildingSO.startingHealth, buildingHealth);

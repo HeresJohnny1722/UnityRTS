@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
 
     public List<GameObject> buildingPrefabs = new List<GameObject>();
+    public List<GameObject> unitPrefabs = new List<GameObject>();
+    public List<GameObject> enemyPrefabs = new List<GameObject>();
 
     // Inventory variables
     public int currentPopulation = 0;
@@ -77,12 +79,69 @@ public class GameManager : MonoBehaviour, IDataPersistence
         UpdateTextFields();
     }
 
+    private GameObject FindBuildingPrefab(string enemyName)
+    {
+        // Find the prefab in GameManager.instance.buildingPrefabs
+        foreach (var prefab in enemies)
+        {
+            // Compare the first 5 characters of the prefab name with the provided buildingName
+            if (prefab.name.Length >= 5 && prefab.name.Substring(0, 5) == enemyName.Substring(0, 5))
+            {
+                return prefab;
+            }
+        }
+
+        return null; // If no matching prefab is found
+    }
+
     public void LoadData(GameData data)
     {
         this.enemiesKilledCount = data.enemiesKilled;
         this.gold = data.gold;
         this.wood = data.wood;
         this.food = data.food;
+
+
+        //Enemy loading
+
+        enemies.Clear();
+
+        for (int i = 0; i < data.enemyListName.Count; i++)
+        {
+            string enemyName = data.enemyListName[i];
+            Vector3 enemyPosition = data.enemyListPositions[i];
+
+            // Find the corresponding prefab in GameManager.instance.buildingPrefabs
+            GameObject prefab = FindBuildingPrefab(enemyName);
+
+            if (prefab != null)
+            {
+                // Instantiate the prefab and add it to the buildingsList and set its health to the saved health
+                GameObject enemyObject = Instantiate(prefab, enemyPosition, Quaternion.identity);
+                EnemyAI enemy = enemyObject.GetComponent<EnemyAI>();
+
+                enemy.enemyHealth = data.enemyListHealth[i];
+               // Debug.Log(data.enemyListHealth[i]);
+
+                //If the building has taken damage, we should see the healthbar
+                if (enemy.enemyHealth != enemy.enemyAISO.startingHealth)
+                {
+                    enemy.enemyHealthbar.gameObject.SetActive(true);
+                    enemy.enemyHealthbar.UpdateHealthBar(enemy.enemyAISO.startingHealth, enemy.enemyHealth);
+                }
+                else
+                {
+                    enemy.enemyHealthbar.gameObject.SetActive(false);
+                    enemy.enemyHealthbar.UpdateHealthBar(enemy.enemyAISO.startingHealth, enemy.enemyHealth);
+                }
+
+                //buildingsList.Add(buildingObject);
+            }
+            else
+            {
+                Debug.LogWarning("Prefab not found for enemy: " + enemyName);
+            }
+        }
     }
 
     public void SaveData(GameData data)
@@ -91,6 +150,20 @@ public class GameManager : MonoBehaviour, IDataPersistence
         data.gold = this.gold;
         data.wood = this.wood;
         data.food = this.food;
+
+        //Enemies Save
+        data.enemyListName.Clear();
+        data.enemyListPositions.Clear();
+        data.enemyListHealth.Clear();
+
+        for (int i = 0; i < this.enemies.Count; i++)
+        {
+            data.enemyListName.Add(this.enemies[i].name);
+            data.enemyListPositions.Add(this.enemies[i].transform.position);
+            data.enemyListHealth.Add((int)this.enemies[i].GetComponent<EnemyAI>().enemyHealth);
+        }
+
+        //Debug.Log(data.enemyListName.Count);
     }
 
     public void GameOver()

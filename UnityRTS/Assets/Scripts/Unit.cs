@@ -28,7 +28,7 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private Animator unitAnimator;
 
-    [SerializeField] private Healthbar unitHealthbar;
+    public Healthbar unitHealthbar;
     [SerializeField] private GameObject unitFloorHighlight;
     [SerializeField] private GameObject muzzleFlash;
     [SerializeField] private GameObject deathEffect;
@@ -50,15 +50,20 @@ public class Unit : MonoBehaviour
 
     private void SetupUnit()
     {
-        unitHealth = unitSO.startingHealth;
-        unitHealthbar.UpdateHealthBar(unitSO.startingHealth, unitHealth);
-        unitHealthbar.gameObject.SetActive(false);
+        //SetupHealth();
 
         UnitSelection.Instance.unitList.Add(this.gameObject);
 
         currentState = UnitState.Idle;
 
         myAstarAI = GetComponent<AstarAI>();
+    }
+
+    public void SetupHealth()
+    {
+        unitHealth = unitSO.startingHealth;
+        unitHealthbar.UpdateHealthBar(unitSO.startingHealth, unitHealth);
+        unitHealthbar.gameObject.SetActive(false);
     }
 
     private void Update()
