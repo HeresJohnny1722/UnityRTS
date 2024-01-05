@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IDataPersistence
 {
     // Singleton instance
     public static GameManager instance;
@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> enemies = new List<GameObject>();
     public bool areWavesDone;
 
+
+    public List<GameObject> buildingPrefabs = new List<GameObject>();
 
     // Inventory variables
     public int currentPopulation = 0;
@@ -68,6 +70,27 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateTextFields();
+    }
+
+    public void Start()
+    {
+        UpdateTextFields();
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.enemiesKilledCount = data.enemiesKilled;
+        this.gold = data.gold;
+        this.wood = data.wood;
+        this.food = data.food;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.enemiesKilled = this.enemiesKilledCount;
+        data.gold = this.gold;
+        data.wood = this.wood;
+        data.food = this.food;
     }
 
     public void GameOver()

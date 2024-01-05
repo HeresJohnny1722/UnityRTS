@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class BuildingSelection : MonoBehaviour
+public class BuildingSelection : MonoBehaviour, IDataPersistence
 {
     public List<GameObject> buildingsList = new List<GameObject>();
     public Transform selectedBuilding = null;
@@ -15,6 +15,8 @@ public class BuildingSelection : MonoBehaviour
     private Building building;
 
     [SerializeField] BuildingGridPlacer buildingGridPlacer;
+
+    [SerializeField] private float buildingCount = 0;
 
 
     void Awake()
@@ -62,5 +64,38 @@ public class BuildingSelection : MonoBehaviour
     public void MoveFlag(Vector3 point)
     {
         building.buildingTraining.moveFlag(point);
+    }
+
+    public void LoadData(GameData data)
+    {
+        //this.buildingCount = data.buildingCount;
+        //        this.buildingsList = data.listBuilding;
+
+        foreach (var building in data.buildingsList)
+        {
+            Debug.Log(building);
+
+
+        }
+
+        foreach (var buildingPos in data.buildingsListPositions)
+        {
+            Debug.Log(buildingPos);
+        }
+
+    }
+
+    public void SaveData(GameData data)
+    {
+        //data.buildingCount = this.buildingsList.Count;
+
+        for (int i = 0; i < this.buildingsList.Count; i++)
+        {
+            data.buildingsList.Add(this.buildingsList[i].name);
+            data.buildingsListPositions.Add(this.buildingsList[i].transform.position);
+        }
+
+        
+      //  data.listBuilding = this.buildingsList;
     }
 }

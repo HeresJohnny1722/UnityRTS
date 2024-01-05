@@ -3506,6 +3506,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614441604}
   m_CullTransparentMesh: 1
+--- !u!1 &627530862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 627530864}
+  - component: {fileID: 627530863}
+  m_Layer: 0
+  m_Name: DataPersistenceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &627530863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627530862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 107345434d82d46c0a347f087eab2bd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: 13
+  useEncryption: 0
+--- !u!4 &627530864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627530862}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &649057928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10174,6 +10220,7 @@ MonoBehaviour:
   buildingsList: []
   selectedBuilding: {fileID: 0}
   buildingGridPlacer: {fileID: 1589060195}
+  buildingCount: 0
 --- !u!1 &1627514523
 GameObject:
   m_ObjectHideFlags: 0
@@ -11735,6 +11782,9 @@ MonoBehaviour:
   enemiesKilledCountText: {fileID: 1449997796}
   enemies: []
   areWavesDone: 0
+  buildingPrefabs:
+  - {fileID: 4451647139569319356, guid: 5c7f0ec08345d424aa3b238eda5f796f, type: 3}
+  - {fileID: 5389587925157907964, guid: 7bd8cc6efb7cd45f0a20e167cb9d8b58, type: 3}
   currentPopulation: 0
   maxedPopulation: 9
   gold: 1000
@@ -13197,3 +13247,4 @@ SceneRoots:
   - {fileID: 859213107}
   - {fileID: 649057928}
   - {fileID: 1646551487}
+  - {fileID: 627530864}
