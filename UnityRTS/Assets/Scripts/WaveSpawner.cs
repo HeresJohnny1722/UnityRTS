@@ -17,7 +17,7 @@ public class Wave
     public float timeBetweenWave; // Add this property
 }
 
-public class WaveSpawner : MonoBehaviour
+public class WaveSpawner : MonoBehaviour, IDataPersistence
 {
     public Wave[] waves;
     public float timeBetweenSpawns = 0.25f;
@@ -29,6 +29,8 @@ public class WaveSpawner : MonoBehaviour
     private int totalTroopsSpawned = 0; // Counter variable
     private int expectedTotalTroops;
 
+    private int savedWaveIndex;
+
     public void Start()
     {
         if (SceneManager.GetActiveScene().buildIndex != 1)
@@ -36,10 +38,21 @@ public class WaveSpawner : MonoBehaviour
         
     }
 
+    public void LoadData(GameData data)
+    {
+        waveIndex = data.waveIndex;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.waveIndex = waveIndex;
+    }
+
     public void StartWaves()
     {
         expectedTotalTroops = CalculateExpectedTotalTroops();
-        StartCoroutine(SpawnWaves());
+        StartCoroutine(SpawnWaves(waveIndex));
+
     }
 
     int CalculateExpectedTotalTroops()
@@ -61,8 +74,10 @@ public class WaveSpawner : MonoBehaviour
         StartWaves();
     }
 
-    IEnumerator SpawnWaves()
+    IEnumerator SpawnWaves(int waveStartIndex)
     {
+        waveIndex = waveStartIndex;
+
         while (waveIndex < waves.Length)
         {
             Wave currentWave = waves[waveIndex];
@@ -91,7 +106,6 @@ public class WaveSpawner : MonoBehaviour
         // Check if all troops are spawned
         if (totalTroopsSpawned >= expectedTotalTroops)
         {
-//            Debug.Log("Waves are done spawning");
             // Assuming GameManager is a singleton or has a static instance property
             GameManager.instance.areWavesDone = true;
         }

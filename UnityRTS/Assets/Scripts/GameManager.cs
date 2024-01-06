@@ -97,6 +97,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         this.enemiesKilledCount = data.enemiesKilled;
+        this.currentPopulation = data.currentPopulation;
+        this.maxedPopulation = data.maxPopulation;
         this.gold = data.gold;
         this.wood = data.wood;
         this.food = data.food;
@@ -147,6 +149,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void SaveData(GameData data)
     {
         data.enemiesKilled = this.enemiesKilledCount;
+        data.currentPopulation = this.currentPopulation;
+        data.maxPopulation = this.maxedPopulation;
         data.gold = this.gold;
         data.wood = this.wood;
         data.food = this.food;

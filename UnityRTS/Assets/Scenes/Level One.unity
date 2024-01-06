@@ -3535,7 +3535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 107345434d82d46c0a347f087eab2bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: 28
+  fileName: 30
   useEncryption: 0
 --- !u!4 &627530864
 Transform:
@@ -3692,7 +3692,7 @@ MonoBehaviour:
       - {fileID: 170372276}
     - enemyPrefab: {fileID: 1898230509516970111, guid: 40b9de4ed97254383a8772ca7d249962,
         type: 3}
-      count: 5
+      count: 10
       spawnPoints:
       - {fileID: 1698194360}
       - {fileID: 798503488}
@@ -3728,7 +3728,7 @@ MonoBehaviour:
   - enemies:
     - enemyPrefab: {fileID: 1898230509516970111, guid: 40b9de4ed97254383a8772ca7d249962,
         type: 3}
-      count: 15
+      count: 25
       spawnPoints:
       - {fileID: 1698194360}
       - {fileID: 798503488}
@@ -3762,7 +3762,7 @@ MonoBehaviour:
   - enemies:
     - enemyPrefab: {fileID: 1898230509516970111, guid: 40b9de4ed97254383a8772ca7d249962,
         type: 3}
-      count: 15
+      count: 25
       spawnPoints:
       - {fileID: 1698194360}
       - {fileID: 798503488}
@@ -7186,6 +7186,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514537546568776806, guid: 24ef802037da34d248827a89de90bd0a,
+        type: 3}
+      propertyPath: buildingHealth
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 4847148961759858548, guid: 24ef802037da34d248827a89de90bd0a,
         type: 3}

@@ -87,6 +87,7 @@ public class BuildingSelection : MonoBehaviour, IDataPersistence
                 // Instantiate the prefab and add it to the buildingsList and set its health to the saved health
                 GameObject buildingObject = Instantiate(prefab, buildingPosition, Quaternion.identity);
                 Building building = buildingObject.GetComponent<Building>();
+                GameManager.instance.increaseBuildingCount(building.buildingSO);
 
                 building.buildingHealth = data.buildingListHealth[i];
                 Debug.Log(data.buildingListHealth[i]);

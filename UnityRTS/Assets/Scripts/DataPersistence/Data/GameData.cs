@@ -6,11 +6,15 @@ using UnityEngine;
 public class GameData
 {
     public int enemiesKilled;
-    public int buildingCount;
+    public int currentPopulation;
+    public int maxPopulation;
 
     public int gold;
     public int wood;
     public int food;
+
+    public int waveIndex;
+    public int enemiesSpawned;
 
     public List<string> buildingsListName;
     public List<Vector3> buildingsListPositions;
@@ -33,12 +37,17 @@ public class GameData
     public GameData()
     {
         this.enemiesKilled = 0;
-        this.buildingCount = 0;
+        this.currentPopulation = 0;
+        this.maxPopulation = 9;
+
         this.gold = 1000;
         this.wood = 1000;
         this.food = 1000;
 
-        buildingsListName = new List<string>();
+        this.waveIndex = 0;
+        this.enemiesSpawned = 0;
+
+    buildingsListName = new List<string>();
         buildingsListPositions = new List<Vector3>();
         buildingListHealth = new List<int>();
 

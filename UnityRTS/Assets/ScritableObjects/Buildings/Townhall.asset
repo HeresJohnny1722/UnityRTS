@@ -16,7 +16,8 @@ MonoBehaviour:
   unitsToTrain: []
   spawnFlagMoveToTroopOffset: 1
   resourceType: 0
-  outputPerSecond: 0
+  outputPerInterval: 0
+  outputTime: 0
   nodeName: 
   nodeDescription: 
   stage: 2
@@ -27,7 +28,7 @@ MonoBehaviour:
   bulletsExplode: 0
   explodeRadius: 0
   explodeParticleSystem: {fileID: 0}
-  populationIncrease: 5
+  populationIncrease: 0
   name: Townhall
   description: Protect it, if you lose it you lose the gamw
   startingHealth: 1000
