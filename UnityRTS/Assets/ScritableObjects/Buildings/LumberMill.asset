@@ -17,7 +17,7 @@ MonoBehaviour:
   spawnFlagMoveToTroopOffset: 0
   resourceType: 1
   outputPerInterval: 25
-  outputTime: 2
+  outputTime: 4
   nodeName: Coal Node
   nodeDescription: This is a coal node
   stage: 2

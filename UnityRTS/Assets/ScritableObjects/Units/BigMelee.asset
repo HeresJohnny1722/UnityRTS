@@ -16,7 +16,7 @@ MonoBehaviour:
   unitType: 0
   name: Big Swordsman
   trainingTime: 9
-  startingHealth: 150
+  startingHealth: 300
   buildRange: 0
   attackRange: 6
   attackDamage: 45

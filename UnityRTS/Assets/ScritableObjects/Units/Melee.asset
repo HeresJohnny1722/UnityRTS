@@ -16,7 +16,7 @@ MonoBehaviour:
   unitType: 0
   name: Swordsman
   trainingTime: 5
-  startingHealth: 100
+  startingHealth: 150
   buildRange: 0
   attackRange: 6
   attackDamage: 16

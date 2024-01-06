@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SoundFeedback : MonoBehaviour
 {
     [SerializeField]
-    private AudioClip clickSound, placeSound, removeSound, wrongPlacementSound, mainMenuSoundtrack;
+    private AudioClip clickSound, placeSound, removeSound, wrongPlacementSound, mainMenuSoundtrack, levelSoundtrack;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -31,6 +31,9 @@ public class SoundFeedback : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             audioSource.PlayOneShot(mainMenuSoundtrack);
+        } else
+        {
+            audioSource.PlayOneShot(levelSoundtrack);
         }
     }
 
