@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     private GameObject FindBuildingPrefab(string enemyName)
     {
         // Find the prefab in GameManager.instance.buildingPrefabs
-        foreach (var prefab in enemies)
+        foreach (var prefab in this.enemyPrefabs)
         {
             // Compare the first 5 characters of the prefab name with the provided buildingName
             if (prefab.name.Length >= 5 && prefab.name.Substring(0, 5) == enemyName.Substring(0, 5))
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 EnemyAI enemy = enemyObject.GetComponent<EnemyAI>();
 
                 enemy.enemyHealth = data.enemyListHealth[i];
-               // Debug.Log(data.enemyListHealth[i]);
+                Debug.Log(data.enemyListName[i]);
 
                 //If the building has taken damage, we should see the healthbar
                 if (enemy.enemyHealth != enemy.enemyAISO.startingHealth)

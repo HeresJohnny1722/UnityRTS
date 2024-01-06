@@ -208,7 +208,7 @@ public class UnitSelection : MonoBehaviour, IDataPersistence
             data.unitListHealth.Add((int)this.unitList[i].GetComponent<Unit>().unitHealth);
         }
 
-        Debug.Log(data.buildingsListName.Count);
+//        Debug.Log(data.buildingsListName.Count);
 
 
         //  data.listBuilding = this.buildingsList;
