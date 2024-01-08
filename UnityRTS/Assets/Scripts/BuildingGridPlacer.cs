@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Places buildings on a grid.
+/// </summary>
 public class BuildingGridPlacer : BuildingPlacer
 {
     public float cellSize;
@@ -51,25 +54,21 @@ public class BuildingGridPlacer : BuildingPlacer
                 if (!_toBuild.activeSelf) _toBuild.SetActive(true);
                 _toBuild.transform.position = _ClampToNearest(_hit.point, cellSize);
 
-
                 if (_toBuild.GetComponent<BuildingManager>().hasValidPlacement)
                 {
                     _toBuild.GetComponent<BuildingManager>().SetPlacementMode(PlacementMode.Valid);
                 }
 
-
-
                 if (Input.GetMouseButtonDown(0))
                 { // if left-click
                     BuildingManager m = _toBuild.GetComponent<BuildingManager>();
 
-                    //Guarding
+                    // Guarding
                     if (!m.hasValidPlacement)
                     {
                         SoundFeedback.Instance.PlaySound(SoundType.wrongPlacement);
                         return;
                     }
-
 
                     SoundFeedback.Instance.PlaySound(SoundType.Place);
                     Building building = _toBuild.GetComponent<Building>();
@@ -78,7 +77,6 @@ public class BuildingGridPlacer : BuildingPlacer
 
                     GameManager.instance.RemoveResources(0, (int)building.buildingSO.goldCost, (int)building.buildingSO.woodCost, (int)building.buildingSO.foodCost, 0);
                     GameManager.instance.increaseBuildingCount(building.buildingSO);
-
 
                     m.SetPlacementMode(PlacementMode.Fixed);
 
@@ -92,7 +90,6 @@ public class BuildingGridPlacer : BuildingPlacer
                             AstarPath.active.UpdateGraphs(_toBuild.GetComponent<BoxCollider>().bounds);
                             _toBuild = null;
                             _PrepareBuilding();
-
                         }
                         else
                         {
@@ -100,9 +97,7 @@ public class BuildingGridPlacer : BuildingPlacer
                             AstarPath.active.UpdateGraphs(_toBuild.GetComponent<BoxCollider>().bounds);
                             _toBuild = null;
                             _EnableGridVisual(false);
-
                         }
-
                     }
                     else
                     {
@@ -110,13 +105,8 @@ public class BuildingGridPlacer : BuildingPlacer
                         AstarPath.active.UpdateGraphs(_toBuild.GetComponent<BoxCollider>().bounds);
                         _toBuild = null;
                         _EnableGridVisual(false);
-
-
                     }
-
-
                 }
-
             }
             else if (_toBuild.activeSelf) _toBuild.SetActive(false);
         }
@@ -152,6 +142,4 @@ public class BuildingGridPlacer : BuildingPlacer
         gridRenderer.sharedMaterial.SetVector(
             "_Cell_Size", new Vector4(cellSize, cellSize, 0, 0));
     }
-
-
 }

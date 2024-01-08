@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages the defensive capabilities of a building, such as shooting at enemies.
+/// </summary>
 public class BuildingDefense : MonoBehaviour
 {
     private Building building;
 
     public bool hasTurretMount;
     public bool turretIsUnit;
-
 
     public GameObject turretObject;
     [SerializeField] private GameObject attackFlash;
@@ -21,16 +23,21 @@ public class BuildingDefense : MonoBehaviour
 
     private float nextShootTime;
 
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
     private void Awake()
     {
         building = this.GetComponent<Building>();
     }
 
+    /// <summary>
+    /// Rotates the turret to face the current target.
+    /// </summary>
     private void RotateToTarget()
     {
         Vector3 directionToTarget = currentTarget.position - turretObject.transform.position;
         directionToTarget.y = 0f; // Ensure rotation only happens in the horizontal plane
-
 
         Quaternion targetRotation;
         if (turretIsUnit)
@@ -42,11 +49,13 @@ public class BuildingDefense : MonoBehaviour
             targetRotation = Quaternion.LookRotation(directionToTarget) * Quaternion.Euler(0f, 90f, 0f);
         }
 
-
         // Smoothly interpolate between the current rotation and the target rotation
         turretObject.transform.rotation = Quaternion.Slerp(turretObject.transform.rotation, targetRotation, Time.deltaTime * building.buildingSO.turretRotationSpeed);
     }
 
+    /// <summary>
+    /// Updates the defensive actions of the building.
+    /// </summary>
     private void Update()
     {
         if (!building.buildingConstruction.isUnderConstruction && GetComponent<BuildingManager>().isFixed)
@@ -63,16 +72,15 @@ public class BuildingDefense : MonoBehaviour
 
             if (Time.time > nextShootTime)
             {
-
                 ShootEnemy();
-
                 nextShootTime = Time.time + building.buildingSO.fireRate;
-
             }
-
         }
     }
 
+    /// <summary>
+    /// Checks for enemies within the attack range.
+    /// </summary>
     private void CheckForEnemies()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, building.buildingSO.attackRange, enemyLayerMask);
@@ -84,11 +92,13 @@ public class BuildingDefense : MonoBehaviour
             if (closestEnemy != null)
             {
                 currentTarget = closestEnemy;
-
             }
         }
     }
 
+    /// <summary>
+    /// Gets the closest enemy from an array of colliders.
+    /// </summary>
     private Transform GetClosestEnemy(Collider[] colliders)
     {
         Transform closestEnemy = null;
@@ -107,6 +117,9 @@ public class BuildingDefense : MonoBehaviour
         return closestEnemy;
     }
 
+    /// <summary>
+    /// Shoots at the current enemy target.
+    /// </summary>
     private void ShootEnemy()
     {
         RaycastHit hit;
@@ -116,18 +129,11 @@ public class BuildingDefense : MonoBehaviour
             if (currentTarget.GetComponent<EnemyAI>() == null)
                 return;
 
-
             if (building.buildingSO.bulletsExplode)
             {
-
-
                 GameObject explosionParticle = Instantiate(building.buildingSO.explodeParticleSystem, hit.transform.position, Quaternion.identity);
                 Destroy(explosionParticle, 5f);
 
-                //attackFlash.SetActive(false);
-                //attackFlash.SetActive(true);
-
-                //Sound Effect
                 SoundFeedback.Instance.PlaySound(SoundType.Gun);
 
                 Collider[] hitColliders = Physics.OverlapSphere(hit.transform.position, building.buildingSO.explodeRadius, enemyLayerMask);
@@ -143,17 +149,11 @@ public class BuildingDefense : MonoBehaviour
                             GameManager.instance.enemiesKilledCount++;
                             currentTarget = null;
                         }
-
                     }
                 }
-
             }
             else
             {
-                //attackFlash.SetActive(false);
-                //attackFlash.SetActive(true);
-
-                //Sound Effect
                 SoundFeedback.Instance.PlaySound(SoundType.Gun);
 
                 currentTarget.GetComponent<EnemyAI>().TakeDamage(building.buildingSO.attackDamage);
@@ -173,5 +173,4 @@ public class BuildingDefense : MonoBehaviour
             currentTarget = null;
         }
     }
-
 }
