@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour, IDataPersistence
 {
@@ -176,17 +177,23 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             isGameOver = true;
             GameOverScreen.SetActive(true);
-          //  Time.timeScale = .25f;
+            DataPersistenceManager.instance.NewGame();
+            //  Time.timeScale = .25f;
         }
         
     }
 
     public void Victory()
     {
-        //isGameOver = false;
+        
         
         VictoryScreen.SetActive(true);
-       // Time.timeScale = .25f;
+
+        if (SceneManager.GetActiveScene().buildIndex != 3)
+        PlayerPrefs.SetInt("levelAt", SceneManager.GetActiveScene().buildIndex + 1);
+
+        DataPersistenceManager.instance.NewGame();
+
     }
 
     private void Update()

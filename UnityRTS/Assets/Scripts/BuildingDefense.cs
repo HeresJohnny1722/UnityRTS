@@ -124,8 +124,11 @@ public class BuildingDefense : MonoBehaviour
                 GameObject explosionParticle = Instantiate(building.buildingSO.explodeParticleSystem, hit.transform.position, Quaternion.identity);
                 Destroy(explosionParticle, 5f);
 
-                attackFlash.SetActive(false);
-                attackFlash.SetActive(true);
+                //attackFlash.SetActive(false);
+                //attackFlash.SetActive(true);
+
+                //Sound Effect
+                SoundFeedback.Instance.PlaySound(SoundType.Gun);
 
                 Collider[] hitColliders = Physics.OverlapSphere(hit.transform.position, building.buildingSO.explodeRadius, enemyLayerMask);
 
@@ -147,8 +150,11 @@ public class BuildingDefense : MonoBehaviour
             }
             else
             {
-                attackFlash.SetActive(false);
-                attackFlash.SetActive(true);
+                //attackFlash.SetActive(false);
+                //attackFlash.SetActive(true);
+
+                //Sound Effect
+                SoundFeedback.Instance.PlaySound(SoundType.Gun);
 
                 currentTarget.GetComponent<EnemyAI>().TakeDamage(building.buildingSO.attackDamage);
 

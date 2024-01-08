@@ -1676,6 +1676,8 @@ MonoBehaviour:
   wrongPlacementSound: {fileID: 8300000, guid: eecb5370c5a174a08b66cb88a89dfa94, type: 3}
   mainMenuSoundtrack: {fileID: 8300000, guid: 0c21d4e4f1e444fb7a71a797e4fe4728, type: 3}
   levelSoundtrack: {fileID: 0}
+  gunSound: {fileID: 0}
+  hitSound: {fileID: 0}
   audioSource: {fileID: 670595805}
 --- !u!4 &670595807
 Transform:
@@ -4088,6 +4090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1640299022}
   - component: {fileID: 1640299023}
+  - component: {fileID: 1640299024}
   m_Layer: 0
   m_Name: LevelSelect
   m_TagString: Untagged
@@ -4123,6 +4126,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f772b94b86348f4b6378b746d5d84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1640299024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640299021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc60224637f14881baedec30637c383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lvlButtons:
+  - {fileID: 688635305}
+  - {fileID: 634929940}
+  - {fileID: 1238115855}
 --- !u!1 &1661049372
 GameObject:
   m_ObjectHideFlags: 0

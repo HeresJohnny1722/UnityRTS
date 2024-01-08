@@ -18,10 +18,8 @@ MonoBehaviour:
   damageAmountPerAttack: 85
   fireRate: 2
   attackRange: 5
-  searchRange: 70
+  searchRange: 200
   rotationSpeed: 30
-  stopChaseDistance: 15
-  reachedStartPositionDistance: 10
   healDuration: 0
   healRange: 0
   healAmount: 0

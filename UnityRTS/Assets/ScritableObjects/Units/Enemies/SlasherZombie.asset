@@ -18,7 +18,7 @@ MonoBehaviour:
   damageAmountPerAttack: 10
   fireRate: 0.75
   attackRange: 5
-  searchRange: 70
+  searchRange: 200
   rotationSpeed: 30
   healDuration: 0
   healRange: 0

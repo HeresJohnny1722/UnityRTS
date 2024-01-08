@@ -157,6 +157,11 @@ public class UnitSelection : MonoBehaviour, IDataPersistence
                 GameObject unitObject = Instantiate(prefab, unitPosition, Quaternion.identity);
                 Unit unit = unitObject.GetComponent<Unit>();
 
+                
+                    myAstarAI = unitObject.GetComponent<AstarAI>();
+                    myAstarAI.ai.destination = unitPosition;
+
+
                 unit.unitHealth = data.unitListHealth[i];
                 Debug.Log(data.unitListHealth[i]);
 

@@ -183,8 +183,11 @@ public class Unit : MonoBehaviour
             if (currentTarget.GetComponent<EnemyAI>() != null)
             {
                 //Muzzle Flash
-                muzzleFlash.SetActive(false);
-                muzzleFlash.SetActive(true);
+                //muzzleFlash.SetActive(false);
+                //muzzleFlash.SetActive(true);
+
+                //Sound Effect
+                SoundFeedback.Instance.PlaySound(SoundType.Gun);
 
                 currentTarget.GetComponent<EnemyAI>().TakeDamage(unitSO.attackDamage);
 
