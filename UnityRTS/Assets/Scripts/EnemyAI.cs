@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Manages the behavior of enemy AI units, including movement, attacking, healing, and target selection.
+/// </summary>
 public class EnemyAI : MonoBehaviour
 {
 
@@ -34,6 +37,9 @@ public class EnemyAI : MonoBehaviour
         SetupEnemy();
     }
 
+    /// <summary>
+    /// Sets up the initial state and registers the enemy with GameManager.
+    /// </summary>
     private void SetupEnemy()
     {
         myAstarAI = GetComponent<AstarAI>();
@@ -43,6 +49,9 @@ public class EnemyAI : MonoBehaviour
         enemyHealthbar.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Update method is called every frame and manages the enemy's behavior based on its type.
+    /// </summary>
     void Update()
     {
         if (enemyAISO.enemyType == EnemyAISO.EnemyType.Support)
@@ -77,6 +86,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Moves toward and heals nearby enemy units.
+    /// </summary>
     private void MoveAndHealTarget()
     {
         SetDestinationToTargetTransform(targetTransform);
@@ -100,6 +112,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Moves toward and attacks the target (unit or building) based on enemy type.
+    /// </summary>
     private void MoveAndAttackTarget(Transform transformTarget)
     {
         
@@ -123,11 +138,17 @@ public class EnemyAI : MonoBehaviour
             }
     }
 
+    /// <summary>
+    /// Sets the destination for the A* pathfinding to the target's position.
+    /// </summary>
     private void SetDestinationToTargetTransform(Transform transformTarget)
     {
         myAstarAI.ai.destination = new Vector3(transformTarget.position.x + Random.Range(-4, 4), transformTarget.position.y, transformTarget.position.z + Random.Range(-4, 4));
     }
 
+    /// <summary>
+    /// Rotates the enemy towards its current target.
+    /// </summary>
     private void RotateToTarget()
     {
         if (targetTransform == null)
@@ -153,6 +174,9 @@ public class EnemyAI : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * enemyAISO.rotationSpeed);
     }
 
+    /// <summary>
+    /// Attacks the current target (unit or building) based on enemy type.
+    /// </summary>
     private void AttackUnit()
     {
         if (targetType == "Unit")
@@ -209,6 +233,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Plays the muzzle flash or melee slash visual effect.
+    /// </summary>
     private void MuzzleFlash()
     {
         if (enemyAISO.enemyType == EnemyAISO.EnemyType.Melee)
@@ -223,6 +250,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Deals damage to the enemy and manages death-related actions.
+    /// </summary>
     public void TakeDamage(float damageAmount)
     {
         enemyHealth -= damageAmount;
@@ -240,6 +270,9 @@ public class EnemyAI : MonoBehaviour
         enemyHealthbar.UpdateHealthBar(enemyAISO.startingHealth, enemyHealth);
     }
 
+    /// <summary>
+    /// Heals the enemy unit by the specified amount.
+    /// </summary>
     public void HealEnemyUnit(float healAmount)
     {
         enemyHealth += healAmount;
@@ -253,6 +286,9 @@ public class EnemyAI : MonoBehaviour
         enemyHealthbar.UpdateHealthBar(enemyAISO.startingHealth, enemyHealth);
     }
 
+    /// <summary>
+    /// Checks for units and buildings in range to determine the next target.
+    /// </summary>
     private void CheckForUnitsAndBuildingsInRange()
     {
         float closestDistance = float.MaxValue;
@@ -289,6 +325,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks for enemy units in range to support.
+    /// </summary>
     private void CheckForEnemyUnitsInRangeToSupport()
     {
         float closestDistance = float.MaxValue;
@@ -311,6 +350,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the given child transform is a child of the parent transform.
+    /// </summary>
     private bool IsChildOf(Transform parent, Transform child)
     {
         while (child != null)

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Manages the behavior and interactions of units in the game, including shooting, movement, and selection.
+/// </summary>
 public class Unit : MonoBehaviour
 {
     public enum UnitState
@@ -48,6 +51,9 @@ public class Unit : MonoBehaviour
         SetupUnit();
     }
 
+    /// <summary>
+    /// Sets up the initial state and registers the unit with UnitSelection.
+    /// </summary>
     private void SetupUnit()
     {
         //SetupHealth();
@@ -59,6 +65,9 @@ public class Unit : MonoBehaviour
         myAstarAI = GetComponent<AstarAI>();
     }
 
+    /// <summary>
+    /// Sets up the initial health of the unit.
+    /// </summary>
     public void SetupHealth()
     {
         unitHealth = unitSO.startingHealth;
@@ -66,9 +75,12 @@ public class Unit : MonoBehaviour
         unitHealthbar.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Update method is called every frame and manages the unit's behavior based on its state.
+    /// </summary>
     private void Update()
     {
-
+        // Checks if the unit is moving or not, if moving it should be in the moving state, else it should check if its idle or if its shooting
         if (myAstarAI.isAtDestination)
         {
             if (currentState != UnitState.Shooting)
@@ -86,6 +98,7 @@ public class Unit : MonoBehaviour
             currentState = UnitState.Moving;
         }
 
+        // Check the unit's state and perform corresponding actions
         switch (currentState)
         {
             case UnitState.Idle:
@@ -126,6 +139,9 @@ public class Unit : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks for nearby enemies and transitions to the shooting state if an enemy is found.
+    /// </summary>
     private void CheckForEnemies()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, unitSO.attackRange, enemyLayerMask);
@@ -142,6 +158,9 @@ public class Unit : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Finds the closest enemy from the provided colliders.
+    /// </summary>
     private Transform GetClosestEnemy(Collider[] colliders)
     {
         Transform closestEnemy = null;
@@ -160,6 +179,9 @@ public class Unit : MonoBehaviour
         return closestEnemy;
     }
 
+    /// <summary>
+    /// Rotates the unit towards its current target's transform.
+    /// </summary>
     private void RotateToTarget()
     {
         if (currentTarget != null)
@@ -172,6 +194,9 @@ public class Unit : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shoots the current enemy target by shooting a raycast and check if it hit something on the enemy layer mask
+    /// </summary>
     private void ShootEnemy()
     {
 
@@ -211,6 +236,9 @@ public class Unit : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Deals damage to the unit and manages death-related actions.
+    /// </summary>
     public void takeDamage(float damageAmount)
     {
         troopHit.HitAnimation();
@@ -242,6 +270,9 @@ public class Unit : MonoBehaviour
         unitHealthbar.UpdateHealthBar(unitSO.startingHealth, unitHealth);
     }
 
+    /// <summary>
+    /// Selects the unit, showing floor highlight and health bar.
+    /// </summary>
     public void selectUnit()
     {
         unitFloorHighlight.SetActive(true);
@@ -258,6 +289,9 @@ public class Unit : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Deselects the unit, hiding floor highlight and health bar.
+    /// </summary>
     public void deselectUnit()
     {
         unitFloorHighlight.SetActive(false);
