@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Saves and Loads the volume of the game
+/// </summary>
 public class Volume : MonoBehaviour
 {
     [SerializeField] private Slider volumeSlider = null;

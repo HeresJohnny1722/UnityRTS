@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Takes care of healhbar related stuff, like updating the sprite
+/// </summary>
 public class Healthbar : MonoBehaviour
 {
     [SerializeField] private Image _healthbarSprite;

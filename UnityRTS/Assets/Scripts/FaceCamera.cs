@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Makes the world space UI face the camera
+/// </summary>
 public class FaceCamera : MonoBehaviour
 {
     Camera myCam;

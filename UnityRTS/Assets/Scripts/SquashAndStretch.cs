@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Plays a squash and stretch animation
+/// </summary>
     public class SquashAndStretch : MonoBehaviour
     {
         [Header("Notes")]

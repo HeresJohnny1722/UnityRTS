@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enumeration representing different placement modes for a building.
+/// </summary>
 public enum PlacementMode
 {
     Fixed,
@@ -9,12 +12,16 @@ public enum PlacementMode
     Invalid
 }
 
+/// <summary>
+/// Handles the placement mode and material of a building, indicating whether the placement is valid, invalid, or fixed.
+/// </summary>
 public class BuildingManager : MonoBehaviour
 {
     public Material validPlacementMaterial;
     public Material invalidPlacementMaterial;
 
     public MeshRenderer[] meshComponents;
+
     public Dictionary<MeshRenderer, List<Material>> initialMaterials;
 
     [HideInInspector] public bool hasValidPlacement;
@@ -24,31 +31,35 @@ public class BuildingManager : MonoBehaviour
 
     public bool isWallPlacementValid = true;
 
+    /// <summary>
+    /// Initializes the building manager's state and material dictionary.
+    /// </summary>
     private void Awake()
     {
         hasValidPlacement = true;
         isFixed = true;
         _nObstacles = 0;
-
         _InitializeMaterials();
     }
 
+    /// <summary>
+    /// Handles triggering events when another collider enters the building's placement area.
+    /// </summary>
     private void OnTriggerEnter(Collider other)
     {
         if (isFixed) return;
-
-        // ignore ground objects
         if (_IsGround(other.gameObject)) return;
 
         _nObstacles++;
         SetPlacementMode(PlacementMode.Invalid);
     }
 
+    /// <summary>
+    /// Handles triggering events when another collider exits the building's placement area.
+    /// </summary>
     private void OnTriggerExit(Collider other)
     {
         if (isFixed) return;
-
-        // ignore ground objects
         if (_IsGround(other.gameObject)) return;
 
         _nObstacles--;
@@ -57,13 +68,10 @@ public class BuildingManager : MonoBehaviour
             SetPlacementMode(PlacementMode.Valid);
     }
 
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        _InitializeMaterials();
-    }
-#endif
-
+    /// <summary>
+    /// Validates the placement mode and sets the appropriate material for visualization.
+    /// </summary>
+    /// <param name="mode">The desired placement mode (Fixed, Valid, or Invalid).</param>
     public void SetPlacementMode(PlacementMode mode)
     {
         if (mode == PlacementMode.Fixed)
@@ -82,6 +90,10 @@ public class BuildingManager : MonoBehaviour
         SetMaterial(mode);
     }
 
+    /// <summary>
+    /// Sets the material for the building based on the specified placement mode.
+    /// </summary>
+    /// <param name="mode">The placement mode (Fixed, Valid, or Invalid).</param>
     public void SetMaterial(PlacementMode mode)
     {
         if (mode == PlacementMode.Fixed)
@@ -106,6 +118,9 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Initializes the initial materials dictionary to store original materials of mesh renderers.
+    /// </summary>
     public void _InitializeMaterials()
     {
         if (initialMaterials == null)
@@ -122,9 +137,13 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the provided game object is associated with the ground layer.
+    /// </summary>
+    /// <param name="o">The game object to check.</param>
+    /// <returns>True if the game object is associated with the ground layer; otherwise, false.</returns>
     private bool _IsGround(GameObject o)
     {
         return ((1 << o.layer) & BuildingPlacer.instance.groundLayerMask.value) != 0;
     }
-
 }

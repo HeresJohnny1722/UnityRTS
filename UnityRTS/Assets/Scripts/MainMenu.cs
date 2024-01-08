@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Has the methods for the call for menu related actions
+/// </summary>
 public class MainMenu : MonoBehaviour
 {
     public void Play()

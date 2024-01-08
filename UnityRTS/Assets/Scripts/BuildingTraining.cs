@@ -5,9 +5,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages building training functionality, including spawning troops and updating training progress.
+/// </summary>
 public class BuildingTraining : MonoBehaviour
 {
-
+    /// <summary>
+    /// Reference to the Building component of the building.
+    /// </summary>
     private Building building;
 
     public GameObject barracksSpawnFlag;
@@ -33,11 +38,17 @@ public class BuildingTraining : MonoBehaviour
     [HideInInspector]
     public Vector3 movePosition;
 
+    /// <summary>
+    /// Initializes the BuildingTraining component.
+    /// </summary>
     private void Awake()
     {
         building = this.GetComponent<Building>();
     }
 
+    /// <summary>
+    /// Updates the building training functionality.
+    /// </summary>
     private void Update()
     {
         if (!building.buildingConstruction.isUnderConstruction)
@@ -46,9 +57,11 @@ public class BuildingTraining : MonoBehaviour
         HideShowBarracks(false);
     }
 
+    /// <summary>
+    /// Handles the selection of the barracks.
+    /// </summary>
     public void BarracksSelected()
     {
-        //Sets the text of each button in the training menu to the correct name of the corresponding unit
         for (int i = 0; i < building.buildingSO.unitsToTrain.Count; i++)
         {
             barracksButtonLayout.transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = building.buildingSO.unitsToTrain[i].name;
@@ -57,11 +70,17 @@ public class BuildingTraining : MonoBehaviour
         HideShowBarracks(true);
     }
 
+    /// <summary>
+    /// Handles the deselection of the barracks.
+    /// </summary>
     public void BarracksDeselected()
     {
         HideShowBarracks(false);
     }
 
+    /// <summary>
+    /// Shows or hides the barracks panel and spawn flag.
+    /// </summary>
     public void HideShowBarracks(bool visible)
     {
         barracksPanel.SetActive(visible);
@@ -69,28 +88,24 @@ public class BuildingTraining : MonoBehaviour
         if (building.buildingConstruction.isUnderConstruction)
         {
             barracksSpawnFlag.SetActive(false);
-        } else
+        }
+        else
         {
             barracksSpawnFlag.SetActive(visible);
         }
-        
     }
 
     /// <summary>
-    /// Sets the flag position to a certain position within 2 meters from the center of the building, purpose is for the flag to not overlap the barracks
+    /// Sets the initial position for the unit spawn flag.
     /// </summary>
     public void SetFlagStartPosition()
     {
-
         unitFlagOffset = building.buildingSO.spawnFlagMoveToTroopOffset;
 
-        // Adjust the distance value to set the minimum distance between the barracks and the spawn flag
         float minDistance = 2.0f;
-        LayerMask buildingLayerMask = LayerMask.GetMask("Building"); // Assuming "Building" is the layer name
+        LayerMask buildingLayerMask = LayerMask.GetMask("Building");
 
         Vector3 randomOffset = new Vector3(Random.Range(-baracksStartFlagRadius, baracksStartFlagRadius), 0, Random.Range(-baracksStartFlagRadius, baracksStartFlagRadius));
-
-        // Calculate the new position with a minimum distance from the barracks
         Vector3 newPosition = transform.GetChild(1).position + Vector3.one + randomOffset;
         float distance = Vector3.Distance(newPosition, transform.GetChild(1).position);
 
@@ -102,16 +117,19 @@ public class BuildingTraining : MonoBehaviour
         }
 
         barracksSpawnFlag.transform.position = new Vector3(newPosition.x, barracksSpawnFlag.transform.position.y, newPosition.z);
-
     }
 
+    /// <summary>
+    /// Moves the troop spawn flag to the specified position.
+    /// </summary>
     public void moveFlag(Vector3 point)
     {
-        
-            barracksSpawnFlag.transform.position = point;
-        
+        barracksSpawnFlag.transform.position = point;
     }
 
+    /// <summary>
+    /// Initiates the training of a troop at the specified index.
+    /// </summary>
     public void spawnTroop(int index)
     {
         if (GameManager.instance.AreResourcesAvailable((int)building.buildingSO.unitsToTrain[index].populationCost * 3, (int)building.buildingSO.unitsToTrain[index].goldCost, (int)building.buildingSO.unitsToTrain[index].coalCost, (int)building.buildingSO.unitsToTrain[index].copperCost, 0))
@@ -121,14 +139,12 @@ public class BuildingTraining : MonoBehaviour
             unitSpawnPoint = this.transform.GetChild(2).transform;
             unitMovePoint = barracksSpawnFlag.transform;
 
-
             UpdateQueueSizeText();
             troopQueue.Enqueue(building.buildingSO.unitsToTrain[index]);
             UpdateQueueSizeText();
 
             if (!isTraining)
             {
-
                 StartCoroutine(TrainTroops());
             }
         }
@@ -136,9 +152,11 @@ public class BuildingTraining : MonoBehaviour
         {
             Debug.Log("Not enough resources");
         }
-
     }
 
+    /// <summary>
+    /// Coroutine for training troops in the barracks.
+    /// </summary>
     private IEnumerator TrainTroops()
     {
         UpdateQueueSizeText();
@@ -155,41 +173,30 @@ public class BuildingTraining : MonoBehaviour
 
             while (trainingTime > 0)
             {
-
                 barracksTrainingTimeLeftText.text = "Training Time: " + trainingTime.ToString("0") + "s";
-
                 yield return new WaitForSeconds(1);
-
                 trainingTime -= 1;
                 UpdateQueueSizeText();
-
             }
 
             for (int i = 0; i < 3; i++)
             {
                 GameObject troop = Instantiate(unit.prefab, unitSpawnPoint.position, Quaternion.identity);
-
                 troop.GetComponent<Unit>().SetupHealth();
 
                 bool isOccupied;
 
                 do
                 {
-                    // Generate a new random position
                     movePosition = new Vector3(unitMovePoint.position.x + Random.Range(-unitFlagOffset, unitFlagOffset), 0, unitMovePoint.position.z + Random.Range(-unitFlagOffset, unitFlagOffset));
-
-                    // Check if there's already a troop within the specified radius
                     isOccupied = IsPositionOccupied(movePosition, troop.transform.localScale.x);
                 } while (isOccupied);
 
-
                 UpdateQueueSizeText();
-
-                // Reset time left text and unit name
                 barracksTrainingTimeLeftText.text = "Training Time: 0s";
                 barracksUnitTrainingNameText.text = "No unit training";
+                UpdateQueueSizeText();
 
-                UpdateQueueSizeText(); // Update the queue size text when a troop is done training
                 troop.GetComponent<Unit>().moveToPosition = movePosition;
                 AstarAI myAstarAI = troop.GetComponent<AstarAI>();
                 myAstarAI.ai.destination = movePosition;
@@ -197,27 +204,30 @@ public class BuildingTraining : MonoBehaviour
         }
 
         isTraining = false;
-        UpdateQueueSizeText(); // Update the queue size text when all troops are done training
+        UpdateQueueSizeText();
     }
 
-    bool IsPositionOccupied(Vector3 position, float radius)
+    /// <summary>
+    /// Checks if the specified position is occupied by other troops.
+    /// </summary>
+    private bool IsPositionOccupied(Vector3 position, float radius)
     {
         foreach (GameObject unit in UnitSelection.Instance.unitList)
         {
-            // Check the distance from the unit to the specified position
             float distance = Vector3.Distance(unit.transform.position, position);
 
-            // If the distance is within the radius, the position is considered occupied
             if (distance < radius)
             {
                 return true;
             }
         }
 
-        // No units found within the radius
         return false;
     }
 
+    /// <summary>
+    /// Updates the queue size text.
+    /// </summary>
     private void UpdateQueueSizeText()
     {
         float queueCount = troopQueue.Count + 1;

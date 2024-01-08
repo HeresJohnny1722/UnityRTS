@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controls the movement and interaction of the camera in the game.
+/// </summary>
 public class CameraController : MonoBehaviour
 {
     public Transform cameraTransform;
@@ -32,8 +35,8 @@ public class CameraController : MonoBehaviour
     public Vector3 rotateStartPosition;
     public Vector3 rotateCurrentPosition;
 
-    public Vector2 boundaryX = new Vector2(-100f, 100f); // Adjust these values to set the boundary in the X-axis
-    public Vector2 boundaryZ = new Vector2(-100f, 100f); // Adjust these values to set the boundary in the Z-axis
+    public Vector2 boundaryX = new Vector2(-100f, 100f);
+    public Vector2 boundaryZ = new Vector2(-100f, 100f);
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +47,6 @@ public class CameraController : MonoBehaviour
 
         newRotation = originalRotation;
         newZoom = originalZoom;
-
     }
 
     // Update is called once per frame
@@ -53,7 +55,6 @@ public class CameraController : MonoBehaviour
         HandleMouseInput();
         HandleMovementInput();
         HandleResetInput();
-        
     }
 
     void HandleMouseInput()
@@ -104,14 +105,12 @@ public class CameraController : MonoBehaviour
         cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * movementTime);
     }
 
-
     void HandleMovementInput()
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
             movementMouseSpeed = fastSpeed;
             movementKeyboardSpeed = fastKeyboardSpeed;
-
         }
         else
         {
@@ -156,7 +155,6 @@ public class CameraController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.R))
         {
-            // Lerping back to original rotation and zoom
             newRotation = originalRotation;
             newZoom = originalZoom;
         }

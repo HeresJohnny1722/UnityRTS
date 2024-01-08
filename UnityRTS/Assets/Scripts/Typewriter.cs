@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Creates a typewriter effect on the text in the tutorial
+/// </summary>
 public class Typewriter : MonoBehaviour
 {
 	[SerializeField] Text text;

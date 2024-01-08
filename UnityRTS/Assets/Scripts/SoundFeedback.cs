@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// Organizes sound effects and creates a method that is easy to call sound effects
+/// </summary>
 public class SoundFeedback : MonoBehaviour
 {
     [SerializeField]

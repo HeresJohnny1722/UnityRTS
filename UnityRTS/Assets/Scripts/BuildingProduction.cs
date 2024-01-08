@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Handles the production functionality of a building, managing resource generation over time.
+/// </summary>
 public class BuildingProduction : MonoBehaviour
 {
     private Building building;
@@ -25,6 +28,9 @@ public class BuildingProduction : MonoBehaviour
         productionInterval = building.buildingSO.outputTime;
     }
 
+    /// <summary>
+    /// Sets up the production properties based on the building's stage.
+    /// </summary>
     public void SetUpProduction()
     {
         if (building.stage == 1)
@@ -37,21 +43,32 @@ public class BuildingProduction : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets properties for the building in stage one.
+    /// </summary>
     private void SetStageOneProperties()
     {
         Node.SetActive(true);
         ProductionBuilding.SetActive(false);
     }
 
+    /// <summary>
+    /// Sets properties for the building in stage two.
+    /// </summary>
     private void SetStageTwoProperties()
     {
         Node.SetActive(false);
         ProductionBuilding.SetActive(true);
     }
 
+    /// <summary>
+    /// Updates the production process, triggering resource generation based on the interval.
+    /// </summary>
     public void UpdateProduction()
     {
-        if (building.buildingSO.buildingType == BuildingSO.BuildingType.Production && !building.buildingConstruction.isUnderConstruction && building.stage == 2)
+        if (building.buildingSO.buildingType == BuildingSO.BuildingType.Production &&
+            !building.buildingConstruction.isUnderConstruction &&
+            building.stage == 2)
         {
             productionTimer += Time.deltaTime;
 
@@ -63,46 +80,49 @@ public class BuildingProduction : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Displays production-related information when the building is selected.
+    /// </summary>
     public void SelectProduction()
     {
-
         if (building.stage == 2)
         {
             building.buildingNameText.text = building.buildingSO.name;
-            building.productionOutputRateText.text = "Output: " + building.buildingSO.outputPerInterval.ToString() + " " + building.buildingSO.resourceType + "/" + productionInterval + " second(s)";
+            building.productionOutputRateText.text = "Output: " +
+                building.buildingSO.outputPerInterval.ToString() +
+                " " + building.buildingSO.resourceType +
+                "/" + productionInterval + " second(s)";
             nodePanel.SetActive(false);
-
         }
     }
 
+    /// <summary>
+    /// Produces resources based on the building's output rate and resource type.
+    /// </summary>
     public void ProduceResource()
     {
         if (building.buildingSO.buildingType == BuildingSO.BuildingType.Production)
         {
             float outputRate = building.buildingSO.outputPerInterval;
 
-            if (building.buildingSO.resourceType == BuildingSO.ResourceType.Gold)
+            switch (building.buildingSO.resourceType)
             {
-                GameManager.instance.AddResources(0, (int)outputRate, 0, 0, 0);
+                case BuildingSO.ResourceType.Gold:
+                    GameManager.instance.AddResources(0, (int)outputRate, 0, 0, 0);
+                    break;
 
+                case BuildingSO.ResourceType.Wood:
+                    GameManager.instance.AddResources(0, 0, (int)outputRate, 0, 0);
+                    break;
+
+                case BuildingSO.ResourceType.Food:
+                    GameManager.instance.AddResources(0, 0, 0, (int)outputRate, 0);
+                    break;
+
+                case BuildingSO.ResourceType.Energy:
+                    GameManager.instance.AddResources(0, 0, 0, 0, (int)outputRate);
+                    break;
             }
-            else if (building.buildingSO.resourceType == BuildingSO.ResourceType.Wood)
-            {
-                GameManager.instance.AddResources(0, 0, (int)outputRate, 0, 0);
-
-            }
-            else if (building.buildingSO.resourceType == BuildingSO.ResourceType.Food)
-            {
-                GameManager.instance.AddResources(0, 0, 0, (int)outputRate, 0);
-
-            }
-            else if (building.buildingSO.resourceType == BuildingSO.ResourceType.Energy)
-            {
-                GameManager.instance.AddResources(0, 0, 0, 0, (int)outputRate);
-            }
-
-
         }
     }
-
 }

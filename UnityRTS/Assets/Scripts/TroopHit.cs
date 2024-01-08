@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Used for setting the units to white when hit by an attack, sets them to white for .15 seconds then sets them back to their orignal color
+/// </summary>
 public class TroopHit : MonoBehaviour
 {
     public Material hitMaterial;
