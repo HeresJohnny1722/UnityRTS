@@ -2,6 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Holds the data for the enemy gameobject, how many of the enemy, and the spawn positions when spawning
+/// </summary>
 [System.Serializable]
 public class EnemyWave
 {
@@ -10,6 +13,9 @@ public class EnemyWave
     public Transform[] spawnPoints;
 }
 
+/// <summary>
+/// Hods the amount of enemy types in a wave, and the time between waves
+/// </summary>
 [System.Serializable]
 public class Wave
 {
@@ -17,6 +23,9 @@ public class Wave
     public float timeBetweenWave; // Add this property
 }
 
+/// <summary>
+/// Spawns the waves and manages the time between waves and the enemies incoming popup, and saving and loading of the waves
+/// </summary>
 public class WaveSpawner : MonoBehaviour, IDataPersistence
 {
     public Wave[] waves;

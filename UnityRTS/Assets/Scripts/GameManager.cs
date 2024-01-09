@@ -3,6 +3,9 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Manages all the stats in the game, resources, building counts, max of a building type, population, gameover and victory
+/// </summary>
 public class GameManager : MonoBehaviour, IDataPersistence
 {
     // Singleton instance
@@ -80,6 +83,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
         UpdateTextFields();
     }
 
+    /// <summary>
+    /// Finds the prefab that is equal to the first 5 letters of a name in a prefab list, used for saving and loading of instantiating enemies when loading back in
+    /// </summary>
+    /// <param name="enemyName"></param>
+    /// <returns></returns>
     private GameObject FindBuildingPrefab(string enemyName)
     {
         // Find the prefab in GameManager.instance.buildingPrefabs
@@ -95,6 +103,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
         return null; // If no matching prefab is found
     }
 
+    /// <summary>
+    /// Loads the resources and instantiates enemies
+    /// </summary>
+    /// <param name="data"></param>
     public void LoadData(GameData data)
     {
         this.enemiesKilledCount = data.enemiesKilled;
@@ -147,6 +159,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    /// <summary>
+    /// Saves enemies to the file and the resource counts
+    /// </summary>
+    /// <param name="data"></param>
     public void SaveData(GameData data)
     {
         data.enemiesKilled = this.enemiesKilledCount;
@@ -171,6 +187,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
         //Debug.Log(data.enemyListName.Count);
     }
 
+    /// <summary>
+    /// Shows the game over screen
+    /// </summary>
     public void GameOver()
     {
         if (VictoryScreen.activeSelf == false)
@@ -183,6 +202,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
         
     }
 
+    /// <summary>
+    /// Shows the victory screen, also unlocks the next level
+    /// </summary>
     public void Victory()
     {
         
@@ -196,6 +218,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     }
 
+    /// <summary>
+    /// Win condition, if the waves are done spawning and all the enemies are killed
+    /// </summary>
     private void Update()
     {
         enemiesKilledCountText.text = "Enemies killed: " + enemiesKilledCount.ToString();

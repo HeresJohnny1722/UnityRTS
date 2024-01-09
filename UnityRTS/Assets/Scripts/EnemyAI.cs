@@ -188,7 +188,7 @@ public class EnemyAI : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(raycastPoint.position, (targetTransform.position - raycastPoint.position).normalized, out hit, playersLayerMask))
             {
-                MuzzleFlash();
+                //MuzzleFlash();
 
                 if (targetTransform.GetComponent<Unit>())
                 {
@@ -212,7 +212,7 @@ public class EnemyAI : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, (targetTransform.GetChild(1).position - raycastPoint.position).normalized, out hit, buildingsLayerMask))
                 {
-                    MuzzleFlash();
+                    //MuzzleFlash();
 
                     if (targetTransform.GetComponent<Building>())
                     {

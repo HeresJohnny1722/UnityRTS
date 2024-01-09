@@ -1159,8 +1159,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 32.4575, y: 20.624}
-  m_SizeDelta: {x: 54.9148, y: -61.248}
+  m_AnchoredPosition: {x: 32.4575, y: 26.3419}
+  m_SizeDelta: {x: 54.9148, y: -72.6839}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &86061316
 MonoBehaviour:
@@ -16536,18 +16536,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Welcome to, A New Dawn!
+  m_text: 'Welcome to, A New Dawn! A red disease has spread throughout the world
+    so you must create new colonies and fend of the enemies, Good Luck!
 
 
-    My name is Byron and I''ll teach you how
-    to play the game!
+    Move
+    the camera with WASD or by bringing your mouse to the edge of the screen.
 
 
-    Move the camera with WASD or by bringing your mouse to
-    the edge of the screen.
-
-
-    Press enter to continue.'
+    Press
+    enter to continue.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -18076,8 +18074,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -113.5, y: -0.7876}
-  m_SizeDelta: {x: 192.089, y: 120.7612}
+  m_AnchoredPosition: {x: -113.5, y: -8.6021}
+  m_SizeDelta: {x: 192.089, y: 136.3902}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &919674427
 MonoBehaviour:
@@ -31844,8 +31842,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -63.587036, y: 84.5}
-  m_SizeDelta: {x: -137.17, y: 89.6}
+  m_AnchoredPosition: {x: -63.58703, y: 98.8}
+  m_SizeDelta: {x: -137.17, y: 86.9316}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1520134763
 MonoBehaviour:

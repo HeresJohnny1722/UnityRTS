@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Disables all buttons that correspond to levels that haven't been unlocked yet
+/// </summary>
 public class LevelSelection : MonoBehaviour
 {
     public Button[] lvlButtons;

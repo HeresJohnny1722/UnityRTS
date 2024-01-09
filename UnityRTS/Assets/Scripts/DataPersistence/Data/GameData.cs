@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Holds all the game data for saving and loading the game
+/// </summary>
 [System.Serializable]
 public class GameData
 {

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+/// <summary>
+/// Manages saving and loading, filenames, new game, load game, save game
+/// </summary>
 public class DataPersistenceManager : MonoBehaviour
 {
     [Header("File Storage Config")]
@@ -38,6 +41,9 @@ public class DataPersistenceManager : MonoBehaviour
         this.gameData = new GameData();
     }
 
+    /// <summary>
+    /// loads the game data from a file and calls the "LoadData" method on all scripts with IDataPersistance
+    /// </summary>
     public void LoadGame()
     {
         // load any saved data from a file using the data handler
@@ -59,6 +65,9 @@ public class DataPersistenceManager : MonoBehaviour
         Debug.Log("Loaded kill count = " + gameData.enemiesKilled);
     }
 
+    /// <summary>
+    /// saves the game data to a file and calls the "LoadData" method on all scripts with IDataPersistance
+    /// </summary>
     public void SaveGame()
     {
         // pass the data to other scripts so they can update it
@@ -74,13 +83,9 @@ public class DataPersistenceManager : MonoBehaviour
 
 
     /// <summary>
-    /// Saves the game whenever you quit the application, not what we want
+    /// Creates a list of all scripts with the IDataPersistance
     /// </summary>
-    private void OnApplicationQuit()
-    {
-        //SaveGame();
-    }
-
+    /// <returns></returns>
     private List<IDataPersistence> FindAllDataPersistenceObjects()
     {
         IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>()

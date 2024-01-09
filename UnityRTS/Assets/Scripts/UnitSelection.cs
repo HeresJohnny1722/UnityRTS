@@ -6,6 +6,9 @@ using UnityEngine.AI;
 using TMPro;
 using System;
 
+/// <summary>
+/// Responsible for the selection of units and saving and loading the units positions and health
+/// </summary>
 public class UnitSelection : MonoBehaviour, IDataPersistence
 {
     public List<GameObject> unitList = new List<GameObject>();
@@ -54,6 +57,10 @@ public class UnitSelection : MonoBehaviour, IDataPersistence
 
     private List<Vector3> _points = new List<Vector3>();
 
+    /// <summary>
+    /// Moves the selected units to a position that is calculated using the Formation class
+    /// </summary>
+    /// <param name="moveToPosition"></param>
     public void moveUnits(Vector3 moveToPosition)
     {
         if (unitsSelected.Count > 0 && Formation != null)
@@ -72,20 +79,20 @@ public class UnitSelection : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void takeDamageUnitTest(float damage)
-    {
-        for (int i = 0; i < unitsSelected.Count; i++)
-        {
-            unitsSelected[i].GetComponent<Unit>().takeDamage(damage);
-        }
-    }
-
+    /// <summary>
+    /// Deselects all units and selects the single unit
+    /// </summary>
+    /// <param name="unitToAdd"></param>
     public void ClickSelectUnit(GameObject unitToAdd)
     {
         DeselectAll();
         SelectUnit(unitToAdd);
     }
 
+    /// <summary>
+    /// Adds the unit to the pre selected unit when shift is held down when selecting units
+    /// </summary>
+    /// <param name="unitToAdd"></param>
     public void ShiftClickSelect(GameObject unitToAdd)
     {
         if (!unitsSelected.Contains(unitToAdd) && (unitsSelected.Count < maxGroupSize))
@@ -100,6 +107,10 @@ public class UnitSelection : MonoBehaviour, IDataPersistence
         }
     }
 
+    /// <summary>
+    /// Drag selection box and selection
+    /// </summary>
+    /// <param name="unitToAdd"></param>
     public void DragSelect(GameObject unitToAdd)
     {
         if (!unitsSelected.Contains(unitToAdd) && (unitsSelected.Count < maxGroupSize))
@@ -108,6 +119,9 @@ public class UnitSelection : MonoBehaviour, IDataPersistence
         }
     }
 
+    /// <summary>
+    /// Removes all units from the unitSelectionList
+    /// </summary>
     public void DeselectAll()
     {
         foreach (var unit in unitsSelected)
@@ -119,6 +133,10 @@ public class UnitSelection : MonoBehaviour, IDataPersistence
 
     }
 
+    /// <summary>
+    /// Function to select unit to reduce duplicated code
+    /// </summary>
+    /// <param name="unitToSelect"></param>
     public void SelectUnit(GameObject unitToSelect)
     {
         if (unitToSelect.activeSelf == true)
@@ -131,6 +149,11 @@ public class UnitSelection : MonoBehaviour, IDataPersistence
 
     }
 
+    /// <summary>
+    /// Sets the ground marker to where the player clicked, also plays the animation
+    /// </summary>
+    /// <param name="groundMarkerObject"></param>
+    /// <param name="groundMarkerPosition"></param>
     public void setGroundMarker(GameObject groundMarkerObject, Vector3 groundMarkerPosition)
     {
         groundMarkerObject.transform.position = groundMarkerPosition;
@@ -138,6 +161,10 @@ public class UnitSelection : MonoBehaviour, IDataPersistence
         groundMarkerObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Loads the positons and health of the units when the game loads in from a save file
+    /// </summary>
+    /// <param name="data"></param>
     public void LoadData(GameData data)
     {
 

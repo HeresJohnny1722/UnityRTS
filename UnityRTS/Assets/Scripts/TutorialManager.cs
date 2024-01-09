@@ -2,6 +2,9 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Manages the tutorial popup text and showing the right UI while in the tutorial
+/// </summary>
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private WaveSpawner waveSpawner;
@@ -33,6 +36,9 @@ public class TutorialManager : MonoBehaviour
     ShowCurrentTutorialText();
     }
 
+    /// <summary>
+    /// Goes to the next text popup in the tutorial when enter is pressed
+    /// </summary>
     private void Update()
     {
         // Check for Enter key press
@@ -118,6 +124,9 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts the enemies waves in 15 seconds after the tutorial is over
+    /// </summary>
     private void TutorialComplete()
     {
         Debug.Log("Tutorial is over!");

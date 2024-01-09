@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages the unit selection and box selection art for when the player drag selects units
+/// </summary>
 public class UnitDrag : MonoBehaviour
 {
     Camera myCam;
@@ -88,6 +91,9 @@ public class UnitDrag : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Draws the box selection square based on starting position of mouse and ending position of mouse
+    /// </summary>
     void DrawVisual()
     {
         Vector2 boxStart = startPosition;
@@ -100,6 +106,10 @@ public class UnitDrag : MonoBehaviour
         boxVisual.sizeDelta = boxSize;
     }
 
+
+    /// <summary>
+    /// Makes sure the selection of the box is in the right spot
+    /// </summary>
     void DrawSelection()
     {
         if (Input.mousePosition.x < startPosition.x)
@@ -130,6 +140,9 @@ public class UnitDrag : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Selects all units that are in the box selection 
+    /// </summary>
     void SelectUnits()
     {
         

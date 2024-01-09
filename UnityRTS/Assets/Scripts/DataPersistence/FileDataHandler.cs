@@ -4,6 +4,9 @@ using UnityEngine;
 using System;
 using System.IO;
 
+/// <summary>
+/// Saves and Loads the game data to an encrypted file
+/// </summary>
 public class FileDataHandler
 {
     private string dataDirPath = "";

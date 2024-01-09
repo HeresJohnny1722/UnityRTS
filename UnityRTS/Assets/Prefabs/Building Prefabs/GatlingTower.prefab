@@ -5384,9 +5384,9 @@ MonoBehaviour:
   buildingDeathEffect: {fileID: 2739781832950810520, guid: d9d0561c674d04cfb8b1a8ba6dcbaedc,
     type: 3}
   infoPanel: {fileID: 1245195648654108068}
+  removeButton: {fileID: 6836445356940488703}
   buildingNameText: {fileID: 4921110263202294174}
   productionOutputRateText: {fileID: 5810251175004799945}
-  removeButton: {fileID: 6836445356940488703}
   buildingHealthbar: {fileID: 3192987372054347442}
   workersInside: []
 --- !u!114 &8955511327124818837
@@ -5414,7 +5414,6 @@ MonoBehaviour:
   - {fileID: 8628466430741941056}
   - {fileID: 4740493910656335481}
   - {fileID: 7758959535704372723}
-  useWorkers: 0
 --- !u!114 &572631810019839744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5438,7 +5437,6 @@ MonoBehaviour:
   - {fileID: 7758959535704372723}
   hasValidPlacement: 0
   isFixed: 0
-  wallNumber: 0
   isWallPlacementValid: 1
 --- !u!114 &2173348100035529839
 MonoBehaviour:
@@ -5455,15 +5453,13 @@ MonoBehaviour:
   hasTurretMount: 1
   turretIsUnit: 1
   turretObject: {fileID: 875110773595471194}
-  animator: {fileID: 0}
+  attackFlash: {fileID: 1632907034255504682}
   currentTarget: {fileID: 0}
   raycastPoint: {fileID: 3904180062900219366}
+  flashTransform: {fileID: 5704377097306701985}
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 4096
-  flashTransform: {fileID: 5704377097306701985}
-  attackFlash: {fileID: 1632907034255504682}
-  flashDistance: 0.5
 --- !u!65 &6436881362662773346
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16354,7 +16350,7 @@ PrefabInstance:
     - target: {fileID: 1598209828171881189, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1660429363526082665, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}

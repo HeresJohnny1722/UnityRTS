@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// All the pause menu functionality, time scale and showing the pause menu art
+/// </summary>
 public class PauseMenu : MonoBehaviour
 {
     public static bool Paused = false;

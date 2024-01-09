@@ -433,7 +433,6 @@ MonoBehaviour:
   squashAndStretch: {fileID: 0}
   meshComponents:
   - {fileID: 7812187444538870201}
-  useWorkers: 0
 --- !u!114 &5619884489375765989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,9 +455,9 @@ MonoBehaviour:
   buildingDeathEffect: {fileID: 2739781832950810520, guid: d9d0561c674d04cfb8b1a8ba6dcbaedc,
     type: 3}
   infoPanel: {fileID: 4890204237372676351}
+  removeButton: {fileID: 884186383178584740}
   buildingNameText: {fileID: 1644350109529740485}
   productionOutputRateText: {fileID: 160023646740659858}
-  removeButton: {fileID: 884186383178584740}
   buildingHealthbar: {fileID: 3813582179310941946}
   workersInside: []
 --- !u!114 &5226236407002545820
@@ -481,7 +480,6 @@ MonoBehaviour:
   - {fileID: 7812187444538870201}
   hasValidPlacement: 0
   isFixed: 0
-  wallNumber: 0
   isWallPlacementValid: 1
 --- !u!114 &6528371850163622390
 MonoBehaviour:
@@ -496,11 +494,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodePanel: {fileID: 6510314454326130806}
+  Node: {fileID: 8996196709703802244}
+  ProductionBuilding: {fileID: 8604843313485195372}
   nodeGoldCostText: {fileID: 714311646533152465}
   nodeCoalCostText: {fileID: 2257686516198212836}
   nodeCopperCostText: {fileID: 7636776618444186432}
-  Node: {fileID: 8996196709703802244}
-  ProductionBuilding: {fileID: 8604843313485195372}
 --- !u!65 &1365973829521450280
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -910,7 +908,7 @@ PrefabInstance:
     - target: {fileID: 1598209828171881189, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1660429363526082665, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}

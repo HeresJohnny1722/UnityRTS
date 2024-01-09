@@ -516,9 +516,9 @@ MonoBehaviour:
   buildingDeathEffect: {fileID: 2739781832950810520, guid: d9d0561c674d04cfb8b1a8ba6dcbaedc,
     type: 3}
   infoPanel: {fileID: 1416146887417991916}
+  removeButton: {fileID: 6647055883823913143}
   buildingNameText: {fileID: 5092361136028999382}
   productionOutputRateText: {fileID: 5927529203766785153}
-  removeButton: {fileID: 6647055883823913143}
   buildingHealthbar: {fileID: 1608911392682213477}
   workersInside: []
 --- !u!114 &5943524431584193767
@@ -545,7 +545,6 @@ MonoBehaviour:
   - {fileID: 5224452857951979935}
   - {fileID: 1255903966283650787}
   - {fileID: 5592914583946245875}
-  useWorkers: 0
 --- !u!114 &1152830689585302334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,11 +558,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodePanel: {fileID: 730458693075038821}
+  Node: {fileID: 7861251109482732414}
+  ProductionBuilding: {fileID: 2498640470693592445}
   nodeGoldCostText: {fileID: 6454760419313460418}
   nodeCoalCostText: {fileID: 5705705739667459831}
   nodeCopperCostText: {fileID: 4143614095401789779}
-  Node: {fileID: 7861251109482732414}
-  ProductionBuilding: {fileID: 2498640470693592445}
 --- !u!114 &2545933729889426331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,7 +585,6 @@ MonoBehaviour:
   - {fileID: 5592914583946245875}
   hasValidPlacement: 0
   isFixed: 0
-  wallNumber: 0
   isWallPlacementValid: 1
 --- !u!65 &22257681220232010
 BoxCollider:
@@ -2661,7 +2659,7 @@ PrefabInstance:
     - target: {fileID: 1598209828171881189, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1660429363526082665, guid: 40a912277b5d341eab3146133c11d5ac,
         type: 3}

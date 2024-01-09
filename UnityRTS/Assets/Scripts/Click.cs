@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
+/// <summary>
+/// Manages on the raycasats of clicking units and buildings
+/// </summary>
 public class Click : MonoBehaviour
 {
     Camera myCam;
@@ -21,6 +25,9 @@ public class Click : MonoBehaviour
     public bool IsPointerOverUI()
         => EventSystem.current.IsPointerOverGameObject();
 
+    /// <summary>
+    /// If statements for selecting buildings/units and moving units
+    /// </summary>
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && !IsPointerOverUI())

@@ -34,10 +34,32 @@ public class SoundFeedback : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            audioSource.PlayOneShot(mainMenuSoundtrack);
-        } else
+            PlayAndRestart(mainMenuSoundtrack);
+        }
+        else
         {
-            audioSource.PlayOneShot(levelSoundtrack);
+            PlayAndRestart(levelSoundtrack);
+        }
+    }
+
+    public void PlayAndRestart(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
+
+        // Invoke a method to restart the soundtrack after the clip duration
+        Invoke("RestartSoundtrack", clip.length);
+    }
+
+    void RestartSoundtrack()
+    {
+        // Restart the soundtrack
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            PlayAndRestart(mainMenuSoundtrack);
+        }
+        else
+        {
+            PlayAndRestart(levelSoundtrack);
         }
     }
 

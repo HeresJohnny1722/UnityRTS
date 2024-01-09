@@ -6894,117 +6894,7 @@ MonoBehaviour:
   - enemies:
     - enemyPrefab: {fileID: 1898230509516970111, guid: 060e82ed7b603423cb05f78353514752,
         type: 3}
-      count: 30
-      spawnPoints:
-      - {fileID: 1698194360}
-      - {fileID: 798503488}
-      - {fileID: 1042929690}
-      - {fileID: 395750890}
-      - {fileID: 670694456}
-      - {fileID: 170372276}
-    - enemyPrefab: {fileID: 1898230509516970111, guid: dceaaf2ee979344618001fde6e1e98b3,
-        type: 3}
-      count: 10
-      spawnPoints:
-      - {fileID: 1698194360}
-      - {fileID: 798503488}
-      - {fileID: 1042929690}
-      - {fileID: 395750890}
-      - {fileID: 670694456}
-      - {fileID: 170372276}
-    - enemyPrefab: {fileID: 1898230509516970111, guid: 40b9de4ed97254383a8772ca7d249962,
-        type: 3}
-      count: 10
-      spawnPoints:
-      - {fileID: 1698194360}
-      - {fileID: 798503488}
-      - {fileID: 1042929690}
-      - {fileID: 395750890}
-      - {fileID: 670694456}
-      - {fileID: 170372276}
-    timeBetweenWave: 25
-  - enemies:
-    - enemyPrefab: {fileID: 1898230509516970111, guid: 0219893f925ad4bb28ef3a216b4d1999,
-        type: 3}
-      count: 5
-      spawnPoints:
-      - {fileID: 1698194360}
-      - {fileID: 798503488}
-      - {fileID: 1042929690}
-      - {fileID: 395750890}
-      - {fileID: 670694456}
-      - {fileID: 170372276}
-    - enemyPrefab: {fileID: 1898230509516970111, guid: 060e82ed7b603423cb05f78353514752,
-        type: 3}
-      count: 5
-      spawnPoints:
-      - {fileID: 1698194360}
-      - {fileID: 798503488}
-      - {fileID: 1042929690}
-      - {fileID: 395750890}
-      - {fileID: 670694456}
-      - {fileID: 170372276}
-    timeBetweenWave: 25
-  - enemies:
-    - enemyPrefab: {fileID: 1898230509516970111, guid: 060e82ed7b603423cb05f78353514752,
-        type: 3}
-      count: 35
-      spawnPoints:
-      - {fileID: 1698194360}
-      - {fileID: 798503488}
-      - {fileID: 1042929690}
-      - {fileID: 395750890}
-      - {fileID: 670694456}
-      - {fileID: 170372276}
-    timeBetweenWave: 25
-  - enemies:
-    - enemyPrefab: {fileID: 1898230509516970111, guid: dceaaf2ee979344618001fde6e1e98b3,
-        type: 3}
-      count: 50
-      spawnPoints:
-      - {fileID: 1698194360}
-      - {fileID: 798503488}
-      - {fileID: 1042929690}
-      - {fileID: 395750890}
-      - {fileID: 670694456}
-      - {fileID: 170372276}
-    timeBetweenWave: 25
-  - enemies:
-    - enemyPrefab: {fileID: 1898230509516970111, guid: 0219893f925ad4bb28ef3a216b4d1999,
-        type: 3}
-      count: 10
-      spawnPoints:
-      - {fileID: 1698194360}
-      - {fileID: 798503488}
-      - {fileID: 1042929690}
-      - {fileID: 395750890}
-      - {fileID: 670694456}
-      - {fileID: 170372276}
-    - enemyPrefab: {fileID: 1898230509516970111, guid: 108af14a4876a4036a0ebe8528872f53,
-        type: 3}
-      count: 1
-      spawnPoints:
-      - {fileID: 1698194360}
-      - {fileID: 798503488}
-      - {fileID: 1042929690}
-      - {fileID: 395750890}
-      - {fileID: 670694456}
-      - {fileID: 170372276}
-    timeBetweenWave: 25
-  - enemies:
-    - enemyPrefab: {fileID: 1898230509516970111, guid: 060e82ed7b603423cb05f78353514752,
-        type: 3}
-      count: 30
-      spawnPoints:
-      - {fileID: 1698194360}
-      - {fileID: 798503488}
-      - {fileID: 1042929690}
-      - {fileID: 395750890}
-      - {fileID: 670694456}
-      - {fileID: 170372276}
-    - enemyPrefab: {fileID: 1898230509516970111, guid: 108af14a4876a4036a0ebe8528872f53,
-        type: 3}
-      count: 1
+      count: 40
       spawnPoints:
       - {fileID: 1698194360}
       - {fileID: 798503488}
@@ -7022,9 +6912,119 @@ MonoBehaviour:
       - {fileID: 395750890}
       - {fileID: 670694456}
       - {fileID: 170372276}
+    - enemyPrefab: {fileID: 1898230509516970111, guid: 40b9de4ed97254383a8772ca7d249962,
+        type: 3}
+      count: 30
+      spawnPoints:
+      - {fileID: 1698194360}
+      - {fileID: 798503488}
+      - {fileID: 1042929690}
+      - {fileID: 395750890}
+      - {fileID: 670694456}
+      - {fileID: 170372276}
+    timeBetweenWave: 25
+  - enemies:
     - enemyPrefab: {fileID: 1898230509516970111, guid: 0219893f925ad4bb28ef3a216b4d1999,
         type: 3}
-      count: 7
+      count: 10
+      spawnPoints:
+      - {fileID: 1698194360}
+      - {fileID: 798503488}
+      - {fileID: 1042929690}
+      - {fileID: 395750890}
+      - {fileID: 670694456}
+      - {fileID: 170372276}
+    - enemyPrefab: {fileID: 1898230509516970111, guid: 060e82ed7b603423cb05f78353514752,
+        type: 3}
+      count: 10
+      spawnPoints:
+      - {fileID: 1698194360}
+      - {fileID: 798503488}
+      - {fileID: 1042929690}
+      - {fileID: 395750890}
+      - {fileID: 670694456}
+      - {fileID: 170372276}
+    timeBetweenWave: 25
+  - enemies:
+    - enemyPrefab: {fileID: 1898230509516970111, guid: 060e82ed7b603423cb05f78353514752,
+        type: 3}
+      count: 70
+      spawnPoints:
+      - {fileID: 1698194360}
+      - {fileID: 798503488}
+      - {fileID: 1042929690}
+      - {fileID: 395750890}
+      - {fileID: 670694456}
+      - {fileID: 170372276}
+    timeBetweenWave: 25
+  - enemies:
+    - enemyPrefab: {fileID: 1898230509516970111, guid: dceaaf2ee979344618001fde6e1e98b3,
+        type: 3}
+      count: 100
+      spawnPoints:
+      - {fileID: 1698194360}
+      - {fileID: 798503488}
+      - {fileID: 1042929690}
+      - {fileID: 395750890}
+      - {fileID: 670694456}
+      - {fileID: 170372276}
+    timeBetweenWave: 25
+  - enemies:
+    - enemyPrefab: {fileID: 1898230509516970111, guid: 0219893f925ad4bb28ef3a216b4d1999,
+        type: 3}
+      count: 20
+      spawnPoints:
+      - {fileID: 1698194360}
+      - {fileID: 798503488}
+      - {fileID: 1042929690}
+      - {fileID: 395750890}
+      - {fileID: 670694456}
+      - {fileID: 170372276}
+    - enemyPrefab: {fileID: 1898230509516970111, guid: 108af14a4876a4036a0ebe8528872f53,
+        type: 3}
+      count: 2
+      spawnPoints:
+      - {fileID: 1698194360}
+      - {fileID: 798503488}
+      - {fileID: 1042929690}
+      - {fileID: 395750890}
+      - {fileID: 670694456}
+      - {fileID: 170372276}
+    timeBetweenWave: 25
+  - enemies:
+    - enemyPrefab: {fileID: 1898230509516970111, guid: 060e82ed7b603423cb05f78353514752,
+        type: 3}
+      count: 60
+      spawnPoints:
+      - {fileID: 1698194360}
+      - {fileID: 798503488}
+      - {fileID: 1042929690}
+      - {fileID: 395750890}
+      - {fileID: 670694456}
+      - {fileID: 170372276}
+    - enemyPrefab: {fileID: 1898230509516970111, guid: 108af14a4876a4036a0ebe8528872f53,
+        type: 3}
+      count: 2
+      spawnPoints:
+      - {fileID: 1698194360}
+      - {fileID: 798503488}
+      - {fileID: 1042929690}
+      - {fileID: 395750890}
+      - {fileID: 670694456}
+      - {fileID: 170372276}
+    - enemyPrefab: {fileID: 1898230509516970111, guid: dceaaf2ee979344618001fde6e1e98b3,
+        type: 3}
+      count: 40
+      spawnPoints:
+      - {fileID: 1698194360}
+      - {fileID: 798503488}
+      - {fileID: 1042929690}
+      - {fileID: 395750890}
+      - {fileID: 670694456}
+      - {fileID: 170372276}
+    - enemyPrefab: {fileID: 1898230509516970111, guid: 0219893f925ad4bb28ef3a216b4d1999,
+        type: 3}
+      count: 14
       spawnPoints:
       - {fileID: 1698194360}
       - {fileID: 798503488}
@@ -7034,7 +7034,7 @@ MonoBehaviour:
       - {fileID: 170372276}
     - enemyPrefab: {fileID: 1898230509516970111, guid: 40b9de4ed97254383a8772ca7d249962,
         type: 3}
-      count: 10
+      count: 20
       spawnPoints:
       - {fileID: 1698194360}
       - {fileID: 798503488}
