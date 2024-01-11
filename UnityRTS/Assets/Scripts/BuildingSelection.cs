@@ -16,7 +16,7 @@ public class BuildingSelection : MonoBehaviour, IDataPersistence
 
     public Transform selectedBuilding = null;
 
-    private static BuildingSelection _instance;
+    public static BuildingSelection _instance;
     public static BuildingSelection Instance { get { return _instance; } }
 
     private Building building;
