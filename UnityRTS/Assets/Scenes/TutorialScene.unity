@@ -47174,6 +47174,7 @@ MonoBehaviour:
   spawnEffect: {fileID: 5306868671923941460, guid: c29cc432593a04fc68989f051648883b,
     type: 3}
   enemiesIncomingPopupAnimator: {fileID: 726168348}
+  waveIndex: 0
 --- !u!4 &2116674891
 Transform:
   m_ObjectHideFlags: 0
@@ -48019,7 +48020,7 @@ PrefabInstance:
     - target: {fileID: 2777437211493795062, guid: 628e1fabfd64647b799fe2cec836dfd3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2777437211493795062, guid: 628e1fabfd64647b799fe2cec836dfd3,
         type: 3}
@@ -48030,16 +48031,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1124701662}
+    - target: {fileID: 2777437211493795062, guid: 628e1fabfd64647b799fe2cec836dfd3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
       objectReference: {fileID: 1411552753}
     - target: {fileID: 2777437211493795062, guid: 628e1fabfd64647b799fe2cec836dfd3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777437211493795062, guid: 628e1fabfd64647b799fe2cec836dfd3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: ReloadScene
       objectReference: {fileID: 0}
     - target: {fileID: 2777437211493795062, guid: 628e1fabfd64647b799fe2cec836dfd3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777437211493795062, guid: 628e1fabfd64647b799fe2cec836dfd3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: LevelLoader, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777437211493795062, guid: 628e1fabfd64647b799fe2cec836dfd3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777437211493795062, guid: 628e1fabfd64647b799fe2cec836dfd3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3180098239141722197, guid: 628e1fabfd64647b799fe2cec836dfd3,
         type: 3}

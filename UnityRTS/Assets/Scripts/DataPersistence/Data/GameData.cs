@@ -10,6 +10,7 @@ using UnityEngine;
 public class GameData
 {
     public int enemiesKilled;
+
     public int currentPopulation;
     public int maxPopulation;
 

@@ -55,56 +55,17 @@ public class SQLdatabase : MonoBehaviour
                 command.CommandText = "CREATE TABLE IF NOT EXISTS units (name VARCHAR(20), health INT, xPos FLOAT, yPos FLOAT, zPos FLOAT);";
                 command.ExecuteNonQuery();
 
-                command.CommandText = "CREATE TABLE IF NOT EXISTS waves (waveIndex INT);";
-            }
-
-            
-
-            connection.Close();
-        }
-    }
-
-    public void AddWeapon(string weaponName, int weaponDamage)
-    {
-        using (var connection = new SqliteConnection(dbName))
-        {
-            connection.Open();
-
-            using (var command = connection.CreateCommand())
-            {
-                command.CommandText = "INSERT INTO weapons (name, damage) VALUES ('" + weaponName + "', '" + weaponDamage + "');";
+                command.CommandText = "CREATE TABLE IF NOT EXISTS enemies (name VARCHAR(20), health INT, xPos FLOAT, yPos FLOAT, zPos FLOAT);";
                 command.ExecuteNonQuery();
-            }
 
-            connection.Close();
-        }
-    }
+                command.CommandText = "CREATE TABLE IF NOT EXISTS waves (waveIndex INT);";
+                command.ExecuteNonQuery();
 
-    public void DisplayBuildings()
-    {
-        using (var connection = new SqliteConnection(dbName))
-        {
-            connection.Open();
+                command.CommandText = "CREATE TABLE IF NOT EXISTS population (maxPop INT, currentPop INT);";
+                command.ExecuteNonQuery();
 
-            using (var command = connection.CreateCommand())
-            {
-
-                //select what you want to get
-                //this just sets the parameters of what will be returned
-                command.CommandText = "SELECT * FROM buildings;";
-
-                //iterate through the recordset that was returned from the statement above
-
-                using (IDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Debug.Log("Name: " + reader["name"] + "\tHealth: " + reader["health"]);
-                    }
-
-                    reader.Close();
-                }
-
+                command.CommandText = "CREATE TABLE IF NOT EXISTS resources (gold INT, wood INT, food INT);";
+                command.ExecuteNonQuery();
             }
 
             connection.Close();
@@ -180,9 +141,6 @@ public class SQLdatabase : MonoBehaviour
 
                 //unit loading
                 command.CommandText = "SELECT * FROM units;";
-
-                //iterate through the recordset that was returned from the statement above
-
                 using (IDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -232,10 +190,110 @@ public class SQLdatabase : MonoBehaviour
 
                     reader.Close();
                 }
+
+
+                command.CommandText = "SELECT * FROM waves;";
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Debug.Log("Loaded waves");
+                        int savedWaveIndex = (int)reader["waveIndex"];
+                        WaveSpawner.Instance.waveIndex = savedWaveIndex;
+
+                    }
+
+                    reader.Close();
+                }
+
+                command.CommandText = "SELECT * FROM population;";
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Debug.Log("Loaded population");
+                        int currentPop = (int)reader["currentPop"];
+                        int maxPop = (int)reader["maxPop"];
+                        GameManager.instance.currentPopulation = currentPop;
+                        GameManager.instance.maxedPopulation = maxPop;
+
+                    }
+
+                    reader.Close();
+                }
+
+                command.CommandText = "SELECT * FROM resources;";
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Debug.Log("Loaded population");
+                        int savedGold = (int)reader["gold"];
+
+                        Debug.Log("Gold: " + savedGold);
+                        int savedWood = (int)reader["wood"];
+                        int savedFood = (int)reader["food"];
+                        GameManager.instance.gold = savedGold;
+                        GameManager.instance.wood = savedWood;
+                        GameManager.instance.food = savedFood;
+
+                    }
+
+                    reader.Close();
+                }
+
+                //enemy loading
+                command.CommandText = "SELECT * FROM enemies;";
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Debug.Log("Loaded Enmies");
+                        string enemyName = (string)reader["name"];
+                        int savedEnemyHealth = (int)reader["health"];
+                        double xPos = (double)reader["xPos"];
+                        double yPos = (double)reader["yPos"];
+                        double zPos = (double)reader["zPos"];
+                        Vector3 enemyPosition = new Vector3((float)xPos, (float)yPos, (float)zPos);
+
+                        GameObject prefab = FindPrefabInList(enemyName, GameManager.instance.enemyPrefabs);
+
+                        if (prefab != null)
+                        {
+                            // Instantiate the prefab and add it to the buildingsList and set its health to the saved health
+                            GameObject enemyObject = Instantiate(prefab, enemyPosition, Quaternion.identity);
+                            EnemyAI enemy = enemyObject.GetComponent<EnemyAI>();
+
+                            enemy.enemyHealth = savedEnemyHealth;
+
+                            //If the enemy has taken damage, we should see the healthbar
+                            if (enemy.enemyHealth != enemy.enemyAISO.startingHealth)
+                            {
+                                enemy.enemyHealthbar.gameObject.SetActive(true);
+                                enemy.enemyHealthbar.UpdateHealthBar(enemy.enemyAISO.startingHealth, enemy.enemyHealth);
+                            }
+                            else
+                            {
+                                enemy.enemyHealthbar.gameObject.SetActive(false);
+                                enemy.enemyHealthbar.UpdateHealthBar(enemy.enemyAISO.startingHealth, enemy.enemyHealth);
+                            }
+
+                        }
+                        else
+                        {
+                            Debug.LogWarning("Prefab not found for enemy: " + enemyName);
+                        }
+
+                    }
+
+                    reader.Close();
+                }
             }
 
             connection.Close();
         }
+
+        GameManager.instance.UpdateTextFields();
 
     }
 
@@ -271,11 +329,20 @@ public class SQLdatabase : MonoBehaviour
             {
                 command.CommandText = "DELETE FROM buildings;";
                 command.ExecuteNonQuery();
-            }
 
-            using (var command = connection.CreateCommand())
-            {
                 command.CommandText = "DELETE FROM units;";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "DELETE FROM enemies;";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "DELETE FROM waves;";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "DELETE FROM population;";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "DELETE FROM resources;";
                 command.ExecuteNonQuery();
             }
 
@@ -296,6 +363,39 @@ public class SQLdatabase : MonoBehaviour
                     command.ExecuteNonQuery();
                 }
             }
+
+            for (int i = 0; i < GameManager.instance.enemies.Count; i++)
+            {
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "INSERT INTO enemies (name, health, xPos, yPos, zPos) VALUES ('" + GameManager.instance.enemies[i].name + "', '" + GameManager.instance.enemies[i].GetComponent<EnemyAI>().enemyHealth + "', '" + GameManager.instance.enemies[i].transform.position.x + "', '" + GameManager.instance.enemies[i].transform.position.y + "', '" + GameManager.instance.enemies[i].transform.position.z + "'); ";
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "INSERT INTO waves (waveIndex) VALUES ('" + WaveSpawner.Instance.waveIndex + "');";
+                command.ExecuteNonQuery();
+
+            }
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "INSERT INTO population (maxPop, currentPop) VALUES ('" + GameManager.instance.maxedPopulation + "', '" + GameManager.instance.currentPopulation + "');";
+
+                command.ExecuteNonQuery();
+            }
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "INSERT INTO resources (gold, wood, food) VALUES ('" + GameManager.instance.gold + "', '" + GameManager.instance.wood + "', '" + GameManager.instance.food + "');";
+
+                command.ExecuteNonQuery();
+            }
+
+
+
 
 
 

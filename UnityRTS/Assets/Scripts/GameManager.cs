@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Manages all the stats in the game, resources, building counts, max of a building type, population, gameover and victory
 /// </summary>
-public class GameManager : MonoBehaviour, IDataPersistence
+public class GameManager : MonoBehaviour
 {
     // Singleton instance
     public static GameManager instance;
@@ -81,110 +81,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void Start()
     {
         UpdateTextFields();
-    }
-
-    /// <summary>
-    /// Finds the prefab that is equal to the first 5 letters of a name in a prefab list, used for saving and loading of instantiating enemies when loading back in
-    /// </summary>
-    /// <param name="enemyName"></param>
-    /// <returns></returns>
-    private GameObject FindBuildingPrefab(string enemyName)
-    {
-        // Find the prefab in GameManager.instance.buildingPrefabs
-        foreach (var prefab in this.enemyPrefabs)
-        {
-            // Compare the first 5 characters of the prefab name with the provided buildingName
-            if (prefab.name.Length >= 5 && prefab.name.Substring(0, 5) == enemyName.Substring(0, 5))
-            {
-                return prefab;
-            }
-        }
-
-        return null; // If no matching prefab is found
-    }
-
-    /// <summary>
-    /// Loads the resources and instantiates enemies
-    /// </summary>
-    /// <param name="data"></param>
-    public void LoadData(GameData data)
-    {
-        this.enemiesKilledCount = data.enemiesKilled;
-        this.currentPopulation = data.currentPopulation;
-        this.maxedPopulation = data.maxPopulation;
-        this.gold = data.gold;
-        this.wood = data.wood;
-        this.food = data.food;
-
-
-        //Enemy loading
-
-        enemies.Clear();
-
-        for (int i = 0; i < data.enemyListName.Count; i++)
-        {
-            string enemyName = data.enemyListName[i];
-            Vector3 enemyPosition = data.enemyListPositions[i];
-
-            // Find the corresponding prefab in GameManager.instance.buildingPrefabs
-            GameObject prefab = FindBuildingPrefab(enemyName);
-
-            if (prefab != null)
-            {
-                // Instantiate the prefab and add it to the buildingsList and set its health to the saved health
-                GameObject enemyObject = Instantiate(prefab, enemyPosition, Quaternion.identity);
-                EnemyAI enemy = enemyObject.GetComponent<EnemyAI>();
-
-                enemy.enemyHealth = data.enemyListHealth[i];
-                Debug.Log(data.enemyListName[i]);
-
-                //If the building has taken damage, we should see the healthbar
-                if (enemy.enemyHealth != enemy.enemyAISO.startingHealth)
-                {
-                    enemy.enemyHealthbar.gameObject.SetActive(true);
-                    enemy.enemyHealthbar.UpdateHealthBar(enemy.enemyAISO.startingHealth, enemy.enemyHealth);
-                }
-                else
-                {
-                    enemy.enemyHealthbar.gameObject.SetActive(false);
-                    enemy.enemyHealthbar.UpdateHealthBar(enemy.enemyAISO.startingHealth, enemy.enemyHealth);
-                }
-
-                //buildingsList.Add(buildingObject);
-            }
-            else
-            {
-                Debug.LogWarning("Prefab not found for enemy: " + enemyName);
-            }
-        }
-    }
-
-    /// <summary>
-    /// Saves enemies to the file and the resource counts
-    /// </summary>
-    /// <param name="data"></param>
-    public void SaveData(GameData data)
-    {
-        data.enemiesKilled = this.enemiesKilledCount;
-        data.currentPopulation = this.currentPopulation;
-        data.maxPopulation = this.maxedPopulation;
-        data.gold = this.gold;
-        data.wood = this.wood;
-        data.food = this.food;
-
-        //Enemies Save
-        data.enemyListName.Clear();
-        data.enemyListPositions.Clear();
-        data.enemyListHealth.Clear();
-
-        for (int i = 0; i < this.enemies.Count; i++)
-        {
-            data.enemyListName.Add(this.enemies[i].name);
-            data.enemyListPositions.Add(this.enemies[i].transform.position);
-            data.enemyListHealth.Add((int)this.enemies[i].GetComponent<EnemyAI>().enemyHealth);
-        }
-
-        //Debug.Log(data.enemyListName.Count);
     }
 
     /// <summary>

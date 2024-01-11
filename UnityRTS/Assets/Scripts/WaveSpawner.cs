@@ -34,11 +34,26 @@ public class WaveSpawner : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject spawnEffect;
     [SerializeField] private Animator enemiesIncomingPopupAnimator;
 
-    private int waveIndex = 0;
+    public int waveIndex = 0;
     private int totalTroopsSpawned = 0; // Counter variable
     private int expectedTotalTroops;
 
     private int savedWaveIndex;
+
+    private static WaveSpawner _instance;
+    public static WaveSpawner Instance { get { return _instance; } }
+
+    void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
     public void Start()
     {

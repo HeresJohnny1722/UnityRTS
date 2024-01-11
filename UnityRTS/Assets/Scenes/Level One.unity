@@ -7073,6 +7073,7 @@ MonoBehaviour:
   spawnEffect: {fileID: 5306868671923941460, guid: c29cc432593a04fc68989f051648883b,
     type: 3}
   enemiesIncomingPopupAnimator: {fileID: 782426539}
+  waveIndex: 0
 --- !u!4 &651937740
 Transform:
   m_ObjectHideFlags: 0
