@@ -92,8 +92,9 @@ public class GameManager : MonoBehaviour
         {
             isGameOver = true;
             GameOverScreen.SetActive(true);
-            DataPersistenceManager.instance.NewGame();
+            //DataPersistenceManager.instance.NewGame();
             //  Time.timeScale = .25f;
+            SQLdatabase.instance.NewGame();
         }
         
     }
@@ -109,8 +110,8 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex != 3)
         PlayerPrefs.SetInt("levelAt", SceneManager.GetActiveScene().buildIndex + 1);
-
-        DataPersistenceManager.instance.NewGame();
+        SQLdatabase.instance.NewGame();
+        //DataPersistenceManager.instance.NewGame();
 
     }
 

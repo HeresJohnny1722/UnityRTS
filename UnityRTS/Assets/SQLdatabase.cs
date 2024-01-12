@@ -12,7 +12,7 @@ using System.Collections.Generic;
 public class SQLdatabase : MonoBehaviour
 {
 
-    //public static SimpleDB instance { get; private set; }
+    public static SQLdatabase instance { get; private set; }
 
 
 
@@ -67,6 +67,63 @@ public class SQLdatabase : MonoBehaviour
                 command.CommandText = "CREATE TABLE IF NOT EXISTS resources (gold INT, wood INT, food INT);";
                 command.ExecuteNonQuery();
             }
+
+            connection.Close();
+        }
+    }
+
+    public void NewGame()
+    {
+        //Clear the buildings table
+
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            //DELETE FROM table_name
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "DELETE FROM buildings;";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "DELETE FROM units;";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "DELETE FROM enemies;";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "DELETE FROM waves;";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "DELETE FROM population;";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "DELETE FROM resources;";
+                command.ExecuteNonQuery();
+            }
+
+            
+
+            
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "INSERT INTO population (maxPop, currentPop) VALUES ('" + 9 + "', '" + 0 + "');";
+
+                command.ExecuteNonQuery();
+            }
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "INSERT INTO resources (gold, wood, food) VALUES ('" + 1000 + "', '" + 1000 + "', '" + 1000 + "');";
+
+                command.ExecuteNonQuery();
+            }
+
+
+
+            
+
 
             connection.Close();
         }
@@ -197,7 +254,6 @@ public class SQLdatabase : MonoBehaviour
                 {
                     while (reader.Read())
                     {
-                        Debug.Log("Loaded waves");
                         int savedWaveIndex = (int)reader["waveIndex"];
                         WaveSpawner.Instance.waveIndex = savedWaveIndex;
 
@@ -211,7 +267,6 @@ public class SQLdatabase : MonoBehaviour
                 {
                     while (reader.Read())
                     {
-                        Debug.Log("Loaded population");
                         int currentPop = (int)reader["currentPop"];
                         int maxPop = (int)reader["maxPop"];
                         GameManager.instance.currentPopulation = currentPop;
@@ -227,7 +282,7 @@ public class SQLdatabase : MonoBehaviour
                 {
                     while (reader.Read())
                     {
-                        Debug.Log("Loaded population");
+                        
                         int savedGold = (int)reader["gold"];
 
                         Debug.Log("Gold: " + savedGold);
@@ -248,7 +303,6 @@ public class SQLdatabase : MonoBehaviour
                 {
                     while (reader.Read())
                     {
-                        Debug.Log("Loaded Enmies");
                         string enemyName = (string)reader["name"];
                         int savedEnemyHealth = (int)reader["health"];
                         double xPos = (double)reader["xPos"];
