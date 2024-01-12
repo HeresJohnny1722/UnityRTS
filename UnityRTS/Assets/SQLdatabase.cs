@@ -2,45 +2,52 @@ using UnityEngine;
 using System.Data;
 using Mono.Data.Sqlite;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
-
-
-//Saving
-//Each building in the building will add to a table called "buildings"
-//5 fields, name, health, x pos, y pos, z pos,
-
+/// <summary>
+/// Manages the saving and loading of game data and session data to a database
+/// </summary>
 public class SQLdatabase : MonoBehaviour
 {
 
-    public static SQLdatabase instance { get; private set; }
+    private static SQLdatabase _instance;
+    public static SQLdatabase Instance { get { return _instance; } }
 
-
+    void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
     // the name of the db, only change "RTS"
     // here so all the methods can access it
     private string dbName = "URI=file:RTS.db";
 
+    /// <summary>
+    /// Creates the Database if not already created, then loads the game
+    /// </summary>
     void Start()
     {
 
         //create the table
         CreateDB();
 
-        LoadGame();
+        //Only load the game if its level one or two
+        if (SceneManager.GetActiveScene().buildIndex != 1 || SceneManager.GetActiveScene().buildIndex != 2)
+            LoadGame();
 
-        //Add entry
-        //AddWeapon("Silver Sword", 30);
-
-        //Display Recrods to console
-        //DisplayBuildings();
-
+        LoadVolume();
     }
 
-    private void OnApplicationQuit()
-    {
-        SaveGame();
-    }
-
+    /// <summary>
+    /// Creates the tables for each saved data type, only if they dont exist already, using SQL lite
+    /// </summary>
     public void CreateDB()
     {
         using (var connection = new SqliteConnection(dbName))
@@ -66,12 +73,18 @@ public class SQLdatabase : MonoBehaviour
 
                 command.CommandText = "CREATE TABLE IF NOT EXISTS resources (gold INT, wood INT, food INT);";
                 command.ExecuteNonQuery();
+
+                command.CommandText = "CREATE TABLE IF NOT EXISTS sound (volume FLOAT);";
+                command.ExecuteNonQuery();
             }
 
             connection.Close();
         }
     }
 
+    /// <summary>
+    /// Creates a new game, clears all the created tables and assign the default population and resource values
+    /// </summary>
     public void NewGame()
     {
         //Clear the buildings table
@@ -102,10 +115,6 @@ public class SQLdatabase : MonoBehaviour
                 command.ExecuteNonQuery();
             }
 
-            
-
-            
-
             using (var command = connection.CreateCommand())
             {
                 command.CommandText = "INSERT INTO population (maxPop, currentPop) VALUES ('" + 9 + "', '" + 0 + "');";
@@ -130,7 +139,7 @@ public class SQLdatabase : MonoBehaviour
     }
 
     /// <summary>
-    /// Loads buildings, units, enemies, resources
+    /// Loads buildings, units, enemies and instantiates them, saved resources and wave index are reassigned to the gamemanager and wavespawner classes
     /// </summary>
     public void LoadGame()
     {
@@ -352,7 +361,7 @@ public class SQLdatabase : MonoBehaviour
     }
 
     /// <summary>
-    /// Finds the prefab associated with the provided building name.
+    /// Finds the prefab associated with the provided name.
     /// </summary>
     private GameObject FindPrefabInList(string name, List<GameObject> objectList)
     {
@@ -368,7 +377,7 @@ public class SQLdatabase : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Clears all the tables, then assigns the values you want to save to each corresponding slot
     /// </summary>
     public void SaveGame()
     {
@@ -457,4 +466,61 @@ public class SQLdatabase : MonoBehaviour
         }
     }
 
+    public void SaveVolume(float volume)
+    {
+        //Clear the buildings table
+
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            //DELETE FROM table_name
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "DELETE FROM sound;";
+                command.ExecuteNonQuery();
+
+            }
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "INSERT INTO sound (volume) VALUES ('" + volume + "');";
+
+                command.ExecuteNonQuery();
+            }
+
+            connection.Close();
+        }
+    }
+
+    public void LoadVolume()
+    {
+        
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+
+                //enemy loading
+                command.CommandText = "SELECT * FROM sound;";
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        double volumeValue = (double) reader["volume"];
+                        AudioListener.volume = (float) volumeValue;
+
+                    }
+
+                    reader.Close();
+                }
+            }
+
+            connection.Close();
+        }
+
+
+    }
 }

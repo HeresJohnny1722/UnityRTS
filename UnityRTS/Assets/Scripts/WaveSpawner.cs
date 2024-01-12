@@ -38,8 +38,6 @@ public class WaveSpawner : MonoBehaviour, IDataPersistence
     private int totalTroopsSpawned = 0; // Counter variable
     private int expectedTotalTroops;
 
-    private int savedWaveIndex;
-
     private static WaveSpawner _instance;
     public static WaveSpawner Instance { get { return _instance; } }
 

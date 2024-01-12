@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 public class SoundFeedback : MonoBehaviour
 {
     [SerializeField]
-    private AudioClip clickSound, placeSound, removeSound, wrongPlacementSound, mainMenuSoundtrack, levelSoundtrack, gunSound, hitSound;
+    private AudioClip clickSound, placeSound, removeSound, wrongPlacementSound, mainMenuSoundtrack, levelSoundtrack, gunSound;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -82,9 +82,6 @@ public class SoundFeedback : MonoBehaviour
             case SoundType.Gun:
                 audioSource.PlayOneShot(gunSound);
                 break;
-            case SoundType.Hit:
-                audioSource.PlayOneShot(hitSound);
-                break;
             default:
                 break;
         }
@@ -98,5 +95,4 @@ public enum SoundType
     Remove,
     wrongPlacement,
     Gun,
-    Hit,
 }

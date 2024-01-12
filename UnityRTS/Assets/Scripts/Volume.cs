@@ -25,14 +25,16 @@ public class Volume : MonoBehaviour
     public void SaveVolumeButton()
     {
         float volumevalue = volumeSlider.value;
-        PlayerPrefs.SetFloat("VolumeValue", volumevalue);
+        SQLdatabase.Instance.SaveVolume(volumevalue);
+        //PlayerPrefs.SetFloat("VolumeValue", volumevalue);
         LoadValues();
     }
 
     void LoadValues()
     {
-        float volumeValue = PlayerPrefs.GetFloat("VolumeValue");
-        volumeSlider.value = volumeValue;
-        AudioListener.volume = volumeValue;
+        //float volumeValue = PlayerPrefs.GetFloat("VolumeValue");
+
+        SQLdatabase.Instance.LoadVolume();
+        volumeSlider.value = AudioListener.volume;
     }
 }
