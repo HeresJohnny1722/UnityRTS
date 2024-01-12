@@ -91,7 +91,12 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     private void MoveAndHealTarget()
     {
-        SetDestinationToTargetTransform(targetTransform);
+        if (targetTransform.position != myAstarAI.ai.destination)
+        {
+            SetDestinationToTargetTransform(targetTransform);
+        }
+
+        
         RotateToTarget();
 
         float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
@@ -117,8 +122,12 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     private void MoveAndAttackTarget(Transform transformTarget)
     {
-        
+
+        if (transformTarget.position != myAstarAI.ai.destination)
+        {
             SetDestinationToTargetTransform(transformTarget);
+        }
+            
             RotateToTarget();
 
             float distanceToTarget = Vector3.Distance(transform.position, transformTarget.position);
@@ -143,7 +152,7 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     private void SetDestinationToTargetTransform(Transform transformTarget)
     {
-        myAstarAI.ai.destination = new Vector3(transformTarget.position.x + Random.Range(-4, 4), transformTarget.position.y, transformTarget.position.z + Random.Range(-4, 4));
+        myAstarAI.ai.destination = transformTarget.position;
     }
 
     /// <summary>
