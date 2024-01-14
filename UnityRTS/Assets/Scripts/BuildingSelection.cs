@@ -7,7 +7,7 @@ using System;
 /// <summary>
 /// Handles the selection and deselection of buildings, along with data persistence for building placement.
 /// </summary>
-public class BuildingSelection : MonoBehaviour, IDataPersistence
+public class BuildingSelection : MonoBehaviour
 {
     /// <summary>
     /// List of buildings placed in the game.
@@ -23,20 +23,27 @@ public class BuildingSelection : MonoBehaviour, IDataPersistence
 
     [SerializeField] BuildingGridPlacer buildingGridPlacer;
 
-//    [SerializeField] private float buildingCount = 0;
+    // [SerializeField] private float buildingCount = 0;
 
     /// <summary>
     /// Initializes the BuildingSelection singleton instance.
     /// </summary>
     void Awake()
     {
-        if (_instance != null && _instance != this)
+        try
         {
-            Destroy(this.gameObject);
+            if (_instance != null && _instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                _instance = this;
+            }
         }
-        else
+        catch (Exception ex)
         {
-            _instance = this;
+            Debug.LogError($"Error in Awake(): {ex.Message}");
         }
     }
 
@@ -45,18 +52,25 @@ public class BuildingSelection : MonoBehaviour, IDataPersistence
     /// </summary>
     public void SelectBuilding(Transform buildingToSelect)
     {
-        DeselectBuilding();
-        selectedBuilding = null;
-
-        if (buildingGridPlacer._buildingPrefab == null)
+        try
         {
-            building = buildingToSelect.GetComponent<Building>();
-
-            UnitSelection.Instance.DeselectAll();
             DeselectBuilding();
-            selectedBuilding = buildingToSelect;
+            selectedBuilding = null;
 
-            building.BuildingSelected();
+            if (buildingGridPlacer._buildingPrefab == null)
+            {
+                building = buildingToSelect.GetComponent<Building>();
+
+                UnitSelection.Instance.DeselectAll();
+                DeselectBuilding();
+                selectedBuilding = buildingToSelect;
+
+                building.BuildingSelected();
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error in SelectBuilding(): {ex.Message}");
         }
     }
 
@@ -65,11 +79,18 @@ public class BuildingSelection : MonoBehaviour, IDataPersistence
     /// </summary>
     public void DeselectBuilding()
     {
-        if (building != null)
+        try
         {
-            building.deselectBuilding();
+            if (building != null)
+            {
+                building.deselectBuilding();
+            }
+            selectedBuilding = null;
         }
-        selectedBuilding = null;
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error in DeselectBuilding(): {ex.Message}");
+        }
     }
 
     /// <summary>
@@ -77,82 +98,15 @@ public class BuildingSelection : MonoBehaviour, IDataPersistence
     /// </summary>
     public void MoveFlag(Vector3 point)
     {
-        building.buildingTraining.moveFlag(point);
-    }
-
-    /// <summary>
-    /// Loads building placement data from the provided GameData object.
-    /// </summary>
-    public void LoadData(GameData data)
-    {
-        for (int i = 1; i < buildingsList.Count; i++)
+        try
         {
-            buildingsList.RemoveAt(i);
+            building.buildingTraining.moveFlag(point);
         }
-
-        for (int i = 0; i < data.buildingsListName.Count; i++)
+        catch (Exception ex)
         {
-            string buildingName = data.buildingsListName[i];
-            Vector3 buildingPosition = data.buildingsListPositions[i];
-
-            GameObject prefab = FindBuildingPrefab(buildingName);
-
-            if (prefab != null)
-            {
-                GameObject buildingObject = Instantiate(prefab, buildingPosition, Quaternion.identity);
-                Building building = buildingObject.GetComponent<Building>();
-                GameManager.instance.increaseBuildingCount(building.buildingSO);
-
-                building.buildingHealth = data.buildingListHealth[i];
-
-                if (building.buildingHealth != building.buildingSO.startingHealth)
-                {
-                    building.buildingHealthbar.gameObject.SetActive(true);
-                    building.buildingHealthbar.UpdateHealthBar(building.buildingSO.startingHealth, building.buildingHealth);
-                }
-                else
-                {
-                    building.buildingHealthbar.gameObject.SetActive(false);
-                    building.buildingHealthbar.UpdateHealthBar(building.buildingSO.startingHealth, building.buildingHealth);
-                }
-            }
-            else
-            {
-                Debug.LogWarning("Prefab not found for building: " + buildingName);
-            }
+            Debug.LogError($"Error in MoveFlag(): {ex.Message}");
         }
     }
 
-    /// <summary>
-    /// Finds the prefab associated with the provided building name.
-    /// </summary>
-    private GameObject FindBuildingPrefab(string buildingName)
-    {
-        foreach (var prefab in GameManager.instance.buildingPrefabs)
-        {
-            if (prefab.name.Length >= 5 && prefab.name.Substring(0, 5) == buildingName.Substring(0, 5))
-            {
-                return prefab;
-            }
-        }
-
-        return null;
-    }
-
-    /// <summary>
-    /// Saves building placement data to the provided GameData object.
-    /// </summary>
-    public void SaveData(GameData data)
-    {
-        data.buildingsListName.Clear();
-        data.buildingsListPositions.Clear();
-        data.buildingListHealth.Clear();
-
-        for (int i = 1; i < this.buildingsList.Count; i++)
-        {
-            data.buildingsListName.Add(this.buildingsList[i].name);
-            data.buildingsListPositions.Add(this.buildingsList[i].transform.position);
-            data.buildingListHealth.Add((int)this.buildingsList[i].GetComponent<Building>().buildingHealth);
-        }
-    }
+    
 }

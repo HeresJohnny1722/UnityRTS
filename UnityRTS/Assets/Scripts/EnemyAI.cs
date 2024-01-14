@@ -351,7 +351,7 @@ public class EnemyAI : MonoBehaviour
         {
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
 
-            if (distance < enemyAISO.searchRange && distance < closestDistance && enemy.transform != transform && !IsChildOf(transform, enemy.transform))
+            if (distance < enemyAISO.searchRange && distance < closestDistance && enemy.transform != transform && !IsChildOf(transform, enemy.transform) && enemy.GetComponent<EnemyAI>().enemyAISO.enemyType != EnemyAISO.EnemyType.Support)
             {
                 closestDistance = distance;
                 closestTarget = enemy.transform;

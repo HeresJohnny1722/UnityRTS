@@ -12,7 +12,9 @@ using System.Security.Cryptography.X509Certificates;
 /// <summary>
 /// This class handles all exceptions that are created while playing the game and when the game crashes,
 /// if you input your email in the crash reporting screen you will get the email sent
-/// to the inputted email when the game crashes or when you get an error while playing
+/// to the inputted email when the game crashes or when errors occur
+///
+/// This class also handles all the logging of erros and events to a text file
 /// </summary>
 public class ErrorHandler : MonoBehaviour
 {
@@ -48,8 +50,43 @@ public class ErrorHandler : MonoBehaviour
 
     private void HandleLog(string logString, string stackTrace, LogType type)
     {
-        // Handle logs (optional)
+        // Log all events to a general log file
+        LogToFile(logString, stackTrace, "GeneralLog.txt");
+
+        // Categorize logs based on log type and log to dedicated files
+        switch (type)
+        {
+            case LogType.Log:
+                LogToFile(logString, stackTrace, "InfoLog.txt");
+                break;
+            case LogType.Warning:
+                LogToFile(logString, stackTrace, "WarningLog.txt");
+                break;
+            case LogType.Error:
+            case LogType.Exception:
+                // Log errors and exceptions to a dedicated error log file
+                LogToFile(logString, stackTrace, "ErrorLog.txt");
+
+                // Optionally, send error emails (you can call SendCrashReportEmail here if needed)
+                break;
+        }
     }
+
+    private void LogToFile(string logString, string stackTrace, string fileName)
+    {
+        string filePath = Application.persistentDataPath + "/" + fileName;
+
+        try
+        {
+            string logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss}\n{logString}\n\nStackTrace:\n{stackTrace}\n\n";
+            File.AppendAllText(filePath, logEntry);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error writing log to file ({fileName}): {ex.Message}");
+        }
+    }
+
 
     private void HandleException(object sender, UnhandledExceptionEventArgs args)
     {
