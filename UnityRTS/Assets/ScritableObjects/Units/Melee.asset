@@ -25,7 +25,7 @@ MonoBehaviour:
   rotationSpeed: 5
   description: Swordsman Description
   goldCost: 75
-  coalCost: 75
-  copperCost: 75
+  woodCost: 75
+  foodCost: 75
   populationCost: 1
   gatheringSpeed: 0
