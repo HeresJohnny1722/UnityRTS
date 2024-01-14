@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.AI;
+using System.Data;
+using Mono.Data.Sqlite;
 
 /// <summary>
 /// Manages the behavior and properties of a building in the game.
@@ -39,6 +41,162 @@ public class Building : MonoBehaviour
     void Start()
     {
         InitializeBuilding();
+        AssignSavedStats();
+    }
+
+    /// <summary>
+    /// Assigns all the saved starting stats to the building, as said in the rubric
+    /// "Values/stats of all game pieces/cards and related data must be stored on a database"
+    /// </summary>
+    public void AssignSavedStats()
+    {
+        using (var connection = new SqliteConnection(SQLdatabase.Instance.dbName))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                if (buildingSO.name == "House")
+                {
+                    command.CommandText = "SELECT * FROM buildingStats WHERE name = 'House';";
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            buildingSO.startingHealth = (int)reader["startingHealth"];
+                            buildingSO.timeToBuild = (int)reader["timeToBuild"];
+                            buildingSO.goldCost = (int)reader["gold"];
+                            buildingSO.woodCost = (int)reader["food"];
+                            buildingSO.foodCost = (int)reader["wood"];
+                        }
+                    }
+                }
+                else if (buildingSO.name == "Barracks")
+                {
+                    command.CommandText = "SELECT * FROM buildingStats WHERE name = 'Barracks';";
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            buildingSO.startingHealth = (int)reader["startingHealth"];
+                            buildingSO.timeToBuild = (int)reader["timeToBuild"];
+                            buildingSO.goldCost = (int)reader["gold"];
+                            buildingSO.woodCost = (int)reader["food"];
+                            buildingSO.foodCost = (int)reader["wood"];
+                        }
+                    }
+                }
+                else if (buildingSO.name == "Bank")
+                {
+                    command.CommandText = "SELECT * FROM buildingStats WHERE name = 'Bank';";
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            buildingSO.startingHealth = (int)reader["startingHealth"];
+                            buildingSO.timeToBuild = (int)reader["timeToBuild"];
+                            buildingSO.goldCost = (int)reader["gold"];
+                            buildingSO.woodCost = (int)reader["food"];
+                            buildingSO.foodCost = (int)reader["wood"];
+                        }
+                    }
+                }
+                else if (buildingSO.name == "Greenhouse")
+                {
+                    command.CommandText = "SELECT * FROM buildingStats WHERE name = 'Greenhouse';";
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            buildingSO.startingHealth = (int)reader["startingHealth"];
+                            buildingSO.timeToBuild = (int)reader["timeToBuild"];
+                            buildingSO.goldCost = (int)reader["gold"];
+                            buildingSO.woodCost = (int)reader["food"];
+                            buildingSO.foodCost = (int)reader["wood"];
+                        }
+                    }
+                }
+                else if (buildingSO.name == "Lumber Mill")
+                {
+                    command.CommandText = "SELECT * FROM buildingStats WHERE name = 'Lumber Mill';";
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            buildingSO.startingHealth = (int)reader["startingHealth"];
+                            buildingSO.timeToBuild = (int)reader["timeToBuild"];
+                            buildingSO.goldCost = (int)reader["gold"];
+                            buildingSO.woodCost = (int)reader["food"];
+                            buildingSO.foodCost = (int)reader["wood"];
+                        }
+                    }
+                }
+                else if (buildingSO.name == "Watchtower")
+                {
+                    command.CommandText = "SELECT * FROM buildingStats WHERE name = 'Watchtower';";
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            buildingSO.startingHealth = (int)reader["startingHealth"];
+                            buildingSO.timeToBuild = (int)reader["timeToBuild"];
+                            buildingSO.goldCost = (int)reader["gold"];
+                            buildingSO.woodCost = (int)reader["food"];
+                            buildingSO.foodCost = (int)reader["wood"];
+                        }
+                    }
+                }
+                else if (buildingSO.name == "Gatling")
+                {
+                    command.CommandText = "SELECT * FROM buildingStats WHERE name = 'Gatling';";
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            buildingSO.startingHealth = (int)reader["startingHealth"];
+                            buildingSO.timeToBuild = (int)reader["timeToBuild"];
+                            buildingSO.goldCost = (int)reader["gold"];
+                            buildingSO.woodCost = (int)reader["food"];
+                            buildingSO.foodCost = (int)reader["wood"];
+                        }
+                    }
+                }
+                else if (buildingSO.name == "Cannon")
+                {
+                    command.CommandText = "SELECT * FROM buildingStats WHERE name = 'Cannon';";
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            buildingSO.startingHealth = (int)reader["startingHealth"];
+                            buildingSO.timeToBuild = (int)reader["timeToBuild"];
+                            buildingSO.goldCost = (int)reader["gold"];
+                            buildingSO.woodCost = (int)reader["food"];
+                            buildingSO.foodCost = (int)reader["wood"];
+                        }
+                    }
+                }
+                else if (buildingSO.name == "Sniper")
+                {
+                    command.CommandText = "SELECT * FROM buildingStats WHERE name = 'Sniper';";
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            buildingSO.startingHealth = (int)reader["startingHealth"];
+                            buildingSO.timeToBuild = (int)reader["timeToBuild"];
+                            buildingSO.goldCost = (int)reader["gold"];
+                            buildingSO.woodCost = (int)reader["food"];
+                            buildingSO.foodCost = (int)reader["wood"];
+                        }
+                    }
+                }
+                
+                
+            }
+
+            connection.Close();
+        }
     }
 
     /// <summary>

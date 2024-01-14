@@ -23,7 +23,7 @@ public class BuildingSelection : MonoBehaviour, IDataPersistence
 
     [SerializeField] BuildingGridPlacer buildingGridPlacer;
 
-    [SerializeField] private float buildingCount = 0;
+//    [SerializeField] private float buildingCount = 0;
 
     /// <summary>
     /// Initializes the BuildingSelection singleton instance.

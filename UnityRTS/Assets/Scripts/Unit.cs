@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using Mono.Data.Sqlite;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -49,6 +51,100 @@ public class Unit : MonoBehaviour
     void Start()
     {
         SetupUnit();
+        AssignSavedStats();
+    }
+
+    /// <summary>
+    /// Assigns all the saved starting stats to the unit, as said in the rubric
+    /// "Values/stats of all game pieces/cards and related data must be stored on a database"
+    /// </summary>
+    public void AssignSavedStats()
+    {
+        using (var connection = new SqliteConnection(SQLdatabase.Instance.dbName))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                if (unitSO.name == "Gunner")
+                {
+                    command.CommandText = "SELECT * FROM unitStats WHERE name = 'Gunner';";
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            unitSO.startingHealth = (int)reader["startingHealth"];
+                            unitSO.trainingTime = (int)reader["trainingTime"];
+                            unitSO.attackRange = (int)reader["attackRange"];
+                            unitSO.attackDamage = (int)reader["attackDamage"];
+                            unitSO.fireRate = (int)reader["fireRate"];
+                            unitSO.speed = (int)reader["speed"];
+                            unitSO.goldCost = (int)reader["gold"];
+                            unitSO.woodCost = (int)reader["food"];
+                            unitSO.foodCost = (int)reader["wood"];
+                        }
+                    }
+                } else if (unitSO.name == "Big Gunner")
+                {
+                    command.CommandText = "SELECT * FROM unitStats WHERE name = 'Big Gunner';";
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            unitSO.startingHealth = (int)reader["startingHealth"];
+                            unitSO.trainingTime = (int)reader["trainingTime"];
+                            unitSO.attackRange = (int)reader["attackRange"];
+                            unitSO.attackDamage = (int)reader["attackDamage"];
+                            unitSO.fireRate = (int)reader["fireRate"];
+                            unitSO.speed = (int)reader["speed"];
+                            unitSO.goldCost = (int)reader["gold"];
+                            unitSO.woodCost = (int)reader["food"];
+                            unitSO.foodCost = (int)reader["wood"];
+                        }
+                    }
+                } else if (unitSO.name == "Swordsman")
+                {
+                    command.CommandText = "SELECT * FROM unitStats WHERE name = 'Swordsman';";
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            unitSO.startingHealth = (int)reader["startingHealth"];
+                            unitSO.trainingTime = (int)reader["trainingTime"];
+                            unitSO.attackRange = (int)reader["attackRange"];
+                            unitSO.attackDamage = (int)reader["attackDamage"];
+                            unitSO.fireRate = (int)reader["fireRate"];
+                            unitSO.speed = (int)reader["speed"];
+                            unitSO.goldCost = (int)reader["gold"];
+                            unitSO.woodCost = (int)reader["food"];
+                            unitSO.foodCost = (int)reader["wood"];
+                        }
+                    }
+                } else if (unitSO.name == "Big Swordsman")
+                {
+                    command.CommandText = "SELECT * FROM unitStats WHERE name = 'Big Swordsman';";
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            unitSO.startingHealth = (int)reader["startingHealth"];
+                            unitSO.trainingTime = (int)reader["trainingTime"];
+                            unitSO.attackRange = (int)reader["attackRange"];
+                            unitSO.attackDamage = (int)reader["attackDamage"];
+                            unitSO.fireRate = (int)reader["fireRate"];
+                            unitSO.speed = (int)reader["speed"];
+                            unitSO.goldCost = (int)reader["gold"];
+                            unitSO.woodCost = (int)reader["food"];
+                            unitSO.foodCost = (int)reader["wood"];
+                        }
+                    }
+                }
+
+
+            }
+
+            connection.Close();
+        }
     }
 
     /// <summary>

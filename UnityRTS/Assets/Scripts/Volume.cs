@@ -10,8 +10,6 @@ public class Volume : MonoBehaviour
 {
     [SerializeField] private Slider volumeSlider = null;
 
-    [SerializeField] private Text volumeTextUI = null;
-
     private void Start()
     {
         LoadValues();
@@ -26,14 +24,11 @@ public class Volume : MonoBehaviour
     {
         float volumevalue = volumeSlider.value;
         SQLdatabase.Instance.SaveVolume(volumevalue);
-        //PlayerPrefs.SetFloat("VolumeValue", volumevalue);
         LoadValues();
     }
 
     void LoadValues()
     {
-        //float volumeValue = PlayerPrefs.GetFloat("VolumeValue");
-
         SQLdatabase.Instance.LoadVolume();
         volumeSlider.value = AudioListener.volume;
     }

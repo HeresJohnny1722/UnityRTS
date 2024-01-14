@@ -27,8 +27,8 @@ public class UnitSO : ScriptableObject
     public float rotationSpeed;
     public string description;
     public float goldCost;
-    public float coalCost;
-    public float copperCost;
+    public float woodCost;
+    public float foodCost;
     public float populationCost;
 
     public float gatheringSpeed;

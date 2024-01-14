@@ -13,6 +13,8 @@ public class SQLdatabase : MonoBehaviour
     private static SQLdatabase _instance;
     public static SQLdatabase Instance { get { return _instance; } }
 
+    public bool shouldLoadGame = true;
+
     void Awake()
     {
         if (_instance != null && _instance != this)
@@ -27,7 +29,8 @@ public class SQLdatabase : MonoBehaviour
 
     // the name of the db, only change "RTS"
     // here so all the methods can access it
-    private string dbName = "URI=file:RTS.db";
+    [HideInInspector]
+    public string dbName = "URI=file:RTS.db";
 
     /// <summary>
     /// Creates the Database if not already created, then loads the game
@@ -38,10 +41,10 @@ public class SQLdatabase : MonoBehaviour
         //create the table
         CreateDB();
 
-        //Only load the game if its level one or two
-        if (SceneManager.GetActiveScene().buildIndex != 1 || SceneManager.GetActiveScene().buildIndex != 2)
+        //Only load the game stats and objects if its level one or two
+        if (shouldLoadGame)
             LoadGame();
-
+        
         LoadVolume();
     }
 
@@ -76,6 +79,96 @@ public class SQLdatabase : MonoBehaviour
 
                 command.CommandText = "CREATE TABLE IF NOT EXISTS sound (volume FLOAT);";
                 command.ExecuteNonQuery();
+
+                command.CommandText = "CREATE TABLE IF NOT EXISTS gmail (address STRING);";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "CREATE TABLE IF NOT EXISTS unitStats (name STRING, trainingTime INT, startingHealth INT, attackRange INT, attackDamage INT, fireRate FLOAT, speed FLOAT, gold INT, wood INT, food INT);";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "CREATE TABLE IF NOT EXISTS buildingStats (name STRING, startingHealth INT, timeToBuild INT, gold INT, wood INT, food INT);";
+                command.ExecuteNonQuery();
+            }
+
+            connection.Close();
+        }
+    }
+
+    /// <summary>
+    /// Assings the unit and building starting saved stats from a database as asked in the rubric
+    ///"Values/stats of all game pieces/cards and related data must be stored on a database"
+    /// </summary>
+    public void AssignStats()
+    {
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            //DELETE FROM table_name
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "DELETE FROM unitStats;";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "DELETE FROM enemyStats;";
+                command.ExecuteNonQuery();
+
+                command.CommandText = "DELETE FROM buildingStats;";
+                command.ExecuteNonQuery();
+
+            }
+
+            using (var command = connection.CreateCommand())
+            {
+                //House Stats
+                command.CommandText = "INSERT INTO buildingStats (name, startingHealth, timeToBuild, gold, wood, food) VALUES ('" + "House" + "', '" + 100 + "', '" + 10 + "', '" + 50 + "', '" + 60 + "', '" + 20 + "'); ";
+                command.ExecuteNonQuery();
+                //Barracks Stats
+                command.CommandText = "INSERT INTO buildingStats (name, startingHealth, timeToBuild, gold, wood, food) VALUES ('" + "Barracks" + "', '" + 300 + "', '" + 3 + "', '" + 150 + "', '" + 150 + "', '" + 150 + "'); ";
+                command.ExecuteNonQuery();
+                //Bank Stats
+                command.CommandText = "INSERT INTO buildingStats (name, startingHealth, timeToBuild, gold, wood, food) VALUES ('" + "Bank" + "', '" + 400 + "', '" + 15 + "', '" + 130 + "', '" + 110 + "', '" + 90 + "'); ";
+                command.ExecuteNonQuery();
+                //Lumbermill Stats
+                command.CommandText = "INSERT INTO buildingStats (name, startingHealth, timeToBuild, gold, wood, food) VALUES ('" + "Lumber Mill" + "', '" + 400 + "', '" + 15 + "', '" + 130 + "', '" + 100 + "', '" + 80 + "'); ";
+                command.ExecuteNonQuery();
+                //Greenhouse Stats
+                command.CommandText = "INSERT INTO buildingStats (name, startingHealth, timeToBuild, gold, wood, food) VALUES ('" + "Greenhouse" + "', '" + 400 + "', '" + 15 + "', '" + 130 + "', '" + 100 + "', '" + 80 + "'); ";
+                command.ExecuteNonQuery();
+                //Basic Tower Stats
+                command.CommandText = "INSERT INTO buildingStats (name, startingHealth, timeToBuild, gold, wood, food) VALUES ('" + "Watchtower" + "', '" + 200 + "', '" + 10 + "', '" + 75 + "', '" + 75 + "', '" + 75 + "'); ";
+                command.ExecuteNonQuery();
+                //Gatling Tower Stats
+                command.CommandText = "INSERT INTO buildingStats (name, startingHealth, timeToBuild, gold, wood, food) VALUES ('" + "Gatling" + "', '" + 400 + "', '" + 10 + "', '" + 150 + "', '" + 170 + "', '" + 100 + "'); ";
+                command.ExecuteNonQuery();
+                //Sniper Tower Stats
+                command.CommandText = "INSERT INTO buildingStats (name, startingHealth, timeToBuild, gold, wood, food) VALUES ('" + "Sniper" + "', '" + 400 + "', '" + 10 + "', '" + 120 + "', '" + 135 + "', '" + 100 + "'); ";
+
+                command.ExecuteNonQuery();
+
+                //Cannon Tower Stats
+                command.CommandText = "INSERT INTO buildingStats (name, startingHealth, timeToBuild, gold, wood, food) VALUES ('" + "Cannon" + "', '" + 400 + "', '" + 10 + "', '" + 175 + "', '" + 185 + "', '" + 100 + "'); ";
+                command.ExecuteNonQuery();
+
+
+                //UNIT STATS
+
+                //Gunner Stats
+                command.CommandText = "INSERT INTO unitStats (name, trainingTime, startingHealth, attackRange, attackDamage, fireRate, speed, gold, wood, food) VALUES ('" + "Gunner" + "', '" + 5 + "', '" + 75 + "', '" + 12 + "', '" + 10 + "', '" + 1 + "', '" +3 + "', '" +75 + "', '" +75 + "', '" +75 + "'); ";
+                command.ExecuteNonQuery();
+
+                //Swordsman Stats
+                command.CommandText = "INSERT INTO unitStats (name, trainingTime, startingHealth, attackRange, attackDamage, fireRate, speed, gold, wood, food) VALUES ('" + "Swordsman" + "', '" + 5 + "', '" + 150 + "', '" + 6 + "', '" + 16 + "', '" + 1 + "', '" + 5 + "', '" + 75 + "', '" + 75 + "', '" + 75 + "'); ";
+                command.ExecuteNonQuery();
+
+                //Big Gunner Stats
+                command.CommandText = "INSERT INTO unitStats (name, trainingTime, startingHealth, attackRange, attackDamage, fireRate, speed, gold, wood, food) VALUES ('" + "Big Gunner" + "', '" + 9 + "', '" + 150 + "', '" + 12 + "', '" + 4 + "', '" + .25 + "', '" + 1.5 + "', '" + 150 + "', '" + 150 + "', '" + 150 + "'); ";
+                command.ExecuteNonQuery();
+
+                //Big Swordsman Stats
+                command.CommandText = "INSERT INTO unitStats (name, trainingTime, startingHealth, attackRange, attackDamage, fireRate, speed, gold, wood, food) VALUES ('" + "Big Swordsman" + "', '" + 9 + "', '" + 300 + "', '" + 6 + "', '" + 45 + "', '" + 2 + "', '" + 3 + "', '" + 150 + "', '" + 150 + "', '" + 150 + "'); ";
+                command.ExecuteNonQuery();
+
             }
 
             connection.Close();
@@ -294,7 +387,7 @@ public class SQLdatabase : MonoBehaviour
                         
                         int savedGold = (int)reader["gold"];
 
-                        Debug.Log("Gold: " + savedGold);
+//                        Debug.Log("Gold: " + savedGold);
                         int savedWood = (int)reader["wood"];
                         int savedFood = (int)reader["food"];
                         GameManager.instance.gold = savedGold;
@@ -463,6 +556,59 @@ public class SQLdatabase : MonoBehaviour
 
 
             connection.Close();
+        }
+    }
+
+    public void SaveEmail(string receivingAddress)
+    {
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            //DELETE FROM table_name
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "DELETE FROM gmail;";
+                command.ExecuteNonQuery();
+
+            }
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "INSERT INTO gmail (address) VALUES ('" + receivingAddress + "');";
+
+                command.ExecuteNonQuery();
+            }
+
+            connection.Close();
+        }
+    }
+
+    public string LoadEmail()
+    {
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "SELECT * FROM gmail;";
+
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())  // Check if there are records in the result set
+                    {
+                        string address = (string)reader["address"];
+                        Debug.Log(address);
+                        reader.Close();
+                        connection.Close();
+                        return address;
+                    }
+                }
+            }
+
+            connection.Close();
+            return null;  // Return null when no records are found
         }
     }
 

@@ -1,3 +1,5 @@
+using System.Data;
+using Mono.Data.Sqlite;
 using UnityEngine;
 
 /// <summary>
@@ -35,7 +37,10 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         SetupEnemy();
+        //AssignSavedStats();
     }
+
+    
 
     /// <summary>
     /// Sets up the initial state and registers the enemy with GameManager.

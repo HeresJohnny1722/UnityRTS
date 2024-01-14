@@ -132,9 +132,9 @@ public class BuildingTraining : MonoBehaviour
     /// </summary>
     public void spawnTroop(int index)
     {
-        if (GameManager.instance.AreResourcesAvailable((int)building.buildingSO.unitsToTrain[index].populationCost * 3, (int)building.buildingSO.unitsToTrain[index].goldCost, (int)building.buildingSO.unitsToTrain[index].coalCost, (int)building.buildingSO.unitsToTrain[index].copperCost, 0))
+        if (GameManager.instance.AreResourcesAvailable((int)building.buildingSO.unitsToTrain[index].populationCost * 3, (int)building.buildingSO.unitsToTrain[index].goldCost, (int)building.buildingSO.unitsToTrain[index].woodCost, (int)building.buildingSO.unitsToTrain[index].foodCost, 0))
         {
-            GameManager.instance.RemoveResources(0, (int)building.buildingSO.unitsToTrain[index].goldCost, (int)building.buildingSO.unitsToTrain[index].coalCost, (int)building.buildingSO.unitsToTrain[index].copperCost, 0);
+            GameManager.instance.RemoveResources(0, (int)building.buildingSO.unitsToTrain[index].goldCost, (int)building.buildingSO.unitsToTrain[index].woodCost, (int)building.buildingSO.unitsToTrain[index].foodCost, 0);
             GameManager.instance.changeCurrentPopulation((int)building.buildingSO.unitsToTrain[index].populationCost * 3);
             unitSpawnPoint = this.transform.GetChild(2).transform;
             unitMovePoint = barracksSpawnFlag.transform;

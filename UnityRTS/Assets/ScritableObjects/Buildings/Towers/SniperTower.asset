@@ -29,7 +29,7 @@ MonoBehaviour:
   explodeRadius: 0
   explodeParticleSystem: {fileID: 0}
   populationIncrease: 0
-  name: Watchtower
+  name: Sniper
   description: Shoot enemies
   startingHealth: 400
   timeToBuild: 10
