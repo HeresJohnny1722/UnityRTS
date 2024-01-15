@@ -26,7 +26,7 @@ public class Wave
 /// <summary>
 /// Spawns the waves and manages the time between waves and the enemies incoming popup, and saving and loading of the waves
 /// </summary>
-public class WaveSpawner : MonoBehaviour, IDataPersistence
+public class WaveSpawner : MonoBehaviour
 {
     public Wave[] waves;
     public float timeBetweenSpawns = 0.25f;
@@ -60,15 +60,6 @@ public class WaveSpawner : MonoBehaviour, IDataPersistence
         
     }
 
-    public void LoadData(GameData data)
-    {
-        waveIndex = data.waveIndex;
-    }
-
-    public void SaveData(GameData data)
-    {
-        data.waveIndex = waveIndex;
-    }
 
     public void StartWaves()
     {

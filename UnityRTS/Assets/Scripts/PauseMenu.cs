@@ -49,10 +49,6 @@ public class PauseMenu : MonoBehaviour
         Paused = false;
     }
 
-    public void saveGame()
-    {
-        DataPersistenceManager.instance.SaveGame();
-    }
 
     public void MainMenuButton()
     {
